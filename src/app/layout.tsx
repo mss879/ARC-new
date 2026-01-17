@@ -8,7 +8,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryProvider } from "@/components/providers/query-provider";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ["latin"],
   display: 'swap',
   preload: true,
@@ -70,8 +70,8 @@ export const metadata: Metadata = {
     description: 'Leading AI automation and digital marketing company in UK & Sri Lanka. Expert web design, branding, AI automation, chatbots, content generation & digital marketing services.',
     images: [
       {
-        url: 'https://arcai.agency/shareimagenew.png',
-        secureUrl: 'https://arcai.agency/shareimagenew.png',
+        url: 'https://arcai.agency/-shareable-img.png',
+        secureUrl: 'https://arcai.agency/-shareable-img.png',
         width: 1200,
         height: 630,
         alt: 'ARC AI - AI Automation and Digital Marketing Company',
@@ -124,45 +124,45 @@ export default function RootLayout({
         {/* Critical Meta Tags */}
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        
+
         {/* Explicit Open Graph tags for WhatsApp */}
-        <meta property="og:image" content="https://arcai.agency/shareimagenew.png" />
-        <meta property="og:image:secure_url" content="https://arcai.agency/shareimagenew.png" />
+        <meta property="og:image" content="https://arcai.agency/-shareable-img.png" />
+        <meta property="og:image:secure_url" content="https://arcai.agency/-shareable-img.png" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="ARC AI - AI Automation and Digital Marketing Company" />
-        
+
         {/* DNS Prefetch & Preconnect - Reduce request latency */}
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
+
         {/* Preload Critical Resources - Reduce LCP */}
         <link rel="preload" as="image" href="/logo.png" type="image/png" fetchPriority="high" />
         {/* Remove video preload - let browser decide based on bandwidth */}
         <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2" type="font/woff2" crossOrigin="anonymous" fetchPriority="high" />
-        
+
         {/* Minimal Favicons - Defer non-critical */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        
+
         {/* Web App Manifest - Deferred */}
         <link rel="manifest" href="/site.webmanifest" />
-        
+
         {/* Theme Colors */}
         <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-        
+
         {/* Performance & Security Headers */}
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
         {/* Google tag (gtag.js) */}
-          <Script
-            src="https://www.googletagmanager.com/gtag/js?id=G-0447V2XK5V"
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-0447V2XK5V"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">

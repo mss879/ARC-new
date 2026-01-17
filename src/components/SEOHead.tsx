@@ -19,7 +19,7 @@ export default function SEOHead({
   description,
   keywords,
   canonical,
-  ogImage = 'https://arcai.agency/shareimagenew.png',
+  ogImage = 'https://arcai.agency/-shareable-img.png',
   ogType = 'website',
 }: SEOHeadProps) {
   useEffect(() => {
@@ -30,13 +30,13 @@ export default function SEOHead({
     const updateMetaTag = (property: string, content: string, isProperty = false) => {
       const attribute = isProperty ? 'property' : 'name';
       let meta = document.querySelector(`meta[${attribute}="${property}"]`);
-      
+
       if (!meta) {
         meta = document.createElement('meta');
         meta.setAttribute(attribute, property);
         document.head.appendChild(meta);
       }
-      
+
       meta.setAttribute('content', content);
     };
 

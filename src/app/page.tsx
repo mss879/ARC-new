@@ -7,51 +7,51 @@ import SchemaOrg from "@/components/SchemaOrg";
 
 // Dynamic imports for below-the-fold components (reduce initial bundle)
 // Using loading fallback to prevent layout shift
-const WhyUs = dynamic(() => import("@/components/WhyUs"), { 
+const WhyUs = dynamic(() => import("@/components/WhyUs"), {
   ssr: true,
   loading: () => <SectionLoader />
 });
-const Benefits = dynamic(() => import("@/components/Benefits"), { 
+const Benefits = dynamic(() => import("@/components/Benefits"), {
   ssr: true,
   loading: () => <SectionLoader />
 });
-const ClientsSection = dynamic(() => import("@/components/ClientsSection"), { 
+const ClientsSection = dynamic(() => import("@/components/ClientsSection"), {
   ssr: true,
   loading: () => <SectionLoader />
 });
-const ServicesSection = dynamic(() => import("@/components/ServicesSection"), { 
+const ServicesSection = dynamic(() => import("@/components/ServicesSection"), {
   ssr: true,
   loading: () => <SectionLoader />
 });
-const Features = dynamic(() => import("@/components/Features"), { 
+const Features = dynamic(() => import("@/components/Features"), {
   ssr: true,
   loading: () => <SectionLoader />
 });
-const AIServices = dynamic(() => import("@/components/AIServices"), { 
+const AIServices = dynamic(() => import("@/components/AIServices"), {
   ssr: true,
   loading: () => <SectionLoader />
 });
-const ProblemSection = dynamic(() => import("@/components/ProblemSection"), { 
+const ProblemSection = dynamic(() => import("@/components/ProblemSection"), {
   ssr: true,
   loading: () => <SectionLoader />
 });
-const SolutionSection = dynamic(() => import("@/components/SolutionSection"), { 
+const SolutionSection = dynamic(() => import("@/components/SolutionSection"), {
   ssr: true,
   loading: () => <SectionLoader />
 });
-const Integrations = dynamic(() => import("@/components/Integrations"), { 
+const Integrations = dynamic(() => import("@/components/Integrations"), {
   ssr: true,
   loading: () => <SectionLoader />
 });
-const Process = dynamic(() => import("@/components/Process"), { 
+const Process = dynamic(() => import("@/components/Process"), {
   ssr: true,
   loading: () => <SectionLoader />
 });
-const CTA = dynamic(() => import("@/components/CTA"), { 
+const CTA = dynamic(() => import("@/components/CTA"), {
   ssr: true,
   loading: () => <SectionLoader />
 });
-const Footer = dynamic(() => import("@/components/Footer"), { 
+const Footer = dynamic(() => import("@/components/Footer"), {
   ssr: true,
   loading: () => <SectionLoader />
 });
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://arcai.agency/shareimagenew.png",
+        url: "https://arcai.agency/-shareable-img.png",
         width: 1200,
         height: 630,
         alt: "ARC AI - AI Automation and Digital Marketing Company"
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "ARC AI - AI Automation and Digital Marketing Company",
     description: "Leading AI automation and digital marketing company in UK & Sri Lanka",
-    images: ["https://arcai.agency/shareimagenew.png"]
+    images: ["https://arcai.agency/-shareable-img.png"]
   },
   alternates: {
     canonical: "https://arcai.agency"
@@ -106,22 +106,22 @@ export default function HomePage() {
     <div className="min-h-screen bg-background dark">
       {/* Schema.org Structured Data for SEO */}
       <SchemaOrg type="home" />
-      
+
       {/* Skip to main content link for accessibility */}
-      <a 
-        href="#main-content" 
+      <a
+        href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-primary focus:text-white focus:top-4 focus:left-4"
       >
         Skip to main content
       </a>
-      
+
       <Navbar />
-      
+
       {/* Main content wrapper with semantic HTML */}
       <main id="main-content" role="main">
         {/* Above the fold - load immediately */}
         <Hero />
-        
+
         {/* Below the fold - dynamically imported and lazy loaded */}
         <WhyUs />
         <Benefits />
@@ -135,7 +135,7 @@ export default function HomePage() {
         <Process />
         <CTA />
       </main>
-      
+
       <Footer />
       <FloatingActions />
     </div>

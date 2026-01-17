@@ -44,7 +44,7 @@ export const pageMetadata = {
       keywords: "web design UK, web development UK, website design Sri Lanka, custom website design, responsive web design, e-commerce website UK, WordPress development, Next.js development",
       url: "https://arcai.agency/services/web-design-development",
     },
-    
+
     branding: {
       title: "Branding & Brand Identity Services UK & Sri Lanka | ARC AI",
       description: "Transform your brand with professional branding services. Logo design, brand identity, visual design, and brand strategy for businesses in UK and Sri Lanka.",
@@ -91,7 +91,7 @@ export const pageMetadata = {
 
 // Helper function to get Open Graph data
 export function getOpenGraphData(page: keyof typeof pageMetadata | string) {
-  const data = typeof page === 'string' && page.includes('services/') 
+  const data = typeof page === 'string' && page.includes('services/')
     ? pageMetadata.services[page.split('/')[1] as keyof typeof pageMetadata.services]
     : pageMetadata[page as keyof typeof pageMetadata];
 
@@ -106,7 +106,7 @@ export function getOpenGraphData(page: keyof typeof pageMetadata | string) {
     type: 'website' as const,
     images: [
       {
-        url: 'https://arcai.agency/shareimagenew.png',
+        url: 'https://arcai.agency/-shareable-img.png',
         width: 1200,
         height: 630,
         alt: 'ARC AI',
@@ -117,7 +117,7 @@ export function getOpenGraphData(page: keyof typeof pageMetadata | string) {
 
 // Helper function to get Twitter Card data
 export function getTwitterCardData(page: keyof typeof pageMetadata | string) {
-  const data = typeof page === 'string' && page.includes('services/') 
+  const data = typeof page === 'string' && page.includes('services/')
     ? pageMetadata.services[page.split('/')[1] as keyof typeof pageMetadata.services]
     : pageMetadata[page as keyof typeof pageMetadata];
 
@@ -129,6 +129,6 @@ export function getTwitterCardData(page: keyof typeof pageMetadata | string) {
     card: 'summary_large_image' as const,
     title: data.title,
     description: data.description,
-    images: ['https://arcai.agency/shareimagenew.png'],
+    images: ['https://arcai.agency/-shareable-img.png'],
   };
 }

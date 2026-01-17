@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     url: "https://arcai.agency/portfolio",
     type: "website",
     images: [{
-      url: "https://arcai.agency/shareimagenew.png",
+      url: "https://arcai.agency/-shareable-img.png",
       width: 1200,
       height: 630,
       alt: "ARC Digital Canvas Portfolio"
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Portfolio - Our Best Work | ARC Digital Canvas",
     description: "Explore our portfolio of successful projects",
-    images: ["https://arcai.agency/shareimagenew.png"]
+    images: ["https://arcai.agency/-shareable-img.png"]
   },
   alternates: {
     canonical: "https://arcai.agency/portfolio"
@@ -45,11 +45,47 @@ export default function Portfolio() {
 
   const portfolioItems = [
     {
+      id: 20,
+      title: "Core Craft",
+      description: "Premium web design and development agency offering custom website builds, UI/UX design, and brand identity solutions.",
+      results: "Custom website ↑ lead generation 45%, Integrated CRM system, Client management efficiency ↑ 60%, Modern design showcase",
+      image: "/core-craft-screenshot.png",
+      link: "https://www.corecraft.agency",
+      status: "live"
+    },
+    {
+      id: 22,
+      title: "Ontriq",
+      description: "Sri Lanka's background verification and HR solutions provider offering 7-day turnaround for employment history, education, and criminal record checks, along with recruitment, payroll management, and business formation services.",
+      results: "Custom website ↑ client inquiries 52%, CRM system streamlined case tracking, Processing time ↓ 30%, Automated client communications",
+      image: "/Ontriq-screenshot.png",
+      link: "https://www.ontriq.com",
+      status: "live"
+    },
+    {
+      id: 21,
+      title: "Orkestrate",
+      description: "AI-powered marketing orchestration platform for DTC brands that automates customer segmentation, campaign creation, and revenue optimization by analyzing order data, browsing behavior, and campaign performance across integrated channels.",
+      results: "Professional website ↑ platform signups 38%, CRM integration ↑ customer retention 41%, Demo requests ↑ 2.4×, User onboarding efficiency ↑ 55%",
+      image: "/orkestrate-screenshot.png",
+      link: "https://www.orkestrate.com",
+      status: "live"
+    },
+    {
+      id: 23,
+      title: "KeysPlease",
+      description: "Real estate marketplace for residential property sales in Sri Lanka featuring premium homes and investment properties with listings and purchase facilitation services.",
+      results: "Custom website ↑ property inquiries 67%, CRM system ↑ lead management efficiency 58%, Listing views ↑ 3.2×, Client follow-up rate ↑ 72%",
+      image: "/KeysPlease-Screenshot.png",
+      link: "https://www.keysplease.shop",
+      status: "live"
+    },
+    {
       id: 1,
       title: "DEK Studio",
       description: "Built a trust-forward MEP site that showcases end-to-end capability with clear project pathways.",
       results: "Leads ↑ 31%, Proposal requests ↑ 24%, Avg. time on Services/Case Studies 2:18, Core Web Vitals pass 92%",
-      image: "/dek-studio.png",
+      image: "/dek-studio-screenshot.png",
       link: "https://www.dek-studio.com/",
       status: "live"
     },
@@ -265,8 +301,8 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-black text-white">
       <ScrollToTop />
-      <SchemaOrg 
-        type="portfolio" 
+      <SchemaOrg
+        type="portfolio"
         pageTitle="Portfolio"
         pageDescription="Explore ARC Digital Canvas portfolio of successful web design, AI automation, branding, and digital marketing projects."
         pageUrl="https://arcai.agency/portfolio"
@@ -297,21 +333,20 @@ export default function Portfolio() {
                   <img src={item.image}
                     alt={item.title}
                     className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
-                   loading="lazy" decoding="async" />
-                  
+                    loading="lazy" decoding="async" />
+
                   {/* Status Badge */}
                   <div className="absolute top-4 right-4">
                     <span
-                      className={`px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider ${
-                        item.status === "live"
-                          ? "bg-green-500/20 text-green-400 border border-green-500/30"
-                          : "bg-orange-500/20 text-orange-400 border border-orange-500/30"
-                      }`}
+                      className={`px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider ${item.status === "live"
+                        ? "bg-green-500/20 text-green-400 border border-green-500/30"
+                        : "bg-orange-500/20 text-orange-400 border border-orange-500/30"
+                        }`}
                     >
                       {item.status === "live" ? "Live" : "In Development"}
                     </span>
                   </div>
-                  
+
                   {/* Hover Overlay */}
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-500 flex items-center justify-center">
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -348,7 +383,7 @@ export default function Portfolio() {
                   <p className="text-base md:text-lg text-zinc-300 leading-relaxed">
                     {item.description}
                   </p>
-                  
+
                   {/* Results */}
                   <div className="pt-3 mt-3 border-t border-zinc-700/50">
                     <div className="flex items-center gap-2 mb-2">
@@ -385,7 +420,7 @@ export default function Portfolio() {
         <div className="max-w-[1800px] w-full mx-auto">
           {/* Section Heading */}
           <div className="mb-16 text-center">
-            <h2 
+            <h2
               className="text-5xl md:text-6xl lg:text-7xl font-bold text-white uppercase tracking-tight"
               style={{
                 fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
@@ -411,14 +446,14 @@ export default function Portfolio() {
               >
                 {/* Image Container */}
                 <div className="relative aspect-[16/10] overflow-hidden rounded-lg mb-6 bg-zinc-900">
-                  <img 
+                  <img
                     src={template.image}
                     alt={template.title}
                     className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy" 
-                    decoding="async" 
+                    loading="lazy"
+                    decoding="async"
                   />
-                  
+
                   {/* Hover Overlay */}
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-700" />
                 </div>

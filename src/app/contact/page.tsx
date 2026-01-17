@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     url: "https://arcai.agency/contact",
     type: "website",
     images: [{
-      url: "https://arcai.agency/shareimagenew.png",
+      url: "https://arcai.agency/-shareable-img.png",
       width: 1200,
       height: 630,
       alt: "Contact ARC Digital Canvas"
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Contact ARC Digital Canvas",
     description: "Get in touch for AI-powered digital solutions",
-    images: ["https://arcai.agency/shareimagenew.png"]
+    images: ["https://arcai.agency/-shareable-img.png"]
   },
   alternates: {
     canonical: "https://arcai.agency/contact"
@@ -41,8 +41,8 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-[rgb(10,10,10)] dark">
-      <SchemaOrg 
-        type="contact" 
+      <SchemaOrg
+        type="contact"
         pageTitle="Contact Us"
         pageDescription="Ready to transform your business with AI? Contact ARC Digital Canvas for web design, AI automation, branding, and digital marketing services."
         pageUrl="https://arcai.agency/contact"
@@ -111,12 +111,12 @@ export default function ContactPage() {
                 TRUSTED BY 100+ CLIENTS
               </p>
             </div>
-            
+
             <div className="relative overflow-hidden">
               {/* Gradient masks on sides */}
               <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[rgb(10,10,10)] to-transparent z-10 pointer-events-none"></div>
               <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[rgb(10,10,10)] to-transparent z-10 pointer-events-none"></div>
-              
+
               {/* Scrolling container */}
               <div className="flex gap-12 animate-scroll-trust">
                 {/* First set of logos */}
@@ -181,7 +181,7 @@ export default function ContactPage() {
                     </p>
                   </div>
                   <div>
-                    <a 
+                    <a
                       href="mailto:support@arcai.agency"
                       className="text-lg text-[rgb(255,73,37)] hover:text-[rgb(255,93,57)] transition-colors leading-relaxed block"
                     >
@@ -208,13 +208,13 @@ export default function ContactPage() {
                     </p>
                   </div>
                   <div className="space-y-2">
-                    <a 
+                    <a
                       href="tel:+447466368427"
                       className="text-lg text-[rgb(202,202,202)] hover:text-white transition-colors leading-relaxed block"
                     >
                       +44 7466 368427 (UK)
                     </a>
-                    <a 
+                    <a
                       href="tel:+94771852522"
                       className="text-lg text-[rgb(202,202,202)] hover:text-white transition-colors leading-relaxed block"
                     >
