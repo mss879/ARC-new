@@ -27,6 +27,52 @@ const headingVariants: Variants = {
   },
 };
 
+const pillVariants: Variants = {
+  hidden: { opacity: 0, y: 10, scale: 0.95 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      delay: 2.5 + (i * 0.2), // Starts after typing finishes (approx 2s)
+      duration: 0.5,
+      ease: [0.23, 1, 0.32, 1]
+    }
+  })
+};
+
+const bubbleVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.9, y: 10, originX: 0 },
+  visible: (delay: number) => ({
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      delay: delay,
+      duration: 0.5,
+      type: "spring",
+      stiffness: 200,
+      damping: 20
+    }
+  })
+};
+
+const typingContainer: Variants = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+      delayChildren: 0.5
+    }
+  }
+};
+
+const typingChar: Variants = {
+  hidden: { opacity: 0, display: "none" },
+  visible: { opacity: 1, display: "inline" }
+};
+
 const AIServices = () => {
   return (
     <section className="py-20 px-4 md:px-6 bg-black" id="services">
@@ -52,9 +98,9 @@ const AIServices = () => {
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Content Generation Card */}
-          <motion.div 
-            className="framer-kt4eez-container" 
-            style={{ willChange: "transform", opacity: 1, transform: "none" }} 
+          <motion.div
+            className="framer-kt4eez-container"
+            style={{ willChange: "transform", opacity: 1, transform: "none" }}
             variants={itemVariants}
             initial="hidden"
             whileInView="visible"
@@ -86,7 +132,7 @@ const AIServices = () => {
                   }}
                 >
                   <div
-                    className="framer-53bk6q"
+                    className="framer-53bk6q pl-4 flex items-center w-full"
                     style={{
                       backgroundColor: "var(--token-4f00a517-d75a-4557-9433-caf4536a911d, rgb(245, 245, 245))",
                       borderRadius: "8px",
@@ -95,28 +141,52 @@ const AIServices = () => {
                       opacity: 1,
                     }}
                   >
-                    <div className="framer-vbds0p" style={{ opacity: 1 }}>
+                    <motion.div
+                      className="framer-vbds0p relative z-10 w-full"
+                      style={{
+                        opacity: 1,
+                        width: "100%",
+                        justifyContent: "flex-start",
+                        height: "auto"
+                      }}
+                      variants={typingContainer}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                    >
+                      <span className="text-[10px] text-white font-medium whitespace-nowrap mr-0.5">
+                        {Array.from("Generate marketing copy...").map((char, i) => (
+                          <motion.span key={i} variants={typingChar}>{char}</motion.span>
+                        ))}
+                      </span>
                       <motion.div
-                        className="blinking-cursor"
+                        className="blinking-cursor inline-block align-middle"
                         style={{
                           width: "2px",
-                          height: "18px",
-                          backgroundColor: "rgba(0, 0, 0, 0.6)",
+                          height: "14px",
+                          backgroundColor: "rgb(255, 255, 255)",
                           borderRadius: "1px",
                         }}
                         animate={{
                           opacity: [1, 0, 1],
                         }}
                         transition={{
-                          duration: 1,
+                          duration: 0.8,
                           repeat: Infinity,
                           ease: "linear",
-                          times: [0, 0.5, 1],
                         }}
                       ></motion.div>
-                    </div>
+                    </motion.div>
                   </div>
-                  <div className="framer-dvipwj" style={{ opacity: 1 }}>
+                  <motion.div
+                    className="framer-dvipwj"
+                    style={{ opacity: 1 }}
+                    variants={pillVariants}
+                    custom={0}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                  >
                     <div className="framer-2q1dkc" style={{ opacity: 1 }}>
                       <div
                         className="framer-1oqlkuc"
@@ -141,8 +211,16 @@ const AIServices = () => {
                         </p>
                       </div>
                     </div>
-                  </div>
-                  <div className="framer-18jmtyc" style={{ opacity: 1 }}>
+                  </motion.div>
+                  <motion.div
+                    className="framer-18jmtyc"
+                    style={{ opacity: 1 }}
+                    variants={pillVariants}
+                    custom={1}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                  >
                     <div className="framer-whm74r" style={{ opacity: 1 }}>
                       <div
                         className="framer-86fogr"
@@ -167,8 +245,16 @@ const AIServices = () => {
                         </p>
                       </div>
                     </div>
-                  </div>
-                  <div className="framer-2dawv9" style={{ opacity: 1 }}>
+                  </motion.div>
+                  <motion.div
+                    className="framer-2dawv9"
+                    style={{ opacity: 1 }}
+                    variants={pillVariants}
+                    custom={2}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                  >
                     <div className="framer-1863du7" style={{ opacity: 1 }}>
                       <div
                         className="framer-1jwmz5h"
@@ -193,7 +279,7 @@ const AIServices = () => {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
                 <div className="framer-1mdub7q" data-framer-name="Text Container" style={{ opacity: 1 }}>
                   <div
@@ -247,9 +333,9 @@ const AIServices = () => {
           </motion.div>
 
           {/* Automated Workflows Card */}
-          <motion.div 
-            className="framer-1wwoz27-container" 
-            style={{ willChange: "transform", opacity: 1, transform: "none" }} 
+          <motion.div
+            className="framer-1wwoz27-container"
+            style={{ willChange: "transform", opacity: 1, transform: "none" }}
             variants={itemVariants}
             initial="hidden"
             whileInView="visible"
@@ -301,7 +387,7 @@ const AIServices = () => {
                         data-framer-background-image-wrapper="true"
                         style={{ position: "absolute", borderRadius: "inherit", inset: "0px" }}
                       >
-                        <img 
+                        <img
                           width="154"
                           height="110"
                           src="https://framerusercontent.com/images/8x7d36XigNJwbX3MhEzcU6N7N8.png"
@@ -314,8 +400,8 @@ const AIServices = () => {
                             objectPosition: "center center",
                             objectFit: "contain",
                           }}
-                          loading="lazy" 
-                          decoding="async" 
+                          loading="lazy"
+                          decoding="async"
                         />
                       </div>
                     </div>
@@ -538,9 +624,9 @@ const AIServices = () => {
           </motion.div>
 
           {/* AI-Powered Chatbots Card */}
-          <motion.div 
-            className="framer-hnkli9-container" 
-            style={{ willChange: "transform", opacity: 1, transform: "none" }} 
+          <motion.div
+            className="framer-hnkli9-container"
+            style={{ willChange: "transform", opacity: 1, transform: "none" }}
             variants={itemVariants}
             initial="hidden"
             whileInView="visible"
@@ -610,8 +696,13 @@ const AIServices = () => {
                 </div>
 
                 {/* Top Chat Bubble with User Icon */}
-                <div
+                <motion.div
                   className="framer-fx0oj2"
+                  variants={bubbleVariants}
+                  custom={0.5} // User message appears first
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
                   style={{
                     backgroundColor: "var(--token-4f00a517-d75a-4557-9433-caf4536a911d, rgb(245, 245, 245))",
                     borderRadius: "10px",
@@ -648,7 +739,7 @@ const AIServices = () => {
                       Set up a Zoom call with Emily at 10:00 AM on Wednesday.
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* User Icon Circle */}
                 <div
@@ -688,9 +779,12 @@ const AIServices = () => {
                 </div>
 
                 {/* Bottom Chat Bubble with AI Response */}
-                <div
+                <motion.div
                   className="framer-1aim1w3"
+                  variants={bubbleVariants}
+                  custom={2.0} // AI responds after 1.5s delay to simulate thinking
                   style={{
+                    originX: 1, // Animate from right/center for AI
                     backgroundColor: "var(--token-4f00a517-d75a-4557-9433-caf4536a911d, rgb(245, 245, 245))",
                     borderRadius: "10px",
                     boxShadow:
@@ -735,7 +829,7 @@ const AIServices = () => {
                       </a>
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Sparkle/AI Icon Circle */}
                 <div
@@ -777,8 +871,8 @@ const AIServices = () => {
             </div>
           </motion.div>
         </div>
-      </div>
-    </section>
+      </div >
+    </section >
   );
 };
 
