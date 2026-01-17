@@ -17,13 +17,50 @@ const inter = Inter({
 });
 
 // Comprehensive SEO Metadata for UK and Sri Lankan markets
+const baseUrl = 'https://arcai.agency';
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://arcai.agency'),
-  title: {
-    default: "ARC AI - AI Automation and Digital Marketing Company UK | Sri Lanka",
-    template: "%s | ARC AI"
+  metadataBase: new URL(baseUrl),
+  title: 'ARC AI - AI Automation and Digital Marketing Company UK | Sri Lanka',
+  description: 'Leading AI automation and digital marketing company in UK & Sri Lanka. Expert web design, branding, AI automation, chatbots, content generation & digital marketing services. Transform your business with cutting-edge technology.',
+
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.png', type: 'image/png', sizes: '192x192' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180' },
+    ],
   },
-  description: "Leading AI automation and digital marketing company in UK & Sri Lanka. Expert web design, branding, AI automation, chatbots, content generation & digital marketing services. Transform your business with cutting-edge technology.",
+
+  openGraph: {
+    title: 'ARC AI - AI Automation and Digital Marketing Company',
+    description: 'Leading AI automation and digital marketing company in UK & Sri Lanka. Expert web design, branding, AI automation, chatbots, content generation & digital marketing services.',
+    url: baseUrl,
+    siteName: 'ARC AI',
+    type: 'website',
+    locale: 'en_GB',
+
+    images: [
+      {
+        url: `${baseUrl}/og-image.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'ARC AI - AI Automation and Digital Marketing Company',
+        type: 'image/jpeg',
+      },
+    ],
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ARC AI - AI Automation and Digital Marketing Company',
+    description: 'Leading AI automation and digital marketing company in UK & Sri Lanka. Expert web design, branding, AI automation & digital marketing.',
+    images: [`${baseUrl}/og-image.jpg`],
+  },
+
+  // Keeping other existing metadata for SEO but ensuring they don't conflict
   keywords: [
     // UK Market Keywords
     "AI digital agency UK", "web design agency London", "AI automation UK", "digital marketing UK",
@@ -60,54 +97,16 @@ export const metadata: Metadata = {
       'en-LK': 'https://arcai.agency',
     },
   },
-  openGraph: {
-    type: 'website',
-    locale: 'en_GB',
-    alternateLocale: ['en_LK'],
-    url: 'https://arcai.agency',
-    siteName: 'ARC AI',
-    title: 'ARC AI - AI Automation and Digital Marketing Company UK | Sri Lanka',
-    description: 'Leading AI automation and digital marketing company in UK & Sri Lanka. Expert web design, branding, AI automation, chatbots, content generation & digital marketing services.',
-    images: [
-      {
-        url: '/share-1200x630.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'ARC AI - AI Automation and Digital Marketing Company',
-        type: 'image/jpeg',
-      },
-      {
-        url: '/share-600x600.jpg',
-        width: 600,
-        height: 600,
-        alt: 'ARC AI - AI Automation and Digital Marketing Company',
-        type: 'image/jpeg',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'ARC AI - AI Automation and Digital Marketing Company',
-    description: 'Leading AI automation and digital marketing company in UK & Sri Lanka. Expert web design, branding, AI automation & digital marketing.',
-    images: ['/share-1200x630.jpg'],
-    creator: '@arcdigitalcanvas',
-    site: '@arcdigitalcanvas',
-  },
   verification: {
     google: 'your-google-verification-code', // Add your Google Search Console verification code
-    // yandex: 'your-yandex-verification-code', // Optional
-    // bing: 'your-bing-verification-code', // Optional
   },
   category: 'technology',
   classification: 'Business Services',
   other: {
-    // Geo-targeting for UK
     'geo.region': 'GB',
     'geo.placename': 'United Kingdom',
-    // Geo-targeting for Sri Lanka
     'geo.region.secondary': 'LK',
     'geo.placename.secondary': 'Sri Lanka',
-    // Additional SEO tags
     'distribution': 'global',
     'revisit-after': '7 days',
     'language': 'English',
@@ -139,10 +138,6 @@ export default function RootLayout({
         {/* Remove video preload - let browser decide based on bandwidth */}
         <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2" type="font/woff2" crossOrigin="anonymous" fetchPriority="high" />
 
-        {/* Minimal Favicons - Defer non-critical */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
         {/* Web App Manifest - Deferred */}
         <link rel="manifest" href="/site.webmanifest" />
