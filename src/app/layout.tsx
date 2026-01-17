@@ -17,7 +17,7 @@ const inter = Inter({
 });
 
 // Comprehensive SEO Metadata for UK and Sri Lankan markets
-const baseUrl = 'https://arcai.agency';
+const baseUrl = 'https://www.arcai.agency';
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
