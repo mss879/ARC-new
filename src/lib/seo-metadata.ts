@@ -106,9 +106,15 @@ export function getOpenGraphData(page: keyof typeof pageMetadata | string) {
     type: 'website' as const,
     images: [
       {
-        url: 'https://arcai.agency/sharemimag-lessq.png',
+        url: 'https://arcai.agency/share-1200x630.jpg',
         width: 1200,
         height: 630,
+        alt: 'ARC AI',
+      },
+      {
+        url: 'https://arcai.agency/share-600x600.jpg',
+        width: 600,
+        height: 600,
         alt: 'ARC AI',
       },
     ],
@@ -129,6 +135,6 @@ export function getTwitterCardData(page: keyof typeof pageMetadata | string) {
     card: 'summary_large_image' as const,
     title: data.title,
     description: data.description,
-    images: ['https://arcai.agency/sharemimag-lessq.png'],
+    images: ['https://arcai.agency/share-1200x630.jpg'],
   };
 }
