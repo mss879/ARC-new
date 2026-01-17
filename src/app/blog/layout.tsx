@@ -14,7 +14,7 @@ export const metadata: Metadata = {
         url: "https://arcai.agency/blog",
         type: "website",
         images: [{
-            url: "https://arcai.agency/-shareable-img.png",
+            url: "https://arcai.agency/shareable-img.png",
             width: 1200,
             height: 630,
             alt: "ARC Digital Canvas Blog"
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Blog - Digital Marketing & AI Insights",
         description: "Explore cutting-edge insights on AI automation and digital marketing",
-        images: ["https://arcai.agency/-shareable-img.png"]
+        images: ["https://arcai.agency/shareable-img.png"]
     },
     alternates: {
         canonical: "https://arcai.agency/blog"

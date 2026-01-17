@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     description: 'Leading AI automation and digital marketing company in UK & Sri Lanka. Expert web design, branding, AI automation, chatbots, content generation & digital marketing services.',
     images: [
       {
-        url: '/-shareable-img.png',
+        url: '/shareable-img.png',
         width: 1200,
         height: 630,
         alt: 'ARC AI - AI Automation and Digital Marketing Company',
@@ -82,7 +82,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'ARC AI - AI Automation and Digital Marketing Company',
     description: 'Leading AI automation and digital marketing company in UK & Sri Lanka. Expert web design, branding, AI automation & digital marketing.',
-    images: ['/-shareable-img.png'],
+    images: ['/shareable-img.png'],
     creator: '@arcdigitalcanvas',
     site: '@arcdigitalcanvas',
   },
@@ -122,8 +122,8 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
         {/* Explicit Open Graph tags for WhatsApp */}
-        <meta property="og:image" content="https://arcai.agency/-shareable-img.png" />
-        <meta property="og:image:secure_url" content="https://arcai.agency/-shareable-img.png" />
+        <meta property="og:image" content="https://arcai.agency/shareable-img.png" />
+        <meta property="og:image:secure_url" content="https://arcai.agency/shareable-img.png" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />

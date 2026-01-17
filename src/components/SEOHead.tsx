@@ -19,7 +19,7 @@ export default function SEOHead({
   description,
   keywords,
   canonical,
-  ogImage = 'https://arcai.agency/-shareable-img.png',
+  ogImage = 'https://arcai.agency/shareable-img.png',
   ogType = 'website',
 }: SEOHeadProps) {
   useEffect(() => {
