@@ -106,7 +106,7 @@ export function getOpenGraphData(page: keyof typeof pageMetadata | string) {
     type: 'website' as const,
     images: [
       {
-        url: 'https://arcai.agency/shareable-img.png',
+        url: 'https://arcai.agency/shareimage-1200x630.png',
         width: 1200,
         height: 630,
         alt: 'ARC AI',
@@ -129,6 +129,6 @@ export function getTwitterCardData(page: keyof typeof pageMetadata | string) {
     card: 'summary_large_image' as const,
     title: data.title,
     description: data.description,
-    images: ['https://arcai.agency/shareable-img.png'],
+    images: ['https://arcai.agency/shareimage-1200x630.png'],
   };
 }
