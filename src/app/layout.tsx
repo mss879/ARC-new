@@ -17,10 +17,8 @@ const inter = Inter({
 });
 
 // Comprehensive SEO Metadata for UK and Sri Lankan markets
-const baseUrl = 'https://www.arcai.agency';
-
 export const metadata: Metadata = {
-  metadataBase: new URL(baseUrl),
+  metadataBase: new URL('https://www.arcai.agency'),
   title: 'ARC AI - AI Automation and Digital Marketing Company UK | Sri Lanka',
   description: 'Leading AI automation and digital marketing company in UK & Sri Lanka. Expert web design, branding, AI automation, chatbots, content generation & digital marketing services. Transform your business with cutting-edge technology.',
 
@@ -37,14 +35,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'ARC AI - AI Automation and Digital Marketing Company',
     description: 'Leading AI automation and digital marketing company in UK & Sri Lanka. Expert web design, branding, AI automation, chatbots, content generation & digital marketing services.',
-    url: baseUrl,
+    url: 'https://www.arcai.agency',
     siteName: 'ARC AI',
     type: 'website',
     locale: 'en_GB',
 
     images: [
       {
-        url: `${baseUrl}/og-image.jpg`,
+        url: 'https://www.arcai.agency/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'ARC AI - AI Automation and Digital Marketing Company',
@@ -57,7 +55,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'ARC AI - AI Automation and Digital Marketing Company',
     description: 'Leading AI automation and digital marketing company in UK & Sri Lanka. Expert web design, branding, AI automation & digital marketing.',
-    images: [`${baseUrl}/og-image.jpg`],
+    images: ['https://www.arcai.agency/og-image.jpg'],
   },
 
   // Keeping other existing metadata for SEO but ensuring they don't conflict
