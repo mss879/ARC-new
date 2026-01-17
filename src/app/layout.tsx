@@ -70,8 +70,7 @@ export const metadata: Metadata = {
     description: 'Leading AI automation and digital marketing company in UK & Sri Lanka. Expert web design, branding, AI automation, chatbots, content generation & digital marketing services.',
     images: [
       {
-        url: 'https://arcai.agency/-shareable-img.png',
-        secureUrl: 'https://arcai.agency/-shareable-img.png',
+        url: '/-shareable-img.png',
         width: 1200,
         height: 630,
         alt: 'ARC AI - AI Automation and Digital Marketing Company',
@@ -83,10 +82,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'ARC AI - AI Automation and Digital Marketing Company',
     description: 'Leading AI automation and digital marketing company in UK & Sri Lanka. Expert web design, branding, AI automation & digital marketing.',
-    images: {
-      url: 'https://arcai.agency/shareimagenew.png',
-      alt: 'ARC AI - AI Automation and Digital Marketing Company',
-    },
+    images: ['/-shareable-img.png'],
     creator: '@arcdigitalcanvas',
     site: '@arcdigitalcanvas',
   },
