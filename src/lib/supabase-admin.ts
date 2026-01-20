@@ -10,6 +10,6 @@ if (!supabaseUrl || !supabaseServiceKey) {
 
 // Admin client for server-side usage (Bypasses RLS - careful!)
 // Only available if the Service Role Key is present (Server-side)
-export const supabaseAdmin = supabaseServiceKey
+export const supabaseAdmin = (supabaseUrl && supabaseServiceKey)
     ? createClient(supabaseUrl, supabaseServiceKey)
     : undefined;

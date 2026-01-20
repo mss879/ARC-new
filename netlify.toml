@@ -1,5 +1,5 @@
 [build]
-  publish = "out"
+  # publish = "out" # Commented out because we are switching to SSR/API routes
   command = "npm run build"
 
 [[headers]]

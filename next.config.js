@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // output: 'export', // Commented out to enable API routes (SSR)
   images: {
     unoptimized: true,
     formats: ['image/avif', 'image/webp'],
