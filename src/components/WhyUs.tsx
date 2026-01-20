@@ -48,9 +48,9 @@ const WhyUs: React.FC = () => {
         </div>
       </div>
 
-      <div className="framer-2pyb2i relative mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-28 backdrop-blur-[1px]">
+      <div className="framer-2pyb2i relative mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-24 backdrop-blur-[1px]">
         {/* Heading Section with Title and Description Side by Side */}
-        <div className="framer-87mhgl mb-16 md:mb-24" data-framer-name="Heading">
+        <div className="framer-87mhgl mb-16 md:mb-20" data-framer-name="Heading">
           <div className="framer-jdz43l mb-6" data-framer-name="(why us)">
             <p className="framer-text text-xs tracking-[0.25em] text-neutral-500 uppercase">(WHY US)</p>
           </div>

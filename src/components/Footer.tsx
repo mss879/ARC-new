@@ -55,7 +55,7 @@ const Footer = () => {
       
       {/* Main Section */}
       <div className="relative bg-black">
-        <div className="max-w-[1400px] mx-auto px-6 py-20">
+        <div className="max-w-[1400px] mx-auto px-6 py-20 lg:py-16">
           {/* Top Section */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 mb-20">
             {/* Contact Section */}
@@ -80,13 +80,25 @@ const Footer = () => {
                 <p className="text-[#777777] text-sm">We'll respond within 24 hours</p>
               </motion.div>
 
+              {/* Company Registration */}
+              <motion.div 
+                className="space-y-2"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <p className="text-[#777777] text-sm">This is a registered company</p>
+                <p className="text-white text-base">Registration Number: <span className="font-semibold">PV00352581</span></p>
+              </motion.div>
+
               {/* Phone */}
               <motion.div 
                 className="space-y-3"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
+                transition={{ duration: 0.6, delay: 0.15 }}
               >
                 <p className="text-[#777777] text-sm uppercase tracking-wider">Phone Numbers</p>
                 <div className="space-y-2">
@@ -309,7 +321,7 @@ const Footer = () => {
           >
             {/* Left */}
             <div className="space-y-4">
-              <p className="text-[#777777] text-sm">©2025 ARC AI. All Rights Reserved</p>
+              <p className="text-[#777777] text-sm">©{new Date().getFullYear()} ARC AI. All Rights Reserved</p>
               <div className="flex items-center gap-4">
                 <a
                   href="/privacy-policy"

@@ -9,7 +9,7 @@ const fade = {
 
 const Benefits = () => {
   return (
-    <section id="benefits" className="relative py-24 px-4 md:px-8 bg-black">
+    <section id="benefits" className="relative py-24 lg:py-20 px-4 md:px-8 bg-black">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <motion.div

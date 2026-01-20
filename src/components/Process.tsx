@@ -42,7 +42,7 @@ const Process = () => {
   };
 
   return (
-    <section className="bg-[rgb(10,10,10)] py-20 px-6 lg:px-12">
+    <section className="bg-[rgb(10,10,10)] py-20 lg:py-16 px-6 lg:px-12">
       <div className="max-w-[1600px] mx-auto">
         <div className="flex flex-col lg:flex-row gap-12 items-start">
           {/* Left Side - Title */}

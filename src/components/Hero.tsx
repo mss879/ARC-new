@@ -145,15 +145,8 @@ const Hero = memo(() => {
       <div className="relative z-10 h-full flex flex-col px-6 md:px-8 lg:px-12 pt-32 md:pt-24 lg:pt-40 pb-8">
         {/* Mobile & Small Screens - Redesigned layout */}
         <div className="flex-1 md:hidden flex flex-col h-full max-w-[1800px] mx-auto w-full">
-          {/* Top Section - Main Headline on Right */}
-          <div className="flex justify-end pt-12 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            <h1 className="text-4xl sm:text-5xl font-bold leading-[1.1] tracking-tight text-white/60 text-right" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
-              Beyond Visuals.
-              <br />
-              Built with Vision.
-            </h1>
-          </div>
-
+          {/* Top Section - Main Headline on Right - REMOVED FOR MOBILE */}
+          
           {/* Spacer */}
           <div className="flex-1"></div>
 
@@ -161,9 +154,9 @@ const Hero = memo(() => {
           <div className="space-y-6 pb-4">
             {/* Description */}
             <div className="animate-fade-in" style={{ animationDelay: "0.4s" }}>
-              <h2 className="text-lg sm:text-xl leading-relaxed text-center text-white" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", fontWeight: 700 }}>
+              <h2 className="text-lg sm:text-xl leading-relaxed text-justify text-white" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", fontWeight: 700 }}>
                 We build brands, websites, and digital experiences{" "}
-                <span className="text-white/60">
+                <span className="text-white">
                   with intention, clarity and care.
                 </span>
               </h2>
@@ -228,9 +221,9 @@ const Hero = memo(() => {
             <div className="space-y-4 md:space-y-6 w-full md:w-auto">
               {/* Description */}
               <div className="animate-fade-in" style={{ animationDelay: "0.4s" }}>
-                <h2 className="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed max-w-2xl text-white" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                <h2 className="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed max-w-2xl text-justify text-white" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
                   We build brands, websites, AI Automations, and Digital experiences{" "}
-                  <span className="text-white/60">
+                  <span className="text-white">
                     with intention, clarity and care.
                   </span>
                 </h2>
@@ -285,11 +278,11 @@ const Hero = memo(() => {
           {/* Left Side - Description at bottom */}
           <div className="flex flex-col justify-end h-full">
             <div className="space-y-4 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-              <h2 className="text-2xl xl:text-3xl font-medium leading-relaxed max-w-xl text-white" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+              <h2 className="text-2xl xl:text-3xl font-medium leading-relaxed max-w-xl text-justify text-white" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
                 We build brands, websites,
                 <br />
                 AI Automations, and Digital experiences{" "}
-                <span className="text-white/60">
+                <span className="text-white">
                   with intention, clarity and care.
                 </span>
               </h2>

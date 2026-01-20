@@ -68,7 +68,7 @@ const CTA = () => {
         </div>
 
         {/* Content Grid */}
-        <div className="relative z-20 max-w-[1600px] mx-auto px-6 lg:px-12 py-20 lg:py-24">
+        <div className="relative z-20 max-w-[1600px] mx-auto px-6 lg:px-12 py-20 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 items-center">
             {/* Left - Title */}
             <div className="lg:col-span-1">

@@ -38,7 +38,7 @@ const ClientsSection = memo(() => {
   }));
 
   return (
-    <section className="relative pt-0 pb-12 md:pb-20 bg-black overflow-hidden" id="clients">
+    <section className="relative pt-0 pb-12 md:pb-16 bg-black overflow-hidden" id="clients">
       <div className="relative w-full">
         <div className="relative flex flex-col items-center">
           {/* Spinning Circle with Images - Positioned higher to show only top half */}

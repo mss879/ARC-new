@@ -75,7 +75,7 @@ const typingChar: Variants = {
 
 const AIServices = () => {
   return (
-    <section className="py-20 px-4 md:px-6 bg-black" id="services">
+    <section className="py-20 lg:py-16 px-4 md:px-6 bg-black" id="services">
       <div className="max-w-7xl mx-auto">
         {/* Heading Section */}
         <motion.div

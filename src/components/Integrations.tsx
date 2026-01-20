@@ -148,7 +148,7 @@ const IntegrationCard = ({ integration }: { integration: Integration }) => {
 
 const Integrations = () => {
   return (
-    <section className="relative w-full py-12 overflow-hidden bg-black" id="integrations-section">
+    <section className="relative w-full py-12 lg:py-10 overflow-hidden bg-black" id="integrations-section">
       <div className="container mx-auto px-12">
         {/* Header */}
         <div className="mb-12">
