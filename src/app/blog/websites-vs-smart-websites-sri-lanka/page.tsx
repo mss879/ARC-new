@@ -2,11 +2,7 @@
 import { Metadata } from "next";
 import BlogPost from "./content";
 
-interface Props {
-    params: { slug: string };
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
     // In a static export or simple structure, we can just return the static data directly.
     // The user requested this specific structure.
 

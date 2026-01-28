@@ -2,11 +2,7 @@
 import { Metadata } from "next";
 import BlogPost from "./content";
 
-interface Props {
-  params: { slug: string };
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const post = {
     title: "Building the Ultimate Marketing Analytics Dashboard | ARC AI Blog",
     excerpt: "Learn how to build a marketing analytics dashboard that drives decisions. Track key metrics, ROI, and performance in one place.",

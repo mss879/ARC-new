@@ -2,11 +2,7 @@
 import { Metadata } from "next";
 import BlogPost from "./content";
 
-interface Props {
-  params: { slug: string };
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const post = {
     title: "Video Marketing Mastery: Dominate YouTube, TikTok & Reels | ARC AI Blog",
     excerpt: "Dominate video marketing in 2025. Strategies for YouTube, TikTok, and Instagram Reels to grow your audience and drive sales.",

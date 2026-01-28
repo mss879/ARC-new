@@ -2,11 +2,7 @@
 import { Metadata } from "next";
 import BlogPost from "./content";
 
-interface Props {
-  params: { slug: string };
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const post = {
     title: "How AI Automation is Transforming Businesses in 2024 | ARC AI Blog",
     excerpt: "Discover how AI automation is revolutionizing business operations, reducing costs, and driving growth in 2024. Expert insights from ARC AI.",

@@ -2,11 +2,7 @@
 import { Metadata } from "next";
 import BlogPost from "./content";
 
-interface Props {
-  params: { slug: string };
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const post = {
     title: "Complete Social Media Marketing Guide for Business Growth | ARC AI Blog",
     excerpt: "A complete guide to social media marketing for business growth. Learn platform strategies, content calendars, and analytics.",

@@ -2,11 +2,7 @@
 import { Metadata } from "next";
 import BlogPost from "./content";
 
-interface Props {
-    params: { slug: string };
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
     // Static metadata for this specific page
     const post = {
         title: "The Rise of AI Agents: Transforming Business Operations in Sri Lanka | ARC AI Blog",

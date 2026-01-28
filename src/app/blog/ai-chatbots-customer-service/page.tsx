@@ -2,11 +2,7 @@
 import { Metadata } from "next";
 import BlogPost from "./content";
 
-interface Props {
-  params: { slug: string };
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const post = {
     title: "AI Chatbots for Customer Service: 2024 Guide | ARC AI Blog",
     excerpt: "Learn how AI chatbots are revolutionizing customer service. A complete guide to implementation, benefits, and best practices.",

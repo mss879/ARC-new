@@ -2,11 +2,7 @@
 import { Metadata } from "next";
 import BlogPost from "./content";
 
-interface Props {
-  params: { slug: string };
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const post = {
     title: "Influencer Marketing Strategy: Partner Your Way to Growth | ARC AI Blog",
     excerpt: "A comprehensive guide to influencer marketing strategy in 2025. Partner with the right influencers to drive growth and ROI.",

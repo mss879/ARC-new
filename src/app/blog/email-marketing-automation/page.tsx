@@ -2,11 +2,7 @@
 import { Metadata } from "next";
 import BlogPost from "./content";
 
-interface Props {
-  params: { slug: string };
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const post = {
     title: "Email Marketing Automation: Complete 2024 Playbook | ARC AI Blog",
     excerpt: "Master email marketing automation with our 2024 playbook. Learn essential workflows, segmentation, and personalization strategies.",

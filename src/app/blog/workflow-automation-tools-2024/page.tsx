@@ -2,11 +2,7 @@
 import { Metadata } from "next";
 import BlogPost from "./content";
 
-interface Props {
-  params: { slug: string };
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const post = {
     title: "Top 10 Workflow Automation Tools Every Business Needs | ARC AI Blog",
     excerpt: "Discover the top 10 workflow automation tools for 2024. Streamline your business, save time, and boost productivity with AI automation.",

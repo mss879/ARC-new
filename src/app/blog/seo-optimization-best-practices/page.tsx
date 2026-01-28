@@ -2,11 +2,7 @@
 import { Metadata } from "next";
 import BlogPost from "./content";
 
-interface Props {
-  params: { slug: string };
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const post = {
     title: "SEO Optimization Best Practices to Rank #1 on Google | ARC AI Blog",
     excerpt: "Master SEO in 2024 with our guide to ranking #1 on Google. Learn technical SEO, keyword research, and link building strategies.",
