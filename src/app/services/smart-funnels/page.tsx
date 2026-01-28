@@ -10,12 +10,28 @@ export const metadata: Metadata = {
         "conversion optimization", "email marketing automation",
         "sales pipeline automation", "customer journey mapping"
     ],
+    authors: [{ name: "ARC AI Agency" }],
     openGraph: {
         title: "Smart Sales Funnels & Marketing Automation | ARC AI",
         description: "Turn leads into customers on autopilot. Intelligent funnels that nurture, qualify, and convert 24/7.",
         url: "https://arcai.agency/services/smart-funnels",
+        siteName: "ARC AI Agency",
+        images: [
+            {
+                url: "https://arcai.agency/shareable-img.png",
+                width: 1200,
+                height: 630,
+                alt: "Smart Sales Funnels & Marketing Automation | ARC AI",
+            },
+        ],
+        locale: "en_US",
         type: "website",
-        images: ["https://arcai.agency/shareable-img.png"]
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Smart Sales Funnels & Marketing Automation | ARC AI",
+        description: "Turn leads into customers on autopilot.",
+        images: ["https://arcai.agency/shareable-img.png"],
     },
     alternates: {
         canonical: "https://arcai.agency/services/smart-funnels"

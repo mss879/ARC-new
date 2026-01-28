@@ -10,12 +10,28 @@ export const metadata: Metadata = {
         "enterprise software", "internal tools", "Next.js development",
         "React web apps", "secure web portals"
     ],
+    authors: [{ name: "ARC AI Agency" }],
     openGraph: {
         title: "Custom Web App Development Services | ARC AI",
         description: "Build software that scales with your business. Custom web apps tailored to your unique workflows.",
         url: "https://arcai.agency/services/web-apps",
+        siteName: "ARC AI Agency",
+        images: [
+            {
+                url: "https://arcai.agency/shareable-img.png",
+                width: 1200,
+                height: 630,
+                alt: "Custom Web App Development Services | ARC AI",
+            },
+        ],
+        locale: "en_US",
         type: "website",
-        images: ["https://arcai.agency/shareable-img.png"]
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Custom Web App Development Services | ARC AI",
+        description: "Build software that scales with your business.",
+        images: ["https://arcai.agency/shareable-img.png"],
     },
     alternates: {
         canonical: "https://arcai.agency/services/web-apps"

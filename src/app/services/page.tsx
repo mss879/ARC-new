@@ -10,12 +10,28 @@ export const metadata: Metadata = {
     "AI chatbots", "workflow automation", "content generation", "custom web apps",
     "brand identity design", "smart ad campaigns", "digital transformation"
   ],
+  authors: [{ name: "ARC AI Agency" }],
   openGraph: {
     title: "Digital Marketing & AI Automation Services | ARC AI",
     description: "Transform your business with our AI-powered digital services. From smart websites to automated workflows, we deliver results that matter.",
     url: "https://arcai.agency/services",
+    siteName: "ARC AI Agency",
+    images: [
+      {
+        url: "https://arcai.agency/shareable-img.png",
+        width: 1200,
+        height: 630,
+        alt: "Digital Marketing & AI Automation Services | ARC AI",
+      },
+    ],
+    locale: "en_US",
     type: "website",
-    images: ["https://arcai.agency/shareable-img.png"]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Digital Marketing & AI Automation Services | ARC AI",
+    description: "Transform your business with our AI-powered digital services.",
+    images: ["https://arcai.agency/shareable-img.png"],
   },
   alternates: {
     canonical: "https://arcai.agency/services"

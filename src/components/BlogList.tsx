@@ -34,6 +34,24 @@ const fadeInUp: Variants = {
 export default function BlogList() {
     const blogPosts = [
         {
+            id: "ai-agents-sri-lanka",
+            title: "The Rise of AI Agents: Transforming Business Operations in Sri Lanka",
+            date: "March 20, 2025",
+            category: "Artificial Intelligence",
+            image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&auto=format&fit=crop&q=80",
+            excerpt: "Learn how AI Agents are revolutionizing Sri Lankan industries from tourism to real estate by automating tasks and improving customer engagement.",
+            tags: ["AI Agents", "Automation", "Sri Lanka Business", "Hospitality AI"]
+        },
+        {
+            id: "websites-vs-smart-websites-sri-lanka",
+            title: "Websites vs. Smart Websites: Why Sri Lankan Businesses Need to Upgrade",
+            date: "March 15, 2025",
+            category: "Web Development",
+            image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&auto=format&fit=crop&q=80",
+            excerpt: "Discover the difference between traditional static websites and modern Smart Websites. Learn why Sri Lankan businesses need to upgrade for 24/7 engagement.",
+            tags: ["Smart Websites", "Web Development", "Sri Lanka Business", "Digital Transformation"]
+        },
+        {
             id: "ai-automation-transform-business-2024",
             title: "How AI Automation is Transforming Businesses in 2024",
             date: "Oct 11, 2024",

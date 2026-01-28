@@ -20,23 +20,28 @@ export const metadata: Metadata = {
     "web design company", "AI automation experts", "digital marketing agency",
     "branding agency", "our story", "company values", "digital transformation"
   ],
+  authors: [{ name: "ARC AI Agency" }],
   openGraph: {
     title: "About ARC Digital Canvas - AI Digital Agency",
     description: "Leading AI-powered digital agency serving UK and Sri Lanka with expertise in web design, AI automation, and digital marketing.",
     url: "https://arcai.agency/about",
+    siteName: "ARC AI Agency",
+    images: [
+      {
+        url: "https://arcai.agency/shareable-img.png",
+        width: 1200,
+        height: 630,
+        alt: "About ARC Digital Canvas",
+      },
+    ],
+    locale: "en_US",
     type: "website",
-    images: [{
-      url: "https://arcai.agency/shareable-img.png",
-      width: 1200,
-      height: 630,
-      alt: "About ARC Digital Canvas"
-    }]
   },
   twitter: {
     card: "summary_large_image",
     title: "About ARC Digital Canvas - AI Digital Agency",
     description: "Leading AI-powered digital agency serving UK and Sri Lanka",
-    images: ["https://arcai.agency/shareable-img.png"]
+    images: ["https://arcai.agency/shareable-img.png"],
   },
   alternates: {
     canonical: "https://arcai.agency/about"

@@ -69,25 +69,28 @@ export const metadata: Metadata = {
     "AI digital agency Sri Lanka", "web design agency Colombo", "digital marketing Sri Lanka",
     "AI web design", "artificial intelligence marketing", "chatbot development", "workflow automation"
   ],
+  authors: [{ name: "ARC AI Agency" }],
   openGraph: {
     title: "ARC AI - AI Automation and Digital Marketing Company",
     description: "Leading AI automation and digital marketing company in UK & Sri Lanka. Transform your business with cutting-edge web design, AI automation, and digital marketing.",
     url: "https://arcai.agency",
-    type: "website",
+    siteName: "ARC AI Agency",
     images: [
       {
         url: "https://arcai.agency/shareable-img.png",
         width: 1200,
         height: 630,
-        alt: "ARC AI - AI Automation and Digital Marketing Company"
-      }
-    ]
+        alt: "ARC AI - AI Automation and Digital Marketing Company",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "ARC AI - AI Automation and Digital Marketing Company",
     description: "Leading AI automation and digital marketing company in UK & Sri Lanka",
-    images: ["https://arcai.agency/shareable-img.png"]
+    images: ["https://arcai.agency/shareable-img.png"],
   },
   alternates: {
     canonical: "https://arcai.agency"

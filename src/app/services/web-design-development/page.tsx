@@ -10,12 +10,28 @@ export const metadata: Metadata = {
     "React web development", "SEO web design", "responsive website design",
     "ecommerce website development", "corporate website design"
   ],
+  authors: [{ name: "ARC AI Agency" }],
   openGraph: {
     title: "Professional Web Design & Development Services | ARC AI",
     description: "Transform your online presence with our expert web design and development services. Fast, secure, and beautiful websites.",
     url: "https://arcai.agency/services/web-design-development",
+    siteName: "ARC AI Agency",
+    images: [
+      {
+        url: "https://arcai.agency/shareable-img.png",
+        width: 1200,
+        height: 630,
+        alt: "Professional Web Design & Development Services | ARC AI",
+      },
+    ],
+    locale: "en_US",
     type: "website",
-    images: ["https://arcai.agency/shareable-img.png"]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Professional Web Design & Development Services | ARC AI",
+    description: "Transform your online presence with our expert web design and development services.",
+    images: ["https://arcai.agency/shareable-img.png"],
   },
   alternates: {
     canonical: "https://arcai.agency/services/web-design-development"

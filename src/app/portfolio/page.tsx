@@ -18,23 +18,28 @@ export const metadata: Metadata = {
     "web development examples", "AI chatbot projects", "design showcase",
     "UK web design portfolio", "Sri Lanka digital agency work"
   ],
+  authors: [{ name: "ARC AI Agency" }],
   openGraph: {
     title: "Portfolio - Our Best Work | ARC Digital Canvas",
     description: "Explore our portfolio of successful web design, AI automation, and digital marketing projects with proven results.",
     url: "https://arcai.agency/portfolio",
+    siteName: "ARC AI Agency",
+    images: [
+      {
+        url: "https://arcai.agency/shareable-img.png",
+        width: 1200,
+        height: 630,
+        alt: "ARC Digital Canvas Portfolio",
+      },
+    ],
+    locale: "en_US",
     type: "website",
-    images: [{
-      url: "https://arcai.agency/shareable-img.png",
-      width: 1200,
-      height: 630,
-      alt: "ARC Digital Canvas Portfolio"
-    }]
   },
   twitter: {
     card: "summary_large_image",
     title: "Portfolio - Our Best Work | ARC Digital Canvas",
     description: "Explore our portfolio of successful projects",
-    images: ["https://arcai.agency/shareable-img.png"]
+    images: ["https://arcai.agency/shareable-img.png"],
   },
   alternates: {
     canonical: "https://arcai.agency/portfolio"

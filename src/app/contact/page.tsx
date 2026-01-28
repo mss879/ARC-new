@@ -15,23 +15,28 @@ export const metadata: Metadata = {
     "AI automation consultation", "branding inquiry", "schedule call",
     "digital agency contact Sri Lanka", "project inquiry"
   ],
+  authors: [{ name: "ARC AI Agency" }],
   openGraph: {
     title: "Contact ARC Digital Canvas - Get in Touch",
     description: "Ready to transform your business with AI? Contact us for web design, AI automation, and digital marketing services.",
     url: "https://arcai.agency/contact",
+    siteName: "ARC AI Agency",
+    images: [
+      {
+        url: "https://arcai.agency/shareable-img.png",
+        width: 1200,
+        height: 630,
+        alt: "Contact ARC Digital Canvas",
+      },
+    ],
+    locale: "en_US",
     type: "website",
-    images: [{
-      url: "https://arcai.agency/shareable-img.png",
-      width: 1200,
-      height: 630,
-      alt: "Contact ARC Digital Canvas"
-    }]
   },
   twitter: {
     card: "summary_large_image",
     title: "Contact ARC Digital Canvas",
     description: "Get in touch for AI-powered digital solutions",
-    images: ["https://arcai.agency/shareable-img.png"]
+    images: ["https://arcai.agency/shareable-img.png"],
   },
   alternates: {
     canonical: "https://arcai.agency/contact"

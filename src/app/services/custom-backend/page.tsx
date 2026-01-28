@@ -10,12 +10,28 @@ export const metadata: Metadata = {
         "scalable systems", "database design", "microservices architecture",
         "Node.js development", "AWS cloud services"
     ],
+    authors: [{ name: "ARC AI Agency" }],
     openGraph: {
         title: "Custom Backend & API Development Services | ARC AI",
         description: "Build the engine that powers your business. Secure, scalable backend infrastructure designed for growth.",
         url: "https://arcai.agency/services/custom-backend",
+        siteName: "ARC AI Agency",
+        images: [
+            {
+                url: "https://arcai.agency/shareable-img.png",
+                width: 1200,
+                height: 630,
+                alt: "Custom Backend & API Development Services | ARC AI",
+            },
+        ],
+        locale: "en_US",
         type: "website",
-        images: ["https://arcai.agency/shareable-img.png"]
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Custom Backend & API Development Services | ARC AI",
+        description: "Build the engine that powers your business.",
+        images: ["https://arcai.agency/shareable-img.png"],
     },
     alternates: {
         canonical: "https://arcai.agency/services/custom-backend"
