@@ -29,7 +29,31 @@ export default function ReviewsPage() {
                 .order('created_at', { ascending: false });
 
             if (!error && data) {
-                setReviews(data);
+                // Programmatic sorting: Move specific reviews (Keys Place, Vibe Web Studio) to the end
+                const sortedReviews = [...data].sort((a, b) => {
+                    const aCompany = (a.client_company || '').toLowerCase();
+                    const aName = (a.client_name || '').toLowerCase();
+                    const aContent = (a.content || '').toLowerCase();
+                    
+                    const bCompany = (b.client_company || '').toLowerCase();
+                    const bName = (b.client_name || '').toLowerCase();
+                    const bContent = (b.content || '').toLowerCase();
+
+                    const isAKeys = aCompany.includes('keys') || aName.includes('keys') || aContent.includes('keys');
+                    const isBKeys = bCompany.includes('keys') || bName.includes('keys') || bContent.includes('keys');
+
+                    const isAVibe = aCompany.includes('vibe') || aName.includes('vibe') || aContent.includes('vibe');
+                    const isBVibe = bCompany.includes('vibe') || bName.includes('vibe') || bContent.includes('vibe');
+
+                    // Push Keys / Vibe reviews to the end
+                    if ((isAKeys || isAVibe) && !(isBKeys || isBVibe)) return 1;
+                    if (!(isAKeys || isAVibe) && (isBKeys || isBVibe)) return -1;
+                    
+                    // Maintain standard chronological order otherwise
+                    return 0;
+                });
+
+                setReviews(sortedReviews);
             }
             setLoading(false);
         };
@@ -89,33 +113,10 @@ export default function ReviewsPage() {
                             variants={containerVariants}
                             initial="hidden"
                             animate="show"
-                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start"
                         >
                             {reviews.map((review) => (
-                                <motion.div
-                                    key={review.id}
-                                    variants={itemVariants}
-                                    className="bg-zinc-900/40 backdrop-blur-sm border border-white/10 rounded-2xl p-8 flex flex-col relative group hover:border-[#FF4925]/30 transition-colors"
-                                >
-                                    <Quote className="absolute top-6 right-6 w-8 h-8 text-[#FF4925]/20 group-hover:text-[#FF4925]/40 transition-colors" />
-                                    
-                                    <div className="flex items-center gap-1 mb-6 text-yellow-500">
-                                        {[...Array(review.rating)].map((_, i) => (
-                                            <Star key={i} className="w-4 h-4 fill-current" />
-                                        ))}
-                                    </div>
-                                    
-                                    <p className="text-gray-300 flex-1 leading-relaxed mb-6">
-                                        "{review.content}"
-                                    </p>
-                                    
-                                    <div className="mt-auto">
-                                        <h3 className="font-semibold text-white">{review.client_name}</h3>
-                                        {review.client_company && (
-                                            <p className="text-sm text-gray-500 mt-1">{review.client_company}</p>
-                                        )}
-                                    </div>
-                                </motion.div>
+                                <ReviewCard key={review.id} review={review} itemVariants={itemVariants} />
                             ))}
                         </motion.div>
                     )}
@@ -124,5 +125,63 @@ export default function ReviewsPage() {
 
             <Footer />
         </div>
+    );
+}
+
+// ── Stateful Testimonial Card with Dynamic Truncation & Expansion ─────────────────
+interface ReviewCardProps {
+    review: Review;
+    itemVariants: any;
+}
+
+function ReviewCard({ review, itemVariants }: ReviewCardProps) {
+    const [isExpanded, setIsExpanded] = useState(false);
+    
+    const CHAR_LIMIT = 180;
+    const shouldTruncate = review.content && review.content.length > CHAR_LIMIT;
+    
+    const displayedText = isExpanded 
+        ? review.content 
+        : shouldTruncate 
+            ? `${review.content.substring(0, CHAR_LIMIT)}...` 
+            : review.content;
+
+    return (
+        <motion.div
+            variants={itemVariants}
+            className="bg-zinc-900/40 backdrop-blur-sm border border-white/10 rounded-2xl p-8 flex flex-col relative group hover:border-[#FF4925]/30 transition-all duration-300 min-h-[340px] h-full"
+        >
+            <Quote className="absolute top-6 right-6 w-8 h-8 text-[#FF4925]/20 group-hover:text-[#FF4925]/40 transition-colors" />
+            
+            <div className="flex items-center gap-1 mb-6 text-yellow-500">
+                {[...Array(review.rating)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-current" />
+                ))}
+            </div>
+            
+            <div className="flex-1 flex flex-col justify-between">
+                <div className="mb-6 flex-1">
+                    <p className="text-gray-300 leading-relaxed whitespace-pre-wrap">
+                        "{displayedText}"
+                    </p>
+                    {shouldTruncate && (
+                        <button
+                            onClick={() => setIsExpanded(!isExpanded)}
+                            className="text-xs font-semibold text-[#FF4925] hover:text-[#FF4925]/80 mt-3 transition-colors uppercase tracking-wider block"
+                            aria-label={isExpanded ? "Show less of the review" : "Read the full review"}
+                        >
+                            {isExpanded ? 'Show Less' : 'Read More'}
+                        </button>
+                    )}
+                </div>
+                
+                <div className="mt-auto pt-6 border-t border-white/5">
+                    <h3 className="font-semibold text-white">{review.client_name}</h3>
+                    {review.client_company && (
+                        <p className="text-sm text-gray-500 mt-1">{review.client_company}</p>
+                    )}
+                </div>
+            </div>
+        </motion.div>
     );
 }
