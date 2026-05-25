@@ -113,6 +113,11 @@
   left: 50%;
 }
 
+.framer-15mjlu7-container svg {
+  color: #f97316 !important;
+  fill: #f97316 !important;
+}
+
 /* Chat Bubble - Bottom */
 .framer-1aim1w3 {
   display: flex;
@@ -149,6 +154,11 @@
   position: absolute;
   top: 50%;
   left: 50%;
+}
+
+.framer-112n03h-container svg {
+  color: #f97316 !important;
+  fill: #f97316 !important;
 }
 
 /* Text Styles */
@@ -452,6 +462,8 @@ gap: 20px;
 .framer-zowy1b-container svg {
   width: 32px;
   height: 32px;
+  color: #f97316 !important;
+  fill: #f97316 !important;
 }
 
 /* AI-Powered Chatbots Card */
@@ -656,23 +668,85 @@ gap: 20px;
 .framer-Jr7KD .framer-53bk6q {
   background-color: #000 !important;
 }
-/* Make inner search option text and blinking cursor white */
+/* Make inner search option text white */
 .framer-Jr7KD .framer-15xx1i4 .framer-text {
   color: #fff !important;
 }
+/* Make blinking cursor orange */
 .framer-Jr7KD .framer-15xx1i4 .blinking-cursor {
-  background-color: #fff !important;
+  background-color: #f97316 !important;
 }
-/* Add visible bottom horizontal line for typing area */
+/* Add visible orange bottom horizontal line for typing area */
 .framer-Jr7KD .framer-53bk6q {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4) !important;
+  border-bottom: 1.5px solid rgba(249, 115, 22, 0.4) !important;
   border-radius: 0 !important; /* ensure line spans full width */
 }
-
-/* Optional stronger line on hover/focus (safe enhancement) */
+/* Stronger orange line on hover/focus */
 .framer-Jr7KD .framer-53bk6q:hover,
 .framer-Jr7KD .framer-53bk6q:focus-within {
-  border-bottom-color: rgba(255, 255, 255, 0.7) !important;
+  border-bottom-color: rgba(249, 115, 22, 0.8) !important;
+}
+/* Add subtle orange left-border accent to Content Generation pills */
+.framer-dvipwj,
+.framer-18jmtyc,
+.framer-2dawv9 {
+  border-left: 2.5px solid rgba(249, 115, 22, 0.6) !important;
+  padding-left: 10px !important;
+}
+
+/* Automated Workflows centerpiece logo box border */
+.framer-pz6kyd {
+  border: 1.5px solid rgba(249, 115, 22, 0.35) !important;
+  box-shadow: 0 0 12px rgba(249, 115, 22, 0.15) !important;
+}
+/* 4 surrounding workflow icon boxes borders */
+.framer-1pg7jle,
+.framer-1hiz4pg,
+.framer-169ow0l,
+.framer-x5ef0m {
+  border: 1.5px solid rgba(249, 115, 22, 0.35) !important;
+  box-shadow: 0 0 8px rgba(249, 115, 22, 0.15) !important;
+}
+
+/* Chatbot circles orange borders & glow */
+.framer-99z3n0,
+.framer-1xij3f2 {
+  border: 1.5px solid rgba(249, 115, 22, 0.4) !important;
+  box-shadow: 0 0 10px rgba(249, 115, 22, 0.2) !important;
+}
+/* Chatbot Zoom link orange color override */
+.framer-styles-preset-1snln9b {
+  color: #f97316 !important;
+}
+
+/* Deep color force for all card SVGs, groups, and paths to be theme orange */
+.framer-ayzamz-container svg,
+.framer-ayzamz-container svg g,
+.framer-ayzamz-container svg path,
+.framer-10v5pq5-container svg,
+.framer-10v5pq5-container svg g,
+.framer-10v5pq5-container svg path,
+.framer-7wodu2-container svg,
+.framer-7wodu2-container svg g,
+.framer-7wodu2-container svg path,
+.framer-zowy1b-container svg,
+.framer-zowy1b-container svg g,
+.framer-zowy1b-container svg path,
+.framer-15mjlu7-container svg,
+.framer-15mjlu7-container svg g,
+.framer-15mjlu7-container svg path,
+.framer-112n03h-container svg,
+.framer-112n03h-container svg g,
+.framer-112n03h-container svg path {
+  color: #f97316 !important;
+  fill: #f97316 !important;
+  stroke: #f97316 !important;
+}
+
+/* Transform black PNG logo in Automated Workflows centerpiece to Theme Orange */
+.framer-pz6kyd img,
+.framer-px05cb img {
+  filter: invert(53%) sepia(81%) saturate(2255%) hue-rotate(346deg) brightness(98%) contrast(97%) !important;
 }
 
 /* -------------------------------------------------- */

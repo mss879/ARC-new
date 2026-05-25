@@ -131,7 +131,7 @@ const IntegrationCard = ({ integration }: { integration: Integration }) => {
 
         {/* Icon */}
         <div className="mb-auto">
-          <div className="w-10 h-10 rounded-lg bg-zinc-800/80 border border-zinc-700/50 flex items-center justify-center text-white">
+          <div className="w-10 h-10 bg-gradient-to-b from-orange-500/20 to-orange-500/5 border border-orange-500/25 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/10 group-hover:border-orange-500/40 group-hover:shadow-orange-500/20 transition-all duration-300 text-orange-500 group-hover:text-orange-400">
             {integration.icon}
           </div>
         </div>

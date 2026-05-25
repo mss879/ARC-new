@@ -58,26 +58,30 @@ const Features = () => {
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          {/* Feature 1 - With Image on Left */}
+          {/* Feature 1 - With Video on Left */}
           <motion.div 
             className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl overflow-hidden shadow-2xl hover:border-white/20 transition-all duration-300 flex flex-col md:flex-row md:h-[220px]" 
             variants={itemVariants}
           >
-            {/* Image Section - Left */}
-            <div className="relative md:w-1/2 h-48 md:h-auto">
-              <Image src="https://framerusercontent.com/images/jt6hxbLaCBNrS66LsJbeYLxd4no.png?width=1200&height=1200"
-                alt="Cutting-Edge AI"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-               loading="lazy" />
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 via-transparent to-transparent" />
+            {/* Video Section - Left */}
+            <div className="relative md:w-1/2 h-48 md:h-auto overflow-hidden">
+              <video
+                src="/robot.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                className="absolute inset-0 w-full h-full object-cover scale-100"
+                suppressHydrationWarning
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 via-transparent to-transparent" />
             </div>
 
             {/* Content - Right */}
             <div className="md:w-1/2 p-6 flex flex-col justify-center space-y-3">
-              <div className="w-10 h-10 bg-gradient-to-b from-zinc-800 to-zinc-900 rounded-xl flex items-center justify-center shadow-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" className="w-5 h-5" fill="white">
+              <div className="w-10 h-10 bg-gradient-to-b from-orange-500/20 to-orange-500/5 border border-orange-500/25 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/10 group-hover:border-orange-500/40 group-hover:shadow-orange-500/20 transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" className="w-5 h-5 text-orange-500 group-hover:text-orange-400 transition-colors duration-300" fill="currentColor">
                   <path d="M196.12,128c24.65-34.61,37.22-70.38,19.74-87.86S162.61,35.23,128,59.88C93.39,35.23,57.62,22.66,40.14,40.14S35.23,93.39,59.88,128c-24.65,34.61-37.22,70.38-19.74,87.86h0c5.63,5.63,13.15,8.14,21.91,8.14,18.47,0,42.48-11.17,66-27.88C151.47,212.83,175.47,224,194,224c8.76,0,16.29-2.52,21.91-8.14h0C233.34,198.38,220.77,162.61,196.12,128Zm8.43-76.55c7.64,7.64,2.48,32.4-18.52,63.28a300.33,300.33,0,0,0-21.19-23.57A302.47,302.47,0,0,0,141.27,70C172.15,49,196.91,43.81,204.55,51.45Zm-153.1,0c2.2-2.21,5.83-3.35,10.62-3.35C73.89,48.1,92.76,55,114.72,70A304,304,0,0,0,91.16,91.16,300.33,300.33,0,0,0,70,114.73C49,83.85,43.81,59.09,51.45,51.45Zm0,153.1C43.81,196.91,49,172.15,70,141.27a300.33,300.33,0,0,0,21.19,23.57A304.18,304.18,0,0,0,114.73,186C83.85,207,59.09,212.19,51.45,204.55ZM128,140a12,12,0,1,1,12-12A12,12,0,0,1,128,140Zm76.55,64.56c-7.64,7.65-32.4,2.48-63.28-18.52a304.18,304.18,0,0,0,23.57-21.19A300.33,300.33,0,0,0,186,141.27C207,172.15,212.19,196.91,204.55,204.55Z"></path>
                 </svg>
               </div>
@@ -94,8 +98,8 @@ const Features = () => {
             variants={itemVariants}
           >
             <div className="space-y-3">
-              <div className="w-10 h-10 bg-gradient-to-b from-zinc-800 to-zinc-900 rounded-xl flex items-center justify-center shadow-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" className="w-5 h-5" fill="white">
+              <div className="w-10 h-10 bg-gradient-to-b from-orange-500/20 to-orange-500/5 border border-orange-500/25 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/10 group-hover:border-orange-500/40 group-hover:shadow-orange-500/20 transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" className="w-5 h-5 text-orange-500 group-hover:text-orange-400 transition-colors duration-300" fill="currentColor">
                   <path d="M237.94,107.21a8,8,0,0,0-3.89-5.4l-29.83-17-.12-33.62a8,8,0,0,0-2.83-6.08,111.91,111.91,0,0,0-36.72-20.67,8,8,0,0,0-6.46.59L128,41.85,97.88,25a8,8,0,0,0-6.47-.6A111.92,111.92,0,0,0,54.73,45.15a8,8,0,0,0-2.83,6.07l-.15,33.65-29.83,17a8,8,0,0,0-3.89,5.4,106.47,106.47,0,0,0,0,41.56,8,8,0,0,0,3.89,5.4l29.83,17,.12,33.63a8,8,0,0,0,2.83,6.08,111.91,111.91,0,0,0,36.72,20.67,8,8,0,0,0,6.46-.59L128,214.15,158.12,231a7.91,7.91,0,0,0,3.9,1,8.09,8.09,0,0,0,2.57-.42,112.1,112.1,0,0,0,36.68-20.73,8,8,0,0,0,2.83-6.07l.15-33.65,29.83-17a8,8,0,0,0,3.89-5.4A106.47,106.47,0,0,0,237.94,107.21ZM128,168a40,40,0,1,1,40-40A40,40,0,0,1,128,168Z"></path>
                 </svg>
               </div>
@@ -112,8 +116,8 @@ const Features = () => {
             variants={itemVariants}
           >
             <div className="space-y-3">
-              <div className="w-10 h-10 bg-gradient-to-b from-zinc-800 to-zinc-900 rounded-xl flex items-center justify-center shadow-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" className="w-5 h-5" fill="white">
+              <div className="w-10 h-10 bg-gradient-to-b from-orange-500/20 to-orange-500/5 border border-orange-500/25 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/10 group-hover:border-orange-500/40 group-hover:shadow-orange-500/20 transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" className="w-5 h-5 text-orange-500 group-hover:text-orange-400 transition-colors duration-300" fill="currentColor">
                   <path d="M240,56v64a8,8,0,0,1-13.66,5.66L200,99.31l-58.34,58.35a8,8,0,0,1-11.32,0L96,123.31,29.66,189.66a8,8,0,0,1-11.32-11.32l72-72a8,8,0,0,1,11.32,0L136,140.69,188.69,88,162.34,61.66A8,8,0,0,1,168,48h64A8,8,0,0,1,240,56Z"></path>
                 </svg>
               </div>
@@ -131,8 +135,8 @@ const Features = () => {
           >
             {/* Content - Left */}
             <div className="md:w-1/2 p-6 flex flex-col justify-center space-y-3 order-2 md:order-1">
-              <div className="w-10 h-10 bg-gradient-to-b from-zinc-800 to-zinc-900 rounded-xl flex items-center justify-center shadow-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" className="w-5 h-5" fill="white">
+              <div className="w-10 h-10 bg-gradient-to-b from-orange-500/20 to-orange-500/5 border border-orange-500/25 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/10 group-hover:border-orange-500/40 group-hover:shadow-orange-500/20 transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" className="w-5 h-5 text-orange-500 group-hover:text-orange-400 transition-colors duration-300" fill="currentColor">
                   <path d="M128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24ZM84,140a12,12,0,1,1,12-12A12,12,0,0,1,84,140Zm44,0a12,12,0,1,1,12-12A12,12,0,0,1,128,140Zm44,0a12,12,0,1,1,12-12A12,12,0,0,1,172,140Z"></path>
                 </svg>
               </div>
@@ -142,15 +146,19 @@ const Features = () => {
               </p>
             </div>
 
-            {/* Image Section - Right */}
-            <div className="relative md:w-1/2 h-48 md:h-auto order-1 md:order-2">
-              <Image src="https://framerusercontent.com/images/NUbGSZcPrAH7CFfBazSJOsGIP4.png?width=800&height=1200"
-                alt="AI-Powered Support"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-               loading="lazy" />
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-400/20 via-transparent to-transparent" />
+            {/* Video Section - Right */}
+            <div className="relative md:w-1/2 h-48 md:h-auto order-1 md:order-2 overflow-hidden">
+              <video
+                src="/support.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                className="absolute inset-0 w-full h-full object-cover scale-100"
+                suppressHydrationWarning
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 via-transparent to-transparent" />
             </div>
           </motion.div>
         </div>

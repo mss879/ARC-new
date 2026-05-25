@@ -191,11 +191,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(249, 115, 22, 0.05) 100%);
+  border: 1px solid rgba(249, 115, 22, 0.25);
   border-radius: 16px;
   transition: all 0.3s ease;
   box-shadow: 
+    rgba(249, 115, 22, 0.15) 0px 0px 15px,
     rgba(0, 0, 0, 0.08) 0px 0.706592px 0.706592px -0.666667px,
     rgba(0, 0, 0, 0.08) 0px 1.80656px 1.80656px -1.33333px,
     rgba(255, 255, 255, 0.03) 0px 2px 1px 0px inset;
@@ -203,19 +204,25 @@
 
 .problem-card:hover .problem-icon-box {
   transform: scale(1.05);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.25) 0%, rgba(249, 115, 22, 0.10) 100%);
+  border-color: rgba(249, 115, 22, 0.4);
+  box-shadow: 
+    rgba(249, 115, 22, 0.3) 0px 0px 20px,
+    rgba(0, 0, 0, 0.08) 0px 0.706592px 0.706592px -0.666667px,
+    rgba(0, 0, 0, 0.08) 0px 1.80656px 1.80656px -1.33333px,
+    rgba(255, 255, 255, 0.03) 0px 2px 1px 0px inset;
 }
 
 .problem-icon {
   width: 32px;
   height: 32px;
-  color: #ffffff;
+  color: #f97316;
   transition: all 0.3s ease;
 }
 
 .problem-card:hover .problem-icon {
   transform: scale(1.1);
+  color: #fb923c;
 }
 
 /* Card Title */

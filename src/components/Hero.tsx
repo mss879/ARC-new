@@ -138,7 +138,7 @@ const Hero = memo(() => {
               setVideoError(true);
             }}
           >
-            <source src="/herovideo.mp4" type="video/mp4" />
+            <source src="/Recreate_video_with_logo_202605251335.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           {/* Fallback for when video doesn't play */}

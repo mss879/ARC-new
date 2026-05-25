@@ -174,7 +174,7 @@ const Stat = ({ item, index, inView }: { item: StatItem; index: number; inView: 
 };
 
 const stats: StatItem[] = [
-  { value: "45", suffix: "+", label: "Successful projects completed" },
+  { value: "65", suffix: "+", label: "Successful projects completed" },
   { value: "6", suffix: "+", label: "Years of experience in creative industry" },
   { value: "99", suffix: "%", label: "Customer satisfaction rate" },
 ];

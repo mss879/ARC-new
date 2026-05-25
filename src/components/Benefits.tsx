@@ -46,12 +46,16 @@ const Benefits = () => {
             {/* Col 1: Strategy */}
             <Card index={0} className="bg-white/[0.04] border-white/10">
               <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mb-5">
-                <Image src="/images/collaborative_compass.webp"
-                  alt="compass"
-                  fill
-                  className="object-cover scale-105"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  loading="lazy" />
+                <video
+                  src="/fragments.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  className="absolute inset-0 w-full h-full object-cover scale-105"
+                  suppressHydrationWarning
+                />
               </div>
               <div className="mt-4 pb-2">
                 <p className="text-2xl font-semibold text-white mb-3 leading-tight tracking-tight">Strategy-First Execution</p>
@@ -87,37 +91,10 @@ const Benefits = () => {
 
               {/* Support */}
               {/* 24/7 Support card: 1/4 height */}
-              <Card index={2} className="relative bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-800 flex-[1] min-h-[100px] overflow-hidden">
-                <div className="flex items-center h-full gap-4 md:gap-6 px-4">
-                  <div className="flex flex-col justify-center">
-                    <p className="text-4xl md:text-5xl font-bold text-white tracking-tight leading-none">24/7</p>
-                    <p className="text-[11px] md:text-xs text-zinc-400 mt-2">Priority Support</p>
-                  </div>
-                  <div className="relative ml-auto">
-                    <div className="rounded-2xl bg-white px-5 md:px-6 py-4 md:py-5 shadow-[0_4px_16px_-2px_rgba(0,0,0,0.35),0_2px_4px_rgba(0,0,0,0.25)] flex items-center gap-4 min-w-[210px]">
-                      <div className="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center shadow-inner">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="white"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="w-6 h-6"
-                        >
-                          <path d="M4 6h16c.55 0 1 .45 1 1v10c0 .55-.45 1-1 1H4a1 1 0 0 1-1-1V7c0-.55.45-1 1-1Z" />
-                          <path d="m4 8 8 5 8-5" />
-                        </svg>
-                      </div>
-                      <div className="flex flex-col leading-tight">
-                        <span className="text-base md:text-lg font-medium text-black tracking-tight">Avexa</span>
-                        <span className="text-xs md:text-sm text-zinc-500">Support Ticket</span>
-                      </div>
-                    </div>
-                    {/* Subtle base shadow / reflection */}
-                    <div className="absolute inset-x-6 -bottom-2 h-4 rounded-xl bg-black/30 blur-md opacity-40 pointer-events-none" />
-                  </div>
+              <Card index={2} className="relative bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-800 flex-[1] min-h-[100px] overflow-hidden flex items-center justify-center">
+                <div className="flex flex-col items-center justify-center text-center">
+                  <p className="text-4xl md:text-5xl font-bold text-white tracking-tight leading-none">24/7</p>
+                  <p className="text-[11px] md:text-xs text-zinc-400 mt-2 uppercase tracking-wider font-medium">Priority Support</p>
                 </div>
               </Card>
             </div>
@@ -125,12 +102,16 @@ const Benefits = () => {
             {/* Col 3: Engineered */}
             <Card index={3} className="relative overflow-hidden p-0">
               <div className="relative w-full aspect-[4/3]">
-                <Image src="/images/bespoke_engineering.webp"
-                  alt="bespoke engineering"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  loading="lazy" />
+                <video
+                  src="/circuit.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  suppressHydrationWarning
+                />
                 <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-black/10 to-black/70" />
               </div>
               <div className="p-5">
@@ -178,7 +159,7 @@ const Benefits = () => {
 
 
             {/* Col 5: Data-Driven Performance (wide) */}
-            <Card index={5} className="relative bg-white/[0.03] min-h-[260px]">
+            <Card index={5} className="relative overflow-hidden p-0 min-h-[300px] md:min-h-[400px] bg-black">
               <div className="absolute top-4 left-5 flex gap-1 z-20">
                 <span className="h-2 w-2 rounded-full bg-orange-500" />
                 <span className="h-2 w-2 rounded-full bg-orange-500/70" />
@@ -194,14 +175,15 @@ const Benefits = () => {
                   sizes="(max-width: 768px) 100vw, 50vw"
                   loading="lazy" />
                 {/* Gradients to keep text readable and replicate the dark card feel */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 pointer-events-none" />
               </div>
 
-              <div className="relative z-10 flex flex-col justify-center h-full pt-10 pb-4 pl-5 pr-4">
+              {/* Text Area explicitly positioned at the bottom */}
+              <div className="relative flex flex-col justify-end h-full p-6 md:p-8 z-10 pt-48">
                 <p className="text-2xl font-semibold text-white mb-3 leading-tight tracking-tight">Data-Driven Performance</p>
-                <p className="text-[12px] md:text-sm text-zinc-300 leading-relaxed max-w-[280px] md:max-w-xs mb-4">
-                  Beautiful design is only half the equation. We architect scalable solutions backed by analytics, ensuring every interaction translates to measurable business growth.
+                <p className="text-[12px] md:text-sm text-zinc-300 leading-relaxed max-w-sm">
+                  Beautiful design is only half the equation. We architect scalable, data-backed solutions that translate directly to measurable business growth.
                 </p>
               </div>
             </Card>
