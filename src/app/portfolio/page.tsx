@@ -185,16 +185,14 @@ export default async function Portfolio() {
       link: "https://www.ontriq.com",
       status: "live"
     },
-    // Orkestrate — temporarily hidden
-    // {
-    //   id: 21,
-    //   title: "Orkestrate",
-    //   description: "AI-powered marketing orchestration platform for DTC brands that automates customer segmentation, campaign creation, and revenue optimization by analyzing order data, browsing behavior, and campaign performance across integrated channels.",
-    //   results: "Professional website ↑ platform signups 38%, CRM integration ↑ customer retention 41%, Demo requests ↑ 2.4×, User onboarding efficiency ↑ 55%",
-    //   image: "/orkestrate-screenshot.webp",
-    //   link: "https://www.orkestrate.com",
-    //   status: "live"
-    // },
+    {
+      id: 21,
+      title: "Orkestrate",
+      description: "AI-powered marketing orchestration platform for DTC brands that automates customer segmentation, campaign creation, and revenue optimization by analyzing order data, browsing behavior, and campaign performance across integrated channels.",
+      image: "/orkestrate-screenshot.webp",
+      link: "https://www.orkestrate.com",
+      status: "live"
+    },
     {
       id: 23,
       title: "KeysPlease",

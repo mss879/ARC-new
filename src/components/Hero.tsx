@@ -133,7 +133,7 @@ const Hero = memo(() => {
             onLoadedData={() => {
               setVideoLoaded(true);
             }}
-            onPlay={() => {}}
+            onPlay={() => { }}
             onError={() => {
               setVideoError(true);
             }}
