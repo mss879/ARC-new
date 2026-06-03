@@ -32,7 +32,7 @@ const packages = [
       "Clean, minimal design — standard layouts",
       "WhatsApp button + contact/inquiry form",
       "Mobile-optimized & fast-loading",
-      "Free hosting forever (up to 1GB)",
+      "Free hosting forever",
     ],
     notIncluded: [
       "Custom animations & parallax effects",
@@ -98,6 +98,7 @@ const packages = [
       "Instant responses to visitor questions 24/7",
       "Handles common inquiries & guides users to action",
       "Improves response time and availability",
+      "1 Month Free Keyword Optimization",
     ],
     notIncluded: [],
   },

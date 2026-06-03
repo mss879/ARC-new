@@ -632,7 +632,7 @@ export default function WebDesignContent() {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div className="bg-neutral-950 border border-neutral-800 p-5 rounded-xl">
                                 <div className="text-sm font-bold text-white mb-2">Additional Pages</div>
-                                <div className="text-2xl font-black text-[rgb(255,73,37)]">Rs 4,000<span className="text-sm text-neutral-400 font-normal"> /page</span></div>
+                                <div className="text-2xl font-black text-[rgb(255,73,37)]">Rs 4,000 - 6,000<span className="text-sm text-neutral-400 font-normal"> /page</span></div>
                             </div>
                             <div className="bg-neutral-950 border border-neutral-800 p-5 rounded-xl">
                                 <div className="text-sm font-bold text-white mb-2">Payment Gateway Integration</div>

@@ -105,7 +105,7 @@ What's included:
 - Clean, minimal design — standard layouts
 - WhatsApp button + contact/inquiry form
 - Mobile-optimized & fast-loading
-- Free hosting forever (up to 1GB)
+- Free hosting forever
 
 What's NOT included in Starter:
 - Custom animations & parallax effects

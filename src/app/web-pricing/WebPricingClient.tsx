@@ -18,7 +18,7 @@ const packages = [
       'Clean, minimal design — standard layouts',
       'WhatsApp button + contact/inquiry form',
       'Mobile-optimized & fast-loading',
-      'Free hosting forever (up to 1GB)',
+      'Free hosting forever',
     ],
     notIncluded: [
       'Custom animations & parallax effects',
@@ -81,6 +81,7 @@ const packages = [
       'Instant responses to visitor questions 24/7',
       'Handles common inquiries & guides users to action',
       'Improves response time and availability',
+      '1 Month Free Keyword Optimization',
     ],
     notIncluded: [],
   },
@@ -88,7 +89,7 @@ const packages = [
 
 const comparisonFeatures: Array<Record<string, any>> = [
   { name: 'Number of Pages', starter: '5', launch: '8', growth: '15', scale: '23' },
-  { name: 'Additional Pages Option', starter: 'Rs 4,000/each', launch: 'Rs 4,000/each', growth: 'Rs 4,000/each', scale: 'Rs 4,000/each' },
+  { name: 'Additional Pages Option', starter: 'Rs 4,000/each', launch: 'Rs 6,000/each', growth: 'Rs 6,000/each', scale: 'Rs 6,000/each' },
   { name: 'WhatsApp Button + Contact Form', starter: true, launch: true, growth: true, scale: true },
   { name: 'Mobile Optimized', starter: true, launch: true, growth: true, scale: true },
   { name: 'Free Hosting Forever', starter: true, launch: true, growth: true, scale: true },
@@ -197,7 +198,7 @@ export default function WebPricingClient() {
                         {pkg.monthly ? `One-time + ${pkg.monthly}/month AI fee` : 'One-time payment. No monthly fees.'}
                       </p>
                       <p className="text-xs font-medium text-gray-400 mt-1 flex items-center gap-1.5">
-                        <Plus className="w-3 h-3" /> Additional pages: Rs 4,000 / each
+                        <Plus className="w-3 h-3" /> Additional pages: {pkg.name === 'Starter' ? 'Rs 4,000' : 'Rs 6,000'} / each
                       </p>
                     </div>
                   </div>

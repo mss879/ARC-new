@@ -24,7 +24,7 @@ const WEB_PACKAGES: Record<string, PackageInfo> = {
       'Clean, minimal design — standard layouts',
       'WhatsApp button + contact/inquiry form',
       'Mobile-optimized & fast-loading',
-      'Free hosting forever (up to 1GB)',
+      'Free hosting forever',
     ],
     timeline: '2–3 days',
   },
