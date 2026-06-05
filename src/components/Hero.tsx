@@ -125,7 +125,7 @@ const Hero = memo(() => {
             playsInline
             loop
             muted
-            preload="metadata"
+            preload="auto"
             suppressHydrationWarning
             className="w-full h-full object-cover scale-100"
             style={{ transformOrigin: 'center center', willChange: 'auto' }}
