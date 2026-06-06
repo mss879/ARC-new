@@ -1,15 +1,13 @@
 "use client";
 
+import Link from "next/link";
+
 interface MenuProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
 const Menu = ({ isOpen, onClose }: MenuProps) => {
-  const handleNavigation = (href: string) => {
-    onClose();
-    window.location.href = href;
-  };
 
   return (
     <>
@@ -56,12 +54,9 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
           <div className="flex-1 px-6 lg:px-12 py-12">
             <div className="space-y-0">
               {/* Home Link - Active */}
-              <a
+              <Link
                 href="/"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavigation('/');
-                }}
+                onClick={onClose}
                 className="group block py-6 border-b border-[rgb(88,88,88)] hover:border-[rgb(255,73,37)] transition-all duration-300"
                 style={{ animationDelay: "0.1s" }}
               >
@@ -71,15 +66,12 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                   </h3>
                   <div className="w-2.5 h-2.5 rounded-full bg-[rgb(255,73,37)] opacity-100"></div>
                 </div>
-              </a>
+              </Link>
 
               {/* Portfolio Link */}
-              <a
+              <Link
                 href="/portfolio"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavigation('/portfolio');
-                }}
+                onClick={onClose}
                 className="group block py-6 border-b border-[rgb(88,88,88)] hover:border-[rgb(255,73,37)] transition-all duration-300"
                 style={{ animationDelay: "0.2s" }}
               >
@@ -89,15 +81,12 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                   </h3>
                   <div className="h-px flex-1 ml-8 bg-[rgb(255,73,37)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
-              </a>
+              </Link>
 
               {/* Services Link */}
-              <a
+              <Link
                 href="/services"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavigation('/services');
-                }}
+                onClick={onClose}
                 className="group block py-6 border-b border-[rgb(88,88,88)] hover:border-[rgb(255,73,37)] transition-all duration-300"
                 style={{ animationDelay: "0.3s" }}
               >
@@ -107,15 +96,12 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                   </h3>
                   <div className="h-px flex-1 ml-8 bg-[rgb(255,73,37)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
-              </a>
+              </Link>
 
               {/* About Link */}
-              <a
+              <Link
                 href="/about"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavigation('/about');
-                }}
+                onClick={onClose}
                 className="group block py-6 border-b border-[rgb(88,88,88)] hover:border-[rgb(255,73,37)] transition-all duration-300"
                 style={{ animationDelay: "0.4s" }}
               >
@@ -125,15 +111,12 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                   </h3>
                   <div className="h-px flex-1 ml-8 bg-[rgb(255,73,37)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
-              </a>
+              </Link>
 
               {/* Success Stories Link */}
-              <a
+              <Link
                 href="/success-stories"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavigation('/success-stories');
-                }}
+                onClick={onClose}
                 className="group block py-6 border-b border-[rgb(88,88,88)] hover:border-[rgb(255,73,37)] transition-all duration-300"
                 style={{ animationDelay: "0.5s" }}
               >
@@ -143,15 +126,12 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                   </h3>
                   <div className="h-px flex-1 ml-8 bg-[rgb(255,73,37)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
-              </a>
+              </Link>
 
               {/* Blog Link */}
-              <a
+              <Link
                 href="/blog"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavigation('/blog');
-                }}
+                onClick={onClose}
                 className="group block py-6 border-b border-[rgb(88,88,88)] hover:border-[rgb(255,73,37)] transition-all duration-300"
                 style={{ animationDelay: "0.6s" }}
               >
@@ -161,15 +141,12 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                   </h3>
                   <div className="h-px flex-1 ml-8 bg-[rgb(255,73,37)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
-              </a>
+              </Link>
 
               {/* Careers Link */}
-              <a
+              <Link
                 href="/careers"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavigation('/careers');
-                }}
+                onClick={onClose}
                 className="group block py-6 border-b border-[rgb(88,88,88)] hover:border-[rgb(255,73,37)] transition-all duration-300"
                 style={{ animationDelay: "0.7s" }}
               >
@@ -179,15 +156,12 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                   </h3>
                   <div className="h-px flex-1 ml-8 bg-[rgb(255,73,37)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
-              </a>
+              </Link>
 
               {/* Contact Link */}
-              <a
+              <Link
                 href="/contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavigation('/contact');
-                }}
+                onClick={onClose}
                 className="group block py-6 border-b border-[rgb(88,88,88)] hover:border-[rgb(255,73,37)] transition-all duration-300"
                 style={{ animationDelay: "0.8s" }}
               >
@@ -197,7 +171,7 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                   </h3>
                   <div className="h-px flex-1 ml-8 bg-[rgb(255,73,37)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
-              </a>
+              </Link>
             </div>
           </div>
 

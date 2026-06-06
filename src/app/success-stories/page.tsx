@@ -1,187 +1,123 @@
-'use client';
-
-import { useEffect, useState } from 'react';
+import { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { supabase } from '@/lib/supabase';
-import { motion } from 'framer-motion';
-import { Star, Quote } from 'lucide-react';
+import ReviewsList, { Review } from '@/components/ReviewsList';
+import SchemaOrg from '@/components/SchemaOrg';
 
-type Review = {
-    id: string;
-    client_name: string;
-    client_company: string;
-    rating: number;
-    content: string;
-    created_at: string;
+export const revalidate = 3600; // Revalidate static cache every 1 hour (ISR)
+
+export const metadata: Metadata = {
+    title: "Client Success Stories & Testimonials | ARC AI",
+    description: "Read real reviews and success stories from our partners in the UK & Sri Lanka. See how ARC AI's web design, branding, and AI automation transform operations.",
+    authors: [{ name: "ARC AI Agency" }],
+    openGraph: {
+        title: "Client Success Stories & Testimonials | ARC AI",
+        description: "Read real reviews and success stories from our partners. See how ARC AI transforms businesses with custom web design and AI automation.",
+        url: "https://www.arcai.agency/success-stories",
+        siteName: "ARC AI Agency",
+        images: [
+            {
+                url: "https://www.arcai.agency/og-image.jpg",
+                width: 1200,
+                height: 630,
+                alt: "Client Success Stories & Testimonials | ARC AI",
+                type: "image/jpeg",
+            },
+        ],
+        locale: "en_GB",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        site: "@arcaiagency",
+        creator: "@arcaiagency",
+        title: "Client Success Stories & Testimonials | ARC AI",
+        description: "Read real reviews and success stories from our partners. See how ARC AI transforms businesses with custom web design and AI automation.",
+        images: ["https://www.arcai.agency/og-image.jpg"],
+    },
+    alternates: {
+        canonical: "https://www.arcai.agency/success-stories"
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+        },
+    },
 };
 
-export default function ReviewsPage() {
-    const [reviews, setReviews] = useState<Review[]>([]);
-    const [loading, setLoading] = useState(true);
+async function getApprovedReviews(): Promise<Review[]> {
+    try {
+        const { data, error } = await supabase
+            .from('client_reviews')
+            .select('*')
+            .eq('status', 'approved')
+            .order('created_at', { ascending: false });
 
-    useEffect(() => {
-        const fetchApprovedReviews = async () => {
-            const { data, error } = await supabase
-                .from('client_reviews')
-                .select('*')
-                .eq('status', 'approved')
-                .order('created_at', { ascending: false });
-
-            if (!error && data) {
-                // Programmatic sorting: Move specific reviews (Keys Place, Vibe Web Studio) to the end
-                const sortedReviews = [...data].sort((a, b) => {
-                    const aCompany = (a.client_company || '').toLowerCase();
-                    const aName = (a.client_name || '').toLowerCase();
-                    const aContent = (a.content || '').toLowerCase();
-                    
-                    const bCompany = (b.client_company || '').toLowerCase();
-                    const bName = (b.client_name || '').toLowerCase();
-                    const bContent = (b.content || '').toLowerCase();
-
-                    const isAKeys = aCompany.includes('keys') || aName.includes('keys') || aContent.includes('keys');
-                    const isBKeys = bCompany.includes('keys') || bName.includes('keys') || bContent.includes('keys');
-
-                    const isAVibe = aCompany.includes('vibe') || aName.includes('vibe') || aContent.includes('vibe');
-                    const isBVibe = bCompany.includes('vibe') || bName.includes('vibe') || bContent.includes('vibe');
-
-                    // Push Keys / Vibe reviews to the end
-                    if ((isAKeys || isAVibe) && !(isBKeys || isBVibe)) return 1;
-                    if (!(isAKeys || isAVibe) && (isBKeys || isBVibe)) return -1;
-                    
-                    // Maintain standard chronological order otherwise
-                    return 0;
-                });
-
-                setReviews(sortedReviews);
-            }
-            setLoading(false);
-        };
-
-        fetchApprovedReviews();
-    }, []);
-
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        show: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1
-            }
+        if (error || !data) {
+            console.error('Error fetching client reviews:', error);
+            return [];
         }
-    };
 
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 300, damping: 24 } }
-    };
+        // Programmatic sorting: Move specific reviews (Keys Place, Vibe Web Studio) to the end
+        return [...data].sort((a, b) => {
+            const aCompany = (a.client_company || '').toLowerCase();
+            const aName = (a.client_name || '').toLowerCase();
+            const aContent = (a.content || '').toLowerCase();
+            
+            const bCompany = (b.client_company || '').toLowerCase();
+            const bName = (b.client_name || '').toLowerCase();
+            const bContent = (b.content || '').toLowerCase();
+
+            const isAKeys = aCompany.includes('keys') || aName.includes('keys') || aContent.includes('keys');
+            const isBKeys = bCompany.includes('keys') || bName.includes('keys') || bContent.includes('keys');
+
+            const isAVibe = aCompany.includes('vibe') || aName.includes('vibe') || aContent.includes('vibe');
+            const isBVibe = bCompany.includes('vibe') || bName.includes('vibe') || bContent.includes('vibe');
+
+            // Push Keys / Vibe reviews to the end
+            if ((isAKeys || isAVibe) && !(isBKeys || isBVibe)) return 1;
+            if (!(isAKeys || isAVibe) && (isBKeys || isBVibe)) return -1;
+            
+            // Maintain standard chronological order otherwise
+            return 0;
+        });
+    } catch (e) {
+        console.error('Exception during client reviews fetch:', e);
+        return [];
+    }
+}
+
+export default async function ReviewsPage() {
+    const reviews = await getApprovedReviews();
 
     return (
         <div className="min-h-screen bg-black text-white flex flex-col">
+            <SchemaOrg 
+                type="portfolio" // We map it as portfolio page for SEO breadcrumbs
+                pageTitle="Success Stories"
+                pageDescription="See what our partners have to say about working with ARC AI."
+                pageUrl="https://arcai.agency/success-stories"
+            />
             <Navbar />
 
-            <main className="flex-1 pt-32 pb-24 px-6 lg:px-12 relative overflow-hidden">
+            <main className="flex-1 pt-48 md:pt-32 pb-24 px-6 lg:px-12 relative overflow-hidden">
                 {/* Background effects */}
                 <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#FF4925]/5 rounded-full blur-[120px] pointer-events-none" />
                 <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
 
                 <div className="max-w-7xl mx-auto relative z-10">
-                    <motion.div 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-center mb-16"
-                    >
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                            Success <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF4925] to-orange-400">Stories</span>
-                        </h1>
-                        <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-                            See what our partners have to say about working with ARC AI to transform their digital presence and automate their operations.
-                        </p>
-                    </motion.div>
-
-                    {loading ? (
-                        <div className="flex justify-center items-center py-20">
-                            <div className="w-12 h-12 border-2 border-[#FF4925] border-t-transparent rounded-full animate-spin" />
-                        </div>
-                    ) : reviews.length === 0 ? (
-                        <div className="text-center py-20 text-gray-500">
-                            <Quote className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                            <p className="text-xl">More reviews coming soon.</p>
-                        </div>
-                    ) : (
-                        <motion.div 
-                            variants={containerVariants}
-                            initial="hidden"
-                            animate="show"
-                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start"
-                        >
-                            {reviews.map((review) => (
-                                <ReviewCard key={review.id} review={review} itemVariants={itemVariants} />
-                            ))}
-                        </motion.div>
-                    )}
+                    <ReviewsList reviews={reviews} />
                 </div>
             </main>
 
             <Footer />
         </div>
-    );
-}
-
-// ── Stateful Testimonial Card with Dynamic Truncation & Expansion ─────────────────
-interface ReviewCardProps {
-    review: Review;
-    itemVariants: any;
-}
-
-function ReviewCard({ review, itemVariants }: ReviewCardProps) {
-    const [isExpanded, setIsExpanded] = useState(false);
-    
-    const CHAR_LIMIT = 180;
-    const shouldTruncate = review.content && review.content.length > CHAR_LIMIT;
-    
-    const displayedText = isExpanded 
-        ? review.content 
-        : shouldTruncate 
-            ? `${review.content.substring(0, CHAR_LIMIT)}...` 
-            : review.content;
-
-    return (
-        <motion.div
-            variants={itemVariants}
-            className="bg-zinc-900/40 backdrop-blur-sm border border-white/10 rounded-2xl p-8 flex flex-col relative group hover:border-[#FF4925]/30 transition-all duration-300 min-h-[340px] h-full"
-        >
-            <Quote className="absolute top-6 right-6 w-8 h-8 text-[#FF4925]/20 group-hover:text-[#FF4925]/40 transition-colors" />
-            
-            <div className="flex items-center gap-1 mb-6 text-yellow-500">
-                {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-current" />
-                ))}
-            </div>
-            
-            <div className="flex-1 flex flex-col justify-between">
-                <div className="mb-6 flex-1">
-                    <p className="text-gray-300 leading-relaxed whitespace-pre-wrap">
-                        "{displayedText}"
-                    </p>
-                    {shouldTruncate && (
-                        <button
-                            onClick={() => setIsExpanded(!isExpanded)}
-                            className="text-xs font-semibold text-[#FF4925] hover:text-[#FF4925]/80 mt-3 transition-colors uppercase tracking-wider block"
-                            aria-label={isExpanded ? "Show less of the review" : "Read the full review"}
-                        >
-                            {isExpanded ? 'Show Less' : 'Read More'}
-                        </button>
-                    )}
-                </div>
-                
-                <div className="mt-auto pt-6 border-t border-white/5">
-                    <h3 className="font-semibold text-white">{review.client_name}</h3>
-                    {review.client_company && (
-                        <p className="text-sm text-gray-500 mt-1">{review.client_company}</p>
-                    )}
-                </div>
-            </div>
-        </motion.div>
     );
 }

@@ -23,13 +23,23 @@ const LoadingScreen = dynamic(() => import("./LoadingScreen"), {
 const Hero = memo(() => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoError, setVideoError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  // Only show preloader on first visit per session
+  const [isLoading, setIsLoading] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return !sessionStorage.getItem('arc_preloader_shown');
+    }
+    return true;
+  });
   const [videoLoaded, setVideoLoaded] = useState(false);
 
+  // Download video via fetch() during preloader — fetch() does NOT trigger
+  // the browser tab loading spinner, unlike <video preload="auto"> which does.
   useEffect(() => {
-    // iOS/iPadOS-specific video autoplay fix
     const video = videoRef.current;
     if (!video) return;
+
+    let blobUrl: string | null = null;
+    let cancelled = false;
 
     // Detection for iOS/iPadOS
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
@@ -42,30 +52,44 @@ const Hero = memo(() => {
     video.muted = true;
     video.loop = true;
 
-    // Additional iOS-specific attributes
     if (isIOS) {
       video.setAttribute('playsinline', '');
       video.setAttribute('webkit-playsinline', '');
       video.setAttribute('x-webkit-airplay', 'deny');
     }
 
-    // Force load
-    video.load();
-
-    // Wait for video to be ready before attempting play
+    // Listen for video ready state
     const handleCanPlay = () => {
       setVideoLoaded(true);
       console.log('Video ready to play');
     };
-
     video.addEventListener('canplaythrough', handleCanPlay);
 
+    // Start downloading video via fetch() immediately (during preloader).
+    // This is invisible to the browser's tab loading indicator.
+    fetch('/Recreate_video_with_logo_202605251335.mp4')
+      .then(res => res.blob())
+      .then(blob => {
+        if (cancelled) return;
+        blobUrl = URL.createObjectURL(blob);
+        video.src = blobUrl;
+        video.load();
+        console.log('Video blob loaded during preloader');
+      })
+      .catch(err => {
+        if (cancelled) return;
+        console.error('Video fetch failed, falling back:', err);
+        setVideoError(true);
+      });
+
     return () => {
+      cancelled = true;
       video.removeEventListener('canplaythrough', handleCanPlay);
+      if (blobUrl) URL.revokeObjectURL(blobUrl);
     };
   }, []);
 
-  // Play video only after loading screen is complete and video is ready
+  // Play video once it's loaded and loading screen is complete
   useEffect(() => {
     if (!isLoading && videoLoaded && videoRef.current) {
       const video = videoRef.current;
@@ -110,9 +134,13 @@ const Hero = memo(() => {
     }
   }, [isLoading, videoLoaded]);
 
+
   return (
     <>
-      {isLoading && <LoadingScreen onLoadComplete={() => setIsLoading(false)} />}
+      {isLoading && <LoadingScreen onLoadComplete={() => {
+        sessionStorage.setItem('arc_preloader_shown', '1');
+        setIsLoading(false);
+      }} />}
 
       <section
         className="relative h-screen flex flex-col overflow-hidden"
@@ -125,7 +153,7 @@ const Hero = memo(() => {
             playsInline
             loop
             muted
-            preload="auto"
+            preload="none"
             suppressHydrationWarning
             className="w-full h-full object-cover scale-100"
             style={{ transformOrigin: 'center center', willChange: 'auto' }}
@@ -138,7 +166,6 @@ const Hero = memo(() => {
               setVideoError(true);
             }}
           >
-            <source src="/Recreate_video_with_logo_202605251335.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           {/* Fallback for when video doesn't play */}

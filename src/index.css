@@ -105,12 +105,15 @@ All colors MUST be HSL.
     scroll-behavior: smooth;
     background-color: #000000;
     /* Hide scrollbar globally */
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
   }
 
   html::-webkit-scrollbar {
-    display: none;  /* Chrome, Safari, Opera */
+    display: none;
+    /* Chrome, Safari, Opera */
   }
 
   body {
@@ -119,8 +122,10 @@ All colors MUST be HSL.
     font-feature-settings: "rlig" 1, "calt" 1;
     background-color: #000000;
     /* Hide scrollbar globally */
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
     /* iOS safe area padding */
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
@@ -129,7 +134,8 @@ All colors MUST be HSL.
   }
 
   body::-webkit-scrollbar {
-    display: none;  /* Chrome, Safari, Opera */
+    display: none;
+    /* Chrome, Safari, Opera */
   }
 
   /* Ensure root element is black for iOS safe areas */
@@ -142,6 +148,7 @@ All colors MUST be HSL.
     from {
       opacity: 0;
     }
+
     to {
       opacity: 1;
     }
@@ -164,23 +171,27 @@ All colors MUST be HSL.
 
   /* Hide scrollbar for IE, Edge and Firefox */
   .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
   }
-  
+
   @keyframes scroll {
     from {
       transform: translateX(0);
     }
+
     to {
       transform: translateX(-33.333%);
     }
   }
-  
+
   @keyframes scroll-left {
     0% {
       transform: translateX(0);
     }
+
     100% {
       transform: translateX(-33.333%);
     }
@@ -190,11 +201,12 @@ All colors MUST be HSL.
     0% {
       transform: translateX(-33.333%);
     }
+
     100% {
       transform: translateX(0);
     }
   }
-  
+
   .animate-scroll {
     animation: scroll 15s linear infinite;
   }
@@ -216,6 +228,7 @@ All colors MUST be HSL.
     0% {
       transform: translateX(0);
     }
+
     100% {
       transform: translateX(-50%);
     }
@@ -235,10 +248,14 @@ All colors MUST be HSL.
   }
 
   @keyframes cursor-blink {
-    0%, 49% {
+
+    0%,
+    49% {
       opacity: 1;
     }
-    50%, 100% {
+
+    50%,
+    100% {
       opacity: 0;
     }
   }
@@ -251,6 +268,7 @@ All colors MUST be HSL.
     from {
       transform: rotate(0deg);
     }
+
     to {
       transform: rotate(360deg);
     }

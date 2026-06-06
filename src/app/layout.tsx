@@ -180,9 +180,9 @@ export default async function RootLayout({
           `}
         </Script>
         <noscript>
-          <img 
-            height="1" 
-            width="1" 
+          <img
+            height="1"
+            width="1"
             style={{ display: "none" }}
             src="https://www.facebook.com/tr?id=1489884839479188&ev=PageView&noscript=1"
             alt=""
