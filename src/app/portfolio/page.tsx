@@ -61,7 +61,7 @@ export default async function Portfolio() {
       id: 38,
       title: "Lavendra Beauty Lounge",
       description: "Dive into our world of care at our renowned beauty salon. Our expert team is dedicated to providing exceptional, personalized treatments using the latest innovations in beauty services.",
-      image: "/lavender.png",
+      image: "/lavender.webp",
       link: "https://www.lavendrabeauty.lk",
       status: "live"
     },
@@ -69,7 +69,7 @@ export default async function Portfolio() {
       id: 37,
       title: "Advitec International",
       description: "Based in Colombo, Advitec International is a premier distributor of biomedical devices, representing top-tier manufacturers to make quality healthcare accessible across Sri Lanka.",
-      image: "/advitec.png",
+      image: "/advitec.webp",
       link: "https://advitecint.com",
       status: "live"
     },
