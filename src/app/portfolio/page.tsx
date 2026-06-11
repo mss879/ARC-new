@@ -58,6 +58,22 @@ export const metadata: Metadata = {
 export default async function Portfolio() {
   const portfolioItems = [
     {
+      id: 38,
+      title: "Lavendra Beauty Lounge",
+      description: "Dive into our world of care at our renowned beauty salon. Our expert team is dedicated to providing exceptional, personalized treatments using the latest innovations in beauty services.",
+      image: "/lavender.png",
+      link: "https://www.lavendrabeauty.lk",
+      status: "live"
+    },
+    {
+      id: 37,
+      title: "Advitec International",
+      description: "Based in Colombo, Advitec International is a premier distributor of biomedical devices, representing top-tier manufacturers to make quality healthcare accessible across Sri Lanka.",
+      image: "/advitec.png",
+      link: "https://advitecint.com",
+      status: "live"
+    },
+    {
       id: 36,
       title: "Portland Flooring",
       description: "Portland Flooring delivers elegant, durable, and sustainable flooring solutions. We bring your vision to life with materials that stand the test of time, blending aesthetic beauty with uncompromising quality.",
