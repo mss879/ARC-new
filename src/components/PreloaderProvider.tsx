@@ -13,10 +13,11 @@ import dynamic from "next/dynamic";
 // server-rendered shell below, so the page is never uncovered while it loads
 const LoadingScreen = dynamic(() => import("./LoadingScreen"), { ssr: false });
 
-// How long assets get before the preloader opens anyway
-const ASSET_TIMEOUT_MS = 8000;
+// How long assets (hero video, images) get before the preloader opens anyway —
+// generous so slow connections still land on a fully prepared homepage
+const ASSET_TIMEOUT_MS = 20000;
 // Absolute cap — if the 3D chunk or WebGL ever fails, never strand users on black
-const FAILSAFE_MS = 15000;
+const FAILSAFE_MS = 30000;
 
 interface PreloaderContextValue {
   /** True while the preloader covers the page */

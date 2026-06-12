@@ -84,6 +84,17 @@ const SectionLoader = () => (
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-background dark">
+      {/* Start the hero video download as soon as the HTML arrives — before any
+          JavaScript loads — so it finishes while the preloader plays. React
+          hoists this into <head>; crossOrigin="anonymous" makes it match the
+          fetch() in Hero so the browser reuses the same download. */}
+      <link
+        rel="preload"
+        as="fetch"
+        href="/Recreate_video_with_logo_202605251335.mp4"
+        crossOrigin="anonymous"
+      />
+
       {/* Schema.org Structured Data for SEO */}
       <SchemaOrg type="home" showFAQ={true} />
 
