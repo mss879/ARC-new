@@ -37,14 +37,23 @@ const PreloaderProvider = ({ children }: { children: React.ReactNode }) => {
   // Preloader runs on every homepage load — server and client both start
   // with the shell visible so hydration matches
   const [show, setShow] = useState(true);
+  // The 3D overlay (door panels) has mounted and covers the screen
+  const [overlayMounted, setOverlayMounted] = useState(false);
+  // Doors have started splitting — homepage behind them comes alive
+  const [revealing, setRevealing] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
   const [pageLoaded, setPageLoaded] = useState(false);
   const [timedOut, setTimedOut] = useState(false);
 
   const ready = (videoReady && pageLoaded) || timedOut;
 
-  const finish = useCallback(() => setShow(false), []);
+  const finish = useCallback(() => {
+    setRevealing(true);
+    setShow(false);
+  }, []);
 
+  const markOverlayMounted = useCallback(() => setOverlayMounted(true), []);
+  const markRevealing = useCallback(() => setRevealing(true), []);
   const markVideoReady = useCallback(() => setVideoReady(true), []);
 
   useEffect(() => {
@@ -71,22 +80,31 @@ const PreloaderProvider = ({ children }: { children: React.ReactNode }) => {
   }, [show, finish]);
 
   return (
-    <PreloaderContext.Provider value={{ isLoading: show, markVideoReady }}>
+    <PreloaderContext.Provider value={{ isLoading: show && !revealing, markVideoReady }}>
       {show && (
         <>
           {/* Server-rendered shell: covers the page from the very first paint,
               before any JavaScript runs, so the homepage never flashes in or
-              animates behind the preloader */}
-          <div
-            id="arc-preloader-shell"
-            className="fixed inset-0 z-[70] bg-[#020202] flex items-center justify-center pointer-events-auto"
-          >
-            <div className="relative w-16 h-16">
-              <div className="absolute inset-0 rounded-full border-2 border-orange-500/10" />
-              <div className="absolute inset-0 rounded-full border-t-2 border-orange-500 animate-spin shadow-[0_0_15px_rgba(249,115,22,0.2)]" />
+              animates behind the preloader. Removed as soon as the 3D overlay's
+              door panels take over, so the door split reveals the homepage —
+              not this spinner. */}
+          {!overlayMounted && (
+            <div
+              id="arc-preloader-shell"
+              className="fixed inset-0 z-[70] bg-[#020202] flex items-center justify-center pointer-events-auto"
+            >
+              <div className="relative w-16 h-16">
+                <div className="absolute inset-0 rounded-full border-2 border-orange-500/10" />
+                <div className="absolute inset-0 rounded-full border-t-2 border-orange-500 animate-spin shadow-[0_0_15px_rgba(249,115,22,0.2)]" />
+              </div>
             </div>
-          </div>
-          <LoadingScreen ready={ready} onLoadComplete={finish} />
+          )}
+          <LoadingScreen
+            ready={ready}
+            onMounted={markOverlayMounted}
+            onExitStart={markRevealing}
+            onLoadComplete={finish}
+          />
         </>
       )}
       {children}

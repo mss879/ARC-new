@@ -11,6 +11,12 @@ interface LoadingScreenProps {
   /** True once the homepage assets (hero video, images, fonts) have loaded —
    *  the finale (impact + collapse + doors) is held back until then */
   ready: boolean;
+  /** Fired on mount, once the door panels cover the screen — the provider
+   *  removes its fallback shell so the door split reveals the homepage */
+  onMounted: () => void;
+  /** Fired when the doors start splitting — the homepage video starts playing
+   *  so the reveal shows it already running */
+  onExitStart: () => void;
   onLoadComplete: () => void;
 }
 
@@ -544,9 +550,16 @@ const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () =
 // ==========================================
 // 4. Main Loading Screen Component
 // ==========================================
-const LoadingScreen = memo(({ ready, onLoadComplete }: LoadingScreenProps) => {
+const LoadingScreen = memo(({ ready, onMounted, onExitStart, onLoadComplete }: LoadingScreenProps) => {
   const [isExiting, setIsExiting] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(20);
+
+  // Door panels now cover the screen — the provider's shell is redundant
+  const onMountedRef = useRef(onMounted);
+  onMountedRef.current = onMounted;
+  useEffect(() => {
+    onMountedRef.current();
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -568,8 +581,9 @@ const LoadingScreen = memo(({ ready, onLoadComplete }: LoadingScreenProps) => {
   }, []);
 
   const handleComplete = useCallback(() => {
+    onExitStart();
     setIsExiting(true);
-  }, []);
+  }, [onExitStart]);
 
   return (
     <div className="fixed inset-0 z-[70] overflow-hidden select-none pointer-events-none">
