@@ -3,33 +3,15 @@
 import { ArrowUpRight } from "lucide-react";
 import { memo, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { clientLogos } from "@/lib/client-logos";
-
-// Dynamic import with ssr: false to completely offload Three.js from the initial homepage critical bundle
-const LoadingScreen = dynamic(() => import("./LoadingScreen"), {
-  ssr: false,
-  loading: () => (
-    <div className="fixed inset-0 z-[70] bg-[#020202] flex flex-col items-center justify-center pointer-events-none select-none">
-      {/* Sleek, high-end minimal CSS loader during chunk download */}
-      <div className="relative w-16 h-16">
-        <div className="absolute inset-0 rounded-full border-2 border-orange-500/10" />
-        <div className="absolute inset-0 rounded-full border-t-2 border-orange-500 animate-spin shadow-[0_0_15px_rgba(249,115,22,0.2)]" />
-      </div>
-    </div>
-  )
-});
+import { usePreloader } from "./PreloaderProvider";
 
 const Hero = memo(() => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoError, setVideoError] = useState(false);
-  // Only show preloader on first visit per session
-  const [isLoading, setIsLoading] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return !sessionStorage.getItem('arc_preloader_shown');
-    }
-    return true;
-  });
+  // Preloader is owned by PreloaderProvider at the page level; Hero only
+  // reports video readiness and waits for the doors to open before playing
+  const { isLoading, markVideoReady } = usePreloader();
   const [videoLoaded, setVideoLoaded] = useState(false);
 
   // Download video via fetch() during preloader — fetch() does NOT trigger
@@ -61,6 +43,7 @@ const Hero = memo(() => {
     // Listen for video ready state
     const handleCanPlay = () => {
       setVideoLoaded(true);
+      markVideoReady();
       console.log('Video ready to play');
     };
     video.addEventListener('canplaythrough', handleCanPlay);
@@ -80,6 +63,8 @@ const Hero = memo(() => {
         if (cancelled) return;
         console.error('Video fetch failed, falling back:', err);
         setVideoError(true);
+        // Don't hold the preloader open for a video that will never arrive
+        markVideoReady();
       });
 
     return () => {
@@ -87,9 +72,11 @@ const Hero = memo(() => {
       video.removeEventListener('canplaythrough', handleCanPlay);
       if (blobUrl) URL.revokeObjectURL(blobUrl);
     };
-  }, []);
+  }, [markVideoReady]);
 
-  // Play video once it's loaded and loading screen is complete
+  // Play video once it's loaded and loading screen is complete.
+  // Driven by canplaythrough (not just state) so playback recovers if the
+  // src is swapped after the first successful play.
   useEffect(() => {
     if (!isLoading && videoLoaded && videoRef.current) {
       const video = videoRef.current;
@@ -131,17 +118,19 @@ const Hero = memo(() => {
       };
 
       attemptPlay();
+
+      // Re-attempt when the video becomes playable again (e.g. src replaced)
+      const replayIfPaused = () => {
+        if (video.paused) attemptPlay();
+      };
+      video.addEventListener('canplaythrough', replayIfPaused);
+      return () => video.removeEventListener('canplaythrough', replayIfPaused);
     }
   }, [isLoading, videoLoaded]);
 
 
   return (
     <>
-      {isLoading && <LoadingScreen onLoadComplete={() => {
-        sessionStorage.setItem('arc_preloader_shown', '1');
-        setIsLoading(false);
-      }} />}
-
       <section
         className="relative h-screen flex flex-col overflow-hidden"
         aria-label="Hero section"
@@ -160,6 +149,8 @@ const Hero = memo(() => {
             aria-hidden="true"
             onLoadedData={() => {
               setVideoLoaded(true);
+              // iOS Safari doesn't always fire canplaythrough for muted inline video
+              markVideoReady();
             }}
             onPlay={() => { }}
             onError={() => {

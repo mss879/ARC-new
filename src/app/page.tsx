@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import SchemaOrg from "@/components/SchemaOrg";
+import PreloaderProvider from "@/components/PreloaderProvider";
 
 // Dynamic imports for below-the-fold components (reduce initial bundle)
 // Using loading fallback to prevent layout shift
@@ -89,10 +90,13 @@ export default function HomePage() {
       {/* SEO H1 — keyword-rich, visible, single H1 for the entire page */}
       <h1 className="sr-only">ARC AI — AI Automation & Web Design Agency in UK & Sri Lanka | Top AI Company in Sri Lanka</h1>
 
-      <Navbar />
+      {/* Page-level preloader: covers everything (navbar, hero, all sections)
+          from the first paint and holds until the homepage assets are loaded */}
+      <PreloaderProvider>
+        <Navbar />
 
-      {/* Main content wrapper with semantic HTML */}
-      <article>
+        {/* Main content wrapper with semantic HTML */}
+        <article>
         {/* Above the fold - load immediately */}
         <Hero />
 
@@ -149,10 +153,11 @@ export default function HomePage() {
           </div>
         </section>
 
-        <CTA />
-      </article>
+          <CTA />
+        </article>
 
-      <Footer />
+        <Footer />
+      </PreloaderProvider>
     </div>
   );
 }

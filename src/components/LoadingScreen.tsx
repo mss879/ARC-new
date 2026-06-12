@@ -8,6 +8,9 @@ import * as THREE from "three";
 import gsap from "gsap";
 
 interface LoadingScreenProps {
+  /** True once the homepage assets (hero video, images, fonts) have loaded —
+   *  the finale (impact + collapse + doors) is held back until then */
+  ready: boolean;
   onLoadComplete: () => void;
 }
 
@@ -134,7 +137,7 @@ const generateTextBlocks = (lines: string[]) => {
 // ==========================================
 // 3. Isometric Builder (Ultra-Stable Instanced Animation)
 // ==========================================
-const IsometricCity = ({ onComplete }: { onComplete: () => void }) => {
+const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () => void }) => {
   const masterGroupRef = useRef<THREE.Group>(null);
   const gridRef = useRef<THREE.Group>(null);
   const meshRef = useRef<THREE.InstancedMesh>(null);
@@ -195,6 +198,10 @@ const IsometricCity = ({ onComplete }: { onComplete: () => void }) => {
     onCompleteRef.current = onComplete;
   }, [onComplete]);
 
+  // Build phase done — text assembled and locked in, waiting for assets
+  const [buildDone, setBuildDone] = useState(false);
+  const idlePulseRef = useRef<gsap.core.Tween | null>(null);
+
   useEffect(() => {
     // Utilize GSAP context to ensure clean initialization and complete cleanup upon unmount
     const ctx = gsap.context(() => {
@@ -234,7 +241,16 @@ const IsometricCity = ({ onComplete }: { onComplete: () => void }) => {
 
       const tl = gsap.timeline({
         onComplete: () => {
-          onCompleteRef.current();
+          // Hold here until assets are ready: breathing glow on the voxel text
+          // (DataStream particles and the grid keep flowing via useFrame)
+          idlePulseRef.current = gsap.to(animState, {
+            emissiveIntensity: 0.7,
+            duration: 0.9,
+            yoyo: true,
+            repeat: -1,
+            ease: "sine.inOut"
+          });
+          setBuildDone(true);
         }
       });
 
@@ -274,14 +290,43 @@ const IsometricCity = ({ onComplete }: { onComplete: () => void }) => {
           ease: "power2.out"
         }, 2.34);
       });
+    });
 
-      // 4. Projectile Fly-In (starts at 2.6s, hits center at 3.1s - exactly 0.5 seconds after gap closing completes)
+    return () => {
+      idlePulseRef.current?.kill();
+      idlePulseRef.current = null;
+      ctx.revert();
+    };
+  }, [blockData, blocks, projectileData, animState]);
+
+  // Finale phase — plays only once the build is done AND page assets are loaded
+  useEffect(() => {
+    if (!buildDone || !ready) return;
+
+    idlePulseRef.current?.kill();
+    idlePulseRef.current = null;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        onComplete: () => {
+          onCompleteRef.current();
+        }
+      });
+
+      // Settle the holding glow back down while the projectile flies in
+      tl.to(animState, {
+        emissiveIntensity: 0.2,
+        duration: 0.3,
+        ease: "power1.out"
+      }, 0);
+
+      // 4. Projectile Fly-In (hits center at 0.5s)
       tl.to(projectileData, {
         scale: 1,
         opacity: 1,
         duration: 0.1,
         ease: "power1.out"
-      }, 2.6);
+      }, 0);
 
       tl.to(projectileData, {
         x: 0,
@@ -289,69 +334,69 @@ const IsometricCity = ({ onComplete }: { onComplete: () => void }) => {
         z: 0,
         duration: 0.5,
         ease: "power2.in"
-      }, 2.6);
+      }, 0);
 
       // Trail lag animations to follow with a slight delay
       tl.to(projectileData, {
         tx1: 0, ty1: 0, tz1: 0,
         duration: 0.5,
         ease: "power2.in"
-      }, 2.63);
+      }, 0.03);
 
       tl.to(projectileData, {
         tx2: 0, ty2: 0, tz2: 0,
         duration: 0.5,
         ease: "power2.in"
-      }, 2.66);
+      }, 0.06);
 
       tl.to(projectileData, {
         tx3: 0, ty3: 0, tz3: 0,
         duration: 0.5,
         ease: "power2.in"
-      }, 2.69);
+      }, 0.09);
 
-      // 5. Impact Event (starts at 3.1s)
+      // 5. Impact Event (starts at 0.5s)
       // Disappear main projectile instantly
       tl.to(projectileData, {
         scale: 0,
         opacity: 0,
         duration: 0.05,
         ease: "power1.in"
-      }, 3.1);
+      }, 0.5);
 
       // Fade out trails quickly
-      tl.to(projectileData, { scale: 0, opacity: 0, duration: 0.15 }, 3.19);
+      tl.to(projectileData, { scale: 0, opacity: 0, duration: 0.15 }, 0.59);
 
       // High-intensity camera rumble flare
       tl.to(animState, {
         rumble: 0.4,
         duration: 0.05,
         ease: "power1.out"
-      }, 3.1);
+      }, 0.5);
 
       tl.to(animState, {
         rumble: 0,
         duration: 0.8,
         ease: "power2.out"
-      }, 3.15);
+      }, 0.55);
 
       // Glowing material blast pulse
       tl.to(animState, {
         emissiveIntensity: 6,
         duration: 0.08,
         ease: "power4.out"
-      }, 3.1);
+      }, 0.5);
 
       tl.to(animState, {
         emissiveIntensity: 0.2,
         duration: 1.0,
         ease: "power2.out"
-      }, 3.18);
+      }, 0.58);
 
       // 6. Matrix collapse: structural fall down into space (radial delay from impact center)
       blockData.forEach((block) => {
         const dist = Math.sqrt(block.x * block.x + block.finalY * block.finalY + block.z * block.z);
-        const delay = 3.1 + dist * 0.04;
+        const delay = 0.5 + dist * 0.04;
 
         tl.to(block, {
           y: -40,
@@ -366,7 +411,7 @@ const IsometricCity = ({ onComplete }: { onComplete: () => void }) => {
     });
 
     return () => ctx.revert();
-  }, [blockData, blocks, projectileData, animState]);
+  }, [buildDone, ready, blockData, projectileData, animState]);
 
   const tempObject = useMemo(() => new THREE.Object3D(), []);
 
@@ -499,7 +544,7 @@ const IsometricCity = ({ onComplete }: { onComplete: () => void }) => {
 // ==========================================
 // 4. Main Loading Screen Component
 // ==========================================
-const LoadingScreen = memo(({ onLoadComplete }: LoadingScreenProps) => {
+const LoadingScreen = memo(({ ready, onLoadComplete }: LoadingScreenProps) => {
   const [isExiting, setIsExiting] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(20);
 
@@ -524,8 +569,7 @@ const LoadingScreen = memo(({ onLoadComplete }: LoadingScreenProps) => {
 
   const handleComplete = useCallback(() => {
     setIsExiting(true);
-    setTimeout(onLoadComplete, 1000);
-  }, [onLoadComplete]);
+  }, []);
 
   return (
     <div className="fixed inset-0 z-[70] overflow-hidden select-none pointer-events-none">
@@ -535,6 +579,10 @@ const LoadingScreen = memo(({ onLoadComplete }: LoadingScreenProps) => {
         initial={{ x: "0%" }}
         animate={isExiting ? { x: "-50vw" } : { x: "0%" }}
         transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
+        onAnimationComplete={() => {
+          // Unmount only after the doors have fully opened
+          if (isExiting) onLoadComplete();
+        }}
         className="absolute left-0 top-0 w-[50vw] h-full bg-[#020202] z-10 pointer-events-auto shadow-[0_0_20px_rgba(249,115,22,0.05)]"
       >
         {/* Glowing seam border split details - only rendered during exit split transition */}
@@ -582,7 +630,7 @@ const LoadingScreen = memo(({ onLoadComplete }: LoadingScreenProps) => {
           <directionalLight position={[10, 20, 10]} intensity={1.5} color="#ffffff" castShadow shadow-mapSize={[1024, 1024]} />
           <directionalLight position={[-10, 10, -10]} intensity={0.5} color="#f97316" />
 
-          <IsometricCity onComplete={handleComplete} />
+          <IsometricCity ready={ready} onComplete={handleComplete} />
         </Canvas>
       </motion.div>
 
