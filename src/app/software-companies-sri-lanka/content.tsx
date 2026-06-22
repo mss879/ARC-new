@@ -35,7 +35,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
 import { FAQItem, ScrollProgressBar, ActiveTOC, SocialShareButtons, BackToTop, InteractiveComparisonTable } from "./ClientComponents";
 
-/* â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Data ─────────────────────────────────────────────────────── */
 
 const tocItems = [
     { id: "methodology", label: "How We Evaluated These Companies" },
@@ -48,6 +48,7 @@ const tocItems = [
     { id: "tech-ecosystem", label: "Tech Hubs & Ecosystem" },
     { id: "why-outsource", label: "Why Outsource Software Development to Sri Lanka?" },
     { id: "industry-voices", label: "Industry Voices & Data Points" },
+    { id: "proven-results", label: "Proven Results from This Market" },
     { id: "faq", label: "Frequently Asked Questions" },
 ];
 
@@ -112,10 +113,10 @@ const companies: Company[] = [
         tagline: "Product Engineering for Global Markets",
         founded: "2004",
         hq: "Colombo (Parent: Oslo, Norway)",
-        size: "500â€“1,000",
+        size: "500–1,000",
         specialty: "Product Engineering",
         description:
-            "99x has built a strong reputation as a product engineering company, primarily serving Scandinavian and European clients. They focus on building long-term partnerships rather than project-based engagements, embedding dedicated teams that function as extensions of their client's internal engineering departments. 99x was recognised as a Great Place to WorkÂ® multiple consecutive years and is known for investing heavily in employee development and R&D. Their technical expertise spans full-stack development, DevOps, QA, and emerging technologies. They operate under a \"co-creation\" model where their teams share ownership of product outcomes rather than simply executing specifications.",
+            "99x has built a strong reputation as a product engineering company, primarily serving Scandinavian and European clients. They focus on building long-term partnerships rather than project-based engagements, embedding dedicated teams that function as extensions of their client's internal engineering departments. 99x was recognised as a Great Place to Work® multiple consecutive years and is known for investing heavily in employee development and R&D. Their technical expertise spans full-stack development, DevOps, QA, and emerging technologies. They operate under a \"co-creation\" model where their teams share ownership of product outcomes rather than simply executing specifications.",
         services: ["Custom Software Development", "Product Engineering", "QA & Testing", "DevOps"],
         bestFor: "European companies looking for reliable, long-term offshore engineering teams.",
         rating: "4.7",
@@ -151,9 +152,9 @@ const companies: Company[] = [
         size: "1,500+",
         specialty: "Supply Chain & Retail Technology",
         description:
-            "Sysco LABS is the captive technology innovation centre for Sysco Corporation, the world's largest foodservice distribution company (Fortune 51 on the 2026 Fortune 500 list, with $82 billion in annual revenue). Operating out of Colombo, their engineering teams build the software that powers Sysco's global supply chain managing $70+ billion in annual revenue, logistics, and e-commerce platforms. While they don't accept external clients, Sysco LABS is an important indicator of the calibre of engineering talent in Sri Lanka â€” they compete with Silicon Valley for talent and offer some of the most competitive compensation packages on the island.",
+            "Sysco LABS is the captive technology innovation centre for Sysco Corporation, the world's largest foodservice distribution company (Fortune 51 on the 2026 Fortune 500 list, with $82 billion in annual revenue). Operating out of Colombo, their engineering teams build the software that powers Sysco's global supply chain managing $70+ billion in annual revenue, logistics, and e-commerce platforms. While they don't accept external clients, Sysco LABS is an important indicator of the calibre of engineering talent in Sri Lanka — they compete with Silicon Valley for talent and offer some of the most competitive compensation packages on the island.",
         services: ["Supply Chain Software", "E-commerce Platforms", "Data Engineering", "Enterprise Architecture"],
-        bestFor: "Captive centre â€” demonstrates Sri Lanka's enterprise engineering capability.",
+        bestFor: "Captive centre — demonstrates Sri Lanka's enterprise engineering capability.",
         notableClients: "Sysco Corporation (Fortune 51)",
         techStack: "Java, Kotlin, React, Python, Kafka, Kubernetes, GCP, ML/AI pipelines",
         projectExample: "Developed the core logistics intelligence platform that routes thousands of Sysco delivery trucks daily, optimising fuel consumption and delivery windows.",
@@ -163,7 +164,7 @@ const companies: Company[] = [
         tagline: "Boutique Software Engineering for Startups & Enterprises",
         founded: "2013",
         hq: "Colombo (TRACE Expert City)",
-        size: "200â€“500",
+        size: "200–500",
         specialty: "Full-Stack Product Development",
         description:
             "Located at TRACE Expert City in Colombo, Calcey Technologies is a boutique software engineering firm that partners with startups and growth-stage companies globally to build web and mobile applications. They are known for their strong design sensibility, agile delivery processes, and ability to take products from concept to market quickly. Calcey has worked with clients from Silicon Valley, Australia, Europe, and the Middle East across industries including fintech, healthtech, and proptech. They are a Clutch Global Leader with consistently high client satisfaction scores.",
@@ -181,10 +182,10 @@ const companies: Company[] = [
         tagline: "Immersive Technology & Digital Innovation",
         founded: "2013",
         hq: "Colombo",
-        size: "200â€“500",
+        size: "200–500",
         specialty: "AR/VR, Gamification & Creative Tech",
         description:
-            "Arimac stands out in the Sri Lankan tech landscape for its focus on immersive and experiential technologies. They specialise in augmented reality (AR), virtual reality (VR), gamification, and creative digital solutions. Beyond immersive tech, Arimac also delivers custom software development, mobile apps, and enterprise solutions. Their work has been recognised internationally â€” including at global competitions and startup showcases â€” and they've partnered with brands in tourism, education, and entertainment to create engaging digital experiences. Founded by Chamira Fernando, Arimac represents the creative and innovative edge of Sri Lanka's software sector.",
+            "Arimac stands out in the Sri Lankan tech landscape for its focus on immersive and experiential technologies. They specialise in augmented reality (AR), virtual reality (VR), gamification, and creative digital solutions. Beyond immersive tech, Arimac also delivers custom software development, mobile apps, and enterprise solutions. Their work has been recognised internationally — including at global competitions and startup showcases — and they've partnered with brands in tourism, education, and entertainment to create engaging digital experiences. Founded by Chamira Fernando, Arimac represents the creative and innovative edge of Sri Lanka's software sector.",
         services: ["AR/VR Development", "Gamification", "Mobile Apps", "Enterprise Software"],
         bestFor: "Brands wanting immersive, experiential digital products.",
         rating: "4.6",
@@ -199,7 +200,7 @@ const companies: Company[] = [
         tagline: "Digital Product Engineering Hub",
         founded: "2016",
         hq: "Colombo",
-        size: "100â€“300",
+        size: "100–300",
         specialty: "Product Engineering & Cloud-Native Development",
         description:
             "Rootcode has grown rapidly as a specialised digital product engineering company. They focus on building scalable, cloud-native applications using modern technology stacks and are known for their engineering-first culture. Their team works with startups, scale-ups, and enterprises to build products from scratch or modernise legacy systems. Rootcode places a strong emphasis on DevOps, continuous delivery practices, and infrastructure-as-code. Their rapid growth and focus on modern architectures make them representative of the new generation of Sri Lankan software companies.",
@@ -217,10 +218,10 @@ const companies: Company[] = [
         tagline: "Software Development + Digital Marketing",
         founded: "2014",
         hq: "Colombo",
-        size: "100â€“300",
+        size: "100–300",
         specialty: "Full-Service Digital Agency",
         description:
-            "Surge Global occupies an interesting niche by combining custom software development with digital marketing expertise. They can build your product and then help you market it â€” a combination that few pure-play software companies offer. Their development team handles web and mobile applications, while their marketing division provides data-driven campaigns, performance marketing, SEO, and analytics. Surge serves clients across Australia, USA, UK, and the MENA region and has won multiple industry awards for their integrated approach.",
+            "Surge Global occupies an interesting niche by combining custom software development with digital marketing expertise. They can build your product and then help you market it — a combination that few pure-play software companies offer. Their development team handles web and mobile applications, while their marketing division provides data-driven campaigns, performance marketing, SEO, and analytics. Surge serves clients across Australia, USA, UK, and the MENA region and has won multiple industry awards for their integrated approach.",
         services: ["Web & Mobile Development", "Digital Marketing & SEO", "Data Analytics", "E-commerce Solutions"],
         bestFor: "Businesses needing both software development and marketing execution.",
         rating: "4.7",
@@ -235,10 +236,10 @@ const companies: Company[] = [
         tagline: "Digital Advancement & Cloud Engineering",
         founded: "2014",
         hq: "Colombo & London, UK",
-        size: "100â€“300",
+        size: "100–300",
         specialty: "Cloud Migration & Enterprise Solutions",
         description:
-            "Mitra Innovation specialises in helping enterprises adopt modern cloud architectures, particularly on AWS. With offices in both Sri Lanka and the UK, they bridge the gap between offshore development costs and Western enterprise requirements. Mitra is an AWS Advanced Consulting Partner with multiple AWS competencies and has built deep expertise in product incubation â€” helping enterprises turn internal ideas into standalone software products. Their engagements tend to be long-term, often evolving into managed services relationships that cover ongoing platform maintenance and optimisation.",
+            "Mitra Innovation specialises in helping enterprises adopt modern cloud architectures, particularly on AWS. With offices in both Sri Lanka and the UK, they bridge the gap between offshore development costs and Western enterprise requirements. Mitra is an AWS Advanced Consulting Partner with multiple AWS competencies and has built deep expertise in product incubation — helping enterprises turn internal ideas into standalone software products. Their engagements tend to be long-term, often evolving into managed services relationships that cover ongoing platform maintenance and optimisation.",
         services: ["Cloud Migration (AWS)", "Product Incubation", "Enterprise Applications", "Managed Services"],
         bestFor: "Enterprises pursuing cloud-first strategies and AWS adoption.",
         rating: "4.6",
@@ -253,10 +254,10 @@ const companies: Company[] = [
         tagline: "Dedicated Teams & Staff Augmentation",
         founded: "1999",
         hq: "Colombo",
-        size: "200â€“500",
+        size: "200–500",
         specialty: "Offshore Development Teams",
         description:
-            "With over two and a half decades of experience, Creative Software is one of the pioneering IT outsourcing companies in Sri Lanka. They specialise in providing dedicated, long-term software development teams to global clients. Rather than project-based work, their model centres on embedding engineers within client organisations for extended periods â€” often years. This makes them a reliable partner for companies needing to scale their engineering teams without the overhead of direct recruitment in high-cost markets. As one of the oldest software companies in Sri Lanka, they bring unmatched institutional knowledge about operating successful offshore teams.",
+            "With over two and a half decades of experience, Creative Software is one of the pioneering IT outsourcing companies in Sri Lanka. They specialise in providing dedicated, long-term software development teams to global clients. Rather than project-based work, their model centres on embedding engineers within client organisations for extended periods — often years. This makes them a reliable partner for companies needing to scale their engineering teams without the overhead of direct recruitment in high-cost markets. As one of the oldest software companies in Sri Lanka, they bring unmatched institutional knowledge about operating successful offshore teams.",
         services: ["Dedicated Development Teams", "Staff Augmentation", "Enterprise IT", "Legacy Modernisation"],
         bestFor: "Companies needing long-term, dedicated offshore engineering teams.",
         notableClients: "Long-term enterprise clients across Europe and North America",
@@ -268,10 +269,10 @@ const companies: Company[] = [
         tagline: "HR Technology & Enterprise Software",
         founded: "1997",
         hq: "Colombo",
-        size: "500â€“1,000",
+        size: "500–1,000",
         specialty: "Human Resource Management Systems",
         description:
-            "hSenid is one of Sri Lanka's oldest and most established technology firms, with deep expertise in human resource management systems (HRMS). Their flagship product, hSenid HRM, is deployed by organisations across South Asia, Southeast Asia, and Africa â€” serving millions of employees through their platform. Beyond HR tech, hSenid operates in mobile technology and has been a significant contributor to Sri Lanka's software export growth since the late 1990s. They represent the stability and maturity of the Sri Lankan software industry, with nearly three decades of continuous operation.",
+            "hSenid is one of Sri Lanka's oldest and most established technology firms, with deep expertise in human resource management systems (HRMS). Their flagship product, hSenid HRM, is deployed by organisations across South Asia, Southeast Asia, and Africa — serving millions of employees through their platform. Beyond HR tech, hSenid operates in mobile technology and has been a significant contributor to Sri Lanka's software export growth since the late 1990s. They represent the stability and maturity of the Sri Lankan software industry, with nearly three decades of continuous operation.",
         services: ["HRM Software", "Payroll Systems", "Mobile Solutions", "Enterprise Applications"],
         bestFor: "Organisations looking for proven HRMS solutions in emerging markets.",
         notableClients: "Telcos, banks, and enterprises across South Asia and Africa",
@@ -283,7 +284,7 @@ const companies: Company[] = [
         tagline: "Custom Application Development with Source Code Ownership",
         founded: "2018",
         hq: "Colombo",
-        size: "50â€“100",
+        size: "50–100",
         specialty: "Custom Web & Mobile Applications",
         description:
             "Addix has differentiated itself by emphasising source code ownership and transparent, client-first engagement models. They build custom web and mobile applications with a focus on agile delivery and clear communication. Their \"humanised\" service approach means clients work directly with senior engineers rather than being routed through layers of project management. Addix has built a strong online presence and is frequently cited in directories like Clutch, GoodFirms, and TheManifest as a top-rated Sri Lankan software company, particularly for mid-market and SME clients.",
@@ -301,10 +302,10 @@ const companies: Company[] = [
         tagline: "Travel Technology & Enterprise Solutions",
         founded: "1999",
         hq: "Colombo",
-        size: "500â€“1,000",
+        size: "500–1,000",
         specialty: "Travel Tech & Leisure Industry Software",
         description:
-            "CodeGen International is a pioneer in travel technology software originating from Sri Lanka. Their flagship products, including TravelBoxâ„¢ and SiTours, are used by some of the world's largest travel and leisure companies â€” handling complex booking engines, inventory management, and distribution systems for tour operators and travel agencies globally. CodeGen has expanded into other verticals including education technology with their CodeGen Edu platform. They combine deep domain expertise in the travel industry with enterprise software engineering capabilities accrued over 25+ years of operation.",
+            "CodeGen International is a pioneer in travel technology software originating from Sri Lanka. Their flagship products, including TravelBox™ and SiTours, are used by some of the world's largest travel and leisure companies — handling complex booking engines, inventory management, and distribution systems for tour operators and travel agencies globally. CodeGen has expanded into other verticals including education technology with their CodeGen Edu platform. They combine deep domain expertise in the travel industry with enterprise software engineering capabilities accrued over 25+ years of operation.",
         services: ["Travel Booking Engines", "Tour Operator Software", "Enterprise Applications", "Education Technology"],
         bestFor: "Travel and leisure companies needing specialised booking and distribution platforms.",
         notableClients: "Major international tour operators, travel agencies, and hospitality groups",
@@ -316,10 +317,10 @@ const companies: Company[] = [
         tagline: "R&D and Advanced Technology Solutions",
         founded: "2004",
         hq: "Colombo (Global HQ: San Jose, CA)",
-        size: "200â€“500",
+        size: "200–500",
         specialty: "R&D Engineering & Retail Technology",
         description:
-            "Zone24x7 operates as a technology R&D and engineering services company with a major talent hub in Colombo. Co-founded by Llavan Fernando and Saw-Chin Fernando, the company specialises in end-to-end technology consulting that spans both hardware and software solutions â€” a rare combination in the Sri Lankan market. Their engineering teams work on advanced projects including computer vision, robotics, IoT, and retail automation for major international clients. Zone24x7 is frequently cited as one of the most technically sophisticated R&D centres operating out of Sri Lanka.",
+            "Zone24x7 operates as a technology R&D and engineering services company with a major talent hub in Colombo. Co-founded by Llavan Fernando and Saw-Chin Fernando, the company specialises in end-to-end technology consulting that spans both hardware and software solutions — a rare combination in the Sri Lankan market. Their engineering teams work on advanced projects including computer vision, robotics, IoT, and retail automation for major international clients. Zone24x7 is frequently cited as one of the most technically sophisticated R&D centres operating out of Sri Lanka.",
         services: ["R&D Engineering", "Computer Vision & AI", "IoT Solutions", "Retail Technology"],
         bestFor: "Companies requiring advanced R&D engineering with hardware-software integration.",
         notableClients: "Major US retailers, global technology companies",
@@ -331,10 +332,10 @@ const companies: Company[] = [
         tagline: "Enterprise Digital Services & ERP Implementation",
         founded: "2012",
         hq: "Colombo (offices in US, UK, Sweden, Singapore, Australia)",
-        size: "500â€“1,000",
+        size: "500–1,000",
         specialty: "Business Intelligence & ERP",
         description:
-            "Fortude is a global enterprise and digital services company headquartered in Colombo with offices across eight countries. They specialise in end-to-end ERP implementations â€” particularly as a certified Infor partner â€” alongside data and analytics, automation (UiPath partnership), cloud services, and digital advisory. Their industry focus spans apparel and manufacturing, food and beverage, and healthcare â€” verticals where Sri Lanka has significant domestic expertise. Fortude represents the growing maturity of Sri Lankan software companies in delivering complex enterprise transformation projects to multinational clients.",
+            "Fortude is a global enterprise and digital services company headquartered in Colombo with offices across eight countries. They specialise in end-to-end ERP implementations — particularly as a certified Infor partner — alongside data and analytics, automation (UiPath partnership), cloud services, and digital advisory. Their industry focus spans apparel and manufacturing, food and beverage, and healthcare — verticals where Sri Lanka has significant domestic expertise. Fortude represents the growing maturity of Sri Lankan software companies in delivering complex enterprise transformation projects to multinational clients.",
         services: ["ERP Implementation (Infor)", "Data & Analytics", "Process Automation (UiPath)", "Digital Advisory"],
         bestFor: "Manufacturing and F&B enterprises needing ERP and business intelligence solutions.",
         rating: "4.5",
@@ -349,10 +350,10 @@ const companies: Company[] = [
         tagline: "Healthcare Technology & E-Health Solutions",
         founded: "2005",
         hq: "Colombo (Parent: Stockholm, Sweden)",
-        size: "300â€“500",
+        size: "300–500",
         specialty: "Healthcare IT & EMR Systems",
         description:
-            "Cambio Software Engineering is the Sri Lankan R&D arm of Cambio Healthcare Systems AB, a Swedish e-health company founded in 1993. Their Colombo office, established in 2005, employs over 300 engineers who build electronic medical record (EMR) systems, clinical decision support tools, and healthcare information platforms deployed across Scandinavian and UK healthcare systems. Cambio represents an important niche in Sri Lanka's software ecosystem â€” deep domain expertise in regulated healthcare IT, a sector requiring exceptional attention to data privacy, compliance (GDPR, NHS standards), and system reliability.",
+            "Cambio Software Engineering is the Sri Lankan R&D arm of Cambio Healthcare Systems AB, a Swedish e-health company founded in 1993. Their Colombo office, established in 2005, employs over 300 engineers who build electronic medical record (EMR) systems, clinical decision support tools, and healthcare information platforms deployed across Scandinavian and UK healthcare systems. Cambio represents an important niche in Sri Lanka's software ecosystem — deep domain expertise in regulated healthcare IT, a sector requiring exceptional attention to data privacy, compliance (GDPR, NHS standards), and system reliability.",
         services: ["Electronic Medical Records (EMR)", "Clinical Decision Support", "Healthcare Platforms", "E-Health Integration"],
         bestFor: "Healthcare organisations needing EMR systems and clinical software.",
         notableClients: "Scandinavian healthcare systems, NHS trusts, European hospitals",
@@ -364,7 +365,7 @@ const companies: Company[] = [
         tagline: "Full-Stack Product Engineering & IoT",
         founded: "2015",
         hq: "Colombo",
-        size: "100â€“200",
+        size: "100–200",
         specialty: "IoT, Mobile & Cloud Solutions",
         description:
             "Fcode Labs has built a reputation as a technically strong product engineering company with particular expertise in IoT, embedded systems, and mobile app development. They work across consumer electronics, smart home technology, and enterprise IoT deployments. Their engineering teams combine hardware awareness with modern cloud-native development practices, making them a strong choice for projects that span physical devices and software platforms. Fcode Labs has been recognised on Clutch as a top Sri Lankan development firm.",
@@ -382,7 +383,7 @@ const companies: Company[] = [
         tagline: "Enterprise App Modernisation & Cloud Consulting",
         founded: "2016",
         hq: "Colombo",
-        size: "100â€“200",
+        size: "100–200",
         specialty: "Cloud Consulting & App Modernisation",
         description:
             "Insighture specialises in helping enterprises modernise legacy applications and migrate to cloud-native architectures. They offer resource augmentation, cloud consulting, and AI integration services. Their teams work closely with enterprise clients on long-term transformation projects, typically involving containerisation, microservices migration, and platform re-engineering. Insighture has grown steadily by focusing on deep technical partnerships rather than project-based engagements.",
@@ -400,7 +401,7 @@ const companies: Company[] = [
         tagline: "Offshore Development & Enterprise Solutions",
         founded: "2007",
         hq: "Colombo",
-        size: "200â€“500",
+        size: "200–500",
         specialty: "Offshore Development & QA",
         description:
             "Allion Technologies is a well-established offshore development company providing custom software development, QA and testing, and IT consulting services to clients globally. With nearly two decades of operation, they have built deep expertise in enterprise application development, particularly for clients in financial services, healthcare, and telecommunications. Allion is known for their strong quality assurance practices and structured delivery methodology.",
@@ -557,7 +558,7 @@ export default function SoftwareCompaniesContent() {
 
                     <div>
                         <span className="inline-block px-4 py-1.5 bg-[rgb(255,73,37)]/20 backdrop-blur-sm text-[rgb(255,73,37)] text-sm font-semibold rounded-full border border-[rgb(255,73,37)]/30 mb-4">
-                            Industry Guide · Updated May 2026
+                            Industry Guide · Updated June 2026
                         </span>
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                             Software Companies in Sri Lanka
@@ -595,7 +596,7 @@ export default function SoftwareCompaniesContent() {
                         <div className="flex flex-wrap items-center gap-4 mt-4">
                             <div className="flex items-center gap-2 text-neutral-500 text-sm">
                                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                                <span>Last updated: May 5, 2026</span>
+                                <span>Last updated: June 22, 2026</span>
                             </div>
                         </div>
                         <div className="mt-6">
@@ -1337,6 +1338,12 @@ export default function SoftwareCompaniesContent() {
                                     url: "https://www.cbsl.gov.lk/en/publications/economic-and-financial-reports/annual-economic-review",
                                     context: "Annual Economic Review 2025 & Budget Estimates 2026",
                                 },
+                                {
+                                    quote: "ICT/BPM export revenue reached US$1,645 million in 2025 — up 8.8% year-on-year — and the industry is targeting US$3 billion in exports and a US$15 billion contribution to the digital economy by 2030, making software one of Sri Lanka's top export earners.",
+                                    source: "Export Development Board (EDB) & SLASSCOM",
+                                    url: "https://www.srilankabusiness.com/ict/",
+                                    context: "ICT/BPM Export Performance & 2030 Industry Targets",
+                                },
                             ].map((item) => (
                                 <blockquote key={item.source} className="bg-neutral-950 border-l-4 border-[rgb(255,73,37)] rounded-r-xl p-6 m-0">
                                     <p className="text-neutral-200 mb-4 italic leading-relaxed">
@@ -1350,6 +1357,114 @@ export default function SoftwareCompaniesContent() {
                                     </footer>
                                 </blockquote>
                             ))}
+                        </div>
+                    </section>
+
+                    {/* — Proven Results (Publisher Experience / Social Proof) ————————————————————— */}
+                    <section
+                        id="proven-results"
+                        className="scroll-mt-24"
+                    >
+                        <h2 className="text-3xl md:text-4xl font-bold text-white mt-16 mb-8 flex items-center gap-3">
+                            <BarChart3 className="w-8 h-8 text-[rgb(255,73,37)]" />
+                            Proven Results from This Market
+                        </h2>
+
+                        <p className="text-neutral-300 mb-4">
+                            Research is only half the story. We don&apos;t just write about Sri Lanka&apos;s software industry — we build in it every week. The outcomes below come from our own client engagements across Sri Lanka and the UK. We include them for transparency about the hands-on experience behind this guide, and to illustrate what a capable <strong>software company in Sri Lanka</strong> can realistically deliver.
+                        </p>
+                        <p className="text-neutral-500 text-sm italic mb-8">
+                            As stated in our <a href="#methodology" className="text-[rgb(255,73,37)] hover:underline no-underline">methodology</a>, ARC AI publishes this guide and is <em>deliberately excluded from the 21-company ranking above</em>. The figures here describe our own delivery record — not a competitive placement.
+                        </p>
+
+                        {/* Aggregate stats strip */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-8">
+                            {[
+                                { icon: Star, value: "4.9/5", label: "Average client rating" },
+                                { icon: Briefcase, value: "100+", label: "Projects delivered" },
+                                { icon: TrendingUp, value: "+67%", label: "Avg. lead increase" },
+                                { icon: Rocket, value: "50+", label: "Products shipped" },
+                            ].map((stat) => (
+                                <div key={stat.label} className="bg-neutral-950 border border-neutral-800 rounded-xl p-5 text-center">
+                                    <stat.icon className="w-5 h-5 text-[rgb(255,73,37)] mx-auto mb-2" />
+                                    <div className="text-2xl md:text-3xl font-bold text-white">{stat.value}</div>
+                                    <div className="text-xs text-neutral-500 mt-1">{stat.label}</div>
+                                </div>
+                            ))}
+                        </div>
+                        <p className="text-xs text-neutral-600 -mt-4 mb-8">
+                            Based on verified ARC AI client reviews and delivered projects across the UK and Sri Lanka.
+                        </p>
+
+                        {/* Result cards from real case studies */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                            {[
+                                {
+                                    client: "Tourism & Hospitality",
+                                    location: "Sri Lanka",
+                                    tags: ["AI Chatbot", "Smart Website"],
+                                    summary: "A 24/7 multilingual (Sinhala, Tamil & English) AI assistant replaced 6–12 hour email response times.",
+                                    metrics: [
+                                        { label: "Booking enquiries", value: "+167%" },
+                                        { label: "Response time", value: "99% faster" },
+                                        { label: "Support cost", value: "−60%" },
+                                    ],
+                                },
+                                {
+                                    client: "Real Estate Agency",
+                                    location: "Colombo, Sri Lanka",
+                                    tags: ["AI Sales SDR", "Smart Website"],
+                                    summary: "Automated lead qualification and viewing scheduling freed the sales team from manual follow-up.",
+                                    metrics: [
+                                        { label: "Qualified leads", value: "+247%" },
+                                        { label: "Viewings booked", value: "+160%" },
+                                        { label: "Agent admin time", value: "−75%" },
+                                    ],
+                                },
+                                {
+                                    client: "E-Commerce Retailer",
+                                    location: "Birmingham, UK",
+                                    tags: ["Next.js Rebuild", "SEO"],
+                                    summary: "A full rebuild on Next.js plus a technical SEO overhaul turned a slow store into a revenue engine.",
+                                    metrics: [
+                                        { label: "Monthly revenue", value: "+183%" },
+                                        { label: "Organic traffic", value: "+237%" },
+                                        { label: "PageSpeed score", value: "32 → 94" },
+                                    ],
+                                },
+                            ].map((cs) => (
+                                <div key={cs.client} className="bg-neutral-950 border border-neutral-800 rounded-xl p-6 flex flex-col">
+                                    <div className="flex flex-wrap gap-2 mb-3">
+                                        {cs.tags.map((t) => (
+                                            <span key={t} className="text-[10px] px-2.5 py-1 rounded-full bg-[rgb(255,73,37)]/10 text-[rgb(255,73,37)] border border-[rgb(255,73,37)]/20 uppercase tracking-wider font-semibold">
+                                                {t}
+                                            </span>
+                                        ))}
+                                    </div>
+                                    <h3 className="text-lg font-bold text-white mb-0.5 m-0">{cs.client}</h3>
+                                    <p className="text-xs text-neutral-500 mb-3 m-0">{cs.location}</p>
+                                    <p className="text-sm text-neutral-400 mb-4 m-0">{cs.summary}</p>
+                                    <div className="mt-auto space-y-2 border-t border-neutral-800 pt-4">
+                                        {cs.metrics.map((m) => (
+                                            <div key={m.label} className="flex items-center justify-between gap-2">
+                                                <span className="text-xs text-neutral-500">{m.label}</span>
+                                                <span className="text-sm font-bold text-[rgb(255,73,37)]">{m.value}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-6">
+                            <Link href="/case-studies" className="inline-flex items-center gap-2 text-sm font-semibold text-[rgb(255,73,37)] hover:underline no-underline">
+                                Read the full case studies
+                                <ArrowRight className="w-4 h-4" />
+                            </Link>
+                            <Link href="/success-stories" className="inline-flex items-center gap-2 text-sm font-semibold text-[rgb(255,73,37)] hover:underline no-underline">
+                                Browse client success stories &amp; reviews
+                                <ArrowRight className="w-4 h-4" />
+                            </Link>
                         </div>
                     </section>
 
@@ -1377,6 +1492,16 @@ export default function SoftwareCompaniesContent() {
                         <h2 className="text-2xl font-bold text-white mb-6">Related Reading</h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             {[
+                                {
+                                    title: "Client Success Stories & Verified Reviews",
+                                    href: "/success-stories",
+                                    tag: "Social Proof",
+                                },
+                                {
+                                    title: "Case Studies — Real Results & Metrics",
+                                    href: "/case-studies",
+                                    tag: "Case Studies",
+                                },
                                 {
                                     title: "How AI Is Transforming Sri Lankan Businesses in 2026",
                                     href: "/blog/how-ai-transforms-sri-lanka-businesses-2026",
@@ -1424,35 +1549,49 @@ export default function SoftwareCompaniesContent() {
                         </div>
                     </section>
 
-                    {/* â”€â”€ Bottom CTA (subtle) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+                    {/* ── Bottom CTA (subtle) ─────────────────── */}
                     <section
                         className="mt-16"
                     >
                         <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-8 text-center">
+                            <div className="flex items-center justify-center gap-1.5 mb-3">
+                                {[...Array(5)].map((_, i) => (
+                                    <Star key={i} className="w-4 h-4 text-[rgb(255,73,37)] fill-[rgb(255,73,37)]" />
+                                ))}
+                                <span className="text-sm text-neutral-400 ml-2">4.9/5 from 100+ projects delivered</span>
+                            </div>
                             <h3 className="text-xl font-bold text-white mb-3">
                                 Need help choosing the right software partner?
                             </h3>
                             <p className="text-neutral-400 mb-6 max-w-xl mx-auto text-sm">
-                                Every project has unique requirements â€” budget, timeline, technology stack, and team size. If you&apos;re evaluating software companies in Sri Lanka for your next project, we&apos;re happy to share our perspective based on years of operating in this market â€” no strings attached.
+                                Every project has unique requirements — budget, timeline, technology stack, and team size. If you&apos;re evaluating software companies in Sri Lanka for your next project, we&apos;re happy to share our perspective based on years of operating in this market — no strings attached.
                             </p>
-                            <Link
-                                href="/contact"
-                                className="inline-flex items-center gap-2 px-6 py-3 bg-[rgb(255,73,37)] text-white font-semibold rounded-lg hover:bg-[rgb(255,73,37)]/90 transition-colors text-sm no-underline"
-                            >
-                                Get a Free Consultation
-                                <ArrowRight className="w-4 h-4" />
-                            </Link>
+                            <div className="flex flex-wrap items-center justify-center gap-3">
+                                <Link
+                                    href="/contact"
+                                    className="inline-flex items-center gap-2 px-6 py-3 bg-[rgb(255,73,37)] text-white font-semibold rounded-lg hover:bg-[rgb(255,73,37)]/90 transition-colors text-sm no-underline"
+                                >
+                                    Get a Free Consultation
+                                    <ArrowRight className="w-4 h-4" />
+                                </Link>
+                                <Link
+                                    href="/success-stories"
+                                    className="inline-flex items-center gap-2 px-6 py-3 border border-neutral-700 text-neutral-200 font-semibold rounded-lg hover:border-[rgb(255,73,37)]/40 hover:text-[rgb(255,73,37)] transition-colors text-sm no-underline"
+                                >
+                                    See client success stories
+                                </Link>
+                            </div>
                         </div>
                     </section>
 
-                    {/* â”€â”€ Author / E-E-A-T Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+                    {/* ── Author / E-E-A-T Section ─────────────── */}
                     <section
                         className="mt-16"
                     >
                         <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-6 md:p-8">
                             <div className="flex items-start gap-5">
                                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[rgb(255,73,37)] to-orange-600 flex items-center justify-center p-2 shrink-0">
-                                    <Image src="/favicon.png" alt="Shahid Shamir â€” Founder of ARC AI" width={64} height={64} className="w-full h-full object-contain" loading="lazy" />
+                                    <Image src="/favicon.png" alt="Shahid Shamir — Founder of ARC AI" width={64} height={64} className="w-full h-full object-contain" loading="lazy" />
                                 </div>
                                 <div>
                                     <h3 className="text-lg font-bold text-white mb-1 m-0">About the Author</h3>
@@ -1481,7 +1620,7 @@ export default function SoftwareCompaniesContent() {
                         </div>
                     </section>
 
-                    {/* â”€â”€ Tags â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+                    {/* ── Tags ─────────────────────────────────── */}
                     <div
                         className="mt-12 pt-8 border-t border-neutral-800"
                     >
@@ -1515,7 +1654,7 @@ export default function SoftwareCompaniesContent() {
                         </div>
                     </div>
 
-                    {/* â”€â”€ Navigation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+                    {/* ── Navigation ───────────────────────────── */}
                     <div
                         className="mt-12 pt-8 border-t border-neutral-800 flex items-center justify-between"
                     >
@@ -1548,8 +1687,8 @@ export default function SoftwareCompaniesContent() {
                         <Link href="/web-design-sri-lanka" className="flex items-center justify-between gap-4 group no-underline">
                             <div>
                                 <div className="text-xs font-bold text-[rgb(255,73,37)] uppercase tracking-widest mb-1">Related Pillar Guide</div>
-                                <h4 className="text-lg font-bold text-white group-hover:text-[rgb(255,73,37)] transition-colors m-0">Web Design Companies in Sri Lanka â€” The Complete 2026 Guide</h4>
-                                <p className="text-sm text-neutral-400 mt-1 m-0">12 agencies evaluated Â· Pricing benchmarks Â· WordPress vs Next.js</p>
+                                <h4 className="text-lg font-bold text-white group-hover:text-[rgb(255,73,37)] transition-colors m-0">Web Design Companies in Sri Lanka — The Complete 2026 Guide</h4>
+                                <p className="text-sm text-neutral-400 mt-1 m-0">12 agencies evaluated · Pricing benchmarks · WordPress vs Next.js</p>
                             </div>
                             <ArrowRight className="w-6 h-6 text-neutral-400 group-hover:text-[rgb(255,73,37)] transition-colors shrink-0" />
                         </Link>

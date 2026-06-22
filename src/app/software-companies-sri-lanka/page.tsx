@@ -161,7 +161,7 @@ const articleJsonLd = {
         ],
     },
     datePublished: "2026-04-19",
-    dateModified: "2026-05-05",
+    dateModified: "2026-06-22",
     mainEntityOfPage: {
         "@type": "WebPage",
         "@id": "https://www.arcai.agency/software-companies-sri-lanka",
