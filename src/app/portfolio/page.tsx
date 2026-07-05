@@ -58,6 +58,38 @@ export const metadata: Metadata = {
 export default async function Portfolio() {
   const portfolioItems = [
     {
+      id: 42,
+      title: "YARI",
+      description: "The website presents YARI’s digital automation, custom storefront, web application, and logistics-focused solutions through a futuristic, premium, and high-performance digital experience.",
+      image: "/yari.webp",
+      link: "https://www.yariagency.com",
+      status: "live"
+    },
+    {
+      id: 41,
+      title: "PluggedIn",
+      description: "The website showcases PluggedIn’s tech, electronics, lifestyle, and personal gadget offerings through a modern, stylish, and e-commerce-ready digital experience built for today’s connected customers.",
+      image: "/plugged-in.webp",
+      link: "https://www.pluggedin.lk",
+      status: "live"
+    },
+    {
+      id: 40,
+      title: "TriMed Pharma",
+      description: "The website presents TriMed Pharma’s healthcare and pharmaceutical solutions through a clean, professional, and trust-focused digital experience built to highlight their mission of promoting, protecting, and improving health.",
+      image: "/trimed-pharma.webp",
+      link: "https://www.trimedpharma.com",
+      status: "live"
+    },
+    {
+      id: 39,
+      title: "Zenith Global Pvt Ltd",
+      description: "The website showcases Zenith Global’s clinical engineering, healthcare technology, medical equipment, and critical care solutions through a clean, professional, and reliability-driven digital experience.",
+      image: "/zenith-global.webp",
+      link: "https://www.zenithglobal.biz",
+      status: "live"
+    },
+    {
       id: 38,
       title: "Lavendra Beauty Lounge",
       description: "Dive into our world of care at our renowned beauty salon. Our expert team is dedicated to providing exceptional, personalized treatments using the latest innovations in beauty services.",
