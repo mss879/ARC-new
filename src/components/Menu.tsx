@@ -194,6 +194,26 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
               </h3>
             </div>
 
+            {/* WhatsApp AI Agent */}
+            <div className="space-y-2">
+              <p className="text-sm font-medium text-[rgb(119,119,119)] uppercase tracking-wider">
+                (WHATSAPP AI AGENT)
+              </p>
+              <h3 className="text-2xl lg:text-3xl font-medium">
+                <a
+                  href="https://wa.me/94764662384"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-500 hover:text-green-400 transition-colors"
+                >
+                  +94 76 466 2384
+                </a>
+              </h3>
+              <p className="text-sm text-[rgb(119,119,119)]">
+                Want to speak to our AI agent on WhatsApp?
+              </p>
+            </div>
+
             {/* Socials Section */}
             <div className="space-y-3">
               <p className="text-sm font-medium text-[rgb(119,119,119)] uppercase tracking-wider">

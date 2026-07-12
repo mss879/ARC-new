@@ -297,6 +297,42 @@ export default function ContactPage() {
                     </div>
                   </div>
                 </div>
+
+                {/* WhatsApp AI Agent */}
+                <div className="group relative space-y-4 bg-gradient-to-br from-green-500/[0.05] via-white/[0.05] to-white/[0.02] backdrop-blur-xl border border-green-500/20 rounded-3xl p-8 hover:border-green-500/40 transition-all duration-500 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden md:col-span-2">
+                  {/* Glass shine effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-transparent to-transparent opacity-50 pointer-events-none" aria-hidden="true"></div>
+                  {/* Reflection effect */}
+                  <div className="absolute -top-[50%] -right-[50%] w-full h-full bg-gradient-to-br from-green-500/5 to-transparent rotate-45 group-hover:opacity-75 opacity-50 transition-opacity duration-500 pointer-events-none" aria-hidden="true"></div>
+                  {/* Content */}
+                  <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div className="space-y-3">
+                      <p className="text-xs font-semibold text-green-400 uppercase tracking-wider flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        WhatsApp AI Agent
+                      </p>
+                      <h3 className="text-2xl font-bold text-white uppercase tracking-tight">
+                        Speak to our AI Agent
+                      </h3>
+                      <p className="text-sm md:text-base text-[rgb(160,160,160)] max-w-xl">
+                        Want to speak to our AI agent on WhatsApp? Click below to start a conversation instantly and get immediate answers to your queries.
+                      </p>
+                    </div>
+                    <div>
+                      <a
+                        href="https://wa.me/94764662384"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold py-3 px-6 rounded-full transition-colors shadow-lg shadow-green-600/20"
+                      >
+                        <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.66.986 3.292 1.503 4.91 1.505 5.599 0 10.154-4.55 10.158-10.15.002-2.71-1.05-5.259-2.961-7.17C16.84 1.427 14.29 1.372 11.582 1.372c-5.6 0-10.156 4.549-10.16 10.15-.001 1.882.5 3.719 1.45 5.343l-.973 3.55 3.65-.957zm12.383-7.228c-.33-.165-1.951-.963-2.251-1.073-.3-.109-.518-.165-.736.165-.218.329-.844 1.073-1.036 1.293-.19.22-.382.247-.712.082-.33-.165-1.393-.513-2.653-1.637-.98-.874-1.64-1.953-1.832-2.282-.19-.33-.02-.508.145-.671.149-.148.33-.384.495-.576.165-.192.22-.33.33-.549.11-.22.055-.411-.028-.576-.082-.165-.736-1.774-1.009-2.433-.266-.64-.537-.552-.736-.562-.19-.01-.409-.011-.627-.011-.218 0-.573.082-.873.411-.3.33-1.146 1.124-1.146 2.742 0 1.618 1.173 3.181 1.336 3.398.164.218 2.31 3.527 5.596 4.952.782.339 1.393.541 1.869.692.786.25 1.5.215 2.064.13.629-.094 1.951-.798 2.225-1.57.275-.771.275-1.432.193-1.57-.083-.138-.3-.22-.63-.385z" />
+                        </svg>
+                        +94 76 466 2384
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
-import { Check, X, ArrowRight, Zap, BarChart3, Bot, Shield, Clock, Globe, Mail, Phone, Lock, Target, Brain, Workflow } from 'lucide-react';
+import { Check, X, ArrowRight, Zap, BarChart3, Bot, Shield, Clock, Globe, Mail, Phone, Lock, Target, Brain, Workflow, MessageCircle } from 'lucide-react';
 
 const packages = [
   {
@@ -620,6 +620,10 @@ export default function AIPricingClient() {
               <a href="tel:+94771852522" className="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-white transition-colors">
                 <Phone className="w-4 h-4" />
                 +94 771852522 (LK)
+              </a>
+              <a href="https://wa.me/94764662384" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold text-green-500 hover:text-green-400 transition-colors">
+                <MessageCircle className="w-4 h-4" />
+                WhatsApp AI Agent
               </a>
             </div>
           </motion.div>

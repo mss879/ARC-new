@@ -58,6 +58,30 @@ export const metadata: Metadata = {
 export default async function Portfolio() {
   const portfolioItems = [
     {
+      id: 45,
+      title: "Imperial Life Sciences Pvt Ltd",
+      description: "The website showcases Imperial Life Sciences’ healthcare distribution, medical solutions, and supply chain services through a professional, reliable, and modern digital experience built to strengthen trust and brand presence.",
+      image: "/imperial-life-sciences-pvt-ltd.webp",
+      link: "https://www.imperiallifesciences.com",
+      status: "live"
+    },
+    {
+      id: 44,
+      title: "Inventis Pharma",
+      description: "The website presents Inventis Pharma’s smart biomedical solutions, medical devices, rehabilitative equipment, and surgical consumables through a strong, professional, and healthcare-focused digital experience.",
+      image: "/inventis-pharma.webp",
+      link: "https://www.inventispharma.org",
+      status: "live"
+    },
+    {
+      id: 43,
+      title: "iConn Health Care",
+      description: "The website presents iConn Health Care’s diagnostic and healthcare solutions through a clean, modern, and professional digital experience built to highlight quality, accuracy, and trusted medical support.",
+      image: "/iconn-health-care.webp",
+      link: "https://www.iconnhealthcare.org",
+      status: "live"
+    },
+    {
       id: 42,
       title: "YARI",
       description: "The website presents YARI’s digital automation, custom storefront, web application, and logistics-focused solutions through a futuristic, premium, and high-performance digital experience.",

@@ -142,6 +142,28 @@ const Footer = () => {
                 </div>
                 <p className="text-[#777777] text-sm">Available 9 AM - 6 PM EST</p>
               </motion.div>
+
+              {/* WhatsApp AI Agent */}
+              <motion.div 
+                className="space-y-2"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <p className="text-[#777777] text-sm uppercase tracking-wider">WhatsApp AI Agent</p>
+                <motion.a
+                  href="https://wa.me/94764662384"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-500 text-xl md:text-2xl font-semibold block hover:text-green-400 transition-colors"
+                  whileHover={{ x: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  +94 76 466 2384
+                </motion.a>
+                <p className="text-[#777777] text-sm">Want to speak to our AI agent on WhatsApp?</p>
+              </motion.div>
             </div>
 
             {/* Links & Newsletter Section */}
