@@ -58,6 +58,14 @@ export const metadata: Metadata = {
 export default async function Portfolio() {
   const portfolioItems = [
     {
+      id: 46,
+      title: "Attendly",
+      description: "Host events. Sell tickets. Scan in. Attendly turns any event into a seamless experience — attendees pick numbered seats on a live map and walk in with a personal QR ticket. Organizers watch it all happen from one dashboard.",
+      image: "/attendly.webp",
+      link: "https://www.attendly.buzz",
+      status: "live"
+    },
+    {
       id: 45,
       title: "Imperial Life Sciences Pvt Ltd",
       description: "The website showcases Imperial Life Sciences’ healthcare distribution, medical solutions, and supply chain services through a professional, reliable, and modern digital experience built to strengthen trust and brand presence.",

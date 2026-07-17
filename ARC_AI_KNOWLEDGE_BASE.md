@@ -341,175 +341,179 @@ The following database details completed and in-development projects deployed by
 
 ### A. Live Production Sites
 
-1.  **Imperial Life Sciences Pvt Ltd**
+1.  **Attendly**
+    *   **Website**: [https://www.attendly.buzz](https://www.attendly.buzz)
+    *   **Description**: Host events. Sell tickets. Scan in. Attendly turns any event into a seamless experience — attendees pick numbered seats on a live map and walk in with a personal QR ticket. Organizers watch it all happen from one dashboard.
+
+2.  **Imperial Life Sciences Pvt Ltd**
     *   **Website**: [https://www.imperiallifesciences.com](https://www.imperiallifesciences.com)
     *   **Description**: The website showcases Imperial Life Sciences’ healthcare distribution, medical solutions, and supply chain services through a professional, reliable, and modern digital experience built to strengthen trust and brand presence.
-2.  **Inventis Pharma**
+3.  **Inventis Pharma**
     *   **Website**: [https://www.inventispharma.org](https://www.inventispharma.org)
     *   **Description**: The website presents Inventis Pharma’s smart biomedical solutions, medical devices, rehabilitative equipment, and surgical consumables through a strong, professional, and healthcare-focused digital experience.
-3.  **iConn Health Care**
+4.  **iConn Health Care**
     *   **Website**: [https://www.iconnhealthcare.org](https://www.iconnhealthcare.org)
     *   **Description**: The website presents iConn Health Care’s diagnostic and healthcare solutions through a clean, modern, and professional digital experience built to highlight quality, accuracy, and trusted medical support.
-4.  **YARI**
+5.  **YARI**
     *   **Website**: [https://www.yariagency.com](https://www.yariagency.com)
     *   **Description**: A futuristic, high-performance web experience presenting digital automation, custom storefront options, web applications, and logistics solutions.
-5.  **PluggedIn**
+6.  **PluggedIn**
     *   **Website**: [https://www.pluggedin.lk](https://www.pluggedin.lk)
     *   **Description**: Modern, stylish, e-commerce-ready platform showcasing tech, electronics, personal gadgets, and lifestyle products.
-6.  **TriMed Pharma**
+7.  **TriMed Pharma**
     *   **Website**: [https://www.trimedpharma.com](https://www.trimedpharma.com)
     *   **Description**: Clean, professional, and trust-oriented digital showcase presenting healthcare and pharmaceutical distribution solutions.
-7.  **Zenith Global Pvt Ltd**
+8.  **Zenith Global Pvt Ltd**
     *   **Website**: [https://www.zenithglobal.biz](https://www.zenithglobal.biz)
     *   **Description**: Clinical engineering and medical equipment platform, highlighting critical care and healthcare tech solutions.
-8.  **Lavendra Beauty Lounge**
+9.  **Lavendra Beauty Lounge**
     *   **Website**: [https://www.lavendrabeauty.lk](https://www.lavendrabeauty.lk)
     *   **Description**: Renowned beauty salon portal for booking personalized beauty, care, and aesthetic treatments.
-9.  **Advitec International**
+10. **Advitec International**
     *   **Website**: [https://advitecint.com](https://advitecint.com)
     *   **Description**: Trust-focused biomedical device distribution website representing top manufacturers across Sri Lanka.
-10. **Portland Flooring**
+11. **Portland Flooring**
     *   **Website**: [https://www.portlands.com.au/](https://www.portlands.com.au/)
     *   **Description**: High-end corporate site showcasing elegant, durable, and sustainable flooring solutions for the Australian market.
-11. **Ceylon Tea Land**
+12. **Ceylon Tea Land**
     *   **Website**: [https://www.ceylonealand.com/](https://www.ceylonealand.com/)
     *   **Description**: Premium B2B export platform for Ceylon Tea Land (Pvt) Ltd, facilitating global wholesale tea inquiries directly from Sri Lankan tea estates.
-12. **Java Global Nexus Platform**
+13. **Java Global Nexus Platform**
     *   **Website**: [https://www.javagnp.ae](https://www.javagnp.ae)
     *   **Description**: High-performance corporate portal representing a global delivery and governance execution hub based in Dubai.
-13. **Inspira Worldwide**
+14. **Inspira Worldwide**
     *   **Website**: [https://inspiraworldwide.com](https://inspiraworldwide.com)
     *   **Description**: Professional service portal for a pharmaceutical distribution outsourcing and logistics partner in Sri Lanka.
-14. **Agenly**
+15. **Agenly**
     *   **Website**: [https://www.agenly.online/](https://www.agenly.online/)
     *   **Description**: A modern SaaS platform enabling users to build, train, and deploy custom AI agents on their websites in minutes.
-15. **TOS Lanka**
+16. **TOS Lanka**
     *   **Website**: [https://www.toslanka.com](https://www.toslanka.com)
     *   **Description**: Corporate site for a pioneer Electronic Manufacturing Services (EMS) provider and BOI subsidiary of Tosslec (Japan).
-16. **Mulberry Living**
+17. **Mulberry Living**
     *   **Website**: [https://www.mulberry-living.com/](https://www.mulberry-living.com/)
     *   **Description**: Tailored boutique accommodation Negombo booking platform built on Next.js, featuring seamless online reservations.
-17. **Java Global Access Platform LLC**
+18. **Java Global Access Platform LLC**
     *   **Website**: [https://javagap.ae/](https://javagap.ae/)
     *   **Description**: Global delivery tech/professional services portal. Integrated a custom CRM and customer support AI assistant.
     *   **Results**: Operational efficiency increased by 45%, support response times reduced by 60%, client management streamlined.
-18. **Sponge Global (Pvt) Ltd**
+19. **Sponge Global (Pvt) Ltd**
     *   **Website**: [https://www.spongeglobal.com/](https://www.spongeglobal.com/)
     *   **Description**: Interactive learning and development solutions site (custom eLearning, immersive VR/AR training).
     *   **Results**: Training engagement up by 40%, course completion up by 35%, client inquiries up by 50%.
-19. **Delft Tours & Travel (Pvt) Ltd**
+20. **Delft Tours & Travel (Pvt) Ltd**
     *   **Website**: [https://www.delfttours.com/](https://www.delfttours.com/)
     *   **Description**: Tourism booking site for immersive island tours around Sri Lanka, featuring interactive itinerary mapping.
     *   **Results**: Online tour bookings increased by 55%, itinerary requests up by 40%, user engagement up by 65%.
-20. **Secretaries Consultant Services (Pvt) Ltd**
+21. **Secretaries Consultant Services (Pvt) Ltd**
     *   **Website**: [https://consultantservices.lk/](https://consultantservices.lk/)
     *   **Description**: Clean corporate portal showcasing end-to-end legal and corporate secretary lifecycle services.
     *   **Results**: Operational efficiency up by 45%, corporate workflow speeds up by 40%, admin overhead down by 35%.
-21. **Halo 360**
+22. **Halo 360**
     *   **Website**: [https://halo360.online/](https://halo360.online/)
     *   **Description**: Sleek portfolio and landing page system for a partner digital marketing agency.
     *   **Results**: Brand visibility up by 45%, organic SEO traffic up by 60%, strategic partnership inquiries up by 35%.
-22. **EXIM Corporation**
+23. **EXIM Corporation**
     *   **Website**: [https://eximcpl.com](https://eximcpl.com)
     *   **Description**: Industrial manufacturing and global partner network directory site.
     *   **Results**: Global network reach up by 40%, supply chain efficiency up by 25%, manufacturing inquiries up by 30%.
-23. **Core Craft**
+24. **Core Craft**
     *   **Website**: [https://www.corecraft.agency](https://www.corecraft.agency)
     *   **Description**: High-end creative agency portfolio showing premium UI/UX case studies. Integrated CRM and client workflows.
     *   **Results**: Lead generation increased by 45%, client tracking efficiency up by 60%.
-24. **Ontriq**
+25. **Ontriq**
     *   **Website**: [https://www.ontriq.com](https://www.ontriq.com)
     *   **Description**: Background verification and HR solutions provider portal, built with a custom case-tracking dashboard.
     *   **Results**: Client inquiries increased by 52%, processing turnaround time reduced by 30%.
-25. **Orkestrate**
+26. **Orkestrate**
     *   **Website**: [https://www.orkestrate.com](https://www.orkestrate.com)
     *   **Description**: Modern marketing orchestration SaaS platform website built on Next.js.
-26. **KeysPlease**
+27. **KeysPlease**
     *   **Website**: [https://www.keysplease.shop](https://www.keysplease.shop)
     *   **Description**: Lead generation-focused real estate marketplace for high-end residential listings in Sri Lanka.
     *   **Results**: Property inquiries up by 67%, CRM management efficiency up by 58%, listing views up by 3.2x, follow-up rates up by 72%.
-27. **DEK Studio**
+28. **DEK Studio**
     *   **Website**: [https://www.dek-studio.com/](https://www.dek-studio.com/)
     *   **Description**: Trust-forward MEP (Mechanical, Electrical, Plumbing) engineering services site.
     *   **Results**: Lead volume increased by 31%, proposal requests up by 24%, 92% PageSpeed score.
-28. **Vibe Web Studio**
+29. **Vibe Web Studio**
     *   **Website**: [https://vibewebstudio.com](https://vibewebstudio.com)
     *   **Description**: Sales-first conversion design showcase with transparent packages.
     *   **Results**: Qualified leads increased by 1.9x, conversion rate up by +3.2%, 1.9s Largest Contentful Paint (LCP) speed.
-29. **YBO Agency**
+30. **YBO Agency**
     *   **Website**: [https://yboagency.com](https://yboagency.com)
     *   **Description**: Creative back-office positioning with modular service selection blocks and instant quote selectors.
     *   **Results**: Brief submissions up by 27%, average deal value up by 14%, bounce rate reduced by 11%.
-30. **Car Rush**
+31. **Car Rush**
     *   **Website**: [https://www.carrush.lk/](https://www.carrush.lk/)
     *   **Description**: Responsive vehicle marketplace platform with custom search filtering.
     *   **Results**: Vehicle views up by 38%, lead-to-dealer CTR up by +2.6% (to 9.4%), 1,200 saved searches monthly.
-31. **Car Arena Ceylon**
+32. **Car Arena Ceylon**
     *   **Website**: [https://www.cararenaceylon.com/](https://www.cararenaceylon.com/)
     *   **Description**: Automobile dealer hub showcasing warranties, OEM upgrades, and booking mechanics.
     *   **Results**: Bookings increased by 29%, LCP optimized to 2.2s.
-32. **Hilltop Recruitment**
+33. **Hilltop Recruitment**
     *   **Website**: [https://hiltopglobal.com/](https://hiltopglobal.com/)
     *   **Description**: Heritage-driven recruitment platform with custom sector filters.
     *   **Results**: Candidate sign-ups increased by 23%, client inquiries up by 18%, organic impressions up by 41%.
-33. **Island Jerky**
+34. **Island Jerky**
     *   **Website**: [https://www.islandjerky.lk/](https://www.islandjerky.lk/)
     *   **Description**: Clean, flavorsome e-commerce store with story-led flavor options.
     *   **Results**: Store conversion rate up by +0.7% (to 2.4%), AOV up by 12%.
-34. **Digital Kade**
+35. **Digital Kade**
     *   **Website**: [https://digitalkade.lk/](https://digitalkade.lk/)
     *   **Description**: Fast-loading catalog with instant filtering and search index.
     *   **Results**: Search-to-purchase up by +2.1% (to 6.3%), total sales revenue up by 16%.
-35. **Jacob Day Coaching**
+36. **Jacob Day Coaching**
     *   **Website**: [https://www.jacobday.co/](https://www.jacobday.co/)
     *   **Description**: Clean landing page for personal development, showcasing high-impact social proof widgets.
     *   **Results**: Consultation calls up by 26%, refund rates decreased to a minimal 1.8%.
-36. **Mouttaki Coaching**
+37. **Mouttaki Coaching**
     *   **Website**: [https://mouttakicoaching.com/](https://mouttakicoaching.com/)
     *   **Description**: High-impact personal trainer portfolio site, showcasing client transformation sliders.
     *   **Results**: Lead-to-client conversion up by +3.8% (to 12.5%), NPS rating of 64.
-37. **ARC AI CRM System**
+38. **ARC AI CRM System**
     *   **Description**: Custom internal system developed to streamline lead capture, client onboarding, and automated email trigger sequences.
     *   **Results**: Successfully unified CRM and lead logs.
 
 ### B. In Development / Staging Projects
 
-38. **Fit Bite**
+39. **Fit Bite**
     *   **Website**: [https://www.fitbite.shop/](https://www.fitbite.shop/)
     *   **Description**: Artisan protein cookie store with customizable nutritional settings.
     *   **Results**: Upfront online sales increased by 21%, repeat purchases at 24%.
-39. **Inlaid Jewelry**
+40. **Inlaid Jewelry**
     *   **Website**: [https://cosmic-dusk-c32013.netlify.app/](https://cosmic-dusk-c32013.netlify.app/)
     *   **Description**: Heritage jewelry platform showcasing Tamil culture-aligned custom aesthetics.
     *   **Results**: Custom consults up by 28%, average session value up by 13%.
-40. **Hijab Boutique**
+41. **Hijab Boutique**
     *   **Website**: [https://hijabboutiquestore.netlify.app/](https://hijabboutiquestore.netlify.app/)
     *   **Description**: Modest apparel storefront utilizing optimized mobile catalogs.
     *   **Results**: Checkout conversions up +0.9%, cart abandonment down by 6%.
-41. **Joe Fitness**
+42. **Joe Fitness**
     *   **Website**: [https://mellifluous-jalebi-dd6aef.netlify.app/](https://mellifluous-jalebi-dd6aef.netlify.app/)
     *   **Description**: Simple lead-generation landing page for local fitness trainers.
     *   **Results**: Lead capture rate of 38%, email open rate at 41%.
-42. **Essential Marketing**
+43. **Essential Marketing**
     *   **Website**: [https://essentialmarketing.netlify.app](https://essentialmarketing.netlify.app)
     *   **Description**: Studio site turning agency briefs into bookable packages.
     *   **Results**: Proposal acceptance rate up to 38%, response times cut by 19%.
-43. **Ceylon Motors**
+44. **Ceylon Motors**
     *   **Website**: [https://ceylonmotors.netlify.app](https://ceylonmotors.netlify.app)
     *   **Description**: Discovery and directory engine for buy/rent car models.
     *   **Results**: Filtered searches up by 33%, average session length at 3:04.
-44. **Bakery Website**
+45. **Bakery Website**
     *   **Website**: [https://prismatic-mooncake-640ca9.netlify.app](https://prismatic-mooncake-640ca9.netlify.app)
     *   **Description**: Immersive, animated layout demonstrating modern Next.js styling.
 
 ### C. Live Custom Design Templates
 These links host interactive demos deployed for client previews:
-45. **Luxury Restaurant**: [Demo Link](https://luxaryrestaurant-demo.netlify.app/)
-46. **Travel Agency**: [Demo Link](https://beautiful-conkies-2df92d.netlify.app/)
-47. **Real Estate**: [Demo Link](https://silly-bombolone-0213cb.netlify.app/)
-48. **Corporate Website**: [Demo Link](https://courageous-fenglisu-1afb0d.netlify.app/)
-49. **Music/Radio Website**: [Demo Link](https://music-demo1.netlify.app/)
-50. **Travel/Tourism**: [Demo Link](https://delftdemo.netlify.app/)
+46. **Luxury Restaurant**: [Demo Link](https://luxaryrestaurant-demo.netlify.app/)
+47. **Travel Agency**: [Demo Link](https://beautiful-conkies-2df92d.netlify.app/)
+48. **Real Estate**: [Demo Link](https://silly-bombolone-0213cb.netlify.app/)
+49. **Corporate Website**: [Demo Link](https://courageous-fenglisu-1afb0d.netlify.app/)
+50. **Music/Radio Website**: [Demo Link](https://music-demo1.netlify.app/)
+51. **Travel/Tourism**: [Demo Link](https://delftdemo.netlify.app/)
 
 ---
 
