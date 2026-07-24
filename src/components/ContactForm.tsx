@@ -50,7 +50,8 @@ export default function ContactForm() {
     name: "",
     phone: "",
     company: "",
-    service: "",
+    companyWebsite: "",
+    subject: "",
     message: "",
   });
 
@@ -112,7 +113,7 @@ export default function ContactForm() {
             p_full_name: formData.name,
             p_phone: formData.phone,
             p_company: formData.company || null,
-            p_subject: formData.service || null,
+            p_subject: formData.subject || null,
             p_message: formData.message,
             p_source: 'website contact form',
           });
@@ -130,7 +131,8 @@ export default function ContactForm() {
           name: "",
           phone: "",
           company: "",
-          service: "",
+          companyWebsite: "",
+          subject: "",
           message: "",
         });
         setFieldErrors({});
@@ -239,7 +241,7 @@ export default function ContactForm() {
         </div>
       </div>
 
-      {/* Company & Service Row */}
+      {/* Company Name & Company Website Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <Input
@@ -255,14 +257,28 @@ export default function ContactForm() {
         <div>
           <Input
             type="text"
-            name="service"
-            placeholder={isMobile ? "Service" : "Service interested"}
-            aria-label="Service interested in"
-            value={formData.service}
+            name="companyWebsite"
+            inputMode="url"
+            placeholder={isMobile ? "Website" : "Company website"}
+            aria-label="Company website"
+            value={formData.companyWebsite}
             onChange={handleChange}
             className="bg-[rgb(30,30,30)] border-none text-white placeholder:text-[rgb(90,90,90)] focus-visible:ring-1 focus-visible:ring-[#FF4925]/50 focus-visible:ring-offset-0 rounded-xl h-14 px-6"
           />
         </div>
+      </div>
+
+      {/* Subject */}
+      <div>
+        <Input
+          type="text"
+          name="subject"
+          placeholder="Subject"
+          aria-label="Subject"
+          value={formData.subject}
+          onChange={handleChange}
+          className="bg-[rgb(30,30,30)] border-none text-white placeholder:text-[rgb(90,90,90)] focus-visible:ring-1 focus-visible:ring-[#FF4925]/50 focus-visible:ring-offset-0 rounded-xl h-14 px-6"
+        />
       </div>
 
       {/* Message */}

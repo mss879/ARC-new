@@ -69,7 +69,9 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        const { name, phone, company, service, message } = body;
+        const { name, phone, company, companyWebsite, message } = body;
+        // "subject" replaces the legacy "service" field; accept either for backward-compat
+        const subject: string = body.subject ?? body.service ?? '';
 
         // ── Phone number validation ─────────────────────────────────────────
         // Only allow digits, +, -, spaces, parentheses
@@ -111,35 +113,84 @@ export async function POST(req: NextRequest) {
         }
 
         // Basic input sanitization — reject suspiciously long inputs
-        if (name.length > 200 || phone.length > 50 || (company && company.length > 200) || (service && service.length > 200) || message.length > 5000) {
+        if (
+            name.length > 200 ||
+            phone.length > 50 ||
+            (company && company.length > 200) ||
+            (companyWebsite && companyWebsite.length > 300) ||
+            (subject && subject.length > 200) ||
+            message.length > 5000
+        ) {
             return NextResponse.json(
                 { error: 'Input exceeds maximum allowed length' },
                 { status: 400 }
             );
         }
 
-        // Get webhook URL from server-side env (never exposed to client)
-        const webhookUrl = process.env.MAKE_WEBHOOK_URL;
+        // ── Dispatch submission to webhooks ─────────────────────────────────
+        // 1. ARC AI CRM hook — always sent (public endpoint, no secret required)
+        // 2. Make.com automation — only if MAKE_WEBHOOK_URL is configured
+        const arcWebhookUrl = process.env.ARC_WEBHOOK_URL
+            || 'https://www.arcai.online/api/public/hooks/4a98dacf2cb64d9cabb8504e662830f3efb957f6da7e42f8b949c311d675fc09';
+        const makeWebhookUrl = process.env.MAKE_WEBHOOK_URL;
 
-        if (!webhookUrl) {
-            console.error('MAKE_WEBHOOK_URL is not configured');
-            return NextResponse.json(
-                { error: 'Contact form is not configured. Please try again later.' },
-                { status: 500 }
-            );
+        const jsonHeaders = { 'Content-Type': 'application/json' };
+
+        // Build the dispatch list. Index 0 is always the ARC webhook.
+        const dispatches: { target: string; request: Promise<Response> }[] = [
+            {
+                target: 'ARC webhook',
+                request: fetch(arcWebhookUrl, {
+                    method: 'POST',
+                    headers: jsonHeaders,
+                    body: JSON.stringify({
+                        name,
+                        number: phone,
+                        company_name: company || '',
+                        company_website: companyWebsite || '',
+                        subject: subject || '',
+                        message,
+                    }),
+                }),
+            },
+        ];
+
+        if (makeWebhookUrl) {
+            dispatches.push({
+                target: 'Make webhook',
+                request: fetch(makeWebhookUrl, {
+                    method: 'POST',
+                    headers: jsonHeaders,
+                    body: JSON.stringify({
+                        name,
+                        phone,
+                        company,
+                        companyWebsite,
+                        subject,
+                        // preserve the legacy key so existing Make scenarios keep mapping
+                        service: subject,
+                        message,
+                    }),
+                }),
+            });
         }
 
-        // Forward to Make.com webhook
-        const webhookResponse = await fetch(webhookUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ name, phone, company, service, message }),
+        const results = await Promise.allSettled(dispatches.map((d) => d.request));
+
+        // Log any failures for observability
+        results.forEach((result, i) => {
+            const target = dispatches[i].target;
+            if (result.status === 'rejected') {
+                console.error(`${target} request failed:`, result.reason);
+            } else if (!result.value.ok) {
+                console.error(`${target} responded with`, result.value.status, result.value.statusText);
+            }
         });
 
-        if (!webhookResponse.ok) {
-            console.error('Webhook error:', webhookResponse.status, webhookResponse.statusText);
+        // Treat the submission as delivered if at least one destination accepted it
+        const anyDelivered = results.some((r) => r.status === 'fulfilled' && r.value.ok);
+
+        if (!anyDelivered) {
             return NextResponse.json(
                 { error: 'Failed to process your request. Please try again later.' },
                 { status: 502 }
