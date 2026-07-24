@@ -136,6 +136,8 @@ export async function POST(req: NextRequest) {
 
         const jsonHeaders = { 'Content-Type': 'application/json' };
 
+        const websiteUrl = body.website ?? body.companyWebsite ?? '';
+
         // Build the dispatch list. Index 0 is always the ARC webhook.
         const dispatches: { target: string; request: Promise<Response> }[] = [
             {
@@ -145,11 +147,11 @@ export async function POST(req: NextRequest) {
                     headers: jsonHeaders,
                     body: JSON.stringify({
                         name,
-                        number: phone,
-                        company_name: company || '',
-                        company_website: companyWebsite || '',
-                        subject: subject || '',
+                        website: websiteUrl,
+                        phone,
+                        company: company || '',
                         message,
+                        subject: subject || '',
                     }),
                 }),
             },

@@ -50,6 +50,7 @@ export default function ContactForm() {
     name: "",
     phone: "",
     company: "",
+    website: "",
     companyWebsite: "",
     subject: "",
     message: "",
@@ -131,6 +132,7 @@ export default function ContactForm() {
           name: "",
           phone: "",
           company: "",
+          website: "",
           companyWebsite: "",
           subject: "",
           message: "",
@@ -257,12 +259,15 @@ export default function ContactForm() {
         <div>
           <Input
             type="text"
-            name="companyWebsite"
+            name="website"
             inputMode="url"
             placeholder={isMobile ? "Website" : "Company website"}
             aria-label="Company website"
-            value={formData.companyWebsite}
-            onChange={handleChange}
+            value={formData.website || formData.companyWebsite}
+            onChange={(e) => {
+              const val = e.target.value;
+              setFormData((prev) => ({ ...prev, website: val, companyWebsite: val }));
+            }}
             className="bg-[rgb(30,30,30)] border-none text-white placeholder:text-[rgb(90,90,90)] focus-visible:ring-1 focus-visible:ring-[#FF4925]/50 focus-visible:ring-offset-0 rounded-xl h-14 px-6"
           />
         </div>
