@@ -158,7 +158,7 @@ export function ActiveTOC({ items }: { items: TOCItem[] }) {
 export function SocialShareButtons() {
     const [copied, setCopied] = useState(false);
     const url = typeof window !== "undefined" ? window.location.href : "https://www.arcai.agency/software-companies-sri-lanka";
-    const title = "Software Companies in Sri Lanka — 21 Top Firms Rated & Compared (2026)";
+    const title = "Software Companies in Sri Lanka: 23 Top Firms Compared (2026)";
 
     const shareLinks = {
         linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
