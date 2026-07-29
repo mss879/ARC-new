@@ -20,6 +20,7 @@ const packages = [
     ],
     notIncluded: [
       'Mobile Reels/Short-form Video',
+      'Ad Campaigns',
       'Advanced Content Strategy',
       'Professional Copywriting',
       'Detailed Analytics & Strategy Review',
@@ -41,6 +42,7 @@ const packages = [
       'Monthly Performance Report',
       'Priority Design Support',
       '1 Mobile Reel Included',
+      '1 Ad Campaign Included',
     ],
     notIncluded: [
       'Advanced Content Strategy',
@@ -48,6 +50,7 @@ const packages = [
       'Detailed Analytics Report',
       'Priority Creative Support (Photography/Consultation)',
       '2 Mobile Reels (Only 1 included)',
+      '2 Ad Campaigns (Only 1 included)',
       'Brand Consultation & Campaign Planning',
     ],
   },
@@ -64,6 +67,7 @@ const packages = [
       'Detailed Analytics Report',
       'Priority Creative Support',
       '2 Mobile Reels Included',
+      '2 Ad Campaigns Included',
       'Brand Consultation & Campaign Planning',
     ],
     notIncluded: [],
@@ -77,6 +81,7 @@ const comparisonFeatures = [
   { name: 'Performance Reports', starter: 'Basic Overview', intermediate: 'Monthly Report', premium: 'Detailed Analytics Report' },
   { name: 'Graphic Design Support', starter: 'Basic Support', intermediate: 'Priority Support', premium: 'Priority Creative Support' },
   { name: 'Mobile Reels / Short Video', starter: false, intermediate: '1 Reel Included', premium: '2 Reels Included' },
+  { name: 'Ad Campaigns', starter: false, intermediate: '1 Campaign Included', premium: '2 Campaigns Included' },
   { name: 'Brand Consultation', starter: false, intermediate: false, premium: true },
   { name: 'Campaign Planning', starter: false, intermediate: false, premium: true },
 ];
@@ -93,7 +98,7 @@ const addOns = [
     icon: Video,
     title: 'Additional Mobile Reel',
     desc: 'Bespoke short-form video (up to 60s) complete with trending audio selection, subtitles, and color grading.',
-    price: '25,000',
+    price: '30,000',
     period: '/reel',
   },
   {
@@ -107,7 +112,7 @@ const addOns = [
     icon: Camera,
     title: 'Professional Photography',
     desc: 'Half-day photo shoot at your location to produce authentic product, lifestyle, or team content assets.',
-    price: '35,000',
+    price: '45,000',
     period: '/shoot',
   },
   {
@@ -174,13 +179,24 @@ export default function DigitalMarketingPricingClient() {
       {/* ═══════════════════════════════════════════════ */}
       <section className="border-b border-gray-100 bg-white" id="packages">
         <div className="max-w-[1280px] mx-auto px-6 py-16 sm:py-24 space-y-12">
-          <div className="space-y-4">
-            <p className="text-xs font-black text-orange-500 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-8 h-px bg-orange-500"></span> Social Media Management
-            </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-black leading-tight tracking-tight">
-              Monthly Packages
-            </h2>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="space-y-4">
+              <p className="text-xs font-black text-orange-500 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-8 h-px bg-orange-500"></span> Social Media Management
+              </p>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-black leading-tight tracking-tight">
+                Monthly Packages
+              </h2>
+            </div>
+            <div className="bg-orange-50/80 border border-orange-200/80 rounded-2xl p-4 max-w-md shadow-sm">
+              <div className="flex items-start gap-3">
+                <HelpCircle className="w-5 h-5 text-orange-600 shrink-0 mt-0.5" />
+                <p className="text-xs text-orange-950 leading-relaxed font-medium">
+                  <strong className="font-black text-orange-900 block mb-0.5">Ad Account Setup Notice</strong>
+                  If your Meta (FB/IG) or Google ad accounts are not already set up, a <strong className="font-black text-orange-950 bg-orange-200/60 px-1.5 py-0.5 rounded">LKR 10,000</strong> one-time setup fee applies.
+                </p>
+              </div>
+            </div>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -258,6 +274,13 @@ export default function DigitalMarketingPricingClient() {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="p-4 rounded-2xl bg-gray-50/80 border border-gray-100 flex items-center justify-between text-xs text-gray-500">
+            <span className="flex items-center gap-2 font-medium">
+              <Sparkles className="w-4 h-4 text-orange-500 shrink-0" />
+              <span>Note: A one-time setup fee of <strong>LKR 10,000</strong> applies only if ad accounts (Meta / Google) are not previously created and configured.</span>
+            </span>
           </div>
         </div>
       </section>
