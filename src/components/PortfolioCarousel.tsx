@@ -37,18 +37,14 @@ const CarouselRow = ({ images, reverse = false }: { images: string[], reverse?: 
                         key={idx}
                         className="relative aspect-[16/10] w-[260px] md:w-[450px] shrink-0 overflow-hidden rounded-xl border border-white/10 bg-zinc-900/50 hover:bg-zinc-800/50 transition-colors"
                     >
-                        <div className="absolute inset-0 w-full h-full p-4 flex items-center justify-center">
-                            <div className="relative w-full h-full">
-                                <Image
-                                    src={src}
-                                    alt={`Portfolio project ${src.replace(/^\//, '').replace(/\.(png|jpg|jpeg|webp)$/i, '').replace(/[-_]/g, ' ')}`}
-                                    fill
-                                    className="object-contain"
-                                    sizes="(max-width: 768px) 260px, 450px"
-                                    quality={85}
-                                />
-                            </div>
-                        </div>
+                        <Image
+                            src={src}
+                            alt={`Portfolio project ${src.replace(/^\//, '').replace(/\.(png|jpg|jpeg|webp)$/i, '').replace(/[-_]/g, ' ')}`}
+                            fill
+                            className="object-contain transition-transform duration-700 hover:scale-105"
+                            sizes="(max-width: 768px) 260px, 450px"
+                            quality={85}
+                        />
                     </div>
                 ))}
             </div>
@@ -63,18 +59,14 @@ const CarouselRow = ({ images, reverse = false }: { images: string[], reverse?: 
                         key={`dup-${idx}`}
                         className="relative aspect-[16/10] w-[260px] md:w-[450px] shrink-0 overflow-hidden rounded-xl border border-white/10 bg-zinc-900/50 hover:bg-zinc-800/50 transition-colors"
                     >
-                        <div className="absolute inset-0 w-full h-full p-4 flex items-center justify-center">
-                            <div className="relative w-full h-full">
-                                <Image
-                                    src={src}
-                                    alt={`Portfolio project ${src.replace(/^\//, '').replace(/\.(png|jpg|jpeg|webp)$/i, '').replace(/[-_]/g, ' ')}`}
-                                    fill
-                                    className="object-contain"
-                                    sizes="(max-width: 768px) 260px, 450px"
-                                    quality={85}
-                                />
-                            </div>
-                        </div>
+                        <Image
+                            src={src}
+                            alt={`Portfolio project ${src.replace(/^\//, '').replace(/\.(png|jpg|jpeg|webp)$/i, '').replace(/[-_]/g, ' ')}`}
+                            fill
+                            className="object-contain transition-transform duration-700 hover:scale-105"
+                            sizes="(max-width: 768px) 260px, 450px"
+                            quality={85}
+                        />
                     </div>
                 ))}
             </div>

@@ -58,6 +58,22 @@ export const metadata: Metadata = {
 export default async function Portfolio() {
   const portfolioItems = [
     {
+      id: 48,
+      title: "Tech Nurture",
+      description: "Expert repair, servicing and maintenance for air conditioners, refrigerators, inline water purifiers and bottle water dispensers, keeping homes and businesses across Sri Lanka cool, fresh and running.",
+      image: "/tech-nurture.png",
+      link: "https://technurture.lk",
+      status: "live"
+    },
+    {
+      id: 47,
+      title: "Ceylon Gem Maison",
+      description: "Ceylon Gem Maison exports world-class, ethically sourced gemstones from Sri Lanka to global markets with strict certification, complete traceability, and uncompromising international quality standards.",
+      image: "/ceylongem.png",
+      link: "https://www.ceylongemmaison.com",
+      status: "live"
+    },
+    {
       id: 46,
       title: "Attendly",
       description: "Host events. Sell tickets. Scan in. Attendly turns any event into a seamless experience — attendees pick numbered seats on a live map and walk in with a personal QR ticket. Organizers watch it all happen from one dashboard.",
@@ -101,7 +117,7 @@ export default async function Portfolio() {
       id: 41,
       title: "PluggedIn",
       description: "The website showcases PluggedIn’s tech, electronics, lifestyle, and personal gadget offerings through a modern, stylish, and e-commerce-ready digital experience built for today’s connected customers.",
-      image: "/plugged-in.webp",
+      image: "/plugged-new.png",
       link: "https://www.pluggedin.lk",
       status: "live"
     },
@@ -530,20 +546,16 @@ export default async function Portfolio() {
                   }}
                 >
                   {/* Image Container */}
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-lg mb-6 bg-zinc-900">
-                    <div className="absolute inset-0 w-full h-full p-6 flex items-center justify-center">
-                      <div className="relative w-full h-full">
-                        <NextImage
-                          src={item.image}
-                          alt={`${item.title} - Custom Web Design & Software built by ARC AI`}
-                          fill
-                          className="object-contain transition-transform duration-700 group-hover:scale-105"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          quality={85}
-                          priority={index < 4}
-                        />
-                      </div>
-                    </div>
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-lg mb-6 bg-zinc-950 border border-white/10">
+                    <NextImage
+                      src={item.image}
+                      alt={`${item.title} - Custom Web Design & Software built by ARC AI`}
+                      fill
+                      className="object-contain transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      quality={85}
+                      priority={index < 4}
+                    />
 
                     {/* Status Badge */}
                     <div className="absolute top-4 right-4 z-10">
@@ -660,19 +672,15 @@ export default async function Portfolio() {
                   }}
                 >
                   {/* Image Container */}
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-lg mb-6 bg-zinc-900">
-                    <div className="absolute inset-0 w-full h-full p-6 flex items-center justify-center">
-                      <div className="relative w-full h-full">
-                        <NextImage
-                          src={template.image}
-                          alt={`${template.title} - Premium Web Design Template by ARC AI`}
-                          fill
-                          className="object-contain transition-transform duration-700 group-hover:scale-105"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          quality={85}
-                        />
-                      </div>
-                    </div>
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-lg mb-6 bg-zinc-950 border border-white/10">
+                    <NextImage
+                      src={template.image}
+                      alt={`${template.title} - Premium Web Design Template by ARC AI`}
+                      fill
+                      className="object-contain transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      quality={85}
+                    />
 
                     {/* Hover Overlay */}
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-700 z-10" />
