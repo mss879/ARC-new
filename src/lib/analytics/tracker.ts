@@ -40,7 +40,18 @@ import type {
   TrackedEvent,
 } from "./types";
 
+/** The label stored on every row. Must match WEBSITE_ANALYTICS_SITE in the CRM. */
 const SITE = "arcai.agency";
+/**
+ * The registrable domain the site is served from.
+ *
+ * The canonical host is www.arcai.agency and Netlify 301s the apex to it, but
+ * a hardcoded `https://arcai.agency/...` link, a stale bookmark or a referrer
+ * captured before the redirect can all still carry the bare domain. Matching
+ * on the registrable domain rather than on `location.hostname` means those
+ * count as internal, which is what they are.
+ */
+const PRIMARY_DOMAIN = "arcai.agency";
 const ENDPOINT = "/api/analytics/collect";
 
 const FLUSH_INTERVAL_MS = 10_000;
@@ -161,7 +172,7 @@ function classifyChannel(
     return "unknown";
   }
   if (!host) return "direct";
-  if (host === window.location.hostname || host.endsWith(".arcai.agency")) return "internal";
+  if (isInternalHost(host)) return "internal";
   if (AI_ASSISTANTS.test(`${host}.`)) return "ai_assistant";
   if (SEARCH_ENGINES.test(`${host}.`)) return "organic";
   if (SOCIAL.test(`${host}.`)) return "social";
@@ -176,6 +187,22 @@ function hostOf(url: string | null): string | null {
   } catch {
     return null;
   }
+}
+
+/**
+ * Is this host our own site?
+ *
+ * Covers the apex, every subdomain, and whatever host the page is actually
+ * being served from. Getting this wrong is quietly expensive in both
+ * directions: an internal link filed as an outbound click inflates the
+ * "people leaving the site" number, and an internal referral filed as a
+ * third-party referrer invents traffic from a source that does not exist.
+ */
+function isInternalHost(host: string | null): boolean {
+  if (!host) return false;
+  const h = host.toLowerCase();
+  if (h === window.location.hostname.toLowerCase()) return true;
+  return h === PRIMARY_DOMAIN || h.endsWith(`.${PRIMARY_DOMAIN}`);
 }
 
 // ── environment ─────────────────────────────────────────────────────────────
@@ -600,7 +627,7 @@ function instrumentClicks(): void {
         }
 
         const host = hostOf(href);
-        if (host && host !== window.location.hostname) {
+        if (host && !isInternalHost(host)) {
           bump("outbound_clicks");
           enqueue("outbound_click", { href, element, element_text: label });
           return;
