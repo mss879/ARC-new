@@ -78,6 +78,64 @@ function hashIp(ip: string): string | null {
 }
 
 /**
+ * Netlify's geo blob, whichever way it arrives.
+ *
+ * This is the bug that made every session in the dashboard show
+ * country="(none)". Netlify hands `x-nf-geo` to a serverless function
+ * BASE64-encoded, and base64 of a JSON object always starts `eyJ` — so
+ * `JSON.parse` threw on the first character every single time, the catch
+ * fell through to the flat headers, and those are Vercel/Cloudflare names
+ * that Netlify does not send. Every field came back null, on every request,
+ * for months, without ever logging an error.
+ *
+ * So: try the raw string and try the decoded string, and accept whichever
+ * parses. `netlify dev` and some proxies do pass it raw, so both paths are
+ * live rather than one being a defensive nicety.
+ */
+function parseNetlifyGeo(raw: string): {
+  country?: { code?: string; name?: string };
+  subdivision?: { code?: string; name?: string };
+  city?: string;
+} | null {
+  const candidates = [raw];
+  try {
+    candidates.push(Buffer.from(raw, "base64").toString("utf8"));
+  } catch {
+    /* not base64 — the raw attempt is all there is */
+  }
+  for (const candidate of candidates) {
+    const text = candidate.trim();
+    if (!text.startsWith("{")) continue;
+    try {
+      return JSON.parse(text);
+    } catch {
+      /* try the other encoding */
+    }
+  }
+  return null;
+}
+
+/**
+ * A country NAME from an ISO alpha-2 code.
+ *
+ * The dashboard groups by country name, so a row holding only a code still
+ * reads as "(none)" there. `Intl.DisplayNames` is part of the Node runtime
+ * this route runs on and knows every code without shipping a lookup table;
+ * it is wrapped because an unsupported locale build throws rather than
+ * degrading, and a missing country name must never cost us the whole batch.
+ */
+function countryName(code: string | null): string | null {
+  if (!code || code.length !== 2) return null;
+  try {
+    return (
+      new Intl.DisplayNames(["en"], { type: "region" }).of(code.toUpperCase()) ?? null
+    );
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Geography from the CDN edge.
  *
  * Netlify puts a JSON blob in `x-nf-geo`; Vercel and Cloudflare use flat
@@ -92,36 +150,100 @@ function edgeGeo(req: Request): {
 } {
   const nf = req.headers.get("x-nf-geo");
   if (nf) {
-    try {
-      const geo = JSON.parse(nf) as {
-        country?: { code?: string; name?: string };
-        subdivision?: { name?: string };
-        city?: string;
-      };
+    const geo = parseNetlifyGeo(nf);
+    if (geo) {
+      const code = geo.country?.code ?? null;
       return {
-        country: geo.country?.name ?? null,
-        country_code: geo.country?.code ?? null,
+        country: geo.country?.name ?? countryName(code),
+        country_code: code,
         region: geo.subdivision?.name ?? null,
         city: geo.city ?? null,
       };
-    } catch {
-      /* fall through to the flat headers */
     }
   }
   const code =
-    req.headers.get("x-vercel-ip-country") || req.headers.get("cf-ipcountry") || null;
+    req.headers.get("x-nf-country") ||
+    req.headers.get("x-country") ||
+    req.headers.get("x-vercel-ip-country") ||
+    req.headers.get("cf-ipcountry") ||
+    null;
   return {
-    country: null,
+    // Derived, not left null. The dashboard groups by name, so a row with a
+    // code and no name is indistinguishable from a row with no geography at
+    // all — which is how a working fallback still reported "(none)".
+    country: countryName(code),
     country_code: code,
     region:
+      req.headers.get("x-nf-subdivision") ||
       req.headers.get("x-vercel-ip-country-region") ||
       req.headers.get("cf-region") ||
       null,
     city:
-      decodeURIComponent(req.headers.get("x-vercel-ip-city") || "") ||
+      decodeURIComponent(
+        req.headers.get("x-nf-city") || req.headers.get("x-vercel-ip-city") || "",
+      ) ||
       req.headers.get("cf-ipcity") ||
       null,
   };
+}
+
+/**
+ * Device, browser and OS from the user-agent header.
+ *
+ * The browser already reports all three, and this is the fallback for when
+ * it does not: a payload from a stale cached bundle, a hardened browser that
+ * blocks the APIs the client detection uses, a replayed beacon. The server
+ * holds the real UA on every request, so filing the row as device="unknown"
+ * while a perfectly good user-agent sat unread in the headers was throwing
+ * away information we already had — and "unknown" is not a neutral default,
+ * it is the value that dominated the device breakdown.
+ */
+function agentEnvironment(ua: string): {
+  device_type: string;
+  browser: string | null;
+  os: string | null;
+} {
+  // Order matters throughout: Edge's UA contains "Chrome", Chrome's contains
+  // "Safari", and iPadOS claims to be a Mac.
+  const browserTests: [string, RegExp][] = [
+    ["Edge", /Edg(?:e|A|iOS)?\//],
+    ["Opera", /OPR\//],
+    ["Samsung Internet", /SamsungBrowser\//],
+    ["Firefox", /(?:Firefox|FxiOS)\//],
+    ["Instagram", /Instagram/],
+    ["Facebook", /FBAN|FBAV/],
+    ["Chrome", /(?:Chrome|CriOS)\//],
+    ["Safari", /Version\/[\d.]+.*Safari/],
+  ];
+  let browser: string | null = null;
+  for (const [name, re] of browserTests) {
+    if (re.test(ua)) {
+      browser = name;
+      break;
+    }
+  }
+
+  const osTests: [string, RegExp][] = [
+    ["Windows", /Windows NT/],
+    ["Android", /Android/],
+    ["iOS", /iPhone|iPad|iPod/],
+    ["macOS", /Mac OS X|Macintosh/],
+    ["Linux", /Linux/],
+  ];
+  let os: string | null = null;
+  for (const [name, re] of osTests) {
+    if (re.test(ua)) {
+      os = name;
+      break;
+    }
+  }
+
+  let device_type = "desktop";
+  if (/iPad|Tablet|PlayBook|Silk/i.test(ua)) device_type = "tablet";
+  else if (/Mobi|Android|iPhone|iPod|Windows Phone/i.test(ua)) device_type = "mobile";
+  if (!ua) device_type = "unknown";
+
+  return { device_type, browser, os };
 }
 
 const str = (v: unknown, max: number): string | null => {
@@ -179,6 +301,7 @@ export async function POST(req: Request) {
     const userAgent = req.headers.get("user-agent") || "";
     const isBot = BOT_UA.test(userAgent) || s.device_type === "bot";
     const geo = edgeGeo(req);
+    const agent = agentEnvironment(userAgent);
 
     const sessionId = String(s.session_id).slice(0, 120);
     const visitorId = String(s.visitor_id).slice(0, 120);
@@ -186,6 +309,13 @@ export async function POST(req: Request) {
     const events: TrackedEvent[] = Array.isArray(body.events)
       ? body.events.filter((e) => e && EVENT_KINDS.has(e.kind)).slice(0, MAX_EVENTS_PER_BATCH)
       : [];
+
+    const claimedDevice = str(s.device_type, 20);
+    const deviceType = isBot
+      ? "bot"
+      : !claimedDevice || claimedDevice === "unknown"
+        ? agent.device_type
+        : claimedDevice;
 
     const pageCount = int(p.page_count);
     const engaged = int(p.engaged_seconds);
@@ -222,10 +352,14 @@ export async function POST(req: Request) {
       first_touch_channel: str(s.first_touch_channel, 40),
       first_touch_campaign: str(s.first_touch_campaign, 255),
       landing_page_title: str(s.landing_page_title, 300),
-      device_type: str(s.device_type, 20) ?? "unknown",
-      browser: str(s.browser, 60),
+      // The client's own detection wins — it can see touch points, screen
+      // size and the UA-CH hints the header does not carry. The header is
+      // the floor beneath it, so a payload that arrives without them is
+      // still filed against a real device instead of against "unknown".
+      device_type: deviceType,
+      browser: str(s.browser, 60) ?? agent.browser,
       browser_version: str(s.browser_version, 40),
-      os: str(s.os, 60),
+      os: str(s.os, 60) ?? agent.os,
       os_version: str(s.os_version, 40),
       screen_w: num(s.screen_w),
       screen_h: num(s.screen_h),

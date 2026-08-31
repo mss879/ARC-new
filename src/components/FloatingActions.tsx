@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { StickyAiPill } from "@/components/StickyAiPill";
+import { markConversion, trackEvent } from "@/lib/analytics/tracker";
 
 const FloatingActions = () => {
   const pathname = usePathname();
@@ -30,14 +31,36 @@ const FloatingActions = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // These two are the site's highest-intent actions that are not the contact
+  // form, and until now neither registered as anything. The tracker reads
+  // click intent off anchors — tel:, wa.me, mailto: — and both of these are
+  // <button onClick> that call window.open, so they produced a generic
+  // cta_click with no label and never a conversion. Reporting them here is
+  // the only way they can be counted.
   const openWhatsApp = () => {
     // Replace with your actual WhatsApp number
     const phoneNumber = "447466368427"; // UK number without + or spaces
     const message = encodeURIComponent("Hi! I'd like to discuss my project with Arc AI.");
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
+    const href = `https://wa.me/${phoneNumber}?text=${message}`;
+    trackEvent("whatsapp_click", {
+      href,
+      element: "button.floating-whatsapp",
+      element_text: "Chat on WhatsApp",
+      meta: { surface: "floating_actions" },
+    });
+    markConversion("whatsapp_click", { surface: "floating_actions" });
+    window.open(href, "_blank");
   };
 
   const openCalendly = () => {
+    trackEvent("cta_click", {
+      element: "button.floating-calendly",
+      element_text: "Book a meeting",
+      meta: { cta: "book_meeting", surface: "floating_actions" },
+    });
+    // Opening the booking widget is intent, not a booking — Calendly owns
+    // the confirmation and we never see it, so claiming a conversion here
+    // would overstate the one number that must not be overstated.
     setIsCalendlyOpen(true);
     // Load Calendly widget
     const script = document.createElement("script");

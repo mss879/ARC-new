@@ -1,7 +1,21 @@
 "use client";
 
 import { useState, useRef, useEffect, useMemo } from "react";
-import { trackChatMessage, trackEvent } from "@/lib/analytics/tracker";
+import {
+    identifyVisitor,
+    markConversion,
+    trackChatMessage,
+    trackEvent,
+} from "@/lib/analytics/tracker";
+
+/**
+ * Contact details volunteered in a chat message.
+ *
+ * Deliberately strict rather than clever: a false positive here marks a
+ * session converted, and the collector never un-marks a conversion.
+ */
+const EMAIL_IN_TEXT = /[\w.+-]+@[\w-]+\.[\w.-]{2,}/;
+const PHONE_IN_TEXT = /(?:\+\d[\d\s().-]{8,}\d|\b0\d[\d\s().-]{8,}\d)/;
 import Image from "next/image";
 import { MessageCircle, X, Send } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -209,6 +223,21 @@ export function AiChatWidget() {
         setInputValue("");
         setIsLoading(true);
         trackChatMessage("user", trimmedInput.length);
+
+        // A visitor who hands over an email or a phone number in the chat has
+        // done the same thing as filling in the form, and it counted as
+        // nothing: the conversation was mirrored into the CRM but the
+        // browsing session stayed unconverted and anonymous, so chat leads
+        // never appeared in the funnel or in the converted-visits list.
+        const email = trimmedInput.match(EMAIL_IN_TEXT)?.[0] ?? null;
+        const phone = trimmedInput.match(PHONE_IN_TEXT)?.[0] ?? null;
+        if (email) identifyVisitor(email);
+        if (email || phone) {
+            markConversion("chat_lead", {
+                surface: "ai_chat",
+                shared: email ? "email" : "phone",
+            });
+        }
 
         try {
             // Prepare API payload

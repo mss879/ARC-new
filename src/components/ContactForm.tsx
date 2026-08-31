@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { supabase } from '@/lib/supabase';
+import { markConversion, trackEvent } from "@/lib/analytics/tracker";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -71,6 +72,28 @@ export default function ContactForm() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // ── Analytics ─────────────────────────────────────────────────────────────
+  //
+  // The tracker's delegated listeners see this form, but they cannot see
+  // whether it worked. Being capture-phase they fire on the native submit
+  // event — before validateAll() has run and long before /api/contact has
+  // answered — so a rejected or failed submission was being recorded as a
+  // completed one, and a conversion, irreversibly. `data-analytics-manual`
+  // on the <form> below turns that inference off and this component reports
+  // the outcome it actually knows.
+  const startedRef = useRef(false);
+  const startedAtRef = useRef<number | null>(null);
+
+  const noteStart = () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    startedAtRef.current = Date.now();
+    trackEvent("form_start", {
+      element: "contact_form",
+      meta: { form_id: "contact_form" },
+    });
+  };
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{
     type: "success" | "error" | null;
@@ -93,7 +116,13 @@ export default function ContactForm() {
     e.preventDefault();
 
     // Run full validation before submitting
-    if (!validateAll()) return;
+    if (!validateAll()) {
+      trackEvent("form_field", {
+        element: "contact_form",
+        meta: { form_id: "contact_form", outcome: "validation_failed" },
+      });
+      return;
+    }
 
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: "" });
@@ -123,6 +152,19 @@ export default function ContactForm() {
           // Don't block the user — webhook already sent
         }
 
+        // Only here: the request was accepted. This is the one moment that
+        // is genuinely a conversion, and it is the moment the funnel, the
+        // per-page conversion count and the CRM's converted-visits list are
+        // all built from.
+        trackEvent("form_submit", {
+          element: "contact_form",
+          value: startedAtRef.current
+            ? Math.round((Date.now() - startedAtRef.current) / 1000)
+            : null,
+          meta: { form_id: "contact_form", subject: formData.subject || null },
+        });
+        markConversion("contact_form", { form_id: "contact_form" });
+
         setSubmitStatus({
           type: "success",
           message: "Thank you! Your message has been sent successfully.",
@@ -139,11 +181,22 @@ export default function ContactForm() {
         });
         setFieldErrors({});
         setTouched({});
+        // A second send is a second form fill, not a continuation of the first.
+        startedRef.current = false;
+        startedAtRef.current = null;
       } else {
         const data = await response.json().catch(() => null);
         throw new Error(data?.error || "Failed to send message");
       }
     } catch (error) {
+      // A failed send is not a conversion, and it IS worth knowing about —
+      // a form that silently fails looks identical in the analytics to a
+      // form nobody bothers to fill in.
+      trackEvent("error", {
+        element: "contact_form",
+        element_text: error instanceof Error ? error.message : "contact submit failed",
+        meta: { form_id: "contact_form" },
+      });
       setSubmitStatus({
         type: "error",
         message: error instanceof Error ? error.message : "Failed to send message. Please try again.",
@@ -204,6 +257,10 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
+      onFocusCapture={noteStart}
+      id="contact-form"
+      data-form="contact_form"
+      data-analytics-manual
       className="space-y-6 bg-[rgb(20,20,20)] border border-[rgb(40,40,40)] rounded-3xl p-8 lg:p-10"
       noValidate
     >

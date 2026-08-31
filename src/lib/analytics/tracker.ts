@@ -239,6 +239,15 @@ function detectEnvironment(): Pick<
     ["Opera", /OPR\/([\d.]+)/],
     ["Samsung Internet", /SamsungBrowser\/([\d.]+)/],
     ["Firefox", /(?:Firefox|FxiOS)\/([\d.]+)/],
+    // In-app WebViews, before the engine tests below would swallow them.
+    // Social traffic largely arrives inside one of these, and on iOS they
+    // match none of the ordinary patterns — so a real visitor from an
+    // Instagram link used to be filed as browser=(none), which then reads
+    // as broken tracking rather than as the segment it is.
+    ["Instagram", /Instagram\s([\d.]+)/],
+    ["Facebook", /FBAV\/([\d.]+)/],
+    ["LinkedIn", /LinkedInApp\/?([\d.]*)/],
+    ["TikTok", /(?:BytedanceWebview|musical_ly|Trill)\/?([\d.]*)/],
     ["Chrome", /(?:Chrome|CriOS)\/([\d.]+)/],
     ["Safari", /Version\/([\d.]+).*Safari/],
   ];
@@ -434,11 +443,29 @@ function flush(useBeacon = false): void {
   }
 }
 
+/**
+ * Events fired before the tracker finished booting.
+ *
+ * `PerformanceMonitor` and `AnalyticsTracker` are separate components, and
+ * TTFB and FCP resolve within milliseconds of the document being ready —
+ * routinely before `initAnalytics` has run. `enqueue` used to return early
+ * with no context and the measurement was gone, which is why the dashboard
+ * showed four LCP samples against a thousand page views and the whole
+ * performance section looked broken. They are held here instead and
+ * replayed once the session exists. Capped, because an unbooted tracker
+ * must not grow a list forever.
+ */
+const preInit: { kind: AnalyticsEventKind; fields: Partial<TrackedEvent> }[] = [];
+const MAX_PREINIT = 30;
+
 function enqueue(
   kind: AnalyticsEventKind,
   fields: Partial<TrackedEvent> = {},
 ): void {
-  if (!context) return;
+  if (!context) {
+    if (preInit.length < MAX_PREINIT) preInit.push({ kind, fields });
+    return;
+  }
   try {
     queue.push({
       kind,
@@ -478,6 +505,7 @@ function mirrorToGa4(kind: AnalyticsEventKind, fields: Partial<TrackedEvent>): v
     "outbound_click",
     "cta_click",
     "tel_click",
+    "mailto_click",
     "whatsapp_click",
     "download",
     "chat_message",
@@ -614,6 +642,10 @@ function instrumentClicks(): void {
         }
         if (href.startsWith("mailto:")) {
           enqueue("mailto_click", { href, element, element_text: label });
+          // Emailing us is a lead. tel: and WhatsApp were already credited
+          // and this was not, so every visitor who read the contact page and
+          // chose email over the form was recorded as a bounce with a click.
+          markConversion("email_click");
           return;
         }
         if (/wa\.me|api\.whatsapp\.com|whatsapp:/i.test(href)) {
@@ -707,6 +739,15 @@ function instrumentForms(): void {
     "submit",
     (e) => {
       const form = e.target as HTMLFormElement | null;
+      // A form that reports its own outcome opts out here.
+      //
+      // This listener is capture-phase, so it runs BEFORE the component's
+      // onSubmit — before validation has been checked and long before the
+      // request has succeeded. It was therefore recording a submit and an
+      // irreversible conversion every time someone pressed the button on a
+      // form that then refused to send, which is the most expensive kind of
+      // wrong number: it inflates exactly the metric decisions are made on.
+      if (form?.hasAttribute("data-analytics-manual")) return;
       const id = formId(form);
       const record = touched.get(id);
       if (record) record.submitted = true;
@@ -895,9 +936,16 @@ export function trackChatMessage(role: "user" | "assistant", length: number): vo
 export function trackWebVital(name: string, value: number, rating: string): void {
   enqueue("web_vital", {
     element_text: name,
+    // CLS is a small unitless number, so it is shipped as milli-CLS to
+    // survive an integer column. The CRM divides it back out; if that ever
+    // changes, both sides have to change together.
     value: Math.round(name === "CLS" ? value * 1000 : value),
     meta: { rating, metric: name },
   });
+  // LCP, CLS and INP are finalised when the page is hidden — the same moment
+  // the queue is being flushed for the last time. Without this the metric is
+  // enqueued just after its own flush and dies with the document.
+  if (document.visibilityState === "hidden") flush(true);
 }
 
 /**
@@ -983,6 +1031,13 @@ export function initAnalytics(path: string): void {
         referrer,
         meta: { channel, new_visitor: isNewVisitor },
       });
+    }
+
+    // Anything that fired while the tracker was still booting — early web
+    // vitals, above all — now has a session to belong to.
+    if (preInit.length) {
+      const held = preInit.splice(0, preInit.length);
+      for (const item of held) enqueue(item.kind, item.fields);
     }
 
     startEngagementClock();

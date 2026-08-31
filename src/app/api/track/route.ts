@@ -1,5 +1,25 @@
 import { createClient } from '@supabase/supabase-js';
 
+/**
+ * The original thin page-visit log.
+ *
+ * Superseded by /api/analytics/collect, which records the same visit with a
+ * session, a device, a country and an event stream around it — and which
+ * still writes `page_visits` so the /admin dashboard keeps working. Nothing
+ * in the site calls this route any more (`PageTracker`, its only client, is
+ * no longer mounted), but it is left in place because a stale cached bundle
+ * in somebody's browser may still be posting to it.
+ *
+ * It is kept with a bot check it never had. Written with none, it accepted
+ * anything that could send JSON, and every crawler that ever found it landed
+ * in the same table as real visitors with no user-agent recorded to tell
+ * them apart afterwards. That archive is the bulk of what the CRM
+ * reconstructs its history from, which is how "673 sessions, 82% bounce,
+ * almost no engagement" came to look like a website problem.
+ */
+const BOT_UA =
+  /bot|crawl|spider|slurp|headless|lighthouse|pagespeed|gtmetrix|pingdom|uptime|monitor|scrape|curl|wget|python-requests|axios|postman|facebookexternalhit|whatsapp|telegrambot|semrush|ahrefs|mj12|dotbot|petalbot|bytespider/i;
+
 // ── Rate Limiting ──────────────────────────────────────────────────────────
 const rateLimitMap = new Map<string, { count: number; firstRequest: number }>();
 const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
@@ -17,6 +37,16 @@ setInterval(() => {
 
 export async function POST(req: Request) {
     try {
+        // ── Bots ─────────────────────────────────────────────────────────
+        // 200 rather than 403: this is telemetry, and an error status only
+        // teaches a scraper to vary its user agent.
+        if (BOT_UA.test(req.headers.get('user-agent') || '')) {
+            return new Response(JSON.stringify({ ok: true }), {
+                status: 200,
+                headers: { 'Content-Type': 'application/json' },
+            });
+        }
+
         // ── Rate Limiting ────────────────────────────────────────────────
         const clientIP = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
             || req.headers.get('x-real-ip')
