@@ -1,6 +1,7 @@
 'use client';
 
 import { onCLS, onFCP, onINP, onLCP, onTTFB, type Metric } from 'web-vitals';
+import { trackWebVital } from '@/lib/analytics/tracker';
 
 /**
  * Report Web Vitals to analytics
@@ -29,22 +30,10 @@ export function reportWebVitals(metric: Metric) {
       });
     }
 
-    // Example: Send to custom analytics endpoint
-    const body = JSON.stringify({
-      name: metric.name,
-      value: metric.value,
-      rating: metric.rating,
-      delta: metric.delta,
-      id: metric.id,
-      navigationType: metric.navigationType,
-    });
-
-    // Uncomment and configure your analytics endpoint
-    // if (navigator.sendBeacon) {
-    //   navigator.sendBeacon('/api/analytics', body);
-    // } else {
-    //   fetch('/api/analytics', { body, method: 'POST', keepalive: true });
-    // }
+    // Send to the first-party pipeline, so field performance lands on the
+    // same session row as the behaviour it may well explain — a slow LCP
+    // and a bounce on the same visit are one story, not two.
+    trackWebVital(metric.name, metric.value, metric.rating);
   }
 }
 

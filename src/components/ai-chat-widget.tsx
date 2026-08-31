@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useMemo } from "react";
+import { trackChatMessage, trackEvent } from "@/lib/analytics/tracker";
 import Image from "next/image";
 import { MessageCircle, X, Send } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -176,6 +177,14 @@ export function AiChatWidget() {
         }
     }, [isOpen]);
 
+    // Record the moment the agent is opened, and stamp the chat's own
+    // sessionId onto the analytics session so a transcript in the CRM can be
+    // put back next to the pages that led up to it.
+    useEffect(() => {
+        if (!isOpen) return;
+        trackEvent("chat_open", { meta: { chat_session_id: sessionId } });
+    }, [isOpen, sessionId]);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const trimmedInput = inputValue.trim();
@@ -199,6 +208,7 @@ export function AiChatWidget() {
         setMessages(prev => [...prev, userMessage]);
         setInputValue("");
         setIsLoading(true);
+        trackChatMessage("user", trimmedInput.length);
 
         try {
             // Prepare API payload
@@ -226,6 +236,7 @@ export function AiChatWidget() {
                 role: "assistant",
                 content: data.content,
             }]);
+            trackChatMessage("assistant", String(data.content ?? "").length);
 
         } catch (err) {
             setError(err instanceof Error ? err.message : "Failed to send");

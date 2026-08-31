@@ -9,7 +9,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryProvider } from "@/components/providers/query-provider";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
-import PageTracker from "@/components/PageTracker";
+import AnalyticsTracker from "@/components/AnalyticsTracker";
 import FloatingActions from "@/components/FloatingActions";
 
 const inter = Inter({
@@ -198,7 +198,7 @@ export default async function RootLayout({
           Skip to content
         </a>
         <PerformanceMonitor />
-        <PageTracker />
+        <AnalyticsTracker />
         <QueryProvider>
           <TooltipProvider>
             <main id="main-content">
