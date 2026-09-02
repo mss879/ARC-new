@@ -58,6 +58,110 @@ export const metadata: Metadata = {
 export default async function Portfolio() {
   const portfolioItems = [
     {
+      id: 60,
+      title: "Fusion Hybrid Projects",
+      description: "Fusion Hybrid prepares, enhances and presents residential and commercial property across Melbourne and the Mornington Peninsula, with one team managing every trade from scope to handover.",
+      image: "/fusion-gybrid-projects.png",
+      link: "https://fusionhybridprojects.com.au",
+      status: "live"
+    },
+    {
+      id: 59,
+      title: "Gharib Perfumes",
+      description: "A world-class luxury perfume house presented through a refined, sensory-led storefront — curated designer collections, rich fragrance storytelling and a premium checkout experience built for discerning buyers.",
+      image: "/gharib.png",
+      link: "https://gharibperfumes.com",
+      status: "development"
+    },
+    {
+      id: 58,
+      title: "Flow State",
+      description: "Flow State designs custom AI and automation systems that replace slow, manual and disconnected workflows with connected operations that run themselves — fewer handoffs, cleaner data and processes that keep moving.",
+      image: "/flow-state.png",
+      link: "https://www.flowstate.lk",
+      status: "live"
+    },
+    {
+      id: 57,
+      title: "Enivrant",
+      description: "Indulge in a curated universe of refinement — from the art of self-care and iconic fragrances to timeless pearls, luxury fashion designer selects and the serenity of fine bedlinen, all in one elevated destination.",
+      image: "/enivrant.png",
+      link: "https://enivrant.com",
+      status: "development"
+    },
+    {
+      id: 56,
+      title: "Makro Developers",
+      description: "Thoughtfully planned residential and commercial developments built for lasting value, presented through a considered digital experience that showcases every project, its craftsmanship and the communities designed around it.",
+      image: "/makro-dev.png",
+      link: "https://makrodevelopers.com",
+      status: "development"
+    },
+    {
+      id: 55,
+      title: "Iris & Me",
+      description: "A contemporary womenswear label brought online with an elevated e-commerce experience — considered collections, editorial product storytelling and a clean, effortless path from first browse through to checkout.",
+      image: "/iris-and-me.png",
+      link: "",
+      status: "development"
+    },
+    {
+      id: 54,
+      title: "MD Lanka",
+      description: "Support that holds where it hurts. Orthopaedic braces and supports for knee, back, wrist and ankle — correctly sized, honestly advised and delivered island-wide across Sri Lanka.",
+      image: "/md-lanka.png",
+      link: "https://medicaldeviceslanka.com",
+      status: "live"
+    },
+    {
+      id: 53,
+      title: "Green Engineering Systems",
+      description: "Green Engineering Systems (Pvt) Ltd is a forward-looking engineering company committed to advancing clean energy and sustainable infrastructure, delivering solutions built for long-term environmental and operational performance.",
+      image: "/green-engineering-system.png",
+      link: "",
+      status: "development"
+    },
+    {
+      id: 52,
+      title: "Unknown Movement",
+      description: "Minimal cycling wear for riders who believe performance should look as considered as the bike beneath them — a restrained, product-led store built around fit, fabric and the quiet confidence of the kit itself.",
+      image: "/unknownmovement.png",
+      link: "https://unknownmovement.store",
+      status: "development"
+    },
+    {
+      id: 51,
+      title: "Range By Marz",
+      description: "A drop-driven fashion label given a storefront to match — bold collection pages, clear size-and-fit guidance and a fast, mobile-first buying journey designed to turn every release into a sell-out.",
+      image: "/ranbymarz.png",
+      link: "",
+      status: "development"
+    },
+    {
+      id: 50,
+      title: "Mr Rider",
+      description: "One shop floor with 11 aisles, fresh listings every morning, a live auction, a clearance market and coaches on four continents. You don't browse MR.RIDER — you get let in.",
+      image: "/mr-rider.png",
+      link: "https://mr-rider.netlify.app",
+      status: "development"
+    },
+    {
+      id: 49,
+      title: "AEC",
+      description: "Your complete journey to global education — an overseas study consultancy guiding students from course selection and university applications through visas, funding and departure, with support at every step.",
+      image: "/AEC.png",
+      link: "",
+      status: "development"
+    },
+    {
+      id: 61,
+      title: "Pey and Cey World Wide",
+      description: "Your partner in global commodity trade — supplying high-quality sugar, coffee, tea, spices, corn and soybeans from trusted origins in Brazil and Sri Lanka to businesses that value consistency, quality and reliable supply.",
+      image: "/pey-cey.png",
+      link: "",
+      status: "development"
+    },
+    {
       id: 48,
       title: "Tech Nurture",
       description: "Expert repair, servicing and maintenance for air conditioners, refrigerators, inline water purifiers and bottle water dispensers, keeping homes and businesses across Sri Lanka cool, fresh and running.",
@@ -533,110 +637,131 @@ export default async function Portfolio() {
         <section className="relative px-6 lg:px-12 pb-32" aria-label="Portfolio projects">
           <div className="max-w-[1800px] w-full mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-              {portfolioItems.map((item, index) => (
-                <a
-                  key={item.id}
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${item.title} - view project (opens in new tab)`}
-                  className="group cursor-pointer transition-all duration-700 opacity-100 translate-y-0"
-                  style={{
-                    transitionDelay: `${index * 150}ms`,
-                  }}
-                >
-                  {/* Image Container */}
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-lg mb-6 bg-zinc-950 border border-white/10">
-                    <NextImage
-                      src={item.image}
-                      alt={`${item.title} - Custom Web Design & Software built by ARC AI`}
-                      fill
-                      className="object-contain transition-transform duration-700 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      quality={85}
-                      priority={index < 4}
-                    />
+              {portfolioItems.map((item, index) => {
+                const cardClassName = `group transition-all duration-700 opacity-100 translate-y-0${item.link ? " cursor-pointer" : ""}`;
+                const cardStyle = { transitionDelay: `${index * 150}ms` };
 
-                    {/* Status Badge */}
-                    <div className="absolute top-4 right-4 z-10">
+                const cardContent = (
+                  <>
+                    {/* Image Container */}
+                    <div className="relative aspect-[39/20] overflow-hidden rounded-lg mb-6 bg-zinc-950 border border-white/10 transition-colors duration-500 group-hover:border-[rgb(255,73,37)]/40">
+                      <NextImage
+                        src={item.image}
+                        alt={`${item.title} - Custom Web Design & Software built by ARC AI`}
+                        fill
+                        className="object-contain"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        quality={85}
+                        priority={index < 4}
+                      />
+
+                      {/* Hover Overlay - only for projects with a live link */}
+                      {item.link && (
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-500 flex items-center justify-center z-20">
+                          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <div className="w-16 h-16 rounded-full border-2 border-white flex items-center justify-center backdrop-blur-sm bg-white/10">
+                              <svg
+                                className="w-6 h-6 text-white"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Project Info */}
+                    <div className="space-y-3">
+                      {/* Status */}
                       <span
-                        className={`px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider backdrop-blur-sm ${item.status === "live"
-                          ? "bg-green-500/20 text-green-400 border border-green-500/30"
-                          : "bg-orange-500/20 text-orange-400 border border-orange-500/30"
+                        className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider border ${item.status === "live"
+                          ? "bg-green-500/10 text-green-400 border-green-500/30"
+                          : "bg-orange-500/10 text-orange-400 border-orange-500/30"
                           }`}
                       >
+                        <span
+                          className={`w-1.5 h-1.5 rounded-full ${item.status === "live" ? "bg-green-400" : "bg-orange-400"}`}
+                          aria-hidden="true"
+                        />
                         {item.status === "live" ? "Live" : "In Development"}
                       </span>
-                    </div>
+                      <h3
+                        className="text-3xl md:text-4xl font-bold text-white group-hover:text-[rgb(255,73,37)] transition-colors duration-300 uppercase"
+                        style={{
+                          fontFamily:
+                            "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                        }}
+                      >
+                        {item.title}
+                      </h3>
+                      <p className="text-base md:text-lg text-zinc-300 leading-relaxed">
+                        {item.description}
+                      </p>
 
-                    {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-500 flex items-center justify-center z-20">
-                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        <div className="w-16 h-16 rounded-full border-2 border-white flex items-center justify-center backdrop-blur-sm bg-white/10">
-                          <svg
-                            className="w-6 h-6 text-white"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Project Info */}
-                  <div className="space-y-3">
-                    <h3
-                      className="text-3xl md:text-4xl font-bold text-white group-hover:text-[rgb(255,73,37)] transition-colors duration-300 uppercase"
-                      style={{
-                        fontFamily:
-                          "'Helvetica Neue', Helvetica, Arial, sans-serif",
-                      }}
-                    >
-                      {item.title}
-                    </h3>
-                    <p className="text-base md:text-lg text-zinc-300 leading-relaxed">
-                      {item.description}
-                    </p>
-
-                    {/* Results */}
-                    {item.results && (
-                      <div className="pt-3 mt-3 border-t border-zinc-700/50">
-                        <div className="flex items-center gap-2 mb-2">
-                          <svg
-                            className="w-4 h-4 text-green-500"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-                            />
-                          </svg>
-                          <p className="text-xs text-green-500 uppercase tracking-wider font-bold">
-                            Results
+                      {/* Results */}
+                      {item.results && (
+                        <div className="pt-3 mt-3 border-t border-zinc-700/50">
+                          <div className="flex items-center gap-2 mb-2">
+                            <svg
+                              className="w-4 h-4 text-green-500"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                              />
+                            </svg>
+                            <p className="text-xs text-green-500 uppercase tracking-wider font-bold">
+                              Results
+                            </p>
+                          </div>
+                          <p className="text-sm md:text-base text-zinc-200 leading-relaxed font-medium">
+                            {item.results}
                           </p>
                         </div>
-                        <p className="text-sm md:text-base text-zinc-200 leading-relaxed font-medium">
-                          {item.results}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </a>
-              ))}
+                      )}
+                    </div>
+                  </>
+                );
+
+                // Projects without a public link yet render as plain cards.
+                if (!item.link) {
+                  return (
+                    <div key={item.id} className={cardClassName} style={cardStyle}>
+                      {cardContent}
+                    </div>
+                  );
+                }
+
+                return (
+                  <a
+                    key={item.id}
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${item.title} - view project (opens in new tab)`}
+                    className={cardClassName}
+                    style={cardStyle}
+                  >
+                    {cardContent}
+                  </a>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -672,12 +797,12 @@ export default async function Portfolio() {
                   }}
                 >
                   {/* Image Container */}
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-lg mb-6 bg-zinc-950 border border-white/10">
+                  <div className="relative aspect-[39/20] overflow-hidden rounded-lg mb-6 bg-zinc-950 border border-white/10 transition-colors duration-500 group-hover:border-[rgb(255,73,37)]/40">
                     <NextImage
                       src={template.image}
                       alt={`${template.title} - Premium Web Design Template by ARC AI`}
                       fill
-                      className="object-contain transition-transform duration-700 group-hover:scale-105"
+                      className="object-contain"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       quality={85}
                     />
