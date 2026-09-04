@@ -152,6 +152,15 @@ export async function POST(req: NextRequest) {
                         company: company || '',
                         message,
                         subject: subject || '',
+                        // Where they actually came from. The form stashes this
+                        // on the landing page, because by the time somebody
+                        // reaches the contact page the campaign parameters are
+                        // two or three clicks behind them. Without it every
+                        // enquiry is recorded as "website".
+                        ...(body.utm ? { utm: body.utm } : {}),
+                        ...(body.referrer ? { referrer: body.referrer } : {}),
+                        ...(body.landing_url ? { landing_url: body.landing_url } : {}),
+                        ...(body.ref ? { ref: body.ref } : {}),
                     }),
                 }),
             },

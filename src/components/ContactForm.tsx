@@ -46,6 +46,72 @@ type FieldErrors = {
   message?: string | null;
 };
 
+/**
+ * What brought this visitor here, remembered for the whole session.
+ *
+ * The campaign parameters are on the URL of the page they LAND on, and by the
+ * time they reach the contact form they have usually clicked through two or
+ * three pages and lost them. Stashing them on first sight means the CRM
+ * learns which ad or post actually produced the enquiry instead of recording
+ * "website" for everything.
+ *
+ * sessionStorage, not localStorage: attribution belongs to this visit.
+ */
+const ATTRIBUTION_KEY = "arc_attribution";
+
+type Attribution = {
+  utm: Record<string, string>;
+  referrer: string;
+  landing_url: string;
+  ref: string;
+};
+
+function readAttribution(): Attribution {
+  const empty: Attribution = { utm: {}, referrer: "", landing_url: "", ref: "" };
+  if (typeof window === "undefined") return empty;
+
+  try {
+    const stored = sessionStorage.getItem(ATTRIBUTION_KEY);
+    if (stored) return { ...empty, ...JSON.parse(stored) };
+  } catch {
+    // Private mode, or a corrupt value. Fall through and read the URL.
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const utm: Record<string, string> = {};
+  for (const key of [
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_term",
+    "utm_content",
+    "gclid",
+    "fbclid",
+  ]) {
+    const value = params.get(key);
+    if (value) utm[key] = value.slice(0, 200);
+  }
+
+  const fresh: Attribution = {
+    utm,
+    // Our own pages are not a referrer — that would record the site as the
+    // source of its own traffic.
+    referrer:
+      document.referrer && !document.referrer.includes(window.location.host)
+        ? document.referrer.slice(0, 500)
+        : "",
+    landing_url: window.location.href.slice(0, 500),
+    ref: (params.get("ref") || "").slice(0, 60),
+  };
+
+  try {
+    sessionStorage.setItem(ATTRIBUTION_KEY, JSON.stringify(fresh));
+  } catch {
+    // Nothing to do — the values are still used for this submission.
+  }
+  return fresh;
+}
+
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
@@ -56,6 +122,10 @@ export default function ContactForm() {
     subject: "",
     message: "",
   });
+
+  useEffect(() => {
+    readAttribution();
+  }, []);
 
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -133,7 +203,7 @@ export default function ContactForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, ...readAttribution() }),
       });
 
       if (response.ok) {
