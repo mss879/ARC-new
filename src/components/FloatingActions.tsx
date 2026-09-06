@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { StickyAiPill } from "@/components/StickyAiPill";
-import { markConversion, trackEvent } from "@/lib/analytics/tracker";
+import { trackContactClick, trackEvent } from "@/lib/analytics/tracker";
 
 const FloatingActions = () => {
   const pathname = usePathname();
@@ -32,23 +32,20 @@ const FloatingActions = () => {
   }, []);
 
   // These two are the site's highest-intent actions that are not the contact
-  // form, and until now neither registered as anything. The tracker reads
-  // click intent off anchors — tel:, wa.me, mailto: — and both of these are
-  // <button onClick> that call window.open, so they produced a generic
-  // cta_click with no label and never a conversion. Reporting them here is
-  // the only way they can be counted.
+  // form. The tracker reads click intent off anchors — tel:, wa.me, mailto: —
+  // and both of these are <button onClick> that call window.open, so they
+  // report themselves; the buttons carry data-analytics-ignore so the
+  // tracker's own click listener does not record them a second time.
   const openWhatsApp = () => {
     // Replace with your actual WhatsApp number
     const phoneNumber = "447466368427"; // UK number without + or spaces
     const message = encodeURIComponent("Hi! I'd like to discuss my project with Arc AI.");
     const href = `https://wa.me/${phoneNumber}?text=${message}`;
-    trackEvent("whatsapp_click", {
-      href,
+    trackContactClick("whatsapp_click", href, {
       element: "button.floating-whatsapp",
       element_text: "Chat on WhatsApp",
-      meta: { surface: "floating_actions" },
+      surface: "floating_actions",
     });
-    markConversion("whatsapp_click", { surface: "floating_actions" });
     window.open(href, "_blank");
   };
 
@@ -98,6 +95,7 @@ const FloatingActions = () => {
             <motion.button
               onClick={openCalendly}
               aria-label="Book a meeting"
+              data-analytics-ignore
               className="group relative w-14 h-14 rounded-full flex items-center justify-center transition-all duration-500 hover:scale-110 overflow-hidden"
               style={{
                 background: 'linear-gradient(135deg, rgba(255, 73, 37, 0.8), rgba(255, 73, 37, 0.4))',
@@ -139,6 +137,7 @@ const FloatingActions = () => {
             <motion.button
               onClick={openWhatsApp}
               aria-label="Chat on WhatsApp"
+              data-analytics-ignore
               className="group relative w-14 h-14 rounded-full flex items-center justify-center transition-all duration-500 hover:scale-110 overflow-hidden"
               style={{
                 background: 'linear-gradient(135deg, rgba(37, 211, 102, 0.8), rgba(37, 211, 102, 0.4))',

@@ -138,6 +138,21 @@ export async function POST(req: NextRequest) {
 
         const websiteUrl = body.website ?? body.companyWebsite ?? '';
 
+        // Only the shapes the tracker produces are forwarded, bounded in length,
+        // so this cannot become a way to write arbitrary text into the CRM.
+        const id = (v: unknown, pattern: RegExp): string | null =>
+            typeof v === 'string' && pattern.test(v) ? v : null;
+        const analyticsIds = {
+            ...(id(body.lead_id, /^lead_[A-Za-z0-9-]{8,80}$/) ? { lead_id: body.lead_id } : {}),
+            ...(id(body.analytics_session_id, /^s_[A-Za-z0-9-]{8,100}$/)
+                ? { analytics_session_id: body.analytics_session_id }
+                : {}),
+            ...(id(body.analytics_visitor_id, /^v_[A-Za-z0-9-]{8,100}$/)
+                ? { analytics_visitor_id: body.analytics_visitor_id }
+                : {}),
+            ...(body.test === true ? { test: true } : {}),
+        };
+
         // Build the dispatch list. Index 0 is always the ARC webhook.
         const dispatches: { target: string; request: Promise<Response> }[] = [
             {
@@ -161,6 +176,11 @@ export async function POST(req: NextRequest) {
                         ...(body.referrer ? { referrer: body.referrer } : {}),
                         ...(body.landing_url ? { landing_url: body.landing_url } : {}),
                         ...(body.ref ? { ref: body.ref } : {}),
+                        // The analytics side of the enquiry. The form mints
+                        // lead_id before it sends and records the same id on
+                        // its conversion event, so the CRM's lead ledger can
+                        // match this exact lead to this exact conversion.
+                        ...analyticsIds,
                     }),
                 }),
             },

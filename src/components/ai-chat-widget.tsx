@@ -236,6 +236,10 @@ export function AiChatWidget() {
             markConversion("chat_lead", {
                 surface: "ai_chat",
                 shared: email ? "email" : "phone",
+                // One lead per conversation, however many times the details
+                // are repeated — and the same id the CRM's chat mirror knows
+                // the transcript by.
+                lead_id: `chat:${sessionId}`,
             });
         }
 
@@ -355,7 +359,9 @@ export function AiChatWidget() {
                         </div>
 
                         {/* Input */}
-                        <form onSubmit={handleSubmit} className="p-3 border-t border-white/10 bg-zinc-900">
+                        {/* data-analytics-ignore: a chat message is not a form fill, and every
+                            send used to count as a form submit on whatever page this sat on. */}
+                        <form onSubmit={handleSubmit} className="p-3 border-t border-white/10 bg-zinc-900" data-analytics-ignore>
                             <div className="relative flex items-center">
                                 <input
                                     type="text"

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import "./Footer.css";
+import { trackFormSubmitted } from "@/lib/analytics/tracker";
 
 const Footer = () => {
   const footerRef = useRef<HTMLElement>(null);
@@ -40,6 +41,11 @@ const Footer = () => {
       const data = await response.json();
 
       if (response.ok) {
+        // A signup is a form submit, not a lead: the tracker files it under
+        // "other" and never converts the session. Nothing is recorded when
+        // the honeypot was filled — the server said yes to a script, not to
+        // a person.
+        if (!honeypot.trim()) trackFormSubmitted("newsletter", "newsletter");
         setSubscribeStatus({ type: "success", message: "You're subscribed! 🎉" });
         setEmail("");
       } else {
@@ -290,13 +296,13 @@ const Footer = () => {
                 <p className="text-lg text-white">
                   Sign up for our newsletter to get latest insights and updates
                 </p>
-                {/* data-analytics-intent="none": a mailing-list signup is not a lead.
-                    Without this the footer form counted as a conversion on every
-                    page it appears on, which is every page. */}
+                {/* data-form names this form in the analytics. A mailing-list
+                    signup is not a lead: the success handler files it as a
+                    submit and the tracker never converts a session for it. */}
                 <form
                   onSubmit={handleSubmit}
                   className="space-y-4"
-                  data-analytics-intent="none"
+                  data-form="newsletter"
                 >
                   {/* Honeypot. Hidden from people and from screen readers, and
                       out of the tab order, so anything that fills it is a script.

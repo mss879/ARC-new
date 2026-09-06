@@ -1,8 +1,13 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from '@/lib/supabase';
-import { markConversion, trackEvent } from "@/lib/analytics/tracker";
+import {
+  getAnalyticsIdentity,
+  newLeadId,
+  trackEvent,
+  trackFormSubmitted,
+} from "@/lib/analytics/tracker";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -144,25 +149,12 @@ export default function ContactForm() {
 
   // ── Analytics ─────────────────────────────────────────────────────────────
   //
-  // The tracker's delegated listeners see this form, but they cannot see
-  // whether it worked. Being capture-phase they fire on the native submit
-  // event — before validateAll() has run and long before /api/contact has
-  // answered — so a rejected or failed submission was being recorded as a
-  // completed one, and a conversion, irreversibly. `data-analytics-manual`
-  // on the <form> below turns that inference off and this component reports
-  // the outcome it actually knows.
-  const startedRef = useRef(false);
-  const startedAtRef = useRef<number | null>(null);
-
-  const noteStart = () => {
-    if (startedRef.current) return;
-    startedRef.current = true;
-    startedAtRef.current = Date.now();
-    trackEvent("form_start", {
-      element: "contact_form",
-      meta: { form_id: "contact_form" },
-    });
-  };
+  // The tracker records the start (first focus) and every submit attempt on
+  // its own, keyed by data-form below. What it cannot see is whether the
+  // send WORKED, so the success path reports that — and only that — through
+  // trackFormSubmitted, carrying the lead id that went to the CRM with the
+  // enquiry. One id on both sides is what lets the CRM's lead ledger match
+  // this exact conversion to this exact lead instead of guessing by time.
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{
@@ -197,13 +189,25 @@ export default function ContactForm() {
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: "" });
 
+    // Minted before the request, so the CRM receives the same id the
+    // analytics conversion will carry.
+    const leadId = newLeadId();
+    const identity = getAnalyticsIdentity();
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...formData, ...readAttribution() }),
+        body: JSON.stringify({
+          ...formData,
+          ...readAttribution(),
+          lead_id: leadId,
+          analytics_session_id: identity.session_id,
+          analytics_visitor_id: identity.visitor_id,
+          ...(identity.test ? { test: true } : {}),
+        }),
       });
 
       if (response.ok) {
@@ -224,16 +228,12 @@ export default function ContactForm() {
 
         // Only here: the request was accepted. This is the one moment that
         // is genuinely a conversion, and it is the moment the funnel, the
-        // per-page conversion count and the CRM's converted-visits list are
-        // all built from.
-        trackEvent("form_submit", {
-          element: "contact_form",
-          value: startedAtRef.current
-            ? Math.round((Date.now() - startedAtRef.current) / 1000)
-            : null,
-          meta: { form_id: "contact_form", subject: formData.subject || null },
+        // per-page conversion count and the CRM's lead ledger are all built
+        // from.
+        trackFormSubmitted("contact_form", "contact_form", {
+          lead_id: leadId,
+          meta: { subject: formData.subject || null },
         });
-        markConversion("contact_form", { form_id: "contact_form" });
 
         setSubmitStatus({
           type: "success",
@@ -251,9 +251,6 @@ export default function ContactForm() {
         });
         setFieldErrors({});
         setTouched({});
-        // A second send is a second form fill, not a continuation of the first.
-        startedRef.current = false;
-        startedAtRef.current = null;
       } else {
         const data = await response.json().catch(() => null);
         throw new Error(data?.error || "Failed to send message");
@@ -327,10 +324,8 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      onFocusCapture={noteStart}
       id="contact-form"
       data-form="contact_form"
-      data-analytics-manual
       className="space-y-6 bg-[rgb(20,20,20)] border border-[rgb(40,40,40)] rounded-3xl p-8 lg:p-10"
       noValidate
     >

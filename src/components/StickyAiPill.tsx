@@ -621,7 +621,7 @@ export function StickyAiPill() {
                                         )}
                                         {chatError && <div className="text-xs text-red-400 text-center p-2 bg-red-500/10 rounded">{chatError}</div>}
                                     </div>
-                                    <form onSubmit={handleChatSubmit} className="p-3 border-t border-white/10 bg-zinc-900/50">
+                                    <form onSubmit={handleChatSubmit} className="p-3 border-t border-white/10 bg-zinc-900/50" data-analytics-ignore>
                                         <div className="relative flex items-center">
                                             <input
                                                 type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)}

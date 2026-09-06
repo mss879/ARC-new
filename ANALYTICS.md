@@ -62,20 +62,90 @@ state, chat engagement, and any email the visitor typed.
 
 Events cover: `page_view`, `page_exit`, `scroll_depth`, `click`, `cta_click`,
 `outbound_click`, `download`, `tel_click`, `mailto_click`, `whatsapp_click`,
-`form_start`, `form_field`, `form_abandon`, `form_submit`, `chat_open`,
-`chat_message`, `video_play`, `copy`, `rage_click`, `dead_click`,
+`form_start`, `form_field`, `form_attempt`, `form_abandon`, `form_submit`,
+`chat_open`, `chat_message`, `video_play`, `copy`, `rage_click`, `dead_click`,
 `exit_intent`, `error`, `web_vital`, `conversion`, `session_start`,
 `session_end`.
+
+---
+
+## Conversions — what counts, and why the numbers reconcile
+
+A conversion is a **confirmed outcome**, never an inference from a DOM event.
+The tracker's own listeners only ever record `form_start` (first focus),
+`form_field`, `form_attempt` (every press of the submit button) and
+`form_abandon`. `form_submit` and `conversion` are recorded by the form
+component itself, after the server accepted the send, through
+`trackFormSubmitted`. That is what makes `form_start ≥ form_submit` an
+invariant: a success reported for a form nobody focused gets an implicit
+start first and is flagged `untouched`.
+
+Every conversion kind has a category:
+
+| Category | Kinds | Effect |
+| --- | --- | --- |
+| `enquiry` | `contact_form`, `chat_lead`, `job_request`, `proposal_request` | Marks the session `converted`; counted as a conversion by the CRM unless a person marks it spam or test |
+| `contact_click` | `whatsapp_click`, `call_click`, `email_click` | Intent, not a conversion. Listed in the CRM's lead ledger to confirm or dismiss; once per session per kind |
+| `other` | `newsletter`, `career_application`, `review` | A `form_submit`, never a conversion |
+
+Every `conversion` event carries a `lead_id` in its `meta`. An enquiry form
+mints it **before** the request (`newLeadId()`) and sends it to the CRM with
+the enquiry, so the analytics row and the CRM lead share one key. A contact
+click derives it from the session (`whatsapp_click:<session_id>`), so ten
+clicks on the same button are one conversion.
+
+Forms opt in by naming themselves: `<form data-form="contact_form">`. A form
+that is not a form in the visitor's sense — the chat box's message input —
+carries `data-analytics-ignore` and is left alone entirely, as is any control
+that reports itself (the floating WhatsApp button).
+
+The three footer / contact / project forms, the careers modal and the review
+page all follow this contract; see `src/components/ContactForm.tsx` for the
+enquiry shape (lead id + analytics ids sent to the CRM webhook).
+
+---
+
+## Testing a form or a WhatsApp route
+
+Add `?arc_test=1` to any page on the live site. For the rest of that visit:
+
+- every event carries `meta.test = true`, and the CRM's lead ledger files the
+  resulting conversions as **tests**, not leads;
+- the event stream is mirrored to `window.__arcAnalyticsLog` in the console,
+  so you can watch `form_start → form_attempt → form_submit → conversion`
+  arrive with the same `lead_id` on the last two.
+
+`?arc_test=0` turns it off. Deploy previews, branch deploys and `next dev`
+never reach the CRM at all: anything not served from `www.arcai.agency` is
+labelled `arcai.agency:preview`, and the CRM filters on the bare label.
 
 ---
 
 ## Recording something custom
 
 ```ts
-import { trackEvent, markConversion, identifyVisitor } from "@/lib/analytics/tracker";
+import {
+  trackEvent,
+  trackFormSubmitted,
+  trackContactClick,
+  newLeadId,
+  getAnalyticsIdentity,
+  identifyVisitor,
+} from "@/lib/analytics/tracker";
 
 trackEvent("cta_click", { element_text: "Book a call", meta: { placement: "hero" } });
-markConversion("proposal_request", { service: "ai-chatbots" });
+
+// An enquiry form: mint the id, send it with the request, report success only.
+const leadId = newLeadId();
+await fetch("/api/contact", {
+  method: "POST",
+  body: JSON.stringify({ ...fields, lead_id: leadId, ...getAnalyticsIdentity() }),
+});
+trackFormSubmitted("proposal_form", "proposal_request", { lead_id: leadId });
+
+// A button that opens WhatsApp itself (an <a href="https://wa.me/…"> needs nothing).
+trackContactClick("whatsapp_click", href, { surface: "pricing_table" });
+
 identifyVisitor("someone@example.com");
 ```
 

@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
+import { trackFormSubmitted } from '@/lib/analytics/tracker';
 import { motion } from 'framer-motion';
 import { Star, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
@@ -80,6 +81,8 @@ function ReviewForm() {
             setError('Failed to submit review. Please try again later.');
             setSubmitting(false);
         } else {
+            // A client's review, stored: a submit filed as "other" — not a lead.
+            trackFormSubmitted('review', 'review');
             setSuccess(true);
             setSubmitting(false);
         }
@@ -149,7 +152,7 @@ function ReviewForm() {
                     <p className="text-gray-400">We'd love to hear about your experience working with ARC AI.</p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6" data-form="review">
                     {/* Rating */}
                     <div className="flex flex-col items-center mb-8">
                         <p className="text-sm font-medium text-gray-300 mb-3">How would you rate our services?</p>

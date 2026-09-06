@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import { X, Upload, Loader2, CheckCircle, Calendar, Briefcase } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { trackFormSubmitted } from '@/lib/analytics/tracker';
 
 interface Vacancy {
     id: string;
@@ -62,6 +63,11 @@ export default function CareerApplicationModal({ vacancy, isOpen, onClose }: Car
                 throw new Error(result.error || 'Failed to submit application');
             }
 
+            // Accepted by the server — a submit, filed as "other": a job
+            // application is not a sales lead and never converts the session.
+            trackFormSubmitted('career_application', 'career_application', {
+                meta: { vacancy_id: vacancy.id },
+            });
             setSubmitted(true);
         } catch (err: any) {
             setError(err.message || 'Something went wrong. Please try again.');
@@ -144,7 +150,7 @@ export default function CareerApplicationModal({ vacancy, isOpen, onClose }: Car
                         </div>
                     ) : (
                         /* Form */
-                        <form onSubmit={handleSubmit} className="p-6 space-y-5">
+                        <form onSubmit={handleSubmit} className="p-6 space-y-5" data-form="career_application">
                             {error && (
                                 <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
                                     {error}

@@ -11,13 +11,24 @@ import dynamic from "next/dynamic";
 
 // Heavy Three.js preloader — client-only chunk that mounts on top of the
 // server-rendered shell below, so the page is never uncovered while it loads
-const LoadingScreen = dynamic(() => import("./LoadingScreen"), { ssr: false });
+const loadLoadingScreen = () => import("./LoadingScreen");
+const LoadingScreen = dynamic(loadLoadingScreen, { ssr: false });
 
-// How long assets (hero video, images) get before the preloader opens anyway —
-// generous so slow connections still land on a fully prepared homepage
-const ASSET_TIMEOUT_MS = 20000;
+// Start fetching the 3D chunk the moment this module evaluates in the
+// browser — in parallel with hydration — instead of when the component
+// first renders, which is after it. Same chunk, same import; webpack hands
+// `dynamic` the module that is already on its way. The spinner shell is
+// on screen for the download either way; this just makes it shorter.
+if (typeof window !== "undefined") void loadLoadingScreen().catch(() => undefined);
+
+// How long assets (hero video, images) get before the preloader opens anyway.
+// The finale used to wait up to 20 seconds for a 3.7 MB hero video, which on
+// a slow mobile connection meant twenty seconds of a pulsing logo. Seven is
+// still longer than the build itself; the video starts the moment it can
+// behind the opened doors (Hero plays on canplaythrough).
+const ASSET_TIMEOUT_MS = 7000;
 // Absolute cap — if the 3D chunk or WebGL ever fails, never strand users on black
-const FAILSAFE_MS = 30000;
+const FAILSAFE_MS = 15000;
 
 interface PreloaderContextValue {
   /** True while the preloader covers the page */

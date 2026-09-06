@@ -208,6 +208,21 @@ const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () =
   const [buildDone, setBuildDone] = useState(false);
   const idlePulseRef = useRef<gsap.core.Tween | null>(null);
 
+  // Performance, not appearance. Both GSAP timelines flag this on every tick
+  // they move a block, and the frame loop rebuilds the instance matrices only
+  // on those frames. During the hold for page assets — which can last
+  // seconds on a slow connection — nothing but the emissive pulse changes,
+  // so the 200-odd matrix composes and the GPU upload that used to happen
+  // sixty times a second there now happen zero times. What is drawn is
+  // identical: an unchanged matrix re-uploaded is the same picture.
+  const blocksDirty = useRef(true);
+  const markBlocksDirty = useCallback(() => {
+    blocksDirty.current = true;
+  }, []);
+  // Last projectile scale written to the meshes, so an invisible (scale 0)
+  // projectile is not re-positioned every frame of the build and the hold.
+  const projectileApplied = useRef(-1);
+
   useEffect(() => {
     // Utilize GSAP context to ensure clean initialization and complete cleanup upon unmount
     const ctx = gsap.context(() => {
@@ -246,7 +261,9 @@ const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () =
       });
 
       const tl = gsap.timeline({
+        onUpdate: markBlocksDirty,
         onComplete: () => {
+          markBlocksDirty();
           // Hold here until assets are ready: breathing glow on the voxel text
           // (DataStream particles and the grid keep flowing via useFrame)
           idlePulseRef.current = gsap.to(animState, {
@@ -303,7 +320,7 @@ const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () =
       idlePulseRef.current = null;
       ctx.revert();
     };
-  }, [blockData, blocks, projectileData, animState]);
+  }, [blockData, blocks, projectileData, animState, markBlocksDirty]);
 
   // Finale phase — plays only once the build is done AND page assets are loaded
   useEffect(() => {
@@ -314,7 +331,9 @@ const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () =
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
+        onUpdate: markBlocksDirty,
         onComplete: () => {
+          markBlocksDirty();
           onCompleteRef.current();
         }
       });
@@ -417,13 +436,14 @@ const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () =
     });
 
     return () => ctx.revert();
-  }, [buildDone, ready, blockData, projectileData, animState]);
+  }, [buildDone, ready, blockData, projectileData, animState, markBlocksDirty]);
 
   const tempObject = useMemo(() => new THREE.Object3D(), []);
 
   useFrame((state, delta) => {
-    // 1. Matrix block updates
-    if (meshRef.current) {
+    // 1. Matrix block updates — only on frames where a tween moved a block
+    if (meshRef.current && blocksDirty.current) {
+      blocksDirty.current = false;
       blockData.forEach((block, i) => {
         tempObject.position.set(block.x, block.y, block.z);
         tempObject.rotation.set(block.rx, block.ry, block.rz);
@@ -450,8 +470,13 @@ const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () =
       materialRef.current.emissiveIntensity = animState.emissiveIntensity;
     }
 
-    // 4. Update projectile and trails position, scale, and opacity
-    if (projectileRef.current) {
+    // 4. Update projectile and trails position, scale, and opacity — skipped
+    //    while the projectile is at scale 0 and already written as such
+    const projectileIdle =
+      projectileData.scale === 0 && projectileApplied.current === 0;
+    if (!projectileIdle) projectileApplied.current = projectileData.scale;
+
+    if (projectileRef.current && !projectileIdle) {
       projectileRef.current.position.set(projectileData.x, projectileData.y, projectileData.z);
       projectileRef.current.scale.setScalar(projectileData.scale);
       if (projectileRef.current.material) {
@@ -459,7 +484,7 @@ const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () =
       }
     }
 
-    if (trail1Ref.current) {
+    if (trail1Ref.current && !projectileIdle) {
       trail1Ref.current.position.set(projectileData.tx1, projectileData.ty1, projectileData.tz1);
       trail1Ref.current.scale.setScalar(projectileData.scale * 0.8);
       if (trail1Ref.current.material) {
@@ -467,7 +492,7 @@ const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () =
       }
     }
 
-    if (trail2Ref.current) {
+    if (trail2Ref.current && !projectileIdle) {
       trail2Ref.current.position.set(projectileData.tx2, projectileData.ty2, projectileData.tz2);
       trail2Ref.current.scale.setScalar(projectileData.scale * 0.6);
       if (trail2Ref.current.material) {
@@ -475,7 +500,7 @@ const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () =
       }
     }
 
-    if (trail3Ref.current) {
+    if (trail3Ref.current && !projectileIdle) {
       trail3Ref.current.position.set(projectileData.tx3, projectileData.ty3, projectileData.tz3);
       trail3Ref.current.scale.setScalar(projectileData.scale * 0.4);
       if (trail3Ref.current.material) {
@@ -483,7 +508,7 @@ const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () =
       }
     }
 
-    if (pointLightRef.current) {
+    if (pointLightRef.current && !projectileIdle) {
       pointLightRef.current.intensity = projectileData.scale * 15;
     }
 
@@ -638,7 +663,10 @@ const LoadingScreen = memo(({ ready, onMounted, onExitStart, onLoadComplete }: L
         {/* Subtle blueprint grid overlay */}
         <div className="absolute inset-0 z-10 pointer-events-none opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px]" />
 
-        <Canvas orthographic camera={{ position: [0, 0, 20], zoom: zoomLevel }} dpr={[1, 1.5]} gl={{ antialias: false, alpha: false, powerPreference: "high-performance" }} shadows className="w-full h-full">
+        {/* stencil: false drops a buffer nothing here draws with; every other
+            renderer setting — shadows, DPR, tone mapping — is untouched so the
+            picture is the same one. */}
+        <Canvas orthographic camera={{ position: [0, 0, 20], zoom: zoomLevel }} dpr={[1, 1.5]} gl={{ antialias: false, alpha: false, stencil: false, powerPreference: "high-performance" }} shadows className="w-full h-full">
           <color attach="background" args={["#020202"]} />
           <ambientLight intensity={0.4} />
           <directionalLight position={[10, 20, 10]} intensity={1.5} color="#ffffff" castShadow shadow-mapSize={[1024, 1024]} />

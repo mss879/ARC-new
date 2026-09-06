@@ -21,7 +21,10 @@ export type AnalyticsEventKind =
   | "whatsapp_click"
   | "form_start"
   | "form_field"
+  /** A press of the submit button, whether or not it went anywhere. */
+  | "form_attempt"
   | "form_abandon"
+  /** A send the server accepted — only ever reported by the form itself. */
   | "form_submit"
   | "chat_open"
   | "chat_message"
@@ -126,6 +129,12 @@ export type SessionProgress = {
   converted: boolean;
   conversion_kind?: string | null;
   identified_email?: string | null;
+  /**
+   * Client-side only. Every conversion this session has recorded, by lead
+   * id, so a second click on the same WhatsApp link or a re-report of the
+   * same success is not a second conversion. The collector ignores it.
+   */
+  lead_ids?: string[];
 };
 
 /** The POST body of /api/analytics/collect. */

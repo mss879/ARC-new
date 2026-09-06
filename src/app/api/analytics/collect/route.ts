@@ -44,7 +44,7 @@ setInterval(() => {
 const EVENT_KINDS = new Set([
   "session_start", "page_view", "page_exit", "scroll_depth", "click",
   "cta_click", "outbound_click", "download", "tel_click", "mailto_click",
-  "whatsapp_click", "form_start", "form_field", "form_abandon", "form_submit",
+  "whatsapp_click", "form_start", "form_field", "form_attempt", "form_abandon", "form_submit",
   "chat_open", "chat_message", "video_play", "video_complete", "search",
   "copy", "rage_click", "dead_click", "exit_intent", "error", "web_vital",
   "conversion", "session_end",
@@ -432,8 +432,10 @@ export async function POST(req: Request) {
       );
     }
 
-    // Keep the legacy thin log alive so /admin keeps working unchanged.
-    if (!isBot) {
+    // Keep the legacy thin log alive so /admin keeps working unchanged. Not
+    // for preview or dev traffic: a developer clicking through localhost is
+    // not a visit the site's own dashboard should count.
+    if (!isBot && !sessionRow.site.endsWith(":preview")) {
       const pageViews = events.filter((e) => e.kind === "page_view");
       for (const view of pageViews) {
         await supabase

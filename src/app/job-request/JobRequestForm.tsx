@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { supabase } from '@/lib/supabase';
+import { trackFormSubmitted } from '@/lib/analytics/tracker';
 import { CheckCircle, Loader2, ArrowRight, Sparkles, Globe, Palette, Bot } from 'lucide-react';
 import Link from 'next/link';
 
@@ -91,6 +92,9 @@ export default function JobRequestForm() {
                 console.error(supaError);
                 setError('Something went wrong. Please try again.');
             } else {
+                // Stored — a project request is an enquiry, so this is a
+                // conversion, recorded only now that the write succeeded.
+                trackFormSubmitted('job_request', 'job_request');
                 setSubmitted(true);
             }
         } catch {
@@ -155,6 +159,7 @@ export default function JobRequestForm() {
                 {/* Form Card */}
                 <form
                     onSubmit={handleSubmit}
+                    data-form="job_request"
                     className="bg-zinc-900/80 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 space-y-8"
                 >
                     {/* Contact Details */}

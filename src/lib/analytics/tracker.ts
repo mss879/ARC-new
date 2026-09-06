@@ -28,6 +28,12 @@
  *     hour behind another window is not an hour of attention, so
  *     the clock only runs while the page is visible AND the
  *     visitor has done something in the last 30 seconds.
+ *
+ *   • A conversion is a confirmed outcome, never an inference. The
+ *     tracker's own listeners record form starts and submit ATTEMPTS;
+ *     form_submit and the conversion are reported by the form that
+ *     saw the server accept the send, carrying one lead id that the
+ *     CRM was handed too. See `trackFormSubmitted`.
  */
 
 import type {
@@ -352,6 +358,69 @@ let engagementTicker: ReturnType<typeof setInterval> | null = null;
 let currentPath = "/";
 let pageMaxScroll = 0;
 
+// ── preview and test traffic ────────────────────────────────────────────────
+
+/** Hosts the production site answers on. Anything else is a preview or a dev box. */
+const PRODUCTION_HOSTS = new Set(["www.arcai.agency", "arcai.agency"]);
+
+/**
+ * The label stored on every row.
+ *
+ * A Netlify deploy preview, a branch deploy and `next dev` all run this
+ * exact code against the same collector, and used to file their rows under
+ * the production label — a developer clicking through the contact form on
+ * localhost was a conversion in the CRM. Anything not served from the
+ * production host is labelled `arcai.agency:preview`; the CRM filters on
+ * the bare label and never sees it.
+ */
+function siteLabel(): string {
+  try {
+    if (PRODUCTION_HOSTS.has(window.location.hostname.toLowerCase())) return SITE;
+  } catch {
+    /* no window — fall through */
+  }
+  return `${SITE}:preview`;
+}
+
+/**
+ * Test mode: `?arc_test=1` on any page marks every event this visit sends
+ * with `test: true` — the CRM's lead ledger files those as tests, not
+ * leads — and mirrors the event stream to `window.__arcAnalyticsLog`, so a
+ * form or a WhatsApp route can be checked end to end on the live site
+ * without moving a single number. `?arc_test=0` turns it off again.
+ */
+const TEST_PARAM = "arc_test";
+const TEST_KEY = "arc_an_test";
+let testMode = false;
+
+function detectTestMode(params: URLSearchParams): boolean {
+  try {
+    const flag = params.get(TEST_PARAM);
+    if (flag === "1") window.sessionStorage.setItem(TEST_KEY, "1");
+    else if (flag === "0") window.sessionStorage.removeItem(TEST_KEY);
+    return window.sessionStorage.getItem(TEST_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+declare global {
+  interface Window {
+    __arcAnalyticsLog?: TrackedEvent[];
+  }
+}
+
+function debugLog(event: TrackedEvent): void {
+  if (!testMode) return;
+  try {
+    const log = (window.__arcAnalyticsLog ??= []);
+    log.push(event);
+    if (log.length > 500) log.shift();
+  } catch {
+    /* nothing to log to */
+  }
+}
+
 function nextSeq(): number {
   const n = Number(read(K.seq) || 0) + 1;
   write(K.seq, String(n));
@@ -467,7 +536,7 @@ function enqueue(
     return;
   }
   try {
-    queue.push({
+    const event: TrackedEvent = {
       kind,
       seq: nextSeq(),
       occurred_at: new Date().toISOString(),
@@ -478,8 +547,10 @@ function enqueue(
       element_text: fields.element_text ?? null,
       href: fields.href ?? null,
       value: fields.value ?? null,
-      meta: fields.meta ?? {},
-    });
+      meta: testMode ? { ...(fields.meta ?? {}), test: true } : (fields.meta ?? {}),
+    };
+    queue.push(event);
+    debugLog(event);
     write(K.seenAt, String(Date.now()));
     mirrorToGa4(kind, fields);
     if (queue.length >= FLUSH_AT_QUEUE) flush();
@@ -627,6 +698,10 @@ function instrumentClicks(): void {
         });
       }
 
+      // A control that reports itself (the floating WhatsApp button, the chat
+      // box) opts out here, or every one of its clicks is recorded twice.
+      if (target.closest("[data-analytics-ignore]")) return;
+
       const anchor = target.closest("a") as HTMLAnchorElement | null;
       const button = target.closest("button,[role='button'],[data-cta]") as HTMLElement | null;
 
@@ -635,22 +710,19 @@ function instrumentClicks(): void {
         const label = labelOf(anchor);
         const element = describe(anchor);
 
+        // A hand raised, not yet a message: recorded as the click it is and
+        // as a contact_click conversion once per session — never as an
+        // enquiry. See the conversions section below.
         if (href.startsWith("tel:")) {
-          enqueue("tel_click", { href, element, element_text: label });
-          markConversion("call_click");
+          trackContactClick("call_click", href, { element, element_text: label });
           return;
         }
         if (href.startsWith("mailto:")) {
-          enqueue("mailto_click", { href, element, element_text: label });
-          // Emailing us is a lead. tel: and WhatsApp were already credited
-          // and this was not, so every visitor who read the contact page and
-          // chose email over the form was recorded as a bounce with a click.
-          markConversion("email_click");
+          trackContactClick("email_click", href, { element, element_text: label });
           return;
         }
         if (/wa\.me|api\.whatsapp\.com|whatsapp:/i.test(href)) {
-          enqueue("whatsapp_click", { href, element, element_text: label });
-          markConversion("whatsapp_click");
+          trackContactClick("whatsapp_click", href, { element, element_text: label });
           return;
         }
         if (/\.(pdf|docx?|xlsx?|pptx?|zip|csv|txt|mp4|mp3)(\?|$)/i.test(href)) {
@@ -665,6 +737,16 @@ function instrumentClicks(): void {
           return;
         }
         enqueue("click", { href, element, element_text: label });
+        return;
+      }
+
+      // A submit button inside a form is that form's attempt — recorded by the
+      // submit listener — not a call-to-action click on top of it.
+      if (
+        button &&
+        (button as HTMLButtonElement).type === "submit" &&
+        button.closest("form")
+      ) {
         return;
       }
 
@@ -691,34 +773,95 @@ function instrumentClicks(): void {
   );
 }
 
-function instrumentForms(): void {
-  const touched = new Map<string, { started: number; submitted: boolean; fields: Set<string> }>();
+// ── forms ───────────────────────────────────────────────────────────────────
+//
+// What the tracker can see for itself: the first time somebody focuses a
+// field (form_start), which fields they touch (form_field), every press of
+// the submit button (form_attempt) and a form left unfinished (form_abandon).
+// What it CANNOT see is whether a submission WORKED — the native submit event
+// fires before the component has validated anything and long before the
+// server has answered. The version that inferred form_submit and a conversion
+// from that event recorded a conversion for every rejected send, for every
+// spam script that dispatched a submit without ever focusing a field, and —
+// because the footer newsletter box is on every page — for mailing-list
+// signups made on the contact page, under the name "contact_form". Over one
+// month that produced 15 "conversions" from a single script and 0 from
+// enquiries, with 3 form starts against 15 submits.
+//
+// So form_submit is only ever recorded by the component that made the request
+// and saw it accepted, through `trackFormSubmitted`. A form names itself with
+// `data-form="…"` (falling back to id, then name); a form that is not a form
+// in the visitor's sense — the chat box's message input — carries
+// `data-analytics-ignore` and is left alone entirely.
 
-  const formId = (form: HTMLFormElement | null): string =>
-    (form && (form.id || form.getAttribute("name") || form.getAttribute("data-form"))) || "form";
+type FormRecord = {
+  id: string;
+  started: number;
+  /** Presses of the submit button, successful or not. */
+  attempts: number;
+  /** Set only by trackFormSubmitted — a confirmed, server-accepted send. */
+  submitted: boolean;
+  fields: Set<string>;
+};
 
-  document.addEventListener(
-    "focusin",
-    (e) => {
-      markActivity();
-      const el = e.target as HTMLInputElement | null;
-      const form = el?.form ?? null;
-      if (!form) return;
-      const id = formId(form);
-      if (!touched.has(id)) {
-        touched.set(id, { started: Date.now(), submitted: false, fields: new Set() });
-        bump("forms_started");
-        enqueue("form_start", { element: id, meta: { form_id: id } });
-      }
-      const name = el?.name || el?.id || el?.type || "field";
-      const record = touched.get(id);
-      if (record && !record.fields.has(name)) {
-        record.fields.add(name);
-        enqueue("form_field", { element: id, meta: { form_id: id, field: name } });
-      }
-    },
-    { capture: true },
+/** Forms touched on this page, by their analytics id. */
+const forms = new Map<string, FormRecord>();
+
+function formIdOf(form: HTMLFormElement | null): string {
+  return (
+    (form && (form.getAttribute("data-form") || form.id || form.getAttribute("name"))) ||
+    "form"
   );
+}
+
+/** Anything inside a `data-analytics-ignore` boundary is not a form worth a row. */
+function isIgnored(el: Element | null): boolean {
+  return Boolean(el?.closest("[data-analytics-ignore]"));
+}
+
+const secondsSince = (t: number): number => Math.round((Date.now() - t) / 1000);
+
+/**
+ * The first interaction with a form. Idempotent per form per page, so
+ * form_start is at most one per form — which is what lets "starts ≥ submits"
+ * hold as an invariant rather than a hope.
+ */
+function noteFormStart(id: string, implicit = false): FormRecord {
+  let record = forms.get(id);
+  if (!record) {
+    record = { id, started: Date.now(), attempts: 0, submitted: false, fields: new Set() };
+    forms.set(id, record);
+    bump("forms_started");
+    enqueue("form_start", {
+      element: id,
+      // `implicit` marks a start the tracker never saw happen: a success was
+      // reported for a form nobody focused. A person cannot do that; a
+      // script can. The CRM's ledger reads it.
+      meta: implicit ? { form_id: id, implicit: true } : { form_id: id },
+    });
+  }
+  return record;
+}
+
+function instrumentForms(): void {
+  // The first focus on a field starts the form, and so does the first
+  // character typed into one: a browser autofill, and some mobile keyboards,
+  // change a value without ever focusing it, and a person who did that has
+  // still started the form.
+  const touchField = (e: Event) => {
+    markActivity();
+    const el = e.target as HTMLInputElement | null;
+    const form = el?.form ?? null;
+    if (!form || isIgnored(form)) return;
+    const record = noteFormStart(formIdOf(form));
+    const name = el?.name || el?.id || el?.type || "field";
+    if (!record.fields.has(name)) {
+      record.fields.add(name);
+      enqueue("form_field", { element: record.id, meta: { form_id: record.id, field: name } });
+    }
+  };
+  document.addEventListener("focusin", touchField, { capture: true });
+  document.addEventListener("input", touchField, { capture: true });
 
   // An email typed into any form identifies the session, which is what
   // links anonymous browsing to the lead that shows up in the CRM.
@@ -726,7 +869,7 @@ function instrumentForms(): void {
     "change",
     (e) => {
       const el = e.target as HTMLInputElement | null;
-      if (!el || el.type !== "email") return;
+      if (!el || el.type !== "email" || isIgnored(el)) return;
       const value = (el.value || "").trim();
       if (value && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value)) {
         saveProgress({ identified_email: value.slice(0, 200) });
@@ -735,80 +878,43 @@ function instrumentForms(): void {
     { capture: true },
   );
 
+  // Capture phase: this runs before the component's own onSubmit, so it sees
+  // every press of the button — including the ones validation then refuses.
+  // That is exactly why it records an ATTEMPT and nothing more.
   document.addEventListener(
     "submit",
     (e) => {
       const form = e.target as HTMLFormElement | null;
-      // A form that reports its own outcome opts out here.
-      //
-      // This listener is capture-phase, so it runs BEFORE the component's
-      // onSubmit — before validation has been checked and long before the
-      // request has succeeded. It was therefore recording a submit and an
-      // irreversible conversion every time someone pressed the button on a
-      // form that then refused to send, which is the most expensive kind of
-      // wrong number: it inflates exactly the metric decisions are made on.
-      if (form?.hasAttribute("data-analytics-manual")) return;
-      const id = formId(form);
-      const record = touched.get(id);
-      if (record) record.submitted = true;
-      const kind = conversionKind(form);
-      enqueue("form_submit", {
+      if (!form || isIgnored(form)) return;
+      const id = formIdOf(form);
+      const record = forms.get(id);
+      if (record) record.attempts += 1;
+      enqueue("form_attempt", {
         element: id,
-        value: record ? Math.round((Date.now() - record.started) / 1000) : null,
+        value: record ? secondsSince(record.started) : null,
         meta: {
           form_id: id,
+          attempt: record?.attempts ?? 1,
           fields: record ? [...record.fields] : [],
-          // What this submit was taken to be, so a "conversion" can always be
-          // traced back to the form that claimed it.
-          intent: kind ?? "none",
+          // A submit on a form nobody ever focused is not a person.
+          touched: Boolean(record),
         },
       });
-      if (kind) markConversion(kind);
     },
     { capture: true },
   );
 
   window.addEventListener("pagehide", () => {
-    for (const [id, record] of touched) {
+    for (const [id, record] of forms) {
       if (record.submitted) continue;
       bump("forms_abandoned");
       enqueue("form_abandon", {
         element: id,
-        value: Math.round((Date.now() - record.started) / 1000),
-        meta: { form_id: id, fields: [...record.fields] },
+        value: secondsSince(record.started),
+        meta: { form_id: id, fields: [...record.fields], attempts: record.attempts },
       });
     }
   });
-}
-
-/**
- * What a form submit was, or null when it is not a conversion at all.
- *
- * A conversion has to mean "somebody asked us to get in touch". It used to
- * mean "a form was submitted anywhere", which quietly made the newsletter
- * box in the FOOTER — present on every page — the single biggest source of
- * conversions on the site: over thirty days the dashboard reported 17
- * conversions, of which 15 were footer signups by one spam script and 0
- * were enquiries. A metric that counts a mailing-list signup and an £8k
- * enquiry as the same event cannot be used to decide anything, and every
- * scan of the data said so.
- *
- * So: a form declares what it is with `data-analytics-intent`, or it is
- * identified by the page it lives on. Anything unrecognised is recorded as
- * a submit and is NOT a conversion — the safe direction, because an
- * uncounted conversion is a number that is too low, while a counted
- * non-conversion is a number that is wrong in a way nobody can see.
- */
-function conversionKind(form: HTMLFormElement | null): string | null {
-  const declared = form?.getAttribute("data-analytics-intent")?.trim();
-  if (declared) return declared === "none" ? null : declared;
-
-  const p = currentPath;
-  if (p.startsWith("/contact")) return "contact_form";
-  if (p.startsWith("/careers")) return "career_application";
-  if (p.startsWith("/job-request")) return "job_request";
-  if (p.startsWith("/review")) return "review";
-  return null;
 }
 
 function instrumentMisc(): void {
@@ -932,14 +1038,208 @@ export function trackEvent(
   enqueue(kind, fields);
 }
 
-/** Flag the session as converted. Idempotent — the first conversion wins. */
-export function markConversion(kind: string, meta: Record<string, unknown> = {}): void {
-  const p = progress();
-  if (!p.converted) {
-    saveProgress({ converted: true, conversion_kind: kind });
+// ── conversions ─────────────────────────────────────────────────────────────
+//
+// A conversion is a confirmed outcome with a category, recorded once:
+//
+//   enquiry        somebody asked us to get in touch and the server accepted
+//                  it — the contact form, a project request, an email or a
+//                  phone number given to the chat agent. The ONLY category
+//                  that marks the session converted, and the only one the
+//                  CRM counts as a conversion unless a person says otherwise.
+//   contact_click  a hand raised but not yet a message: WhatsApp, tel: and
+//                  mailto: clicks. Recorded in the CRM's lead ledger for
+//                  someone to confirm or dismiss; never a conversion on its
+//                  own, so the "Converted" stage can never exceed "Showed
+//                  intent".
+//   other          a form that is not a lead at all — newsletter, a job
+//                  application, a client review. A submit, never a
+//                  conversion.
+//
+// Every conversion carries a lead id. For an enquiry the form mints it BEFORE
+// the request and sends it to the CRM with the enquiry, so the analytics row
+// and the CRM lead share one key and reconcile exactly. For a contact click it
+// is derived from the session and the kind, so ten clicks on the same
+// WhatsApp button in one visit are one conversion, not ten.
+
+export type ConversionCategory = "enquiry" | "contact_click" | "other";
+
+const CONVERSION_CATEGORY: Record<string, ConversionCategory> = {
+  contact_form: "enquiry",
+  chat_lead: "enquiry",
+  job_request: "enquiry",
+  proposal_request: "enquiry",
+  whatsapp_click: "contact_click",
+  call_click: "contact_click",
+  email_click: "contact_click",
+  newsletter: "other",
+  career_application: "other",
+  review: "other",
+};
+
+/** What a conversion kind is. Unknown kinds are "other" — the safe direction. */
+export function conversionCategory(kind: string): ConversionCategory {
+  return CONVERSION_CATEGORY[kind] ?? "other";
+}
+
+/** A fresh lead id, minted by a form before it sends so the CRM gets the same one. */
+export function newLeadId(): string {
+  return uid("lead");
+}
+
+/** The ids a form sends with an enquiry so the CRM can put the lead next to the visit. */
+export function getAnalyticsIdentity(): {
+  session_id: string | null;
+  visitor_id: string | null;
+  test: boolean;
+} {
+  return {
+    session_id: context?.session_id ?? read(K.session),
+    visitor_id: context?.visitor_id ?? read(K.visitor),
+    test: testMode,
+  };
+}
+
+/** Lead ids recorded on this page — the dedupe that survives a storage-less browser. */
+const recordedLeadIds = new Set<string>();
+
+/**
+ * Record a conversion. Returns its lead id, or null when the kind is not a
+ * conversion at all. Idempotent per lead id.
+ *
+ * The session is flagged `converted` for enquiries only, and the first
+ * enquiry names `conversion_kind`. The conversion EVENT is what the CRM's
+ * ledger is built from; the flag is a summary of it.
+ */
+export function markConversion(
+  kind: string,
+  meta: Record<string, unknown> = {},
+): string | null {
+  try {
+    const category = conversionCategory(kind);
+    if (category === "other") return null;
+
+    const sessionId = context?.session_id ?? read(K.session) ?? "nosession";
+    const given = typeof meta.lead_id === "string" && meta.lead_id ? meta.lead_id : null;
+    const leadId =
+      given ?? (category === "contact_click" ? `${kind}:${sessionId}` : newLeadId());
+
+    const p = progress();
+    const seen = Array.isArray(p.lead_ids) ? p.lead_ids : [];
+    if (recordedLeadIds.has(leadId) || seen.includes(leadId)) return leadId;
+    recordedLeadIds.add(leadId);
+
+    const patch: Partial<SessionProgress> = { lead_ids: [...seen, leadId].slice(-50) };
+    if (category === "enquiry" && !p.converted) {
+      patch.converted = true;
+      patch.conversion_kind = kind;
+    }
+    saveProgress(patch);
+
+    enqueue("conversion", {
+      element_text: kind,
+      meta: { ...meta, kind, category, lead_id: leadId },
+    });
+    flush();
+    return leadId;
+  } catch {
+    return null;
   }
-  enqueue("conversion", { element_text: kind, meta: { ...meta, kind } });
-  flush();
+}
+
+type ContactClickKind = "whatsapp_click" | "call_click" | "email_click";
+
+const CONTACT_EVENT: Record<ContactClickKind, AnalyticsEventKind> = {
+  whatsapp_click: "whatsapp_click",
+  call_click: "tel_click",
+  email_click: "mailto_click",
+};
+
+/** The most recent contact click, so a double-click is one click. */
+let lastContactClick: { key: string; at: number } | null = null;
+const CONTACT_CLICK_DEBOUNCE_MS = 1500;
+
+/**
+ * A click on a WhatsApp, tel: or mailto: link — the click event itself every
+ * time, and a contact_click conversion the first time per session.
+ */
+export function trackContactClick(
+  kind: ContactClickKind,
+  href: string,
+  fields: { element?: string | null; element_text?: string | null; surface?: string | null } = {},
+): void {
+  try {
+    const key = `${kind}|${href}`;
+    const now = Date.now();
+    if (
+      lastContactClick &&
+      lastContactClick.key === key &&
+      now - lastContactClick.at < CONTACT_CLICK_DEBOUNCE_MS
+    ) {
+      return;
+    }
+    lastContactClick = { key, at: now };
+    const surface = fields.surface ? { surface: fields.surface } : {};
+    enqueue(CONTACT_EVENT[kind], {
+      href,
+      element: fields.element ?? null,
+      element_text: fields.element_text ?? null,
+      meta: surface,
+    });
+    markConversion(kind, { href, ...surface });
+  } catch {
+    /* a click that cannot be recorded is still a click */
+  }
+}
+
+/**
+ * The one way a form_submit is recorded: by the component that made the
+ * request, after the server accepted it.
+ *
+ * Emits the form_submit and, for an enquiry, the conversion — both carrying
+ * the lead id, the same one the form already sent to the CRM when it has
+ * one. A success for a form the tracker never saw anybody touch gets an
+ * implicit form_start first, so starts ≥ submits always holds, and is marked
+ * `untouched` so the ledger can treat it with suspicion.
+ */
+export function trackFormSubmitted(
+  formId: string,
+  kind: string,
+  opts: { lead_id?: string | null; meta?: Record<string, unknown>; value?: number | null } = {},
+): string | null {
+  try {
+    const existing = forms.get(formId);
+    const record = existing ?? noteFormStart(formId, true);
+    record.submitted = true;
+
+    const category = conversionCategory(kind);
+    const leadId = category === "enquiry" ? opts.lead_id || newLeadId() : null;
+
+    enqueue("form_submit", {
+      element: formId,
+      value: opts.value ?? secondsSince(record.started),
+      meta: {
+        ...(opts.meta ?? {}),
+        form_id: formId,
+        intent: kind,
+        category,
+        fields: [...record.fields],
+        attempts: record.attempts,
+        ...(leadId ? { lead_id: leadId } : {}),
+        ...(existing ? {} : { untouched: true }),
+      },
+    });
+    if (leadId) {
+      markConversion(kind, { ...(opts.meta ?? {}), form_id: formId, lead_id: leadId });
+    } else {
+      flush();
+    }
+    // A second send is a second form fill, not a continuation of the first.
+    forms.delete(formId);
+    return leadId;
+  } catch {
+    return null;
+  }
 }
 
 /** Attach a known email to the session once the visitor identifies themselves. */
@@ -986,6 +1286,7 @@ export function initAnalytics(path: string): void {
 
   try {
     const params = new URLSearchParams(window.location.search);
+    testMode = detectTestMode(params);
     const referrer = document.referrer || null;
     const isNewSession = sessionExpired();
 
@@ -1026,7 +1327,7 @@ export function initAnalytics(path: string): void {
       : {
           session_id: sessionId,
           visitor_id: visitorId,
-          site: SITE,
+          site: siteLabel(),
           entry_path: path,
           landing_page_title: document.title || null,
           landing_referrer: referrer,
