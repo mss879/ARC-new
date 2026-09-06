@@ -751,12 +751,19 @@ function instrumentForms(): void {
       const id = formId(form);
       const record = touched.get(id);
       if (record) record.submitted = true;
+      const kind = conversionKind(form);
       enqueue("form_submit", {
         element: id,
         value: record ? Math.round((Date.now() - record.started) / 1000) : null,
-        meta: { form_id: id, fields: record ? [...record.fields] : [] },
+        meta: {
+          form_id: id,
+          fields: record ? [...record.fields] : [],
+          // What this submit was taken to be, so a "conversion" can always be
+          // traced back to the form that claimed it.
+          intent: kind ?? "none",
+        },
       });
-      markConversion(conversionKindForPath());
+      if (kind) markConversion(kind);
     },
     { capture: true },
   );
@@ -774,14 +781,34 @@ function instrumentForms(): void {
   });
 }
 
-/** Which conversion a form submit on this page most likely was. */
-function conversionKindForPath(): string {
+/**
+ * What a form submit was, or null when it is not a conversion at all.
+ *
+ * A conversion has to mean "somebody asked us to get in touch". It used to
+ * mean "a form was submitted anywhere", which quietly made the newsletter
+ * box in the FOOTER — present on every page — the single biggest source of
+ * conversions on the site: over thirty days the dashboard reported 17
+ * conversions, of which 15 were footer signups by one spam script and 0
+ * were enquiries. A metric that counts a mailing-list signup and an £8k
+ * enquiry as the same event cannot be used to decide anything, and every
+ * scan of the data said so.
+ *
+ * So: a form declares what it is with `data-analytics-intent`, or it is
+ * identified by the page it lives on. Anything unrecognised is recorded as
+ * a submit and is NOT a conversion — the safe direction, because an
+ * uncounted conversion is a number that is too low, while a counted
+ * non-conversion is a number that is wrong in a way nobody can see.
+ */
+function conversionKind(form: HTMLFormElement | null): string | null {
+  const declared = form?.getAttribute("data-analytics-intent")?.trim();
+  if (declared) return declared === "none" ? null : declared;
+
   const p = currentPath;
   if (p.startsWith("/contact")) return "contact_form";
   if (p.startsWith("/careers")) return "career_application";
   if (p.startsWith("/job-request")) return "job_request";
   if (p.startsWith("/review")) return "review";
-  return "form_submit";
+  return null;
 }
 
 function instrumentMisc(): void {

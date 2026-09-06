@@ -19,6 +19,8 @@ const Footer = () => {
   const [email, setEmail] = useState("");
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [isSubscribing, setIsSubscribing] = useState(false);
+  /** Honeypot: stays empty for a person, gets filled by a bot. */
+  const [honeypot, setHoneypot] = useState("");
   const [subscribeStatus, setSubscribeStatus] = useState<{ type: "success" | "error" | null; message: string }>({ type: null, message: "" });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -32,7 +34,7 @@ const Footer = () => {
       const response = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim() }),
+        body: JSON.stringify({ email: email.trim(), company_website: honeypot }),
       });
 
       const data = await response.json();
@@ -288,7 +290,27 @@ const Footer = () => {
                 <p className="text-lg text-white">
                   Sign up for our newsletter to get latest insights and updates
                 </p>
-                <form onSubmit={handleSubmit} className="space-y-4">
+                {/* data-analytics-intent="none": a mailing-list signup is not a lead.
+                    Without this the footer form counted as a conversion on every
+                    page it appears on, which is every page. */}
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-4"
+                  data-analytics-intent="none"
+                >
+                  {/* Honeypot. Hidden from people and from screen readers, and
+                      out of the tab order, so anything that fills it is a script.
+                      The list had collected 66 addresses, most of them from one. */}
+                  <input
+                    type="text"
+                    name="company_website"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="absolute left-[-9999px] h-0 w-0 opacity-0"
+                  />
                   {/* Email Input */}
                   <div className="relative group">
                     <input

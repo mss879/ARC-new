@@ -41,6 +41,15 @@ export async function POST(req: NextRequest) {
 
         const { email } = body;
 
+        // Honeypot: a field hidden from people and filled by scripts. Answered
+        // with a cheerful 200 rather than an error — a bot that is told it
+        // failed simply tries again, and this list had collected 66 addresses,
+        // most of them from one script working through obfuscated Gmail
+        // variants. Nothing is written.
+        if (typeof body.company_website === 'string' && body.company_website.trim()) {
+            return NextResponse.json({ success: true });
+        }
+
         // Basic email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email) || email.length > 254) {
