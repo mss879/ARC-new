@@ -173,7 +173,7 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                 </div>
               </Link>
 
-              {/* Client login — smaller on purpose: it is for the handful of
+              {/* Client Portal — smaller on purpose: it is for the handful of
                   people who already work with us, not a headline nav item. */}
               <a
                 href="https://www.arcai.online/portal/login"
@@ -183,7 +183,7 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
               >
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg lg:text-xl font-semibold text-[rgb(202,202,202)] group-hover:text-white transition-colors uppercase tracking-wider">
-                    Client login
+                    Client Portal
                   </h3>
                   <div className="h-px flex-1 ml-8 bg-[rgb(255,73,37)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>

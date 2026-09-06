@@ -198,15 +198,6 @@ const Navbar = memo(() => {
 
               {/* CTA Button and Menu - Close together */}
               <div className="flex items-center gap-2 md:gap-3">
-                {/* Existing clients have a project page; until now the only
-                    way back to it was the link they were once texted. */}
-                <a
-                  href="https://www.arcai.online/portal/login"
-                  className={`text-xs font-medium tracking-wider text-white/60 hover:text-white transition-all duration-300 ${isMenuOpen ? 'opacity-0 invisible w-0' : 'opacity-100 visible'}`}
-                  aria-label="Client login"
-                >
-                  CLIENT LOGIN
-                </a>
                 <a
                   href="/contact"
                   className={`rounded-full border border-white/20 font-semibold tracking-wider text-white hover:bg-white/10 transition-all duration-300 ${isMenuOpen ? 'opacity-0 invisible w-0 px-0' : 'opacity-100 visible'} ${isScrolled ? "px-5 py-2 text-xs" : "px-6 lg:px-8 py-3 lg:py-4 text-sm lg:text-base"}`}
