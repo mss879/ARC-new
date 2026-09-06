@@ -172,22 +172,6 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                   <div className="h-px flex-1 ml-8 bg-[rgb(255,73,37)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
               </Link>
-
-              {/* Client Portal — smaller on purpose: it is for the handful of
-                  people who already work with us, not a headline nav item. */}
-              <a
-                href="https://www.arcai.online/portal/login"
-                onClick={onClose}
-                className="group block py-5 hover:opacity-100 opacity-70 transition-all duration-300"
-                style={{ animationDelay: "0.9s" }}
-              >
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg lg:text-xl font-semibold text-[rgb(202,202,202)] group-hover:text-white transition-colors uppercase tracking-wider">
-                    Client Portal
-                  </h3>
-                  <div className="h-px flex-1 ml-8 bg-[rgb(255,73,37)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                </div>
-              </a>
             </div>
           </div>
 
