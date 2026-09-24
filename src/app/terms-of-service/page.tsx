@@ -126,6 +126,13 @@ export default function TermsOfServicePage() {
               <li>Late payments may incur additional charges</li>
               <li>All prices are exclusive of applicable taxes unless stated otherwise</li>
             </ul>
+            <p className="mt-2">
+              Cancellations and refunds are covered by our{" "}
+              <a href="/refund-policy" className="text-[#FF4925] hover:underline">
+                Refund Policy
+              </a>
+              . Approved refunds are always made to the original payment method.
+            </p>
           </section>
 
           {/* 7 */}

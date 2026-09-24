@@ -415,6 +415,13 @@ const Footer = () => {
                 >
                   Terms of Service
                 </a>
+                <div className="w-px h-4 bg-[#333333]" />
+                <a
+                  href="/refund-policy"
+                  className="text-[#CACACA] text-sm hover:text-white transition-colors"
+                >
+                  Refund Policy
+                </a>
               </div>
             </div>
           </motion.div>

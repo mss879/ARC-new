@@ -112,6 +112,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             changeFrequency: 'yearly',
             priority: 0.3,
         },
+        {
+            url: `${baseUrl}/refund-policy`,
+            lastModified: getPageModDate('refund-policy'),
+            changeFrequency: 'yearly',
+            priority: 0.3,
+        },
         // NOTE: /ai-pricing and /web-pricing are intentionally excluded
         // because they have robots: { index: false, follow: false }
         {
