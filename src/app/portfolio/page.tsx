@@ -58,6 +58,94 @@ export const metadata: Metadata = {
 export default async function Portfolio() {
   const portfolioItems = [
     {
+      id: 7,
+      title: "Island Jerky",
+      description: "Premium handcrafted beef jerky made in Sri Lanka — a bold, flavor-led store for Original and Honey Garlic Nai Miris with fast checkout and cash on delivery.",
+      image: "/islandjerky.webp",
+      link: "https://islandjerky.lk",
+      status: "live"
+    },
+    {
+      id: 67,
+      title: "Jolly's Creamery",
+      description: "Styled ice cream carts with a live host for weddings, corporate events and parties across Sri Lanka, presented through a warm, feel-good website with online event reservations and a custom admin for enquiries, bookings and the sales pipeline.",
+      image: "/jollys-creamery.webp",
+      link: "https://jollyscreamery.com",
+      status: "live"
+    },
+    {
+      id: 66,
+      title: "Island Adventures",
+      description: "Tailor-made, responsible Sri Lanka journeys for trekkers, cyclists, birders, wildlife lovers and the culturally curious, with a content-managed website that lets the team keep tours, trip updates and stories current.",
+      image: "/island-adventures.webp",
+      link: "https://island-aus.netlify.app/",
+      status: "development"
+    },
+    {
+      id: 65,
+      title: "Dock One Solutions",
+      description: "Sri Lanka's tech store for laptops, storage devices, keyboards and mice — a bold, tech-led storefront with flash deals, island-wide delivery and cash on delivery, all run from a custom admin panel.",
+      image: "/dock-one-solutions.webp",
+      link: "https://dockonesolutions.com",
+      status: "live"
+    },
+    {
+      id: 64,
+      title: "Franley",
+      description: "A Sri Lankan men's accessories brand for the modern gentleman — neckties, cufflinks and finishing pieces sold through a refined storefront with guest checkout, order tracking and a full admin panel the owner runs without touching code.",
+      image: "/franley.webp",
+      link: "https://franley.lk",
+      status: "live"
+    },
+    {
+      id: 63,
+      title: "ARC OS POS",
+      description: "Point of sale for Sri Lankan shops — the till, the stock book, the credit book, the reports and the owner's phone, in English, Sinhala and Tamil, built to keep selling when the internet or the power goes.",
+      image: "/arc-os.webp",
+      link: "https://www.arc-os.online",
+      status: "live"
+    },
+    {
+      id: 62,
+      title: "Easy Ledger",
+      description: "Accounting, tax and payroll for Sri Lankan businesses — IRD-format tax invoices, bank reconciliation, VAT, SSCL and WHT, payroll with EPF and ETF, and an AI accountant that answers from your own books in English, Sinhala or Tamil.",
+      image: "/easy-ledger.webp",
+      link: "https://easyledger.lk",
+      status: "live"
+    },
+    {
+      id: 70,
+      title: "Royal Paradise Gems",
+      description: "Rare Ceylon sapphires, padparadscha, spinel and alexandrite, hand-selected in Sri Lanka, precision cut and independently certified — presented through a refined storefront with private viewing bookings and a custom back office.",
+      image: "/royal-paradise.webp",
+      link: "https://royal-paradise-1.netlify.app/",
+      status: "development"
+    },
+    {
+      id: 69,
+      title: "Armac Mart",
+      description: "Imported chocolates, snacks, beverages and pantry favourites from a Dehiwala convenience store, brought online with ten shoppable aisles, viral product drops and islandwide delivery.",
+      image: "/armac-mart.webp",
+      link: "https://armac-draft2.netlify.app",
+      status: "development"
+    },
+    {
+      id: 72,
+      title: "Cloud Healthcare",
+      description: "A Sri Lankan pharmaceutical company bringing medicines, medical devices and cosmeceuticals from leading global manufacturers — presented through a clean corporate site with a product portfolio by therapeutic area, careers and enquiries.",
+      image: "/cloud-healthcare.webp",
+      link: "https://cloud-1.netlify.app",
+      status: "development"
+    },
+    {
+      id: 71,
+      title: "Victoria Lakeside",
+      description: "Fully furnished contemporary villas on a private lakefront above the Victoria Reservoir in Digana, Kandy — presented through an interactive master plan of all fifteen lots, a page for every villa, a downloadable brochure and enquiries by call, WhatsApp or form.",
+      image: "/regal-victoria.webp",
+      link: "https://regalvictorialakeside.com",
+      status: "live"
+    },
+    {
       id: 60,
       title: "Fusion Hybrid Projects",
       description: "Fusion Hybrid prepares, enhances and presents residential and commercial property across Melbourne and the Mornington Peninsula, with one team managing every trade from scope to handover.",
@@ -79,6 +167,14 @@ export default async function Portfolio() {
       description: "Flow State designs custom AI and automation systems that replace slow, manual and disconnected workflows with connected operations that run themselves — fewer handoffs, cleaner data and processes that keep moving.",
       image: "/flow-state.png",
       link: "https://www.flowstate.lk",
+      status: "live"
+    },
+    {
+      id: 68,
+      title: "Lusako",
+      description: "Bottleless water purification and hydration for homes, offices and businesses across Sri Lanka — buy or rent UF and RO purifiers, find the right system in three quick questions and book installation and care online.",
+      image: "/lusako.webp",
+      link: "https://drinkingwater.lk",
       status: "live"
     },
     {
@@ -317,7 +413,6 @@ export default async function Portfolio() {
       id: 29,
       title: "Java Global Access Platform LLC",
       description: "Global Delivery for Tech & Professional Services. Structured professional services and managed operational support for overseas clients. We built a custom website, an internal CRM system, and an AI agent for customer support.",
-      results: "Operational efficiency ↑ 45%, Client management streamlined, Support response time ↓ 60%, AI-driven customer engagement",
       image: "/javagap.webp",
       link: "https://javagap.ae/",
       status: "live"
@@ -326,7 +421,6 @@ export default async function Portfolio() {
       id: 28,
       title: "Sponge Global (Pvt) Ltd",
       description: "We deliver innovative learning and development solutions, including customer eLearning, Immersive training, and talent development strategies.",
-      results: "Training engagement ↑ 40%, Course completion rate ↑ 35%, Client inquiries ↑ 50%, Interactive learning deployment",
       image: "/sponge-portfolio.webp",
       link: "https://www.spongeglobal.com/",
       status: "live"
@@ -335,7 +429,6 @@ export default async function Portfolio() {
       id: 27,
       title: "Delft Tours & Travel (Pvt) Ltd",
       description: "A premier Sri Lankan travel agency offering immersive, custom-tailored tours across the island. Discover the vibrant culture, pristine beaches, and exotic wildlife with expert local guides.",
-      results: "Tour bookings ↑ 55%, Custom itinerary requests ↑ 40%, Website engagement ↑ 65%, Seamless booking experience",
       image: "/delft-tours.webp",
       link: "https://www.delfttours.com/",
       status: "live"
@@ -344,7 +437,6 @@ export default async function Portfolio() {
       id: 26,
       title: "Secretaries Consultant Services (Pvt) Ltd",
       description: "Secretaries Consultant Services (Pvt) Ltd provides complete end-to-end support spanning the entire corporate lifecycle.",
-      results: "Operational efficiency ↑ 45%, Corporate workflow speed ↑ 40%, Admin overhead ↓ 35%, End-to-end support optimization",
       image: "/secertery-services.webp",
       link: "https://consultantservices.lk/",
       status: "live"
@@ -353,7 +445,6 @@ export default async function Portfolio() {
       id: 24,
       title: "Halo 360",
       description: "Digital agency focused on strategic partnerships for marketing and growth.",
-      results: "Custom website ↑ brand visibility 45%, SEO traffic ↑ 60%, Strategic partnership inquiries ↑ 35%, Client retention improvement",
       image: "/halo.webp",
       link: "https://halo360.online/",
       status: "live"
@@ -362,7 +453,6 @@ export default async function Portfolio() {
       id: 25,
       title: "EXIM Corporation",
       description: "Specializes in industrial manufacturing and partner networks in Sri Lanka.",
-      results: "Global network reach ↑ 40%, Supply chain efficiency ↑ 25%, Manufacturing inquiries ↑ 30%, Digital catalog engagement",
       image: "/exim.webp",
       link: "https://eximcpl.com",
       status: "live"
@@ -371,7 +461,6 @@ export default async function Portfolio() {
       id: 20,
       title: "Core Craft",
       description: "Premium web design and development agency offering custom website builds, UI/UX design, and brand identity solutions.",
-      results: "Custom website ↑ lead generation 45%, Integrated CRM system, Client management efficiency ↑ 60%, Modern design showcase",
       image: "/core-craft-screenshot.webp",
       link: "https://www.corecraft.agency",
       status: "live"
@@ -380,7 +469,6 @@ export default async function Portfolio() {
       id: 22,
       title: "Ontriq",
       description: "Sri Lanka's background verification and HR solutions provider offering 7-day turnaround for employment history, education, and criminal record checks, along with recruitment, payroll management, and business formation services.",
-      results: "Custom website ↑ client inquiries 52%, CRM system streamlined case tracking, Processing time ↓ 30%, Automated client communications",
       image: "/Ontriq-screenshot.webp",
       link: "https://www.ontriq.com",
       status: "live"
@@ -397,7 +485,6 @@ export default async function Portfolio() {
       id: 23,
       title: "KeysPlease",
       description: "Real estate marketplace for residential property sales in Sri Lanka featuring premium homes and investment properties with listings and purchase facilitation services.",
-      results: "Custom website ↑ property inquiries 67%, CRM system ↑ lead management efficiency 58%, Listing views ↑ 3.2×, Client follow-up rate ↑ 72%",
       image: "/KeysPlease-Screenshot.webp",
       link: "https://www.keysplease.shop",
       status: "live"
@@ -406,7 +493,6 @@ export default async function Portfolio() {
       id: 1,
       title: "DEK Studio",
       description: "Built a trust-forward MEP site that showcases end-to-end capability with clear project pathways.",
-      results: "Leads ↑ 31%, Proposal requests ↑ 24%, Avg. time on Services/Case Studies 2:18, Core Web Vitals pass 92%",
       image: "/dek-studio-screenshot.webp",
       link: "https://www.dek-studio.com/",
       status: "live"
@@ -415,7 +501,6 @@ export default async function Portfolio() {
       id: 2,
       title: "Vibe Web Studio",
       description: "Sales-first agency site with crisp offers, social proof, and conversion-optimized packages.",
-      results: "Qualified leads ↑ 1.9×, Form CVR ↑ +3.2pp (to 6.8%), SQLs/month 18 → 33, LCP 1.9s",
       image: "/vibewebstudio.webp",
       link: "https://vibewebstudio.com",
       status: "live"
@@ -424,7 +509,6 @@ export default async function Portfolio() {
       id: 3,
       title: "YBO Agency",
       description: "'Creative back office' positioning with modular service blocks and fast quote flows.",
-      results: "Inbound briefs ↑ 27%, Avg. deal size ↑ 14%, Bounce ↓ 11%, Return visits ↑ 22%",
       image: "/yboagency.webp",
       link: "https://yboagency.com",
       status: "live"
@@ -433,7 +517,6 @@ export default async function Portfolio() {
       id: 4,
       title: "Car Rush",
       description: "Marketplace UX for verified vehicles with transparent pricing and smart filters.",
-      results: "Listing views ↑ 38%, Contact-dealer CTR ↑ +2.6pp (to 9.4%), Saved searches 1.2k/mo, PDP exit ↓ 15%",
       image: "/carrush.webp",
       link: "https://www.carrush.lk/",
       status: "live"
@@ -442,7 +525,6 @@ export default async function Portfolio() {
       id: 5,
       title: "Car Arena Ceylon",
       description: "Dealer site emphasizing warranties, OEM upgrades, and nationwide support.",
-      results: "Test-drive bookings ↑ 29%, Finance enquiries ↑ 21%, Mobile call clicks ↑ 34%, LCP 2.2s",
       image: "/cararenaceylon.webp",
       link: "https://www.cararenaceylon.com/",
       status: "live"
@@ -451,25 +533,14 @@ export default async function Portfolio() {
       id: 6,
       title: "Hilltop Recruitment",
       description: "Heritage-led global recruitment with outcome-driven sector pages.",
-      results: "Candidate sign-ups ↑ 23%, Client enquiries ↑ 18%, Time-to-apply ↓ 17%, Organic impressions ↑ 41%",
       image: "/hiltopglobal.webp",
       link: "https://hiltopglobal.com/",
-      status: "live"
-    },
-    {
-      id: 7,
-      title: "Island Jerky",
-      description: "Artisan Sri Lankan jerky with flavor storytelling and fast checkout.",
-      results: "Conversion rate ↑ +0.7pp (to 2.4%), AOV ↑ 12%, Add-to-cart ↑ 19%, Email capture 4.6%",
-      image: "/islandjerky.webp",
-      link: "https://www.islandjerky.lk/",
       status: "live"
     },
     {
       id: 8,
       title: "Digital Kade",
       description: "Scalable catalogue UX; speed, filters, and useful search.",
-      results: "Search-to-purchase ↑ +2.1pp (to 6.3%), Revenue ↑ 16%, Pages/session 3.1 → 4.2, CLS ≤0.06",
       image: "/digitalkade.webp",
       link: "https://digitalkade.lk/",
       status: "live"
@@ -478,7 +549,6 @@ export default async function Portfolio() {
       id: 9,
       title: "Jacob Day Coaching",
       description: "High-accountability coaching with risk-reversal guarantee.",
-      results: "Discovery calls ↑ 26%, Program sign-ups ↑ 19%, Refund rate 1.8%, Social-proof clicks 540/mo",
       image: "/jacobday.webp",
       link: "https://www.jacobday.co/",
       status: "live"
@@ -487,7 +557,6 @@ export default async function Portfolio() {
       id: 10,
       title: "Mouttaki Coaching",
       description: "8-week transformation program with friction-free onboarding.",
-      results: "Lead→Client conversion ↑ +3.8pp (to 12.5%), CAC ↓ 14%, Completion rate 88%, NPS 64",
       image: "/mouttakicoaching.webp",
       link: "https://mouttakicoaching.com/",
       status: "live"
@@ -496,7 +565,6 @@ export default async function Portfolio() {
       id: 11,
       title: "ARC AI CRM System",
       description: "Custom-built CRM system with AI-powered features for streamlined client management and automation.",
-      results: "Enhanced client tracking, Automated workflows, AI-driven insights, Improved team collaboration",
       image: "/arc crm system.webp",
       link: "#",
       status: "live"
@@ -505,7 +573,6 @@ export default async function Portfolio() {
       id: 12,
       title: "Fit Bite",
       description: "Handcrafted protein-cookie brand with Ceylon flavors and custom protein (10–50 g).",
-      results: "Online sales ↑ 21%, AOV ↑ 11%, Subscribe-and-save uptake 7.9%, Repeat purchase 24%",
       image: "/fitbite.webp",
       link: "https://www.fitbite.shop/",
       status: "development"
@@ -514,7 +581,6 @@ export default async function Portfolio() {
       id: 14,
       title: "Inlaid Jewelry",
       description: "Three-generation family jeweler blending Tamil tradition with modern elegance.",
-      results: "Custom consults ↑ 28%, High-ticket orders ↑ 17%, Avg. session value ↑ 13%, Organic clicks ↑ 36%",
       image: "/cosmic-dusk.webp",
       link: "https://cosmic-dusk-c32013.netlify.app/",
       status: "development"
@@ -523,7 +589,6 @@ export default async function Portfolio() {
       id: 15,
       title: "Hijab Boutique",
       description: "Premium hijabs & modest fashion with streamlined PDPs and 30-day free returns.",
-      results: "Conversion rate ↑ +0.9pp (to 2.8%), Return rate ↓ 8%, Mobile CVR ↑ +1.1pp, Checkout abandonment ↓ 6%",
       image: "/hijabboutiquestore.webp",
       link: "https://hijabboutiquestore.netlify.app/",
       status: "development"
@@ -532,7 +597,6 @@ export default async function Portfolio() {
       id: 16,
       title: "Joe Fitness",
       description: "Lead-magnet microsite with a tight value ladder.",
-      results: "Lead capture 38%, Cost/lead ↓ 23%, Email open rate 41%, Guide downloads 820/mo",
       image: "/mellifluous-jalebi.webp",
       link: "https://mellifluous-jalebi-dd6aef.netlify.app/",
       status: "development"
@@ -541,7 +605,6 @@ export default async function Portfolio() {
       id: 17,
       title: "Essential Marketing",
       description: "Studio site turning briefs into bookable packages.",
-      results: "Booked projects ↑ 22%, Proposal acceptance ↑ +6.4pp (to 38%), Pipeline value LKR 14.6M, Avg. response time ↓ 19%",
       image: "/essentialmarketing.webp",
       link: "https://essentialmarketing.netlify.app",
       status: "development"
@@ -550,7 +613,6 @@ export default async function Portfolio() {
       id: 18,
       title: "Ceylon Motors",
       description: "Car discovery hub for buy/rent with type & price filters.",
-      results: "Filtered searches ↑ 33%, Dealer contacts 210/mo, Bounce ↓ 12%, Session duration 3:04",
       image: "/ceylonmotors.webp",
       link: "https://ceylonmotors.netlify.app",
       status: "development"
@@ -559,7 +621,6 @@ export default async function Portfolio() {
       id: 19,
       title: "Bakery website",
       description: "Modern AI-powered portfolio showcase with advanced animations.",
-      results: "Currently in development",
       image: "/prismatic-mooncake.webp",
       link: "https://prismatic-mooncake-640ca9.netlify.app",
       status: "development"
@@ -707,34 +768,6 @@ export default async function Portfolio() {
                       <p className="text-base md:text-lg text-zinc-300 leading-relaxed">
                         {item.description}
                       </p>
-
-                      {/* Results */}
-                      {item.results && (
-                        <div className="pt-3 mt-3 border-t border-zinc-700/50">
-                          <div className="flex items-center gap-2 mb-2">
-                            <svg
-                              className="w-4 h-4 text-green-500"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-                              />
-                            </svg>
-                            <p className="text-xs text-green-500 uppercase tracking-wider font-bold">
-                              Results
-                            </p>
-                          </div>
-                          <p className="text-sm md:text-base text-zinc-200 leading-relaxed font-medium">
-                            {item.results}
-                          </p>
-                        </div>
-                      )}
                     </div>
                   </>
                 );
