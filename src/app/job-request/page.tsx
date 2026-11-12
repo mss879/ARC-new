@@ -3,14 +3,14 @@ import JobRequestForm from "./JobRequestForm";
 
 // SEO Metadata for Job Request Page
 export const metadata: Metadata = {
-  title: "Start Your Project | ARC AI — AI & Web Agency UK & Sri Lanka",
+  title: "Start Your Project | ARC AI — AI & Web Agency Sri Lanka",
   description:
     "Submit your project request to ARC AI. Tell us about your website, AI automation, or branding needs and get a free consultation. No commitment required.",
   authors: [{ name: "ARC AI Agency" }],
   openGraph: {
     title: "Start Your Project | ARC AI",
     description:
-      "Submit your project request and get a free consultation from ARC AI — AI automation, web design, and branding experts in UK & Sri Lanka.",
+      "Submit your project request and get a free consultation from ARC AI — AI automation, web design, and branding experts in Sri Lanka.",
     url: "https://www.arcai.agency/job-request",
     siteName: "ARC AI Agency",
     images: [

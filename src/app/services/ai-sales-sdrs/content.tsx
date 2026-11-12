@@ -4,7 +4,6 @@ import { motion, Variants } from "framer-motion";
 import { ArrowUpRight, Search, Mails, Calendar, Users, Target, Activity } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 const letterContainer: Variants = {
     hidden: { opacity: 0 },
@@ -272,7 +271,6 @@ export default function AISalesSDRsContent() {
                 </div>
             </section>
 
-            <Footer />
         </div>
     );
 }

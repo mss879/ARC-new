@@ -3,8 +3,8 @@ import { Metadata } from "next";
 import AIContentGenerationContent from "./content";
 
 export const metadata: Metadata = {
-  title: "ARC AI | AI Content Generation Services UK & Sri Lanka",
-  description: "Scale content creation with AI in UK & Sri Lanka. ARC AI generates SEO articles, ad copy, social content & more — aligned with your brand, at scale.",
+  title: "AI Content Generation Services in Sri Lanka | ARC AI",
+  description: "Scale content creation with AI in Sri Lanka. ARC AI generates SEO articles, ad copy, social content & more — aligned with your brand, at scale.",
   authors: [{ name: "ARC AI Agency" }],
   openGraph: {
     title: "AI Content Generation Services | ARC AI",

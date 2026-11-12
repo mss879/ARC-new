@@ -9,7 +9,7 @@ export const revalidate = 3600; // Revalidate static cache every 1 hour (ISR)
 
 export const metadata: Metadata = {
     title: "Client Success Stories & Testimonials | ARC AI",
-    description: "Read real reviews and success stories from our partners in the UK & Sri Lanka. See how ARC AI's web design, branding, and AI automation transform operations.",
+    description: "Read real reviews and success stories from our partners in Sri Lanka. See how ARC AI's web design, branding, and AI automation transform operations.",
     authors: [{ name: "ARC AI Agency" }],
     openGraph: {
         title: "Client Success Stories & Testimonials | ARC AI",

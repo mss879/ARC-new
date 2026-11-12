@@ -5,6 +5,14 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import "./Footer.css";
 import { trackFormSubmitted } from "@/lib/analytics/tracker";
+import { company, hours, office, phones, socials, whatsapp } from "@/content/site-facts";
+import { companyLinks, guideLinks, serviceLinks } from "@/content/navigation";
+
+const linkGroups = [
+  { title: "Company", links: companyLinks },
+  { title: "Services", links: serviceLinks },
+  { title: "Guides", links: guideLinks },
+];
 
 const Footer = () => {
   const footerRef = useRef<HTMLElement>(null);
@@ -58,23 +66,11 @@ const Footer = () => {
     }
   };
 
-  const navLinks = [
-    { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
-    { label: "Portfolio", href: "/portfolio" },
-    { label: "Services", href: "/services" },
-    { label: "Contact", href: "/contact" },
-    { label: "Blog", href: "/blog" },
-    { label: "AI Sri Lanka", href: "/ai-companies-sri-lanka" },
-    { label: "Web Design & Development Guide", href: "/web-design-sri-lanka" },
-    { label: "Software Companies in Sri Lanka", href: "/software-companies-sri-lanka" },
-  ];
-
   const socialLinks = [
-    { label: "X/Twitter", href: "https://x.com/arc_ai_agency" },
-    { label: "Instagram", href: "https://www.instagram.com/arcai_agency/" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/company/105845719" },
-    { label: "Facebook", href: "https://www.facebook.com/ARCAI.lk" },
+    { label: "X/Twitter", href: socials.x },
+    { label: "Instagram", href: socials.instagram },
+    { label: "LinkedIn", href: socials.linkedin },
+    { label: "Facebook", href: socials.facebook },
   ];
 
   return (
@@ -99,12 +95,12 @@ const Footer = () => {
               >
                 <p className="text-[#777777] text-sm uppercase tracking-wider">Email Address</p>
                 <motion.a
-                  href="mailto:support@arcai.agency"
+                  href={`mailto:${company.email}`}
                   className="text-[#FF4925] text-2xl md:text-3xl lg:text-4xl font-bold block hover:opacity-80 transition-opacity"
                   whileHover={{ x: 5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  support@arcai.agency
+                  {company.email}
                 </motion.a>
                 <p className="text-[#777777] text-sm">We'll respond within 24 hours</p>
               </motion.div>
@@ -117,8 +113,13 @@ const Footer = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                <p className="text-[#777777] text-sm">This is a registered company</p>
-                <p className="text-white text-base">Registration Number: <span className="font-semibold">PV00352581</span></p>
+                <p className="text-[#777777] text-sm uppercase tracking-wider">Office</p>
+                <p className="text-white text-base">{office.oneLine}</p>
+                <p className="text-[#777777] text-sm">{company.overseasNote}</p>
+                <p className="text-[#777777] text-sm">
+                  {company.legalName}, registration number{" "}
+                  <span className="text-white font-semibold">{company.registrationNumber}</span>
+                </p>
               </motion.div>
 
               {/* Phone */}
@@ -132,23 +133,23 @@ const Footer = () => {
                 <p className="text-[#777777] text-sm uppercase tracking-wider">Phone Numbers</p>
                 <div className="space-y-2">
                   <motion.a
-                    href="tel:+447466368427"
+                    href={`tel:${phones.sriLanka.e164}`}
                     className="text-white text-xl md:text-2xl font-semibold block hover:text-[#FF4925] transition-colors"
                     whileHover={{ x: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
-                    +44 7466 368427 <span className="text-[#777777] text-sm">(UK)</span>
+                    {phones.sriLanka.display}
                   </motion.a>
                   <motion.a
-                    href="tel:+94771852522"
+                    href={`tel:${phones.international.e164}`}
                     className="text-white text-xl md:text-2xl font-semibold block hover:text-[#FF4925] transition-colors"
                     whileHover={{ x: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
-                    +94 771852522 <span className="text-[#777777] text-sm">(Sri Lanka)</span>
+                    {phones.international.display} <span className="text-[#777777] text-sm">(International)</span>
                   </motion.a>
                 </div>
-                <p className="text-[#777777] text-sm">Available 9 AM - 6 PM EST</p>
+                <p className="text-[#777777] text-sm">{hours.oneLine}</p>
               </motion.div>
 
               {/* WhatsApp AI Agent */}
@@ -161,14 +162,14 @@ const Footer = () => {
               >
                 <p className="text-[#777777] text-sm uppercase tracking-wider">WhatsApp AI Agent</p>
                 <motion.a
-                  href="https://wa.me/94764662384"
+                  href={whatsapp.agent.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-green-500 text-xl md:text-2xl font-semibold block hover:text-green-400 transition-colors"
                   whileHover={{ x: 5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  +94 76 466 2384
+                  {whatsapp.agent.display}
                 </motion.a>
                 <p className="text-[#777777] text-sm">Want to speak to our AI agent on WhatsApp?</p>
               </motion.div>
@@ -177,48 +178,49 @@ const Footer = () => {
             {/* Links & Newsletter Section */}
             <div className="space-y-12">
               {/* Navigation Links */}
-              <motion.div
-                className="space-y-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+              {/* Link columns. Rendered visible in the server HTML (no fade-in from
+                  opacity 0): these are the links every page relies on to reach
+                  the pages that sell. */}
+              <nav
+                aria-label="Footer navigation"
+                className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-10"
               >
-                <p className="text-[#777777] text-sm uppercase tracking-wider">(LINKS)</p>
-                <nav aria-label="Footer navigation"><div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {navLinks.map((link, index) => (
-                    <motion.a
-                      key={link.label}
-                      href={link.href}
-                      className="relative group py-1"
-                      onMouseEnter={() => setHoveredLink(link.label)}
-                      onMouseLeave={() => setHoveredLink(null)}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: 0.3 + index * 0.05 }}
-                    >
-                      <div className="space-y-1">
-                        <motion.p 
-                          className="text-[#CACACA] text-base group-hover:text-white transition-colors"
-                          animate={{ x: hoveredLink === link.label ? 3 : 0 }}
-                          transition={{ type: "spring", stiffness: 300 }}
-                        >
-                          {link.label}
-                        </motion.p>
-                        <div className="relative h-[1px] bg-transparent overflow-hidden">
-                          <motion.div
-                            className="absolute inset-0 bg-[#FF4925]"
-                            initial={{ x: "-100%" }}
-                            animate={{ x: hoveredLink === link.label ? 0 : "-100%" }}
-                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                          />
-                        </div>
-                      </div>
-                    </motion.a>
-                  ))}
-                </div></nav>
-              </motion.div>
+                {linkGroups.map((group) => (
+                  <div key={group.title} className="space-y-4">
+                    <p className="text-[#777777] text-sm uppercase tracking-wider">({group.title})</p>
+                    <ul className="space-y-2 list-none p-0 m-0">
+                      {group.links.map((link) => (
+                        <li key={link.href}>
+                          <a
+                            href={link.href}
+                            className="relative group inline-block py-1"
+                            onMouseEnter={() => setHoveredLink(link.href)}
+                            onMouseLeave={() => setHoveredLink(null)}
+                          >
+                            <span className="block space-y-1">
+                              <motion.span
+                                className="block text-[#CACACA] text-base group-hover:text-white transition-colors"
+                                animate={{ x: hoveredLink === link.href ? 3 : 0 }}
+                                transition={{ type: "spring", stiffness: 300 }}
+                              >
+                                {link.label}
+                              </motion.span>
+                              <span className="relative block h-[1px] bg-transparent overflow-hidden">
+                                <motion.span
+                                  className="absolute inset-0 block bg-[#FF4925]"
+                                  initial={{ x: "-100%" }}
+                                  animate={{ x: hoveredLink === link.href ? 0 : "-100%" }}
+                                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                />
+                              </span>
+                            </span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </nav>
 
               {/* Social Links */}
               <motion.div

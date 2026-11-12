@@ -117,6 +117,13 @@ const nextConfig = {
         destination: '/ai-automation-sri-lanka',
         permanent: true,
       },
+      // The Birmingham page described an office that does not exist. The site
+      // is Sri Lanka-first; overseas clients are served remotely from Colombo.
+      {
+        source: '/ai-agency-birmingham',
+        destination: '/',
+        permanent: true,
+      },
     ]
   },
 }

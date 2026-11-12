@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { guideLinks, serviceLinks } from "@/content/navigation";
 
 interface MenuProps {
   isOpen: boolean;
@@ -177,29 +178,26 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
 
           {/* Footer */}
           <div className="px-6 lg:px-12 py-8 space-y-8">
-            {/* Guides */}
-            <div className="space-y-2">
-              <p className="text-sm font-medium text-[rgb(119,119,119)] uppercase tracking-wider">
-                (GUIDES)
-              </p>
-              <ul className="space-y-1 text-lg lg:text-xl font-medium list-none p-0 m-0">
-                <li>
-                  <Link href="/software-companies-sri-lanka" onClick={onClose} className="text-[rgb(202,202,202)] hover:text-white transition-colors">
-                    Software Companies in Sri Lanka
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/ai-companies-sri-lanka" onClick={onClose} className="text-[rgb(202,202,202)] hover:text-white transition-colors">
-                    AI Companies in Sri Lanka
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/web-design-sri-lanka" onClick={onClose} className="text-[rgb(202,202,202)] hover:text-white transition-colors">
-                    Web Design in Sri Lanka
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            {/* Services, then guides: the same lists the footer shows */}
+            {[
+              { title: "SERVICES", links: serviceLinks },
+              { title: "GUIDES", links: guideLinks },
+            ].map((group) => (
+              <div key={group.title} className="space-y-2">
+                <p className="text-sm font-medium text-[rgb(119,119,119)] uppercase tracking-wider">
+                  ({group.title})
+                </p>
+                <ul className="space-y-1 text-lg lg:text-xl font-medium list-none p-0 m-0">
+                  {group.links.map((link) => (
+                    <li key={link.href}>
+                      <Link href={link.href} onClick={onClose} className="text-[rgb(202,202,202)] hover:text-white transition-colors">
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
 
             {/* Email Section */}
             <div className="space-y-2">

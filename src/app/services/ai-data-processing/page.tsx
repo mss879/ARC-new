@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import AIDataProcessingContent from "./content";
 
 export const metadata: Metadata = {
-  title: "ARC AI | AI Data Processing UK & Sri Lanka",
+  title: "AI Data Processing in Sri Lanka | ARC AI",
   description: "Intelligently extract clean data from messy PDFs, receipts, and emails directly into your database using NLP.",
   authors: [{ name: "ARC AI Agency" }],
   openGraph: {

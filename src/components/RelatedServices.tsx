@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const allServices = [
   { slug: "ai-chatbots", name: "AI Chatbots", category: "ai" },
@@ -19,15 +22,16 @@ const allServices = [
   { slug: "consulting-audits", name: "Consulting & Audits", category: "consulting" },
 ];
 
-interface RelatedServicesProps {
-  currentSlug?: string;
-}
-
 /**
- * RelatedServices — auto-generated internal linking section for every service page.
- * Displays all other services, cross-linking for SEO juice distribution.
+ * RelatedServices — internal linking section at the end of every service page.
+ *
+ * The services layout renders this without knowing which page it is on, so the
+ * current page is read from the URL. Before this, every service page listed
+ * itself among its "other" services.
  */
-export default function RelatedServices({ currentSlug }: RelatedServicesProps) {
+export default function RelatedServices() {
+  const pathname = usePathname();
+  const currentSlug = pathname?.match(/^\/services\/([^/]+)/)?.[1];
   const otherServices = allServices.filter(s => s.slug !== currentSlug);
 
   return (
@@ -37,7 +41,7 @@ export default function RelatedServices({ currentSlug }: RelatedServicesProps) {
           Explore Our Other Services
         </h2>
         <p className="text-zinc-400 mb-10 max-w-3xl">
-          Discover how ARC AI can help your business grow with our full range of AI automation, web design, and digital marketing services. As one of the <Link href="/ai-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">top AI companies in Sri Lanka</Link> and the UK, we deliver enterprise-grade solutions at competitive rates. Comparing vendors? See our independent guide to <Link href="/software-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">software companies in Sri Lanka</Link>.
+          ARC AI builds AI agents, automation and the business systems they run inside. Comparing providers? See our guides to <Link href="/ai-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">AI companies in Sri Lanka</Link> and <Link href="/software-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">software companies in Sri Lanka</Link>.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {otherServices.map((service) => (

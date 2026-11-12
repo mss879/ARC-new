@@ -87,7 +87,7 @@ const Navbar = memo(() => {
       </div>
 
       {/* Hamburger/Close Button - Always on top */}
-      <div className={`fixed z-[60] transition-all duration-500 ${isScrolled ? "top-6 right-8 lg:right-12" : "top-6 right-6 lg:right-12"}`}>
+      <div className={`fixed z-[60] transition-all duration-500 ${isScrolled ? "top-[14px] right-6 md:top-6 md:right-8 lg:right-12" : "top-6 right-6 lg:right-12"}`}>
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="relative p-2.5 md:p-3 lg:p-4 rounded-full border border-white/20 hover:bg-white/10 transition-colors bg-black/20 backdrop-blur-sm"
@@ -123,7 +123,7 @@ const Navbar = memo(() => {
 
       <nav
         className={`fixed z-40 transition-all duration-500 ease-in-out ${isScrolled
-          ? "top-0 left-0 right-0 px-6 py-6 md:top-4 md:left-4 md:right-4 lg:left-8 lg:right-8 md:bg-white/[0.03] md:backdrop-blur-2xl md:rounded-full md:border md:border-white/10 md:px-6 md:py-2 md:shadow-2xl"
+          ? "top-0 left-0 right-0 px-6 py-3 bg-black/85 backdrop-blur-xl border-b border-white/10 md:top-4 md:left-4 md:right-4 lg:left-8 lg:right-8 md:bg-white/[0.03] md:backdrop-blur-2xl md:rounded-full md:border md:border-white/10 md:px-6 md:py-2 md:shadow-2xl"
           : "top-0 left-0 right-0 px-6 lg:px-12 py-6 bg-transparent border-b border-transparent"
           }`}
         role="navigation"
@@ -133,15 +133,15 @@ const Navbar = memo(() => {
           {/* Mobile Layout - Logo on left, CTA/Menu on right, Status under logo */}
           <div className="md:hidden">
             {/* Top Row - Logo and Buttons */}
-            <div className="flex items-start justify-between pr-16">
+            <div className={`flex justify-between pr-16 ${isScrolled ? "items-center" : "items-start"}`}>
               {/* Logo */}
-              <a href="/" className={`transition-all duration-500 -mt-3 ${isMenuOpen ? 'opacity-0 invisible' : 'opacity-100 visible'}`}>
+              <a href="/" className={`transition-all duration-500 ${isScrolled ? "" : "-mt-3"} ${isMenuOpen ? 'opacity-0 invisible' : 'opacity-100 visible'}`}>
                 <Image
                   src="/logo.png"
                   alt="ARC AI - AI Automation & Web Design Agency"
                   width={80}
                   height={80}
-                  className="w-auto h-[70px] sm:h-[80px] cursor-pointer"
+                  className={`w-auto cursor-pointer transition-all duration-500 ${isScrolled ? "h-[44px]" : "h-[70px] sm:h-[80px]"}`}
                   priority
                 />
               </a>
@@ -162,7 +162,12 @@ const Navbar = memo(() => {
           {/* Medium & Desktop Layout - Original horizontal layout */}
           <div className={`hidden md:flex justify-between pr-20 lg:pr-24 transition-all duration-500 ${isScrolled ? "items-center" : "items-start"}`}>
             {/* Logo */}
-            <a href="/" className={`transition-all duration-500 ${isScrolled ? "" : "lg:-mt-8"} ${isMenuOpen ? 'opacity-0 invisible' : 'opacity-100 visible'}`}>
+            {/* The logo is taller than the items on the right, and the artwork sits
+                a little above the middle of its image, so each size of logo needs its
+                own nudge to put the artwork level with them: 80px logo down-shifted
+                less at md, 100px at lg, 140px at xl. One value for all three left
+                the logo 16px high at lg and 13px low at md. */}
+            <a href="/" className={`transition-all duration-500 ${isScrolled ? "" : "md:-mt-[13px] lg:-mt-4 xl:-mt-[34px]"} ${isMenuOpen ? 'opacity-0 invisible' : 'opacity-100 visible'}`}>
                 <Image
                   src="/logo.png"
                   alt="ARC AI - AI Automation & Web Design Agency"

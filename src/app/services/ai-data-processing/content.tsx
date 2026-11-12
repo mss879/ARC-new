@@ -4,7 +4,6 @@ import { motion, Variants } from "framer-motion";
 import { ArrowUpRight, FileText, ScanLine, Database, Zap, Lock, Eye } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 const letterContainer: Variants = {
     hidden: { opacity: 0 },
@@ -256,7 +255,6 @@ export default function AIDataProcessingContent() {
                 </div>
             </section>
 
-            <Footer />
         </div>
     );
 }

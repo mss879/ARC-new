@@ -4,7 +4,6 @@ import { motion, Variants } from "framer-motion";
 import { ArrowUpRight, PhoneCall, Mic, Clock, BrainCircuit, Activity, LineChart, MessageSquare } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 const letterContainer: Variants = {
     hidden: { opacity: 0 },
@@ -274,7 +273,6 @@ export default function AIVoiceAssistantsContent() {
                 </div>
             </section>
 
-            <Footer />
         </div>
     );
 }

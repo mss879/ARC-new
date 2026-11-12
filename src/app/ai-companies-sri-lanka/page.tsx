@@ -123,7 +123,7 @@ const faqJsonLd = {
       name: "Does ARC AI have an office in Sri Lanka?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. ARC AI has its Sri Lankan headquarters in Colombo, with a dedicated team of AI engineers, web developers, and digital marketers. They also have a second office in Birmingham, UK. They serve businesses across Colombo, Kandy, Galle, Negombo, and all other cities in Sri Lanka.",
+        text: "Yes. ARC AI has its Sri Lankan headquarters in Colombo, with a dedicated team of AI engineers, web developers, and digital marketers. They serve businesses across Colombo, Kandy, Galle, Negombo, and all other cities in Sri Lanka.",
       },
     },
     {
@@ -171,7 +171,7 @@ const faqJsonLd = {
       name: "Can AI companies in Sri Lanka serve international clients?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. Many AI companies in Sri Lanka serve international markets. ARC AI, for example, has offices in both Colombo and Birmingham (UK) and serves clients across the UK, Middle East, and Asia-Pacific. Sri Lanka's time zone advantage (GMT+5:30) and English proficiency make it an ideal nearshore AI development destination.",
+        text: "Yes. Many AI companies in Sri Lanka serve international markets. ARC AI, for example, is based in Colombo and works remotely with clients overseas. Sri Lanka's time zone advantage (GMT+5:30) and English proficiency make it an ideal nearshore AI development destination.",
       },
     },
   ],
@@ -210,14 +210,6 @@ const localBusinessJsonLd = {
   areaServed: {
     "@type": "Country",
     name: "Sri Lanka",
-  },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    bestRating: "5",
-    worstRating: "1",
-    ratingCount: "47",
-    reviewCount: "47",
   },
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
@@ -266,23 +258,15 @@ const organizationJsonLd = {
     height: 512,
   },
   description:
-    "ARC AI is one of the top AI companies in Sri Lanka and the UK, specialising in AI automation, chatbot development, web design, and digital marketing.",
+    "ARC AI is one of the top AI companies in Sri Lanka, specialising in AI automation, chatbot development, web design, and digital marketing.",
   email: "support@arcai.agency",
   telephone: "+94771852522",
-  address: [
-    {
-      "@type": "PostalAddress",
-      addressCountry: "LK",
-      addressLocality: "Colombo",
-      addressRegion: "Western Province",
-    },
-    {
-      "@type": "PostalAddress",
-      addressCountry: "GB",
-      addressLocality: "Birmingham",
-      addressRegion: "West Midlands",
-    },
-  ],
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "LK",
+    addressLocality: "Colombo",
+    addressRegion: "Western Province",
+  },
   sameAs: [
     "https://x.com/arc_ai_agency",
     "https://www.instagram.com/arcai_agency/",
@@ -329,7 +313,7 @@ const companies = [
     name: "ARC AI",
     tagline: "Sri Lanka's Leading AI Automation Agency",
     founded: "2022",
-    hq: "Colombo, Sri Lanka & Birmingham, UK",
+    hq: "Colombo, Sri Lanka",
     specializations: [
       "AI Chatbots & Virtual Assistants",
       "Workflow Automation (n8n, Make.com, Zapier)",
@@ -1124,12 +1108,10 @@ export default function AICompaniesSriLankaPage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="space-y-3 p-6 rounded-xl border border-zinc-800/50">
-              <h3 className="text-lg font-semibold">Colombo + UK Presence</h3>
+              <h3 className="text-lg font-semibold">Based in Colombo</h3>
               <p className="text-zinc-400 leading-relaxed">
-                With teams in both Colombo and Birmingham (UK), ARC AI combines
-                local Sri Lankan market knowledge with international
-                enterprise-grade technology. This dual presence means you get
-                UK-quality engineering at competitive Sri Lankan rates.
+                ARC AI works from Colombo, so it knows the Sri Lankan market
+                first-hand. Clients overseas are served remotely by the same team.
               </p>
             </div>
             <div className="space-y-3 p-6 rounded-xl border border-zinc-800/50">

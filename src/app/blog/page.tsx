@@ -3,8 +3,8 @@ import BlogList from "@/components/BlogList";
 import SchemaOrg from "@/components/SchemaOrg";
 
 export const metadata: Metadata = {
-  title: "ARC AI Blog | AI & Digital Marketing Insights UK & Sri Lanka",
-  description: "Expert insights on AI automation, web design & digital marketing for UK & Sri Lanka. Learn how to grow your business with cutting-edge AI solutions.",
+  title: "ARC AI Blog | AI, Automation and Systems for Sri Lankan Business",
+  description: "Guides on AI agents, automation, websites and business systems for Sri Lankan businesses, from the ARC AI team.",
   authors: [{ name: "ARC AI Agency" }],
   openGraph: {
     title: "Digital Marketing & AI Insights | ARC AI Blog",

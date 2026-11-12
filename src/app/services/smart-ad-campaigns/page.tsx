@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import SmartAdCampaignsContent from "./content";
 
 export const metadata: Metadata = {
-  title: "ARC AI | Smart Ad Campaigns UK & Sri Lanka",
-  description: "Data-driven Meta and Google advertising campaigns that scale ROI. ARC AI serves businesses in UK & Sri Lanka.",
+  title: "Smart Ad Campaigns in Sri Lanka | ARC AI",
+  description: "Data-driven Meta and Google advertising campaigns that scale ROI. ARC AI serves businesses in Sri Lanka.",
   authors: [{ name: "ARC AI Agency" }],
   openGraph: {
     title: "ARC AI | Smart Ad Campaigns",
-    description: "Data-driven Meta and Google advertising campaigns that scale ROI. ARC AI serves businesses in UK & Sri Lanka.",
+    description: "Data-driven Meta and Google advertising campaigns that scale ROI. ARC AI serves businesses in Sri Lanka.",
     url: "https://www.arcai.agency/services/smart-ad-campaigns",
     siteName: "ARC AI Agency",
     images: [
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     site: "@arcaiagency",
     creator: "@arcaiagency",
     title: "ARC AI | Smart Ad Campaigns",
-    description: "Data-driven Meta and Google advertising campaigns that scale ROI. ARC AI serves businesses in UK & Sri Lanka.",
+    description: "Data-driven Meta and Google advertising campaigns that scale ROI. ARC AI serves businesses in Sri Lanka.",
     images: ["https://www.arcai.agency/og-image.jpg"],
   },
   alternates: {

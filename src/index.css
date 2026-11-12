@@ -274,3 +274,46 @@ All colors MUST be HSL.
     }
   }
 }
+
+/* The Flarex display font ships a broken ligature: the pair "AI" is replaced by
+   a glyph with no width, so whatever follows is drawn on top of it ("with AI
+   agents" rendered as overlapping letters). Turning ligatures off for the font
+   restores normal spacing everywhere it is used. */
+.font-flarex {
+  font-variant-ligatures: none;
+}
+
+/* Small loops inside the home page product demos: the typing dots, the voice
+   waveform and the text caret. They are decoration only, so they stop for
+   anyone who has asked for reduced motion. */
+@keyframes demo-dot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-3px); opacity: 1; }
+}
+@keyframes demo-voice-bar {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+@keyframes demo-caret {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@keyframes chat-typing-dot {
+  0%, 65%, 100% { transform: translateY(0); opacity: 0.35; }
+  30% { transform: translateY(-1.8px); opacity: 1; }
+}
+/* The dots inside the chat button's speech bubble. transform-box makes each
+   dot move about its own centre inside the SVG. */
+.chat-typing-dot {
+  animation: chat-typing-dot 1.3s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.demo-dot { animation: demo-dot 1.1s ease-in-out infinite; }
+.demo-voice-bar { animation: demo-voice-bar 1s ease-in-out infinite; transform-origin: center; }
+.demo-caret { animation: demo-caret 1s steps(1) infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-dot, .demo-voice-bar, .demo-caret, .chat-typing-dot { animation: none; }
+  .chat-typing-dot { opacity: 1; }
+}

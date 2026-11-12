@@ -4,7 +4,6 @@ import { motion, Variants } from "framer-motion";
 import { ArrowUpRight, Network, FileSearch, Route, Users, GitMerge, FileText } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 const letterContainer: Variants = {
     hidden: { opacity: 0 },
@@ -252,7 +251,6 @@ export default function ConsultingAuditsContent() {
                 </div>
             </section>
 
-            <Footer />
         </div>
     );
 }

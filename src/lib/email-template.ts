@@ -373,7 +373,7 @@ export function generateProposalEmail(
                                     © ${year} ARC AI (Pvt) Ltd. All rights reserved.
                                 </p>
                                 <p style="margin: 6px 0 0 0; font-size: 11px; color: #55555a;">
-                                    Colombo 4, Sri Lanka &nbsp;&middot;&nbsp; Birmingham, UK
+                                    Colombo 4, Sri Lanka
                                 </p>
                             </td>
                             <td style="text-align: right; vertical-align: middle;">
@@ -707,7 +707,7 @@ function generateAIProposalEmail(
                                     © ${year} ARC AI (Pvt) Ltd. All rights reserved.
                                 </p>
                                 <p style="margin: 6px 0 0 0; font-size: 11px; color: #55555a;">
-                                    Colombo 4, Sri Lanka &nbsp;&middot;&nbsp; Birmingham, UK
+                                    Colombo 4, Sri Lanka
                                 </p>
                             </td>
                             <td style="text-align: right; vertical-align: middle;">

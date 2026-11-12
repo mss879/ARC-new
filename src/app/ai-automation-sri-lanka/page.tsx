@@ -8,11 +8,11 @@ import SchemaOrg from "@/components/SchemaOrg";
 
 export const metadata: Metadata = {
   title: "AI Agency Sri Lanka | Web Design & AI Automation Colombo — ARC AI",
-  description: "ARC AI is Sri Lanka's leading AI automation and web design agency based in Colombo. Custom AI chatbots, workflow automation, smart websites, and digital marketing for businesses across Sri Lanka.",
+  description: "ARC AI is an AI automation and software company based in Colombo. Custom AI chatbots, workflow automation, smart websites, and digital marketing for businesses across Sri Lanka.",
   authors: [{ name: "ARC AI Agency" }],
   openGraph: {
     title: "AI Agency Sri Lanka — Web Design & AI Automation | ARC AI",
-    description: "Sri Lanka's leading AI agency in Colombo. Custom AI chatbots, workflow automation, SEO-optimised websites, and data-driven digital marketing.",
+    description: "An AI agency in Colombo. Custom AI chatbots, workflow automation, SEO-optimised websites, and data-driven digital marketing.",
     url: "https://www.arcai.agency/ai-automation-sri-lanka",
     siteName: "ARC AI Agency",
     images: [
@@ -54,7 +54,7 @@ export default function SriLankaPage() {
       <SchemaOrg
         type="services"
         pageTitle="AI Agency Sri Lanka"
-        pageDescription="ARC AI is Sri Lanka's leading AI automation and web design agency."
+        pageDescription="ARC AI is an AI automation and software company based in Colombo."
         pageUrl="https://www.arcai.agency/ai-automation-sri-lanka"
       />
       <Navbar />
@@ -162,7 +162,7 @@ export default function SriLankaPage() {
               <div className="space-y-3 p-6 rounded-xl border border-zinc-800/50">
                 <h3 className="text-lg font-semibold">Local + Global Expertise</h3>
                 <p className="text-zinc-400 leading-relaxed">
-                  With teams in both Colombo and Birmingham (UK), ARC AI combines local Sri Lankan market knowledge with global best practices and enterprise-grade technology. We understand Sri Lanka&apos;s unique digital landscape, consumer behaviour, and regulatory environment.
+                  ARC AI works from Colombo, so it knows the Sri Lankan market first-hand. Clients overseas are served remotely by the same team. We understand Sri Lanka&apos;s unique digital landscape, consumer behaviour, and regulatory environment.
                 </p>
               </div>
               <div className="space-y-3 p-6 rounded-xl border border-zinc-800/50">

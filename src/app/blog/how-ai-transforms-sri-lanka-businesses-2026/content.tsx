@@ -207,7 +207,7 @@ export default function BlogPost() {
                                 <Link href="/ai-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">ARC AI</Link> has delivered these results consistently across 100+ projects because of three fundamental advantages:
                             </p>
                             <ol className="list-decimal pl-6 space-y-3">
-                                <li><strong>Dual-Market Expertise:</strong> With teams in Colombo and Birmingham (UK), ARC AI combines local Sri Lankan market knowledge with international enterprise-grade technology and design standards.</li>
+                                <li><strong>Local knowledge:</strong> ARC AI works from Colombo, so it knows the Sri Lankan market first-hand.</li>
                                 <li><strong>Full-Stack AI:</strong> Unlike narrow AI vendors, ARC AI delivers end-to-end solutions — chatbots, automation, web design, digital marketing, content generation, and voice assistants — all integrated and optimised together.</li>
                                 <li><strong>Measurable Results:</strong> Every ARC AI project is tracked with quantifiable KPIs. The results in this article are real, verified outcomes from actual Sri Lankan client deployments.</li>
                             </ol>

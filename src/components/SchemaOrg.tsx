@@ -1,7 +1,22 @@
 // Schema.org Structured Data for SEO
-// This component provides JSON-LD structured data for search engines
+// This component provides JSON-LD structured data for search engines.
+//
+// Everything about the company comes from src/content/site-facts.ts, and the
+// FAQ comes from the same list the page renders, so the markup only ever
+// describes what a visitor can read. There is deliberately no AggregateRating
+// here: Google does not show stars for a rating a business publishes about
+// itself, and the figure has to match reviews visible on the page.
 
 import React from 'react';
+import {
+  SITE_URL,
+  company,
+  hours,
+  office,
+  phones,
+  socialUrls,
+} from '@/content/site-facts';
+import type { Faq } from '@/content/home-faq';
 
 interface SchemaOrgProps {
   type?: 'home' | 'about' | 'services' | 'portfolio' | 'blog' | 'contact' | 'service-page';
@@ -16,7 +31,33 @@ interface SchemaOrgProps {
   blogDatePublished?: string;
   blogDateModified?: string;
   blogAuthor?: string;
-  showFAQ?: boolean;
+  /** Questions that are visible on this page. Emits FAQPage markup for them. */
+  faq?: Faq[];
+}
+
+const ORGANIZATION_ID = `${SITE_URL}/#organization`;
+
+const logo = {
+  "@type": "ImageObject",
+  "url": `${SITE_URL}/logo.png`,
+  "width": 512,
+  "height": 512,
+};
+
+const postalAddress = {
+  "@type": "PostalAddress",
+  "streetAddress": office.street,
+  "addressLocality": office.locality,
+  "addressRegion": office.region,
+  "postalCode": office.postalCode,
+  "addressCountry": office.countryCode,
+};
+
+const sriLanka = { "@type": "Country", "name": office.country };
+
+/** JSON for a script tag: "<" is escaped so the payload cannot close the tag. */
+function toJsonLd(schema: unknown): string {
+  return JSON.stringify(schema).replace(/</g, "\\u003c");
 }
 
 export default function SchemaOrg({
@@ -32,243 +73,74 @@ export default function SchemaOrg({
   blogDatePublished,
   blogDateModified,
   blogAuthor = 'ARC AI',
-  showFAQ = false,
+  faq,
 }: SchemaOrgProps) {
 
   // Organization Schema (appears on all pages)
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": "https://www.arcai.agency/#organization",
-    "name": "ARC AI",
+    "@id": ORGANIZATION_ID,
+    "name": company.name,
+    "legalName": company.legalName,
     "alternateName": "ARC AI Agency",
-    "url": "https://www.arcai.agency",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://www.arcai.agency/logo.png",
-      "width": 512,
-      "height": 512
-    },
-    "description": "Leading AI-powered digital agency specializing in web design, branding, AI automation, chatbots, and digital marketing services in UK and Sri Lanka.",
-    "email": "support@arcai.agency",
-    "telephone": "+447466368427",
-    "address": [
-      {
-        "@type": "PostalAddress",
-        "addressCountry": "GB",
-        "addressRegion": "England",
-        "addressLocality": "Birmingham"
-      },
-      {
-        "@type": "PostalAddress",
-        "addressCountry": "LK",
-        "addressRegion": "Western Province",
-        "addressLocality": "Colombo"
-      }
-    ],
-    "areaServed": [
-      {
-        "@type": "Country",
-        "name": "United Kingdom"
-      },
-      {
-        "@type": "Country",
-        "name": "Sri Lanka"
-      },
-      {
-        "@type": "Place",
-        "name": "Global"
-      }
-    ],
-    "sameAs": [
-      "https://x.com/arc_ai_agency",
-      "https://www.instagram.com/arcai_agency/",
-      "https://www.linkedin.com/company/105845719",
-      "https://www.facebook.com/ARCAI.lk"
-    ],
-    "contactPoint": [
-      {
-        "@type": "ContactPoint",
-        "telephone": "+447466368427",
-        "contactType": "customer service",
-        "areaServed": "GB",
-        "availableLanguage": ["en"]
-      },
-      {
-        "@type": "ContactPoint",
-        "telephone": "+94771852522",
-        "contactType": "customer service",
-        "areaServed": "LK",
-        "availableLanguage": ["en"]
-      }
-    ]
-  };
-
-  // Local Business Schema for UK
-  const localBusinessSchemaUK = {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "@id": "https://www.arcai.agency/#localbusiness-uk",
-    "name": "ARC AI - UK",
-    "alternateName": "ARC AI Agency UK",
-    "url": "https://www.arcai.agency",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://www.arcai.agency/logo.png",
-      "width": 512,
-      "height": 512
-    },
-    "description": "AI-powered digital agency in UK specializing in web design, branding, and AI automation services.",
-    "email": "support@arcai.agency",
-    "telephone": "+447466368427",
-    "priceRange": "£££",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "GB",
-      "addressRegion": "England",
-      "addressLocality": "Birmingham",
-      "streetAddress": "Birmingham"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 52.4862,
-      "longitude": -1.8904
-    },
-    "areaServed": {
-      "@type": "Country",
-      "name": "United Kingdom"
-    },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday"
-      ],
-      "opens": "09:00",
-      "closes": "18:00"
-    },
-    "sameAs": [
-      "https://x.com/arc_ai_agency",
-      "https://www.instagram.com/arcai_agency/",
-      "https://www.linkedin.com/company/105845719",
-      "https://www.facebook.com/ARCAI.lk"
-    ],
+    "url": SITE_URL,
+    "logo": logo,
+    "description": company.summary,
+    "foundingDate": String(company.foundedYear),
+    "email": company.email,
+    "telephone": phones.sriLanka.e164,
+    "address": postalAddress,
+    "areaServed": sriLanka,
+    "sameAs": socialUrls,
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+447466368427",
+      "telephone": phones.sriLanka.e164,
       "contactType": "customer service",
-      "areaServed": "GB",
-      "availableLanguage": ["en"]
-    }
+      "areaServed": office.countryCode,
+      "availableLanguage": ["en", "si", "ta"],
+    },
   };
 
-  // Local Business Schema for Sri Lanka
-  const localBusinessSchemaSL = {
+  // The one office, in Colombo
+  const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "@id": "https://www.arcai.agency/#localbusiness-sl",
-    "name": "ARC AI - Sri Lanka",
-    "alternateName": "ARC AI Agency Sri Lanka",
-    "url": "https://www.arcai.agency",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://www.arcai.agency/logo.png",
-      "width": 512,
-      "height": 512
-    },
-    "description": "AI-powered digital agency in Sri Lanka specializing in web design, branding, and AI automation services.",
-    "email": "support@arcai.agency",
-    "telephone": "+94771852522",
-    "priceRange": "LKR",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "LK",
-      "addressRegion": "Western Province",
-      "addressLocality": "Colombo",
-      "streetAddress": "Colombo 4"
-    },
+    "@id": `${SITE_URL}/#localbusiness-sl`,
+    "name": company.name,
+    "legalName": company.legalName,
+    "url": SITE_URL,
+    "logo": logo,
+    "image": `${SITE_URL}/og-image.jpg`,
+    "description": company.summary,
+    "email": company.email,
+    "telephone": phones.sriLanka.e164,
+    "address": postalAddress,
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": 6.8935,
-      "longitude": 79.8558
+      "latitude": office.geo.latitude,
+      "longitude": office.geo.longitude,
     },
-    "areaServed": {
-      "@type": "Country",
-      "name": "Sri Lanka"
-    },
+    "areaServed": sriLanka,
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday"
-      ],
-      "opens": "09:00",
-      "closes": "18:00"
+      "dayOfWeek": hours.days,
+      "opens": hours.opens,
+      "closes": hours.closes,
     },
-    "sameAs": [
-      "https://x.com/arc_ai_agency",
-      "https://www.instagram.com/arcai_agency/",
-      "https://www.linkedin.com/company/105845719",
-      "https://www.facebook.com/ARCAI.lk"
-    ],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+94771852522",
-      "contactType": "customer service",
-      "areaServed": "LK",
-      "availableLanguage": ["en"]
-    }
+    "sameAs": socialUrls,
+    "parentOrganization": { "@id": ORGANIZATION_ID },
   };
 
   // Website Schema (no fake SearchAction)
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": "https://www.arcai.agency/#website",
-    "url": "https://www.arcai.agency",
-    "name": "ARC AI",
-    "description": "Leading AI-powered digital agency in UK & Sri Lanka",
-    "publisher": {
-      "@id": "https://www.arcai.agency/#organization"
-    }
-  };
-
-  // AggregateRating Schema — enables star ratings in Google SERP
-  const aggregateRatingSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": "https://www.arcai.agency/#organization-rating",
-    "name": "ARC AI",
-    "url": "https://www.arcai.agency",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "bestRating": "5",
-      "worstRating": "1",
-      "ratingCount": "47",
-      "reviewCount": "47"
-    }
-  };
-
-  // VideoObject Schema for hero video — enables video rich snippets
-  const videoSchema = {
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    "name": "ARC AI - AI Automation & Web Design Agency",
-    "description": "Discover how ARC AI helps businesses in the UK and Sri Lanka with AI automation, web design, and digital marketing services.",
-    "thumbnailUrl": "https://www.arcai.agency/og-image.jpg",
-    "uploadDate": "2024-06-01",
-    "contentUrl": "https://www.arcai.agency/herovideo.mp4",
-    "embedUrl": "https://www.arcai.agency",
-    "publisher": {
-      "@id": "https://www.arcai.agency/#organization"
-    }
+    "@id": `${SITE_URL}/#website`,
+    "url": SITE_URL,
+    "name": company.name,
+    "description": "AI agents and business systems for Sri Lankan businesses",
+    "publisher": { "@id": ORGANIZATION_ID },
   };
 
   // Service Schema
@@ -276,85 +148,25 @@ export default function SchemaOrg({
     "@context": "https://schema.org",
     "@type": "Service",
     "serviceType": serviceName,
-    "provider": {
-      "@id": "https://www.arcai.agency/#organization"
-    },
-    "areaServed": [
-      {
-        "@type": "Country",
-        "name": "United Kingdom"
-      },
-      {
-        "@type": "Country",
-        "name": "Sri Lanka"
-      },
-      {
-        "@type": "Place",
-        "name": "Global"
-      }
-    ],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": serviceName,
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": serviceName,
-            "description": serviceDescription || ""
-          }
-        }
-      ]
-    }
+    "name": serviceName,
+    ...(serviceDescription ? { "description": serviceDescription } : {}),
+    ...(pageUrl ? { "url": pageUrl } : {}),
+    "provider": { "@id": ORGANIZATION_ID },
+    "areaServed": sriLanka,
   } : null;
 
-  // FAQ Schema — boosts SERP real estate with rich FAQ dropdowns
-  const faqSchema = showFAQ ? {
+  // FAQ Schema: only for questions the page actually shows
+  const faqSchema = faq && faq.length > 0 ? {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What AI services does ARC AI offer in the UK?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "ARC AI offers AI chatbot development, workflow automation, AI content generation, smart sales funnels, web design & development, motion design, branding, and social media marketing for businesses in the UK, with offices in Birmingham."
-        }
+    "mainEntity": faq.map((item) => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer,
       },
-      {
-        "@type": "Question",
-        "name": "Does ARC AI work with businesses in Sri Lanka?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. ARC AI is a dual-market agency with a team in Colombo, Sri Lanka. We serve Sri Lankan businesses across all our services including web design, AI automation, branding, and digital marketing."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What makes ARC AI different from other software companies?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "ARC AI combines AI-first thinking with design and marketing expertise. We use cutting-edge tools like OpenAI, n8n, and Make.com to build solutions that are not just beautiful but automated and intelligent. We serve both UK and Sri Lanka markets with dedicated teams in each region."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How much does a website cost in the UK with ARC AI?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Website pricing varies based on complexity and requirements. Contact ARC AI for a free quote tailored to your project. We serve businesses of all sizes from startups to enterprises across the UK and Sri Lanka."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can ARC AI build an AI chatbot for my business?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. ARC AI specialises in AI chatbot development for businesses in the UK and Sri Lanka. Our chatbots operate 24/7, handle customer inquiries, qualify leads, and integrate with your existing systems."
-        }
-      }
-    ]
+    })),
   } : null;
 
   // Blog Article Schema
@@ -363,21 +175,19 @@ export default function SchemaOrg({
     "@type": "BlogPosting",
     "headline": blogTitle,
     "description": blogDescription,
-    "image": blogImage || "https://www.arcai.agency/og-image.jpg",
+    "image": blogImage || `${SITE_URL}/og-image.jpg`,
     "datePublished": blogDatePublished || "2024-01-01",
     "dateModified": blogDateModified || blogDatePublished || "2024-01-01",
     "author": {
       "@type": "Organization",
       "name": blogAuthor,
-      "url": "https://www.arcai.agency"
+      "url": SITE_URL,
     },
-    "publisher": {
-      "@id": "https://www.arcai.agency/#organization"
-    },
+    "publisher": { "@id": ORGANIZATION_ID },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": pageUrl || "https://www.arcai.agency"
-    }
+      "@id": pageUrl || SITE_URL,
+    },
   } : null;
 
   // Breadcrumb Schema
@@ -389,26 +199,22 @@ export default function SchemaOrg({
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://www.arcai.agency"
+        "item": SITE_URL,
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": pageTitle,
-        "item": pageUrl
-      }
-    ]
+        "item": pageUrl,
+      },
+    ],
   } : null;
 
   // Combine schemas based on page type
-  const schemas: any[] = [organizationSchema, websiteSchema];
+  const schemas: unknown[] = [organizationSchema, websiteSchema];
 
   if (type === 'home' || type === 'about' || type === 'contact') {
-    schemas.push(localBusinessSchemaUK, localBusinessSchemaSL);
-  }
-
-  if (type === 'home') {
-    schemas.push(aggregateRatingSchema, videoSchema);
+    schemas.push(localBusinessSchema);
   }
 
   if (serviceSchema) {
@@ -433,7 +239,7 @@ export default function SchemaOrg({
         <script
           key={index}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          dangerouslySetInnerHTML={{ __html: toJsonLd(schema) }}
         />
       ))}
     </>

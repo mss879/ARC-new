@@ -7,15 +7,16 @@ import ContactForm from "@/components/ContactForm";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { clientLogos } from "@/lib/client-logos";
 import StoreLocator from "@/components/StoreLocator";
+import { booking, company, hours, office, phones, whatsapp } from "@/content/site-facts";
 
 // SEO Metadata for Contact Page
 export const metadata: Metadata = {
-  title: "Contact ARC AI | Top AI Company Sri Lanka & UK — Get a Free Quote",
-  description: "Contact ARC AI — top AI company in Sri Lanka & UK. Free consultation for AI automation, chatbots, web design & digital marketing.",
+  title: "Contact ARC AI | AI Agents & Business Systems, Colombo",
+  description: "Talk to ARC AI in Colombo about AI agents, automation, ERP, POS and e-commerce systems. Book a 30-minute call, send a message, or try our WhatsApp AI agent.",
   authors: [{ name: "ARC AI Agency" }],
   openGraph: {
-    title: "Contact ARC AI - AI Agency UK & Sri Lanka",
-    description: "Ready to transform your business with AI? Contact ARC AI for web design, AI automation, and digital marketing services in UK and Sri Lanka.",
+    title: "Contact ARC AI",
+    description: "Talk to ARC AI in Colombo about AI agents, automation and business systems. Book a call, send a message, or try our WhatsApp AI agent.",
     url: "https://www.arcai.agency/contact",
     siteName: "ARC AI Agency",
     images: [
@@ -27,7 +28,6 @@ export const metadata: Metadata = {
         type: "image/jpeg",
       },
     ],
-    locale: "en_GB",
     type: "website",
   },
   twitter: {
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     site: "@arcaiagency",
     creator: "@arcaiagency",
     title: "Contact ARC AI",
-    description: "Get in touch for AI-powered digital solutions",
+    description: "Book a call, send a message, or try our WhatsApp AI agent.",
     images: ["https://www.arcai.agency/og-image.jpg"],
   },
   alternates: {
@@ -60,7 +60,7 @@ export default function ContactPage() {
       <SchemaOrg
         type="contact"
         pageTitle="Contact Us"
-        pageDescription="Ready to transform your business with AI? Contact ARC AI for web design, AI automation, branding, and digital marketing services."
+        pageDescription="Talk to ARC AI in Colombo about AI agents, automation and business systems."
         pageUrl="https://www.arcai.agency/contact"
       />
       <Navbar />
@@ -99,7 +99,10 @@ export default function ContactPage() {
                 {/* Description */}
                 <div className="max-w-md">
                   <p className="text-base text-[rgb(119,119,119)] leading-relaxed">
-                    Have a project in mind? As one of the <a href="/ai-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">top AI companies in Sri Lanka</a> and the UK, we deliver AI automation, web design, and digital marketing that drives real results. Let&apos;s create something great together!
+                    Tell us what you want to automate or build: an AI agent for WhatsApp or phone calls, an ERP or point-of-sale system, an online store, or something that does not have a name yet. We reply within 24 hours.
+                  </p>
+                  <p className="text-sm text-[rgb(119,119,119)] leading-relaxed mt-4">
+                    {company.overseasNote}
                   </p>
                 </div>
               </div>
@@ -113,13 +116,13 @@ export default function ContactPage() {
                   <p className="text-base text-[rgb(119,119,119)]">
                     Prefer to hop on a call?{" "}
                     <a
-                      href="https://cal.com"
+                      href={booking.url}
                       target="_blank"
-                      rel="noopener nofollow noreferrer"
-                      aria-label="Book a call with ARC AI (opens in new tab)"
+                      rel="noopener noreferrer"
+                      aria-label={`Book a ${booking.minutes}-minute call with ARC AI (opens in new tab)`}
                       className="text-[rgb(255,73,37)] hover:text-[rgb(255,93,57)] underline transition-colors font-medium"
                     >
-                      Book a call
+                      Book a {booking.minutes}-minute call
                     </a>{" "}
                     instead.
                   </p>
@@ -131,7 +134,7 @@ export default function ContactPage() {
             <div className="mt-20 mb-12" role="region" aria-label="Trusted by clients">
               <div className="text-center mb-8">
                 <p className="text-sm text-[rgb(119,119,119)] uppercase tracking-wider">
-                  TRUSTED BY 100+ CLIENTS
+                  TRUSTED BY
                 </p>
               </div>
 
@@ -232,19 +235,19 @@ export default function ContactPage() {
                     </div>
                     <div className="space-y-2">
                       <a
-                        href="tel:+447466368427"
+                        href={`tel:${phones.sriLanka.e164}`}
                         className="text-lg text-[rgb(202,202,202)] hover:text-white transition-colors leading-relaxed block"
                       >
-                        +44 7466 368427 (UK)
+                        {phones.sriLanka.display}
                       </a>
                       <a
-                        href="tel:+94771852522"
+                        href={`tel:${phones.international.e164}`}
                         className="text-lg text-[rgb(202,202,202)] hover:text-white transition-colors leading-relaxed block"
                       >
-                        +94 771852522 (Sri Lanka)
+                        {phones.international.display} (International)
                       </a>
                       <p className="text-sm text-[rgb(119,119,119)] mt-2">
-                        Available 9 AM - 6 PM GMT (UK) / 2:30 PM - 11:30 PM IST (Sri Lanka)
+                        {hours.oneLine}
                       </p>
                     </div>
                   </div>
@@ -260,15 +263,15 @@ export default function ContactPage() {
                   <div className="relative z-10 space-y-4">
                     <div>
                       <p className="text-xs font-medium text-[rgb(119,119,119)] uppercase tracking-wider">
-                        (OFFICE LOCATIONS)
+                        (OFFICE)
                       </p>
                     </div>
                     <div>
                       <p className="text-lg text-[rgb(202,202,202)] leading-relaxed">
-                        Colombo 4, Sri Lanka
+                        {office.street}
                       </p>
-                      <p className="text-lg text-[rgb(202,202,202)] leading-relaxed mt-2">
-                        Birmingham, UK
+                      <p className="text-lg text-[rgb(202,202,202)] leading-relaxed">
+                        {office.district}, {office.country}
                       </p>
                     </div>
                   </div>
@@ -289,10 +292,10 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <p className="text-lg text-[rgb(202,202,202)] leading-relaxed">
-                        Monday - Friday: 9 AM - 6 PM
+                        Monday to Friday: 9 AM to 6 PM
                       </p>
                       <p className="text-lg text-[rgb(202,202,202)] leading-relaxed mt-2">
-                        Weekend: By appointment
+                        Sri Lanka time. Weekends by appointment.
                       </p>
                     </div>
                   </div>
@@ -320,7 +323,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <a
-                        href="https://wa.me/94764662384"
+                        href={whatsapp.agent.href}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold py-3 px-6 rounded-full transition-colors shadow-lg shadow-green-600/20"

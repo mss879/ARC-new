@@ -61,15 +61,18 @@ export async function POST(req: NextRequest) {
 
         const body = await req.json().catch(() => null);
 
-        // Validate required fields
-        if (!body || !body.name || !body.phone || !body.message) {
+        // Validate required fields. A visitor leaves one way to reach them:
+        // a phone number or an email, whichever they prefer.
+        const phone: string = typeof body?.phone === 'string' ? body.phone.trim() : '';
+        const email: string = typeof body?.email === 'string' ? body.email.trim() : '';
+        if (!body || !body.name || !body.message || (!phone && !email)) {
             return NextResponse.json(
-                { error: 'Missing required fields: name, phone, and message are required' },
+                { error: 'Missing required fields: name, message, and a phone number or email are required' },
                 { status: 400 }
             );
         }
 
-        const { name, phone, company, companyWebsite, message } = body;
+        const { name, company, companyWebsite, message } = body;
         // "subject" replaces the legacy "service" field; accept either for backward-compat
         const subject: string = body.subject ?? body.service ?? '';
 
@@ -77,21 +80,31 @@ export async function POST(req: NextRequest) {
         // Only allow digits, +, -, spaces, parentheses
         const phoneAllowedPattern = /^[0-9+\-\s()]+$/;
         const phoneDigits = phone.replace(/\D/g, '');
-        if (!phoneAllowedPattern.test(phone)) {
-            return NextResponse.json(
-                { error: 'Phone number contains invalid characters. Only digits, +, -, spaces, and parentheses are allowed.' },
-                { status: 400 }
-            );
+        if (phone) {
+            if (!phoneAllowedPattern.test(phone)) {
+                return NextResponse.json(
+                    { error: 'Phone number contains invalid characters. Only digits, +, -, spaces, and parentheses are allowed.' },
+                    { status: 400 }
+                );
+            }
+            if (phoneDigits.length < 7) {
+                return NextResponse.json(
+                    { error: 'Phone number must contain at least 7 digits.' },
+                    { status: 400 }
+                );
+            }
+            if (phone.length > 20) {
+                return NextResponse.json(
+                    { error: 'Phone number is too long.' },
+                    { status: 400 }
+                );
+            }
         }
-        if (phoneDigits.length < 7) {
+
+        // ── Email validation ────────────────────────────────────────────────
+        if (email && (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))) {
             return NextResponse.json(
-                { error: 'Phone number must contain at least 7 digits.' },
-                { status: 400 }
-            );
-        }
-        if (phone.length > 20) {
-            return NextResponse.json(
-                { error: 'Phone number is too long.' },
+                { error: 'Email address is not valid.' },
                 { status: 400 }
             );
         }
@@ -164,6 +177,7 @@ export async function POST(req: NextRequest) {
                         name,
                         website: websiteUrl,
                         phone,
+                        ...(email ? { email } : {}),
                         company: company || '',
                         message,
                         subject: subject || '',
@@ -195,6 +209,7 @@ export async function POST(req: NextRequest) {
                     body: JSON.stringify({
                         name,
                         phone,
+                        email,
                         company,
                         companyWebsite,
                         subject,

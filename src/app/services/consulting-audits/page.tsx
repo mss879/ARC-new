@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import ConsultingAuditsContent from "./content";
 
 export const metadata: Metadata = {
-  title: "ARC AI | Consulting & Automation Audits UK & Sri Lanka",
+  title: "Consulting & Automation Audits in Sri Lanka | ARC AI",
   description: "Expert strategic consulting to map your business processes and identify high-ROI AI integration opportunities.",
   authors: [{ name: "ARC AI Agency" }],
   openGraph: {

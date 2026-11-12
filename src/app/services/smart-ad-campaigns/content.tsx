@@ -4,7 +4,6 @@ import { motion, Variants } from "framer-motion";
 import { ArrowUpRight, Target, Activity, Rocket, TrendingUp, Search, Layers, MousePointerClick } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 const letterContainer: Variants = {
     hidden: { opacity: 0 },
@@ -245,7 +244,6 @@ export default function SmartAdCampaignsContent() {
                 </div>
             </section>
 
-            <Footer />
         </div>
     );
 }

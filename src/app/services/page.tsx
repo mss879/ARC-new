@@ -3,8 +3,8 @@ import ServicesList from "@/components/ServicesList";
 import SchemaOrg from "@/components/SchemaOrg";
 
 export const metadata: Metadata = {
-  title: "AI & Digital Services | Top AI Company Sri Lanka & UK — ARC AI",
-  description: "ARC AI services: AI automation, chatbots, web design, branding & digital marketing. Top AI company in Sri Lanka & UK.",
+  title: "Services | AI Agents, Automation and Business Systems — ARC AI",
+  description: "AI agents, workflow automation, websites, web apps and business systems, built by ARC AI in Colombo.",
   authors: [{ name: "ARC AI Agency" }],
   openGraph: {
     title: "Digital Marketing & AI Automation Services | ARC AI",

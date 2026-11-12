@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useMemo } from "react";
 import Image from "next/image";
-import { MessageCircle, X, Send, Mic, MicOff, Square, Loader2, Calendar } from "lucide-react";
+import { X, Send, Mic, MicOff, Square, Loader2, Calendar } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
@@ -77,7 +77,9 @@ export function StickyAiPill() {
     const [showOnMobile, setShowOnMobile] = useState(false);
     const router = useRouter();
 
-    // Hide pill on mobile until user scrolls past hero section
+    // The chat and voice buttons sit at the bottom right, under the calendar
+    // and WhatsApp buttons, and like them stay hidden until the visitor has
+    // scrolled past the hero (whose own button occupies that corner).
     useEffect(() => {
         const handleScroll = () => {
             const scrollPosition = window.scrollY;
@@ -288,7 +290,7 @@ export function StickyAiPill() {
                         dcRef.current.send(JSON.stringify({
                             type: "response.create",
                             response: {
-                                instructions: "IMPORTANT: The beta call time limit of 1 minute 30 seconds is almost up. Politely inform the user that the call is ending soon due to the beta time limit. Thank them for trying the voice feature and suggest they continue via the chat or book a call through our website. Keep it brief and friendly."
+                                instructions: "IMPORTANT: The call time limit of 1 minute 30 seconds is almost up. Politely inform the user that the call is ending soon because of the time limit. Thank them for trying the voice feature and suggest they continue via the chat or book a call through our website. Keep it brief and friendly."
                             }
                         }));
                     }
@@ -297,7 +299,7 @@ export function StickyAiPill() {
                 // At 1:30, force disconnect
                 maxDurationTimerRef.current = setTimeout(() => {
                     console.warn('[Voice] Beta max call duration reached — disconnecting after 1.5 minutes');
-                    setVoiceStatus("Beta time limit reached");
+                    setVoiceStatus("Time limit reached");
                     stopVoiceSession();
                     setTimeout(() => setActiveMode(null), 1500);
                 }, MAX_CALL_DURATION_MS);
@@ -574,7 +576,7 @@ export function StickyAiPill() {
     if (!pillVisible) return null;
 
     return (
-        <div className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] flex flex-col items-center transition-all duration-500 ${showOnMobile || activeMode ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-8 pointer-events-none'} md:opacity-100 md:translate-y-0 md:pointer-events-auto`}>
+        <div className={`fixed bottom-6 right-4 md:right-8 z-[60] flex flex-col items-end transition-all duration-500 ${showOnMobile || activeMode ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-8 pointer-events-none'}`}>
 
             {/* Expanded UI (Chat or Voice Window) */}
             <AnimatePresence>
@@ -742,7 +744,7 @@ export function StickyAiPill() {
 
             {/* Sticky Pill Container */}
             <div
-                className="relative flex items-center rounded-full p-1.5 transition-all duration-500 shadow-2xl overflow-hidden"
+                className={`relative flex items-center rounded-full transition-all duration-500 shadow-2xl overflow-hidden ${activeMode === null ? "flex-col p-[3px]" : "p-1.5"}`}
                 style={{
                     background: 'rgba(20, 20, 20, 0.85)',
                     backdropFilter: 'blur(20px)',
@@ -752,28 +754,52 @@ export function StickyAiPill() {
                 }}
             >
                 {activeMode === null ? (
-                    // Default State: Show both Chat and Voice buttons
+                    // Default State: two animated icons, chat above voice. No text
+                    // labels, so the control stays small; each button carries its
+                    // name for screen readers and as a hover tooltip.
                     <>
                         <button
                             onClick={() => setActiveMode("chat")}
-                            className="flex items-center gap-2 px-6 py-2.5 rounded-full text-white font-medium text-sm transition-all hover:bg-white/10 group"
+                            aria-label="Chat with our AI agent"
+                            title="Chat with our AI agent"
+                            className="group flex h-10 w-10 items-center justify-center rounded-full transition-all hover:bg-white/10"
                         >
-                            <MessageCircle className="w-4 h-4 text-orange-400 group-hover:scale-110 transition-transform" />
-                            Chat
+                            {/* A speech bubble with three typing dots. Bubble and dots are
+                                one drawing on one grid, so the dots sit exactly inside it
+                                (an icon with dots laid over it drifted off-centre). */}
+                            <svg
+                                viewBox="0 0 24 24"
+                                className="h-[26px] w-[26px] text-orange-400 transition-transform group-hover:scale-110"
+                                fill="none"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M7 4h10a4 4 0 0 1 4 4v5a4 4 0 0 1-4 4h-5l-4 3.2V17H7a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4Z"
+                                    stroke="currentColor"
+                                    strokeWidth="1.7"
+                                    strokeLinejoin="round"
+                                />
+                                <circle className="chat-typing-dot" cx="8.4" cy="10.5" r="1.25" fill="currentColor" />
+                                <circle className="chat-typing-dot [animation-delay:180ms]" cx="12" cy="10.5" r="1.25" fill="currentColor" />
+                                <circle className="chat-typing-dot [animation-delay:360ms]" cx="15.6" cy="10.5" r="1.25" fill="currentColor" />
+                            </svg>
                         </button>
-                        <div className="w-[1px] h-6 bg-white/20 mx-1"></div>
+                        <div className="my-1 h-px w-6 bg-white/20" aria-hidden="true"></div>
                         <button
                             onClick={() => {
                                 setActiveMode("voice");
                                 startVoiceSession();
                             }}
-                            className="flex items-center gap-2 px-6 py-2.5 rounded-full text-white font-medium text-sm transition-all hover:bg-white/10 group"
+                            aria-label="Talk to our AI agent"
+                            title="Talk to our AI agent"
+                            className="group flex h-10 w-10 items-center justify-center gap-[2px] rounded-full transition-all hover:bg-white/10"
                         >
-                            <Mic className="w-4 h-4 text-orange-400 group-hover:scale-110 transition-transform" />
-                            <div className="flex items-center gap-1.5">
-                                Voice
-                                <span className="text-[9px] font-bold tracking-wider uppercase bg-orange-500/20 text-orange-400 px-1.5 py-0.5 rounded border border-orange-500/30">Beta</span>
-                            </div>
+                            {/* A microphone with a sound wave moving either side of it */}
+                            <span className="demo-voice-bar h-2 w-[2px] rounded-full bg-orange-400/70" aria-hidden="true" />
+                            <span className="demo-voice-bar h-3 w-[2px] rounded-full bg-orange-400/70 [animation-delay:180ms]" aria-hidden="true" />
+                            <Mic className="h-[18px] w-[18px] text-orange-400 transition-transform group-hover:scale-110" aria-hidden="true" />
+                            <span className="demo-voice-bar h-3 w-[2px] rounded-full bg-orange-400/70 [animation-delay:360ms]" aria-hidden="true" />
+                            <span className="demo-voice-bar h-2 w-[2px] rounded-full bg-orange-400/70 [animation-delay:540ms]" aria-hidden="true" />
                         </button>
                     </>
                 ) : (

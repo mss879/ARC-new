@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import AISalesSDRsContent from "./content";
 
 export const metadata: Metadata = {
-  title: "ARC AI | AI Sales Reps (SDRs) UK & Sri Lanka",
+  title: "AI Sales Reps (SDRs) in Sri Lanka | ARC AI",
   description: "Automated prospectors that research targets and write hyper-personalized cold emails at massive scale.",
   authors: [{ name: "ARC AI Agency" }],
   openGraph: {

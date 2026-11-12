@@ -10,6 +10,7 @@ import { QueryProvider } from "@/components/providers/query-provider";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
 import FloatingActions from "@/components/FloatingActions";
+import { SITE_URL, company } from "@/content/site-facts";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,11 +26,12 @@ const flarex = localFont({
   display: "swap",
 });
 
-// Comprehensive SEO Metadata for UK and Sri Lankan markets
+// Site-wide defaults. A page that sets its own title, description or canonical
+// replaces these; they are what a page falls back to when it sets none.
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.arcai.agency'),
-  title: 'ARC AI - Top AI Company in Sri Lanka | AI Automation & Digital Marketing UK',
-  description: 'ARC AI is a leading AI company in Sri Lanka & the UK. Expert AI automation, chatbots, web design, branding & digital marketing services. Ranked among the top AI companies in Sri Lanka. Transform your business with cutting-edge technology.',
+  metadataBase: new URL(SITE_URL),
+  title: 'ARC AI | AI Agents and Business Systems in Sri Lanka',
+  description: company.summary,
 
   icons: {
     icon: [
@@ -41,19 +43,18 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: 'ARC AI - AI Automation and Digital Marketing Company',
-    description: 'Leading AI automation and digital marketing company in UK & Sri Lanka. Expert web design, branding, AI automation, chatbots, content generation & digital marketing services.',
-    url: 'https://www.arcai.agency',
+    title: 'ARC AI | AI Agents and Business Systems in Sri Lanka',
+    description: company.summary,
+    url: SITE_URL,
     siteName: 'ARC AI',
     type: 'website',
-    locale: 'en_GB',
 
     images: [
       {
         url: 'https://www.arcai.agency/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'ARC AI - AI Automation and Digital Marketing Company',
+        alt: 'ARC AI: AI agents and business systems',
         type: 'image/jpeg',
       },
     ],
@@ -63,8 +64,8 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@arcaiagency',
     creator: '@arcaiagency',
-    title: 'ARC AI - AI Automation and Digital Marketing Company',
-    description: 'Leading AI automation and digital marketing company in UK & Sri Lanka. Expert web design, branding, AI automation & digital marketing.',
+    title: 'ARC AI | AI Agents and Business Systems in Sri Lanka',
+    description: company.summary,
     images: ['https://www.arcai.agency/og-image.jpg'],
   },
 
@@ -84,28 +85,15 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  alternates: {
-    canonical: 'https://www.arcai.agency',
-    languages: {
-      'en-GB': 'https://www.arcai.agency',
-      'en-LK': 'https://www.arcai.agency',
-      'x-default': 'https://www.arcai.agency',
-    },
-  },
+  // No canonical and no hreflang here. A canonical set on the root layout is
+  // inherited by every page that does not set its own, which pointed pages
+  // such as /review at the home page; and the site has one language version,
+  // so there is nothing for hreflang to distinguish.
   // Google Search Console verification
   // To get your code: Go to https://search.google.com/search-console → Settings → Ownership verification → HTML tag
   // Then paste the content value below, e.g.: verification: { google: 'your-code-here' },
   category: 'technology',
   classification: 'Business Services',
-  other: {
-    'geo.region': 'GB',
-    'geo.placename': 'Birmingham, United Kingdom',
-    'distribution': 'global',
-    'revisit-after': '7 days',
-    'language': 'English',
-    'coverage': 'Worldwide',
-    'rating': 'General',
-  },
 };
 
 // No request-time API in here — no headers(), no cookies(). Reading the
@@ -120,7 +108,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-GB" className="dark">
+    <html lang="en" className="dark">
       <head>
         {/* Critical Meta Tags */}
         <meta charSet="utf-8" />

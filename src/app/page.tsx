@@ -5,6 +5,9 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import SchemaOrg from "@/components/SchemaOrg";
 import PreloaderProvider from "@/components/PreloaderProvider";
+import HomeFaq from "@/components/home/HomeFaq";
+import { SystemsIntro, SystemsPreviews } from "@/components/home/SystemsShowcase";
+import { homeFaq } from "@/content/home-faq";
 
 // Dynamic imports for below-the-fold components (reduce initial bundle)
 // Using loading fallback to prevent layout shift
@@ -12,18 +15,9 @@ const WhyUs = dynamic(() => import("@/components/WhyUs"), {
   ssr: true,
   loading: () => <SectionLoader />
 });
-const Benefits = dynamic(() => import("@/components/Benefits"), {
-  ssr: true,
-  loading: () => <SectionLoader />
-});
-const ClientsSection = dynamic(() => import("@/components/ClientsSection"));
 const ServicesSection = dynamic(() => import("@/components/ServicesSection"));
-const Features = dynamic(() => import("@/components/Features"));
-const AIServices = dynamic(() => import("@/components/AIServices"));
-const ProblemSection = dynamic(() => import("@/components/ProblemSection"));
+const ClientsSection = dynamic(() => import("@/components/ClientsSection"));
 const PortfolioCarousel = dynamic(() => import("@/components/PortfolioCarousel"));
-const SolutionSection = dynamic(() => import("@/components/SolutionSection"));
-const Integrations = dynamic(() => import("@/components/Integrations"));
 const Process = dynamic(() => import("@/components/Process"));
 const CTA = dynamic(() => import("@/components/CTA"));
 const Footer = dynamic(() => import("@/components/Footer"));
@@ -96,10 +90,9 @@ export default function HomePage() {
       />
 
       {/* Schema.org Structured Data for SEO */}
-      <SchemaOrg type="home" showFAQ={true} />
+      <SchemaOrg type="home" faq={homeFaq} />
 
-      {/* SEO H1 — keyword-rich, visible, single H1 for the entire page */}
-      <h1 className="sr-only">ARC AI — AI Automation & Web Design Agency in UK & Sri Lanka | Top AI Company in Sri Lanka</h1>
+      {/* The page's <h1> is the headline people read, inside <Hero />. */}
 
       {/* Page-level preloader: covers everything (navbar, hero, all sections)
           from the first paint and holds until the homepage assets are loaded */}
@@ -111,58 +104,26 @@ export default function HomePage() {
         {/* Above the fold - load immediately */}
         <Hero />
 
-        {/* Below the fold - dynamically imported and lazy loaded */}
+        {/* What ARC AI builds: five systems, each with a live demo. This took
+            the place of six generic blocks (why choose us, problem, solution,
+            AI features, AI services, integrations). The services list is kept,
+            after Why Us, and now covers every service. */}
+        <SystemsIntro />
+
+        {/* Third on the page, straight after "What we build". */}
         <WhyUs />
-        <Benefits />
-        <ClientsSection />
-        <ProblemSection />
-        <PortfolioCarousel />
-        <SolutionSection />
+
+        <SystemsPreviews />
+
+        {/* Below the fold - dynamically imported and lazy loaded */}
         <ServicesSection />
-        <Features />
-        <AIServices />
-        <Integrations />
+        <ClientsSection />
+        <PortfolioCarousel />
         <Process />
 
-        {/* Internal link equity — funnels authority to pillar pages */}
-        <section className="relative bg-black py-24 px-6 lg:px-12" aria-label="Locations we serve">
-          <div className="max-w-5xl mx-auto">
-
-            {/* Location pages — internal link equity funnel */}
-            <div className="space-y-6">
-              <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
-                Locations We Serve
-              </h2>
-              <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-                <a href="/ai-agency-birmingham" className="group p-5 rounded-xl border border-zinc-800 hover:border-[rgb(255,73,37)]/30 transition-colors">
-                  <p className="text-lg font-semibold text-white group-hover:text-[rgb(255,73,37)] transition-colors">AI Agency Birmingham</p>
-                  <p className="text-sm text-zinc-400 mt-1">AI automation, web design & digital marketing in Birmingham, UK.</p>
-                </a>
-                <a href="/ai-automation-sri-lanka" className="group p-5 rounded-xl border border-zinc-800 hover:border-[rgb(255,73,37)]/30 transition-colors">
-                  <p className="text-lg font-semibold text-white group-hover:text-[rgb(255,73,37)] transition-colors">AI Automation Sri Lanka</p>
-                  <p className="text-sm text-zinc-400 mt-1">AI automation & web design services for businesses across Sri Lanka.</p>
-                </a>
-                <a href="/ai-companies-sri-lanka" className="group p-5 rounded-xl border border-zinc-800 hover:border-[rgb(255,73,37)]/30 transition-colors">
-                  <p className="text-lg font-semibold text-white group-hover:text-[rgb(255,73,37)] transition-colors">Top AI Companies in Sri Lanka</p>
-                  <p className="text-sm text-zinc-400 mt-1">Discover why ARC AI is the #1 AI company in Sri Lanka for 2026.</p>
-                </a>
-                <a href="/ai-consultants-sri-lanka" className="group p-5 rounded-xl border border-zinc-800 hover:border-[rgb(255,73,37)]/30 transition-colors">
-                  <p className="text-lg font-semibold text-white group-hover:text-[rgb(255,73,37)] transition-colors">AI Consultants Sri Lanka</p>
-                  <p className="text-sm text-zinc-400 mt-1">Expert AI consulting &amp; strategic audits for Sri Lankan enterprises.</p>
-                </a>
-                <a href="/web-design-sri-lanka" className="group p-5 rounded-xl border border-zinc-800 hover:border-[rgb(255,73,37)]/30 transition-colors">
-                  <p className="text-lg font-semibold text-white group-hover:text-[rgb(255,73,37)] transition-colors">Web Design Sri Lanka</p>
-                  <p className="text-sm text-zinc-400 mt-1">Premium web design &amp; development services for businesses in Sri Lanka.</p>
-                </a>
-                <a href="/software-companies-sri-lanka" className="group p-5 rounded-xl border border-zinc-800 hover:border-[rgb(255,73,37)]/30 transition-colors">
-                  <p className="text-lg font-semibold text-white group-hover:text-[rgb(255,73,37)] transition-colors">Software Companies in Sri Lanka</p>
-                  <p className="text-sm text-zinc-400 mt-1">Top software development companies in Sri Lanka — 2026 guide.</p>
-                </a>
-              </div>
-            </div>
-
-          </div>
-        </section>
+        {/* The guide and location links that used to sit here as a "Locations
+            We Serve" grid are now in the footer, on every page. */}
+        <HomeFaq />
 
           <CTA />
         </article>

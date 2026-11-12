@@ -4,7 +4,6 @@ import { motion, Variants } from "framer-motion";
 import { ArrowUpRight, BrainCircuit, Network, ShieldCheck, Zap, Cog, Bot } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 const letterContainer: Variants = {
     hidden: { opacity: 0 },
@@ -258,7 +257,6 @@ export default function AIMultiAgentSystemsContent() {
                 </div>
             </section>
 
-            <Footer />
         </div>
     );
 }

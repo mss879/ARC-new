@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, Variants, AnimatePresence } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import "./ServicesSection.css";
 
@@ -28,134 +28,189 @@ const itemVariants: Variants = {
   },
 };
 
+// Every service ARC AI offers, in the order the home page lists them: AI
+// agents and automation first, then the business systems, then websites and
+// apps. `href` is the page a visitor goes to for more; a
+// service without its own page yet points at the contact page.
 const services = [
-  { 
-    id: "workflow-automation", 
-    number: "001", 
+  {
+    id: "ai-assistants",
+    number: "001",
+    title: "AI Assistants and Chatbots",
+    href: "/services/ai-chatbots",
+    description: "AI agents that answer your customers on WhatsApp, your website and Instagram.",
+    features: [
+      "WhatsApp agents for enquiries, orders, support and follow up",
+      "Website chatbots for lead capture and FAQs",
+      "Instagram DM agents for auto replies and lead capture from comments",
+      "Answers in Sinhala, Tamil and English from your own business information",
+      "Hands the conversation to your team when it needs a person",
+    ],
+  },
+  {
+    id: "ai-voice-agents",
+    number: "002",
+    title: "AI Voice Agents",
+    href: "/services/ai-voice-assistants",
+    description: "Voice agents that answer the phone, day and night.",
+    features: [
+      "Answers calls in Sinhala, Tamil and English",
+      "Looks up the answer in your product and service information before it speaks",
+      "Books appointments and takes down requests",
+      "Transfers the caller to your team when a person is needed",
+      "Call history with transcripts for every conversation",
+    ],
+  },
+  {
+    id: "workflow-automation",
+    number: "003",
     title: "Workflow Automation Systems",
+    href: "/services/ai-automated-workflows",
     description: "Automate repetitive tasks and streamline your business operations.",
     features: [
       "Lead capture to CRM",
       "Sales pipeline automations",
       "Client onboarding and offboarding",
       "Internal approvals and notifications",
-      "Automated reporting summaries"
-    ]
+      "Automated reporting summaries",
+    ],
   },
-  { 
-    id: "content-automation", 
-    number: "002", 
-    title: "Content Automation Systems",
-    description: "Scale your content creation and distribution effortlessly.",
+  {
+    id: "multi-agent-systems",
+    number: "004",
+    title: "AI Multi-Agent Systems",
+    href: "/services/ai-multi-agent-systems",
+    description: "Teams of AI agents that each handle one part of a job, with people in control.",
     features: [
-      "Long form to short form repurposing (YouTube to shorts, carousels, blog, email)",
-      "Automated social media calendars and scheduling",
-      "AI content generation workflows",
-      "Creator, influencer and UGC content pipelines"
-    ]
+      "Specialised agents for intake, research, drafting, checking and follow up",
+      "Human approval steps wherever a decision matters",
+      "Limits you set on what each agent may do on its own",
+      "Every agent action logged so you can see what happened",
+    ],
   },
-  { 
-    id: "ai-assistants", 
-    number: "003", 
-    title: "AI Assistants and Chatbots",
-    description: "AI powered assistants that handle customer interactions and support.",
+  {
+    id: "erp-systems",
+    number: "005",
+    title: "ERP Systems",
+    href: "/contact",
+    description: "One system for the whole business, built around how your company works.",
     features: [
-      "Website chatbots for lead capture and FAQs",
-      "Customer support assistants for common queries",
-      "Internal knowledge assistants for teams",
-      "Lead qualification chatbots",
-      "WhatsApp agents for lead nurturing, support and follow up",
-      "Instagram DM agents for auto replies, lead capture from comments, and DMs"
-    ]
+      "Sales, stock, purchasing, finance, HR and service jobs in one place",
+      "Dashboards for income, cash, receivables and stock",
+      "Roles, approvals and an audit trail",
+      "Month-end close and bank reconciliation",
+      "An AI assistant that points out what needs attention",
+    ],
   },
-  { 
-    id: "consulting-audits", 
-    number: "004", 
-    title: "Consulting and Automation Audits",
-    description: "Expert guidance to optimize and scale your automation strategy.",
+  {
+    id: "pos-systems",
+    number: "006",
+    title: "POS Systems",
+    href: "/contact",
+    description: "Point of sale built for Sri Lankan shops.",
     features: [
-      "Automation audit of current tools and processes",
-      "3 to 6 month automation roadmap",
-      "Training for the client team on how to use the systems you build"
-    ]
+      "Fast checkout with barcode, cash, card and LankaQR",
+      "Keeps selling when the internet drops, then syncs on its own",
+      "Stock, credit customers and shifts on one screen",
+      "English, Sinhala and Tamil",
+      "Takings and stock on the owner's phone",
+    ],
   },
-  { 
-    id: "landing-pages", 
-    number: "005", 
+  {
+    id: "smart-ecommerce",
+    number: "007",
+    title: "Smart E-commerce Stores",
+    href: "/services/web-design-development",
+    description: "Online stores that follow every order from checkout to the doorstep.",
+    features: [
+      "Fast checkout with cash on delivery and card payments",
+      "Guest checkout and order tracking",
+      "An admin panel for products, orders and stock",
+      "Delivery updates for your customers",
+      "Built for speed and search",
+    ],
+  },
+  {
+    id: "content-office",
+    number: "008",
+    title: "Content Office",
+    href: "/services/ai-content-generation",
+    description: "Your own AI content team, working from a one-line brief.",
+    features: [
+      "AI agents research, write, design and check every post",
+      "Plans up to a month of content around your calendar and local holidays",
+      "Nothing is published until you approve it",
+      "Publishes to Instagram and Facebook",
+      "Long form to short form repurposing for reels, carousels, blogs and email",
+    ],
+  },
+  {
+    id: "landing-pages",
+    number: "009",
     title: "Smart Websites",
+    href: "/services/web-design-development",
     description: "Websites that do more than just look good. They work for you.",
     features: [
       "AI powered chat and lead capture that qualifies visitors 24/7",
       "Smart forms that send leads to the right person or system automatically",
       "Integrated booking, payments or enquiries to streamline your operations",
       "Connected to your CRM, WhatsApp, email and other tools so nothing is manual",
-      "Built for speed, SEO and conversion so you get more leads from the same traffic"
-    ]
+      "Built for speed, SEO and conversion so you get more leads from the same traffic",
+    ],
   },
-  { 
-    id: "smart-ad-campaigns", 
-    number: "006", 
-    title: "Smart Ad Campaigns",
-    description: "Paid ads that improve themselves over time instead of burning money.",
-    features: [
-      "AI assisted audience research and creative ideas",
-      "Automated split testing of creatives, headlines and landing pages",
-      "Smart rules that scale winners and pause losing ads",
-      "Live performance dashboards so clients see what is happening at a glance",
-      "Retargeting flows that follow up visitors on Instagram, Facebook and Google"
-    ]
-  },
-  { 
-    id: "web-apps", 
-    number: "007", 
+  {
+    id: "web-apps",
+    number: "010",
     title: "Web Apps",
+    href: "/services/web-apps",
     description: "Custom web based tools for your business or your clients.",
     features: [
       "Client portals for projects, onboarding or support",
       "Internal tools for tracking leads, tasks, orders or inventory",
       "Dashboards that pull data from multiple platforms into one view",
       "Role based access control for teams, partners and clients",
-      "Built with scalable tech stacks and clean, documented code"
-    ]
+      "Built with scalable tech stacks and clean, documented code",
+    ],
   },
-  { 
-    id: "smart-funnels", 
-    number: "008", 
-    title: "Smart Funnels",
-    description: "Automated funnels that capture, nurture and convert leads.",
-    features: [
-      "Funnel strategy from first click to paid offer",
-      "High converting landing pages connected to your CRM and email tools",
-      "Automated email and WhatsApp follow up sequences",
-      "Upsell and cross sell flows to increase average order value",
-      "Continuous testing of steps to improve conversion rates over time"
-    ]
-  },
-  { 
-    id: "custom-backend", 
-    number: "009", 
+  {
+    id: "custom-backend",
+    number: "011",
     title: "Custom Backend Systems",
+    href: "/services/custom-backend",
     description: "The invisible engine that connects and powers everything.",
     features: [
       "APIs that connect your website, app and third party tools",
       "Central databases to keep your data clean and in sync",
       "Automation layers that remove manual data entry and copy paste work",
       "Secure authentication, roles and permissions for users",
-      "Scalable architecture that can handle growth"
-    ]
+      "Scalable architecture that can handle growth",
+    ],
   },
-  { 
-    id: "brand-kits", 
-    number: "010", 
-    title: "Brand Kits",
-    description: "A clear, consistent visual identity for your brand.",
+  {
+    id: "ai-data-processing",
+    number: "012",
+    title: "AI Data Processing",
+    href: "/services/ai-data-processing",
+    description: "Turn documents, receipts and emails into clean records in your system.",
     features: [
-      "Logo concepts and final logo files for all uses",
-      "Color palette and typography system for web and print",
-      "Social media post templates and story templates",
-      "Basic brand usage guide so your team stays on brand",
-      "Optional website and funnel styling aligned with the brand kit"
-    ]
+      "Reads PDFs, invoices, receipts and emails",
+      "Supplier bills captured from a photo",
+      "Data checked against your records before it is saved",
+      "Anything the AI is unsure about goes to a person to confirm",
+    ],
+  },
+  {
+    id: "ai-sales-reps",
+    number: "013",
+    title: "AI Sales Reps (SDRs)",
+    href: "/services/ai-sales-sdrs",
+    description: "AI that finds prospects, writes to them and books the meeting.",
+    features: [
+      "Researches each prospect before writing",
+      "Personalised outreach emails",
+      "Follow ups until there is a reply",
+      "Replies and booked meetings passed to your team",
+    ],
   },
 ];
 
@@ -261,29 +316,40 @@ const ServicesSection = () => {
                 </div>
               </div>
 
-              <AnimatePresence>
-                {expandedId === service.id && (
-                  <motion.div
-                    id={`svc-panel-${service.id}`}
-                    className="services-panel"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              {/* The panel is always in the page, collapsed to zero height, so
+                  every description and every link to a service page is in the
+                  HTML a search engine reads. It used to be created only when
+                  a visitor opened the row. */}
+              <motion.div
+                id={`svc-panel-${service.id}`}
+                className="services-panel"
+                initial={false}
+                animate={{
+                  height: expandedId === service.id ? "auto" : 0,
+                  opacity: expandedId === service.id ? 1 : 0,
+                }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                aria-hidden={expandedId !== service.id}
+              >
+                <div className="services-panel-content">
+                  <p className="services-description">{service.description}</p>
+                  <ul className="services-features">
+                    {service.features.map((feature, idx) => (
+                      <li key={idx} className="services-feature-item">
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href={service.href}
+                    tabIndex={expandedId === service.id ? 0 : -1}
+                    className="mt-8 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[rgb(255,73,37)] transition-colors hover:text-white"
                   >
-                    <div className="services-panel-content">
-                      <p className="services-description">{service.description}</p>
-                      <ul className="services-features">
-                        {service.features.map((feature, idx) => (
-                          <li key={idx} className="services-feature-item">
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                    {service.href === "/contact" ? `Ask about ${service.title}` : `More on ${service.title}`}
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </motion.div>
             </motion.div>
           ))}
         </motion.div>

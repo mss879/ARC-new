@@ -9,6 +9,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useInView, Variants } from "framer-motion";
+import { stats as siteStats } from "@/content/site-facts";
 
 const title = "NUMBERS DON'T LIE";
 
@@ -98,7 +99,7 @@ const WhyUs: React.FC = () => {
                 data-framer-name="Description"
               >
                 <p>
-                  With 6+ years of expertise, we craft bold brands and high-impact digital experiences that drive measurable results.
+                  With {siteStats.yearsOfExperience}+ years of experience and {siteStats.projectsCompleted}+ projects delivered, we build the AI agents, business systems and websites that Sri Lankan businesses run on.
                 </p>
               </div>
             </div>
@@ -132,7 +133,10 @@ const StatsGrid = () => {
 };
 
 const Stat = ({ item, index, inView }: { item: StatItem; index: number; inView: boolean }) => {
-  const [displayValue, setDisplayValue] = useState("0");
+  // Starts on the real figure, so the server HTML (and anyone without
+  // scripts) reads "100+", not "0+". The count-up replays from zero once the
+  // row scrolls into view.
+  const [displayValue, setDisplayValue] = useState(item.value);
 
   useEffect(() => {
     if (inView) {
@@ -174,8 +178,8 @@ const Stat = ({ item, index, inView }: { item: StatItem; index: number; inView: 
 };
 
 const stats: StatItem[] = [
-  { value: "65", suffix: "+", label: "Successful projects completed" },
-  { value: "6", suffix: "+", label: "Years of experience in creative industry" },
+  { value: String(siteStats.projectsCompleted), suffix: "+", label: "Successful projects completed" },
+  { value: String(siteStats.yearsOfExperience), suffix: "+", label: "Years of experience in creative industry" },
   { value: "99", suffix: "%", label: "Customer satisfaction rate" },
 ];
 

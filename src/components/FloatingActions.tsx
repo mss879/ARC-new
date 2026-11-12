@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { StickyAiPill } from "@/components/StickyAiPill";
 import { trackContactClick, trackEvent } from "@/lib/analytics/tracker";
+import { booking } from "@/content/site-facts";
 
 const FloatingActions = () => {
   const pathname = usePathname();
@@ -85,7 +86,7 @@ const FloatingActions = () => {
       <AnimatePresence>
         {isVisible && (
           <motion.div
-            className="fixed bottom-8 right-8 z-50 hidden md:flex flex-col gap-4"
+            className="fixed bottom-[133px] right-8 z-50 hidden md:flex flex-col gap-3"
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 100 }}
@@ -96,7 +97,7 @@ const FloatingActions = () => {
               onClick={openCalendly}
               aria-label="Book a meeting"
               data-analytics-ignore
-              className="group relative w-14 h-14 rounded-full flex items-center justify-center transition-all duration-500 hover:scale-110 overflow-hidden"
+              className="group relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 hover:scale-110 overflow-hidden"
               style={{
                 background: 'linear-gradient(135deg, rgba(255, 73, 37, 0.8), rgba(255, 73, 37, 0.4))',
                 backdropFilter: 'blur(16px)',
@@ -117,7 +118,7 @@ const FloatingActions = () => {
 
               {/* Calendar Icon */}
               <svg
-                className="w-6 h-6 text-white drop-shadow-md z-10"
+                className="w-5 h-5 text-white drop-shadow-md z-10"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -138,7 +139,7 @@ const FloatingActions = () => {
               onClick={openWhatsApp}
               aria-label="Chat on WhatsApp"
               data-analytics-ignore
-              className="group relative w-14 h-14 rounded-full flex items-center justify-center transition-all duration-500 hover:scale-110 overflow-hidden"
+              className="group relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 hover:scale-110 overflow-hidden"
               style={{
                 background: 'linear-gradient(135deg, rgba(37, 211, 102, 0.8), rgba(37, 211, 102, 0.4))',
                 backdropFilter: 'blur(16px)',
@@ -159,7 +160,7 @@ const FloatingActions = () => {
 
               {/* WhatsApp Icon */}
               <svg
-                className="w-6 h-6 text-white drop-shadow-md z-10"
+                className="w-5 h-5 text-white drop-shadow-md z-10"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +173,9 @@ const FloatingActions = () => {
         )}
       </AnimatePresence>
 
-      {/* Sticky AI Pill (hidden on mobile until scroll past hero) */}
+      {/* Chat and voice: a small capsule fixed at bottom-6, directly under the
+          WhatsApp button. The column above is raised by the capsule's height
+          (97px) plus the 12px gap so the four controls read as one stack. */}
       <StickyAiPill />
 
       {/* Calendly Modal */}
@@ -221,7 +224,7 @@ const FloatingActions = () => {
               <div className="w-full h-full">
                 <div
                   className="calendly-inline-widget w-full h-full"
-                  data-url="https://calendly.com/shahid-arcai-_xeu/30min?hide_event_type_details=1&hide_gdpr_banner=1"
+                  data-url={booking.embedUrl}
                   style={{ minWidth: '320px', height: '100%' }}
                 />
               </div>

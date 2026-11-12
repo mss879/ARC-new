@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 export default {
   darkMode: ["class"],
@@ -136,5 +137,15 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    // `screen-wide:` styles a product demo by the width of the demo itself,
+    // not the browser window. A demo sits in a column that can be 330px wide
+    // on a phone, 500px beside text on a laptop and 700px on a large monitor,
+    // so window breakpoints (sm:, lg:) pick the wrong layout for it. The demo
+    // frame declares itself a container named "screen" (see MockFrame).
+    plugin(({ addVariant }) => {
+      addVariant("screen-wide", "@container screen (min-width: 480px)");
+    }),
+  ],
 } satisfies Config;

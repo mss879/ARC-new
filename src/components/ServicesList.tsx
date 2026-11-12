@@ -6,7 +6,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 // Animation Variants
 const letterContainer: Variants = {
@@ -775,7 +774,6 @@ export default function ServicesList() {
                     </motion.div>
                 </section>
 
-                <Footer />
             </div>
 
             {/* Service Modal */}

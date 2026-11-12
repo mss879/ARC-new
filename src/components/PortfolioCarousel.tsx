@@ -1,101 +1,79 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { latestProjects, type PortfolioItem } from "@/content/portfolio";
 
-const row1Images = [
-    "/javagap.webp",
-    "/sponge-global.webp",
-    "/delft-tours.webp",
-    "/secertery-services.webp",
-    "/halo.webp",
-    "/exim.webp",
-    "/core-craft-screenshot.webp",
-    "/Ontriq-screenshot.webp",
-];
+/**
+ * "Our recent work" on the home page.
+ *
+ * The two rows are the newest sixteen projects from the portfolio list, in
+ * portfolio order, so a project added at the top of src/content/portfolio.ts
+ * appears here without touching this file. It used to be a hand-kept list of
+ * sixteen screenshots that had fallen behind the portfolio.
+ */
+const PER_ROW = 8;
 
-const row2Images = [
-    "/orkestrate-screenshot.webp",
-    "/KeysPlease-Screenshot.webp",
-    "/dek-studio-screenshot.webp",
-    "/vibewebstudio.webp",
-    "/yboagency.webp",
-    "/carrush.webp",
-    "/cararenaceylon.webp",
-    "/hiltopglobal.webp",
-];
+const CarouselRow = ({ projects, reverse = false }: { projects: PortfolioItem[]; reverse?: boolean }) => {
+    const animation = reverse
+        ? "animate-[marquee-reverse_40s_linear_infinite]"
+        : "animate-[marquee_40s_linear_infinite]";
 
-const CarouselRow = ({ images, reverse = false }: { images: string[], reverse?: boolean }) => {
+    // The strip is rendered twice so the loop has no seam. The second copy is
+    // hidden from assistive technology and its images carry no alt text.
     return (
         <div className="flex w-full overflow-hidden">
-            <div
-                className={`flex min-w-full shrink-0 gap-6 py-4 pr-6 ${reverse ? "animate-[marquee-reverse_40s_linear_infinite]" : "animate-[marquee_40s_linear_infinite]"
-                    }`}
-            >
-                {images.map((src, idx) => (
-                    <div
-                        key={idx}
-                        className="relative aspect-[16/10] w-[260px] md:w-[450px] shrink-0 overflow-hidden rounded-xl border border-white/10 bg-zinc-900/50 hover:bg-zinc-800/50 transition-colors"
-                    >
-                        <Image
-                            src={src}
-                            alt={`Portfolio project ${src.replace(/^\//, '').replace(/\.(png|jpg|jpeg|webp)$/i, '').replace(/[-_]/g, ' ')}`}
-                            fill
-                            className="object-contain transition-transform duration-700 hover:scale-105"
-                            sizes="(max-width: 768px) 260px, 450px"
-                            quality={85}
-                        />
-                    </div>
-                ))}
-            </div>
-            {/* Duplicate for seamless infinite scrolling */}
-            <div
-                className={`flex min-w-full shrink-0 gap-6 py-4 pr-6 ${reverse ? "animate-[marquee-reverse_40s_linear_infinite]" : "animate-[marquee_40s_linear_infinite]"
-                    }`}
-                aria-hidden="true"
-            >
-                {images.map((src, idx) => (
-                    <div
-                        key={`dup-${idx}`}
-                        className="relative aspect-[16/10] w-[260px] md:w-[450px] shrink-0 overflow-hidden rounded-xl border border-white/10 bg-zinc-900/50 hover:bg-zinc-800/50 transition-colors"
-                    >
-                        <Image
-                            src={src}
-                            alt={`Portfolio project ${src.replace(/^\//, '').replace(/\.(png|jpg|jpeg|webp)$/i, '').replace(/[-_]/g, ' ')}`}
-                            fill
-                            className="object-contain transition-transform duration-700 hover:scale-105"
-                            sizes="(max-width: 768px) 260px, 450px"
-                            quality={85}
-                        />
-                    </div>
-                ))}
-            </div>
+            {[false, true].map((isCopy) => (
+                <div
+                    key={isCopy ? "copy" : "original"}
+                    className={`flex min-w-full shrink-0 gap-6 py-4 pr-6 ${animation}`}
+                    aria-hidden={isCopy ? "true" : undefined}
+                >
+                    {projects.map((project) => (
+                        <div
+                            key={project.id}
+                            className="relative aspect-[16/10] w-[260px] md:w-[450px] shrink-0 overflow-hidden rounded-xl border border-white/10 bg-zinc-900/50 hover:bg-zinc-800/50 transition-colors"
+                        >
+                            <Image
+                                src={project.image}
+                                alt={isCopy ? "" : `${project.title}, built by ARC AI`}
+                                fill
+                                className="object-contain transition-transform duration-700 hover:scale-105"
+                                sizes="(max-width: 768px) 260px, 450px"
+                                quality={85}
+                            />
+                        </div>
+                    ))}
+                </div>
+            ))}
         </div>
     );
 };
 
 export default function PortfolioCarousel() {
-    const [isClient, setIsClient] = useState(false);
-
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
-
-    if (!isClient) return null; // Avoid hydration mismatch for infinite animations sometimes
+    const projects = latestProjects(PER_ROW * 2);
+    const firstRow = projects.slice(0, PER_ROW);
+    const secondRow = projects.slice(PER_ROW);
 
     return (
-        <section className="relative w-full overflow-hidden bg-black py-24">
+        <section className="relative w-full overflow-hidden bg-black py-24" aria-labelledby="recent-work-heading">
             {/* Section Header */}
             <div className="container mx-auto px-4 mb-12 text-center">
                 <h2
+                    id="recent-work-heading"
                     className="text-4xl md:text-5xl lg:text-6xl font-bold text-white uppercase tracking-tight"
                     style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
                 >
                     Our Recent <span className="text-[rgb(255,73,37)]">Work</span>
                 </h2>
                 <p className="mt-4 text-zinc-400 max-w-2xl mx-auto text-lg">
-                    High-end digital experiences designed to convert, perform, and scale.
+                    The latest systems, stores and websites we have shipped.
                 </p>
+                <Link
+                    href="/portfolio"
+                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[rgb(255,73,37)] hover:text-white transition-colors"
+                >
+                    See all our work
+                    <span aria-hidden="true">↗</span>
+                </Link>
             </div>
 
             {/* Carousel Container with faded edges */}
@@ -106,8 +84,8 @@ export default function PortfolioCarousel() {
                 {/* Right Fade */}
                 <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-[10%] bg-gradient-to-l from-black to-transparent max-md:hidden" />
 
-                <CarouselRow images={row1Images} />
-                <CarouselRow images={row2Images} reverse />
+                <CarouselRow projects={firstRow} />
+                {secondRow.length > 0 && <CarouselRow projects={secondRow} reverse />}
             </div>
         </section>
     );

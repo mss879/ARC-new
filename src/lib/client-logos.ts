@@ -1,7 +1,37 @@
-// All client trust logos - company name and filename mapping
+// Client logos for the "Trusted by" strips, newest work first.
+//
+// Each file is a round badge at public/logos/<file>.webp. The first block was
+// rebuilt on 12 Nov 2026 from the clients' own brand files at 256 px; the
+// second block is the older set. Only brands that are on the public portfolio
+// belong here: this list is read as "these are our clients".
 export const clientLogos = [
-    { name: "YBO Agency", file: "yboagency" },
+    { name: "Island Jerky", file: "island-jerky" },
+    { name: "Jolly's Creamery", file: "jollys-creamery" },
+    { name: "Island Adventures", file: "island-adventures" },
+    { name: "Dock One Solutions", file: "dock-one-solutions" },
+    { name: "Franley", file: "franley" },
+    { name: "Royal Paradise Gems", file: "royal-paradise-gems" },
+    { name: "Armac Mart", file: "armac-mart" },
+    { name: "Cloud Healthcare", file: "cloud-healthcare" },
+    { name: "Fusion Hybrid Projects", file: "fusion-hybrid" },
+    { name: "Gharib Perfumes", file: "gharib-perfumes" },
+    { name: "Lusako", file: "lusako" },
+    { name: "Makro Developers", file: "makro-developers" },
+    { name: "Iris & Me", file: "iris-and-me" },
+    { name: "MD Lanka", file: "md-lanka" },
+    { name: "Green Engineering Systems", file: "green-engineering-systems" },
+    { name: "Mr Rider", file: "mr-rider" },
+    { name: "AEC", file: "aec" },
+    { name: "Tech Nurture", file: "tech-nurture" },
+    { name: "Ceylon Gem Maison", file: "ceylon-gem-maison" },
+    { name: "Imperial Life Sciences", file: "imperial-life-sciences" },
+    { name: "Inventis Pharma", file: "inventis-pharma" },
+    { name: "iConn Health Care", file: "iconn-health-care" },
+    { name: "PluggedIn", file: "pluggedin" },
+    { name: "Portland Flooring", file: "portland-flooring" },
+    { name: "Java Global Nexus", file: "java-global-nexus" },
     { name: "Zenzur", file: "zenzur" },
+    { name: "YBO Agency", file: "yboagency" },
     { name: "Car Rush", file: "car-rush" },
     { name: "Care Arena Ceylon", file: "care-arena-ceylon" },
     { name: "Ceylon Motors", file: "ceylonmotors" },
@@ -13,7 +43,6 @@ export const clientLogos = [
     { name: "Heatwave Pro", file: "heatwave-pro" },
     { name: "Hijab Boutique", file: "hijab-boutique" },
     { name: "Hilltop Recruitment", file: "hilltop-recruitment" },
-    { name: "Island Jerky", file: "island-jerky" },
     { name: "Noble Mentorship", file: "noble-mentorship" },
     { name: "Rivon", file: "rivon" },
     { name: "Skoop", file: "skoop" },
@@ -26,7 +55,12 @@ export const clientLogos = [
     { name: "Exim", file: "exim" },
     { name: "Halo", file: "halo" },
     { name: "Java Gap", file: "java-gap" },
-    { name: "Logo Client", file: "logo-client" },
 ] as const;
 
 export const LOGO_COUNT = clientLogos.length;
+
+/** The hero strip loads eagerly, so it carries only the newest few. */
+export const heroLogos = clientLogos.slice(0, 16);
+
+/** The spinning ring on the home page has room for this many before logos touch. */
+export const ringLogos = clientLogos.slice(0, 28);

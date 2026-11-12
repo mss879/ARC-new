@@ -3,8 +3,8 @@ import { Metadata } from "next";
 import MotionDesignContent from "./content";
 
 export const metadata: Metadata = {
-  title: "ARC AI | Motion Design & Animation Agency UK & Sri Lanka",
-  description: "Bring your brand to life with motion design. ARC AI creates UI animations, micro-interactions & visual storytelling for businesses in UK & Sri Lanka.",
+  title: "Motion Design & Animation Agency in Sri Lanka | ARC AI",
+  description: "Bring your brand to life with motion design. ARC AI creates UI animations, micro-interactions & visual storytelling for businesses in Sri Lanka.",
   authors: [{ name: "ARC AI Agency" }],
   openGraph: {
     title: "Motion Design Services | ARC AI",

@@ -30,12 +30,30 @@ function validateName(value: string): string | null {
   return null;
 }
 
-function validatePhone(value: string): string | null {
-  if (!value.trim()) return "Phone number is required";
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const EMAIL_MAX_LENGTH = 254;
+
+/**
+ * A visitor has to leave one way to reach them, and it can be either. In Sri
+ * Lanka that is usually a phone or WhatsApp number; plenty of business buyers
+ * would rather give an email. Asking for both loses people who have only one
+ * to hand.
+ */
+const NEED_ONE_CONTACT = "Add a phone number or an email so we can reply";
+
+function validatePhone(value: string, email: string): string | null {
+  if (!value.trim()) return email.trim() ? null : NEED_ONE_CONTACT;
   if (!PHONE_ALLOWED_CHARS.test(value)) return "Only digits, +, -, spaces, and parentheses are allowed";
   const digits = extractDigits(value);
   if (digits.length < PHONE_MIN_DIGITS) return `Phone number must have at least ${PHONE_MIN_DIGITS} digits`;
   if (value.length > PHONE_MAX_LENGTH) return "Phone number is too long";
+  return null;
+}
+
+function validateEmail(value: string, phone: string): string | null {
+  const email = value.trim();
+  if (!email) return phone.trim() ? null : NEED_ONE_CONTACT;
+  if (email.length > EMAIL_MAX_LENGTH || !EMAIL_PATTERN.test(email)) return "Enter a valid email address";
   return null;
 }
 
@@ -48,7 +66,29 @@ function validateMessage(value: string): string | null {
 type FieldErrors = {
   name?: string | null;
   phone?: string | null;
+  email?: string | null;
   message?: string | null;
+};
+
+/** What the enquiry is about. Sent to the CRM as the subject. */
+const NEEDS = [
+  "AI agent (WhatsApp, website or voice)",
+  "ERP or point of sale system",
+  "Online store",
+  "Content Office",
+  "Website or web app",
+  "Not sure yet",
+];
+
+const EMPTY_FORM = {
+  name: "",
+  phone: "",
+  email: "",
+  company: "",
+  website: "",
+  companyWebsite: "",
+  subject: "",
+  message: "",
 };
 
 /**
@@ -118,15 +158,7 @@ function readAttribution(): Attribution {
 }
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    company: "",
-    website: "",
-    companyWebsite: "",
-    subject: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState(EMPTY_FORM);
 
   useEffect(() => {
     readAttribution();
@@ -166,12 +198,13 @@ export default function ContactForm() {
   function validateAll(): boolean {
     const errors: FieldErrors = {
       name: validateName(formData.name),
-      phone: validatePhone(formData.phone),
+      phone: validatePhone(formData.phone, formData.email),
+      email: validateEmail(formData.email, formData.phone),
       message: validateMessage(formData.message),
     };
     setFieldErrors(errors);
-    setTouched({ name: true, phone: true, message: true });
-    return !errors.name && !errors.phone && !errors.message;
+    setTouched({ name: true, phone: true, email: true, message: true });
+    return !errors.name && !errors.phone && !errors.email && !errors.message;
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -215,7 +248,8 @@ export default function ContactForm() {
         try {
           await supabase.rpc('submit_contact_form', {
             p_full_name: formData.name,
-            p_phone: formData.phone,
+            ...(formData.phone.trim() ? { p_phone: formData.phone.trim() } : {}),
+            p_email: formData.email.trim() || null,
             p_company: formData.company || null,
             p_subject: formData.subject || null,
             p_message: formData.message,
@@ -240,15 +274,7 @@ export default function ContactForm() {
           message: "Thank you! Your message has been sent successfully.",
         });
         // Reset form
-        setFormData({
-          name: "",
-          phone: "",
-          company: "",
-          website: "",
-          companyWebsite: "",
-          subject: "",
-          message: "",
-        });
+        setFormData(EMPTY_FORM);
         setFieldErrors({});
         setTouched({});
       } else {
@@ -281,13 +307,17 @@ export default function ContactForm() {
     const sanitised = raw.replace(/[^0-9+\-\s()]/g, "");
     const updated = { ...formData, phone: sanitised };
     setFormData(updated);
-    if (touched.phone) {
-      setFieldErrors((prev) => ({ ...prev, phone: validatePhone(sanitised) }));
+    if (touched.phone || touched.email) {
+      setFieldErrors((prev) => ({
+        ...prev,
+        phone: validatePhone(sanitised, updated.email),
+        email: validateEmail(updated.email, sanitised),
+      }));
     }
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     const updated = { ...formData, [name]: value };
@@ -298,6 +328,14 @@ export default function ContactForm() {
       if (name === "name") setFieldErrors((prev) => ({ ...prev, name: validateName(value) }));
       if (name === "message") setFieldErrors((prev) => ({ ...prev, message: validateMessage(value) }));
     }
+    // Phone and email answer for each other, so both are re-checked together.
+    if (name === "email" && (touched.email || touched.phone)) {
+      setFieldErrors((prev) => ({
+        ...prev,
+        email: validateEmail(value, updated.phone),
+        phone: validatePhone(updated.phone, value),
+      }));
+    }
   };
 
   // ── Mark field as touched on blur & validate ──────────────────────────────
@@ -305,7 +343,15 @@ export default function ContactForm() {
     const { name, value } = e.target;
     setTouched((prev) => ({ ...prev, [name]: true }));
     if (name === "name") setFieldErrors((prev) => ({ ...prev, name: validateName(value) }));
-    if (name === "phone") setFieldErrors((prev) => ({ ...prev, phone: validatePhone(value) }));
+    if (name === "phone" || name === "email") {
+      const phone = name === "phone" ? value : formData.phone;
+      const email = name === "email" ? value : formData.email;
+      setFieldErrors((prev) => ({
+        ...prev,
+        phone: validatePhone(phone, email),
+        email: validateEmail(email, phone),
+      }));
+    }
     if (name === "message") setFieldErrors((prev) => ({ ...prev, message: validateMessage(value) }));
   };
 
@@ -351,9 +397,8 @@ export default function ContactForm() {
             type="tel"
             name="phone"
             inputMode="tel"
-            placeholder={isMobile ? "Phone" : "Phone number"}
-            required
-            aria-label="Phone number"
+            placeholder={isMobile ? "Phone" : "Phone or WhatsApp number"}
+            aria-label="Phone or WhatsApp number"
             aria-invalid={!!fieldErrors.phone}
             value={formData.phone}
             onChange={handlePhoneChange}
@@ -365,8 +410,25 @@ export default function ContactForm() {
         </div>
       </div>
 
-      {/* Company Name & Company Website Row */}
+      {/* Email & Company Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <Input
+            type="email"
+            name="email"
+            inputMode="email"
+            autoComplete="email"
+            placeholder={isMobile ? "Email" : "Email address"}
+            aria-label="Email address"
+            aria-invalid={!!fieldErrors.email}
+            value={formData.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            maxLength={EMAIL_MAX_LENGTH}
+            className={`bg-[rgb(30,30,30)] border-none text-white placeholder:text-[rgb(90,90,90)] focus-visible:ring-1 focus-visible:ring-[#FF4925]/50 focus-visible:ring-offset-0 rounded-xl h-14 px-6 ${touched.email && fieldErrors.email ? errorRingClass : ""}`}
+          />
+          {touched.email && <FieldError error={fieldErrors.email} />}
+        </div>
         <div>
           <Input
             type="text"
@@ -378,6 +440,13 @@ export default function ContactForm() {
             className="bg-[rgb(30,30,30)] border-none text-white placeholder:text-[rgb(90,90,90)] focus-visible:ring-1 focus-visible:ring-[#FF4925]/50 focus-visible:ring-offset-0 rounded-xl h-14 px-6"
           />
         </div>
+      </div>
+      <p className="text-xs text-[rgb(119,119,119)] pl-1 -mt-3">
+        A phone number or an email is enough. Leave whichever you prefer.
+      </p>
+
+      {/* Company Website & What they need Row */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <Input
             type="text"
@@ -393,19 +462,22 @@ export default function ContactForm() {
             className="bg-[rgb(30,30,30)] border-none text-white placeholder:text-[rgb(90,90,90)] focus-visible:ring-1 focus-visible:ring-[#FF4925]/50 focus-visible:ring-offset-0 rounded-xl h-14 px-6"
           />
         </div>
-      </div>
-
-      {/* Subject */}
-      <div>
-        <Input
-          type="text"
-          name="subject"
-          placeholder="Subject"
-          aria-label="Subject"
-          value={formData.subject}
-          onChange={handleChange}
-          className="bg-[rgb(30,30,30)] border-none text-white placeholder:text-[rgb(90,90,90)] focus-visible:ring-1 focus-visible:ring-[#FF4925]/50 focus-visible:ring-offset-0 rounded-xl h-14 px-6"
-        />
+        <div>
+          <select
+            name="subject"
+            aria-label="What do you need?"
+            value={formData.subject}
+            onChange={handleChange}
+            className={`w-full appearance-none bg-[rgb(30,30,30)] border-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#FF4925]/50 rounded-xl h-14 px-6 text-sm ${formData.subject ? "text-white" : "text-[rgb(90,90,90)]"}`}
+          >
+            <option value="">What do you need?</option>
+            {NEEDS.map((need) => (
+              <option key={need} value={need} className="text-white">
+                {need}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {/* Message */}

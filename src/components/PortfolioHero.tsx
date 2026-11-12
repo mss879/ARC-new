@@ -67,7 +67,7 @@ export default function PortfolioHero() {
         
         {/* SEO Hidden H1 */}
         <h1 className="sr-only">
-          Portfolio of the Top AI & Web Design Company in Sri Lanka & UK — ARC AI Agency
+          ARC AI Portfolio: Websites, Systems and AI Agents
         </h1>
 
         <div className="flex justify-center items-center mb-6 min-h-[120px] md:min-h-[160px]">

@@ -3,7 +3,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { memo, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { clientLogos } from "@/lib/client-logos";
+import { heroLogos } from "@/lib/client-logos";
 import { usePreloader } from "./PreloaderProvider";
 
 const Hero = memo(() => {
@@ -12,6 +12,14 @@ const Hero = memo(() => {
   // Preloader is owned by PreloaderProvider at the page level; Hero only
   // reports video readiness and waits for the doors to open before playing
   const { isLoading, markVideoReady } = usePreloader();
+
+  // The button opens the booking calendar that FloatingActions owns (it
+  // listens for this event on every page). The link still points at /contact,
+  // so it works before the page has hydrated and for anyone without scripts.
+  const openBooking = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.dispatchEvent(new Event("open-calendly"));
+  };
   const [videoLoaded, setVideoLoaded] = useState(false);
 
   // Download video via fetch() during preloader — fetch() does NOT trigger
@@ -177,13 +185,16 @@ const Hero = memo(() => {
         <div className="relative z-10 h-full flex flex-col px-6 md:px-8 lg:px-12 pt-32 md:pt-24 lg:pt-40 pb-8">
           {/* Mobile & Small Screens - Redesigned layout */}
           <div className="flex-1 md:hidden flex flex-col h-full max-w-[1800px] mx-auto w-full">
-            {/* Mobile tagline — styled as heading but uses <p> to avoid duplicate H1 */}
+            {/* The page's one <h1>. The tablet and desktop layouts below repeat the
+                headline for their own breakpoint as role="heading" paragraphs,
+                so each screen size exposes exactly one level-1 heading while the
+                document still has a single <h1> element. */}
             <div className="animate-fade-in mt-12" style={{ animationDelay: "0.2s" }}>
-              <p className="text-3xl sm:text-4xl font-semibold leading-[1.1] tracking-tight text-white text-left font-flarex" role="heading" aria-level={2}>
-                AI Automation &amp;
+              <h1 className="text-3xl sm:text-4xl font-semibold leading-[1.1] tracking-tight text-white text-left font-flarex">
+                AI Agents &amp;
                 <br />
-                <span className="text-white/70">Web Design Agency</span>
-              </p>
+                <span className="text-white/70">Business Systems</span>
+              </h1>
             </div>
 
             {/* Spacer */}
@@ -194,9 +205,9 @@ const Hero = memo(() => {
               {/* Description */}
               <div className="animate-fade-in" style={{ animationDelay: "0.4s" }}>
                 <p className="text-lg sm:text-xl leading-relaxed text-left text-white font-flarex font-bold">
-                  We build data-driven websites, automations{" "}
+                  ERP, POS and e-commerce systems{" "}
                   <span className="text-white">
-                    that scale brands and drive revenue.
+                    with AI agents built in, for Sri Lankan businesses.
                   </span>
                 </p>
               </div>
@@ -210,7 +221,7 @@ const Hero = memo(() => {
                   <div className="flex gap-6 animate-scroll">
                     {[...Array(3)].map((_, setIndex) => (
                       <div key={setIndex} className="flex gap-6 shrink-0">
-                        {clientLogos.map((logo, i) => (
+                        {heroLogos.map((logo, i) => (
                           <div key={i} className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center p-2 hover:bg-white/20 transition-colors">
                             <img
                               src={`/logos/${logo.file}.webp`}
@@ -230,13 +241,13 @@ const Hero = memo(() => {
 
               {/* CTA Button - Full Width */}
               <div className="animate-fade-in" style={{ animationDelay: "0.8s" }}>
-                <Link href="/contact">
+                <Link href="/contact" onClick={openBooking}>
                   <button
                     className="group relative w-full px-8 py-4 rounded-full border-2 border-orange-500 hover:bg-orange-500 transition-all duration-300 overflow-hidden shadow-[0_0_20px_rgba(249,115,22,0.4)] hover:shadow-[0_0_30px_rgba(249,115,22,0.6)]"
-                    aria-label="Start a project with ARC AI"
+                    aria-label="Book a call with ARC AI"
                   >
                     <span className="relative z-10 flex items-center justify-center gap-3 text-base font-bold tracking-wide text-orange-500 group-hover:text-white transition-colors">
-                      START A PROJECT
+                      BOOK A CALL
                       <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true" />
                     </span>
                   </button>
@@ -249,10 +260,10 @@ const Hero = memo(() => {
           <div className="hidden md:flex lg:hidden flex-col justify-between h-full max-w-[1800px] mx-auto w-full min-h-0">
             {/* Top Section - Main Headline on Right with spacing */}
             <div className="flex items-start justify-end pt-8 md:pt-12 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-              <p className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] md:leading-[0.95] tracking-tight text-white text-right font-flarex" role="heading" aria-level={2}>
-                AI Automation &amp;
+              <p className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] md:leading-[1.08] tracking-tight text-white text-right font-flarex" role="heading" aria-level={1}>
+                AI Agents &amp;
                 <br />
-                <span className="text-white/70">Web Design Agency</span>
+                <span className="text-white/70">Business Systems</span>
               </p>
             </div>
 
@@ -262,9 +273,9 @@ const Hero = memo(() => {
                 {/* Description */}
                 <div className="animate-fade-in" style={{ animationDelay: "0.4s" }}>
                   <p className="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed max-w-2xl text-left text-white font-flarex">
-                    We build data-driven websites, automations{" "}
+                    ERP, POS and e-commerce systems{" "}
                     <span className="text-white">
-                      that scale brands and drive revenue.
+                      with AI agents built in, for Sri Lankan businesses.
                     </span>
                   </p>
                 </div>
@@ -278,7 +289,7 @@ const Hero = memo(() => {
                     <div className="flex gap-6 md:gap-8 animate-scroll">
                       {[...Array(3)].map((_, setIndex) => (
                         <div key={setIndex} className="flex gap-6 md:gap-8 shrink-0">
-                          {clientLogos.map((logo, i) => (
+                          {heroLogos.map((logo, i) => (
                             <div key={i} className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center p-2 hover:bg-white/20 transition-colors">
                               <img
                                 src={`/logos/${logo.file}.webp`}
@@ -298,13 +309,13 @@ const Hero = memo(() => {
 
                 {/* CTA Button - Under Trusted By */}
                 <div className="animate-fade-in" style={{ animationDelay: "0.8s" }}>
-                  <Link href="/contact">
+                  <Link href="/contact" onClick={openBooking}>
                     <button
                       className="group relative px-8 md:px-12 py-3 md:py-4 rounded-full border-2 border-orange-500 hover:bg-orange-500 transition-all duration-300 overflow-hidden shadow-[0_0_20px_rgba(249,115,22,0.4)] hover:shadow-[0_0_30px_rgba(249,115,22,0.6)]"
-                      aria-label="Start a project with ARC AI"
+                      aria-label="Book a call with ARC AI"
                     >
                       <span className="relative z-10 flex items-center gap-3 text-sm md:text-base font-semibold tracking-wide text-orange-500 group-hover:text-white transition-colors">
-                        START A PROJECT
+                        BOOK A CALL
                         <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true" />
                       </span>
                     </button>
@@ -319,12 +330,10 @@ const Hero = memo(() => {
             {/* Left Side - Description at bottom */}
             <div className="flex flex-col justify-end h-full">
               <div className="space-y-4 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-                <p className="text-2xl xl:text-3xl font-medium leading-relaxed max-w-xl text-left text-white font-flarex">
-                  We build data-driven websites,
-                  <br />
-                  automations{" "}
+                <p className="text-2xl xl:text-3xl font-medium leading-relaxed max-w-xl text-left text-white font-flarex text-balance">
+                  ERP, POS and e-commerce systems with AI agents built in,{" "}
                   <span className="text-white">
-                    that scale brands and drive revenue.
+                    for Sri Lankan businesses.
                   </span>
                 </p>
 
@@ -337,7 +346,7 @@ const Hero = memo(() => {
                     <div className="flex gap-8 animate-scroll">
                       {[...Array(3)].map((_, setIndex) => (
                         <div key={setIndex} className="flex gap-8 shrink-0">
-                          {clientLogos.map((logo, i) => (
+                          {heroLogos.map((logo, i) => (
                             <div key={i} className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center p-2.5 hover:bg-white/20 transition-colors">
                               <img
                                 src={`/logos/${logo.file}.webp`}
@@ -361,26 +370,26 @@ const Hero = memo(() => {
             <div className="flex flex-col h-full">
               {/* Main Headline */}
               <div className="text-right animate-fade-in" style={{ animationDelay: "0.4s" }}>
-                <p className="text-3xl xl:text-[64px] font-semibold leading-[0.9] tracking-tight text-white font-flarex" role="heading" aria-level={2}>
-                  Beyond
+                <p className="text-3xl xl:text-[64px] font-semibold leading-[1.08] tracking-tight text-white font-flarex" role="heading" aria-level={1}>
+                  Systems
                   <br />
-                  <span className="inline-block mb-4">Visuals.</span>
+                  <span className="inline-block mb-5">That Run.</span>
                   <br />
-                  <span className="text-white/70">Built with</span>
+                  <span className="text-white/70">Agents</span>
                   <br />
-                  <span className="text-white/70">Vision.</span>
+                  <span className="text-white/70">That Work.</span>
                 </p>
               </div>
 
               {/* CTA Button - Bottom Right */}
               <div className="flex justify-end mt-auto animate-fade-in" style={{ animationDelay: "0.6s" }}>
-                <Link href="/contact">
+                <Link href="/contact" onClick={openBooking}>
                   <button
                     className="group relative px-8 py-4 rounded-full border-2 border-orange-500 bg-white/5 backdrop-blur-xl hover:bg-orange-500 transition-all duration-300 overflow-hidden shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2),0_0_20px_rgba(249,115,22,0.4)] hover:shadow-[0_0_30px_rgba(249,115,22,0.6)]"
-                    aria-label="Start a project with ARC AI"
+                    aria-label="Book a call with ARC AI"
                   >
                     <span className="relative z-10 flex items-center gap-3 text-sm font-semibold tracking-wide text-orange-500 group-hover:text-white transition-colors">
-                      START A PROJECT
+                      BOOK A CALL
                       <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true" />
                     </span>
                   </button>

@@ -3,8 +3,8 @@ import { Metadata } from "next";
 import SocialMediaContent from "./content";
 
 export const metadata: Metadata = {
-  title: "ARC AI | Social Media Marketing Agency UK & Sri Lanka",
-  description: "Grow your brand on social media with ARC AI. Data-driven strategy, content creation & community management for businesses in UK & Sri Lanka.",
+  title: "Social Media Marketing Agency in Sri Lanka | ARC AI",
+  description: "Grow your brand on social media with ARC AI. Data-driven strategy, content creation & community management for businesses in Sri Lanka.",
   authors: [{ name: "ARC AI Agency" }],
   openGraph: {
     title: "Social Media Marketing Service | ARC AI",

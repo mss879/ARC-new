@@ -7,12 +7,12 @@ import CareersClient from "./CareersClient";
 
 // SEO Metadata for Careers Page
 export const metadata: Metadata = {
-  title: "Careers at ARC AI | Join Our Team — AI Agency UK & Sri Lanka",
-  description: "Join ARC AI — explore open positions in AI engineering, web development, design & marketing across UK and Sri Lanka. Build the future of AI.",
+  title: "Careers at ARC AI | Join Our Team in Colombo",
+  description: "Join ARC AI — explore open positions in AI engineering, web development, design & marketing across Sri Lanka. Build the future of AI.",
   authors: [{ name: "ARC AI Agency" }],
   openGraph: {
     title: "Careers at ARC AI — Join Our Team",
-    description: "Explore open positions at ARC AI. We're looking for talented individuals to help us build the future of AI automation and digital marketing across UK and Sri Lanka.",
+    description: "Explore open positions at ARC AI. We're looking for talented individuals to help us build the future of AI automation and digital marketing across Sri Lanka.",
     url: "https://www.arcai.agency/careers",
     siteName: "ARC AI Agency",
     images: [{
@@ -49,18 +49,6 @@ export const metadata: Metadata = {
   },
 };
 
-// JSON-LD Structured Data for Careers/Employer page
-const careersJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "EmployerAggregateRating",
-  "itemReviewed": {
-    "@type": "Organization",
-    "name": "ARC AI Agency",
-    "sameAs": "https://www.arcai.agency",
-    "logo": "https://www.arcai.agency/logo.png"
-  }
-};
-
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -85,10 +73,6 @@ export default function CareersPage() {
     <div className="min-h-screen bg-black">
       <ScrollToTop />
       {/* JSON-LD Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(careersJsonLd) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}

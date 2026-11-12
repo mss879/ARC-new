@@ -3,7 +3,8 @@
 import { memo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { clientLogos } from "@/lib/client-logos";
+import { ringLogos } from "@/lib/client-logos";
+import { booking } from "@/content/site-facts";
 
 const ClientsSection = memo(() => {
   const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
@@ -22,8 +23,8 @@ const ClientsSection = memo(() => {
   };
 
   // Create arms positioned around the circle, one for each logo
-  const arms = clientLogos.map((logo, i) => ({
-    rotation: i * (360 / clientLogos.length),
+  const arms = ringLogos.map((logo, i) => ({
+    rotation: i * (360 / ringLogos.length),
     logo: `/logos/${logo.file}.webp`,
     name: logo.name,
   }));
@@ -124,7 +125,7 @@ const ClientsSection = memo(() => {
               >
                 <div className="flex flex-col items-center">
                   <span className="text-sm font-semibold text-black">
-                    Book a 15-min intro call
+                    Book a {booking.minutes}-min intro call
                   </span>
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-green-500"></div>
@@ -178,7 +179,7 @@ const ClientsSection = memo(() => {
               <div className="w-full h-full">
                 <div
                   className="calendly-inline-widget w-full h-full"
-                  data-url="https://calendly.com/shahid-arcai-_xeu/30min?hide_event_type_details=1&hide_gdpr_banner=1"
+                  data-url={booking.embedUrl}
                   style={{ minWidth: '320px', height: '100%' }}
                 />
               </div>

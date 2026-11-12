@@ -1,60 +1,47 @@
-# ARC AI Agency
+# ARC AI
 
-> ARC AI is one of the top AI companies in Sri Lanka, specializing in AI automation, web design, and digital marketing. Headquartered in Colombo, Sri Lanka with a second office in Birmingham, UK.
+> ARC AI is a software and AI company in Colombo, Sri Lanka. It builds AI agents for WhatsApp, websites and phone calls, and the business systems those agents run inside: ERP, point of sale, e-commerce and web applications.
 
 ## About
 
-ARC AI is a full-stack AI automation and web design agency founded in 2022. We help businesses of all sizes leverage artificial intelligence, workflow automation, and data-driven marketing to grow faster, reduce costs, and outperform their competition. With over 100 projects delivered and a 4.9/5 Google rating, ARC AI is recognized as one of the top AI companies in Sri Lanka.
+ARC AI (Pvt) Ltd was founded in 2022 and is registered in Sri Lanka (company registration PV00352581). One team designs, builds and runs AI agents, workflow automation, business systems and websites for Sri Lankan businesses. Clients overseas are served remotely from Colombo. There is no office outside Sri Lanka.
 
-## Services
+## What ARC AI builds
 
-- **AI Chatbots & Virtual Assistants**: 24/7 multilingual customer support bots (Sinhala, Tamil, English) across WhatsApp, websites, and social media. Reduces support costs by up to 60%.
-- **AI Workflow Automation**: Intelligent automation using n8n, Make.com, and Zapier. Saves businesses 20+ hours per week on repetitive tasks.
-- **Smart Website Development**: High-performance websites built on Next.js and React, optimized for speed, SEO, and conversion.
-- **AI Voice Assistants & SDRs**: Human-sounding voice agents that qualify leads and book meetings automatically.
-- **Digital Marketing & SEO**: Data-driven strategies including social media, content marketing, paid ads, and search engine optimization.
-- **Brand Identity Design**: Complete brand kits including logo, color systems, typography, and brand guidelines.
-- **Custom Backend Systems**: Scalable backend infrastructure, APIs, and database architecture.
-- **Smart Sales Funnels**: AI-powered conversion funnels that nurture leads automatically.
+- **AI agents**: chat agents for WhatsApp and websites that answer customers in Sinhala, Tamil and English from a business's own information, and hand over to staff when needed.
+- **AI voice agents**: agents that answer phone calls, look up answers, and transfer the caller to a person when a question needs one.
+- **Workflow automation**: repetitive work between systems handled automatically, with human approval where it matters.
+- **Business systems**: ERP and back-office systems, point of sale, e-commerce stores and CRM.
+- **Websites and web applications**: built with Next.js and React.
+- **Also available**: ad campaigns, sales funnels, brand kits and motion design.
 
-## Key Facts
+## Key facts
 
 - Founded: 2022
-- Headquarters: Colombo, Sri Lanka
-- Second Office: Birmingham, United Kingdom
-- Projects Delivered: 100+
-- Google Rating: 4.9/5 (47 reviews)
-- Average Lead Increase: 67%
-- Average Cost Reduction: 60%
-- Team Size: 10-50
-- Languages Supported: English, Sinhala, Tamil
-- Company Registration: PV00352581
-
-## Industries Served
-
-Tourism & Hospitality, Real Estate, E-Commerce, Healthcare, Education, Manufacturing, Fintech, Food & Beverage, Logistics, Retail, Legal Services, Construction
-
-## Technologies
-
-Next.js, React, Node.js, TypeScript, OpenAI, n8n, Make.com, Zapier, Vercel, PostgreSQL, MongoDB, Framer Motion
+- Office: 91 Daisy Villa Avenue, Colombo 4, Sri Lanka
+- Company registration: PV00352581
+- Languages the agents work in: English, Sinhala, Tamil
+- Hours: Monday to Friday, 9 AM to 6 PM, Sri Lanka time
 
 ## Links
 
 - Website: https://www.arcai.agency
-- AI Companies in Sri Lanka Guide: https://www.arcai.agency/ai-companies-sri-lanka
-- Software Companies in Sri Lanka Guide: https://www.arcai.agency/software-companies-sri-lanka
 - Services: https://www.arcai.agency/services
+- AI agents: https://www.arcai.agency/services/ai-chatbots
+- AI voice agents: https://www.arcai.agency/services/ai-voice-assistants
 - Portfolio: https://www.arcai.agency/portfolio
-- Case Studies: https://www.arcai.agency/case-studies
+- AI Companies in Sri Lanka guide: https://www.arcai.agency/ai-companies-sri-lanka
+- Software Companies in Sri Lanka guide: https://www.arcai.agency/software-companies-sri-lanka
 - Blog: https://www.arcai.agency/blog
-- Contact: https://www.arcai.agency/contact
 - About: https://www.arcai.agency/about
+- Contact: https://www.arcai.agency/contact
 
 ## Contact
 
 - Email: support@arcai.agency
-- Phone (UK): +44 7466 368427
-- Phone (Sri Lanka): +94 771852522
+- Phone: +94 77 185 2522
+- Phone for callers outside Sri Lanka: +44 7466 368427
+- WhatsApp AI agent: +94 76 466 2384
 - LinkedIn: https://www.linkedin.com/company/105845719
 - Instagram: https://www.instagram.com/arcai_agency/
 - Facebook: https://www.facebook.com/ARCAI.lk

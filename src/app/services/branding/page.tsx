@@ -3,8 +3,8 @@ import { Metadata } from "next";
 import BrandingContent from "./content";
 
 export const metadata: Metadata = {
-  title: "ARC AI | Branding Agency UK & Sri Lanka",
-  description: "Build a powerful brand identity with ARC AI. Expert branding agency serving UK & Sri Lanka — logo design, brand strategy, visual identity & guidelines.",
+  title: "Branding Agency in Sri Lanka | ARC AI",
+  description: "Build a powerful brand identity with ARC AI. Expert branding agency serving Sri Lanka — logo design, brand strategy, visual identity & guidelines.",
   authors: [{ name: "ARC AI Agency" }],
   openGraph: {
     title: "Branding Services | ARC AI",

@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import AIVoiceAssistantsContent from "./content";
 
 export const metadata: Metadata = {
-  title: "ARC AI | AI Voice Assistants UK & Sri Lanka",
+  title: "AI Voice Assistants in Sri Lanka | ARC AI",
   description: "Human-sounding AI voice agents to call inbound leads instantly and handle 24/7 customer support.",
   authors: [{ name: "ARC AI Agency" }],
   openGraph: {

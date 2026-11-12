@@ -15,12 +15,12 @@ import { Rocket, Users } from "lucide-react";
 
 // SEO Metadata for About Page
 export const metadata: Metadata = {
-  title: "About ARC AI | Top AI Company in Sri Lanka & UK",
-  description: "About ARC AI — top AI company in Sri Lanka & UK. Founded 2022, 100+ clients, 4.9/5 Google Reviews. AI automation, chatbots & web design.",
+  title: "About ARC AI | AI Agents and Business Systems, Colombo",
+  description: "ARC AI is a Colombo team, founded in 2022, that builds AI agents and the business systems they run inside: ERP, POS, e-commerce and web applications.",
   authors: [{ name: "ARC AI Agency" }],
   openGraph: {
     title: "About ARC AI - AI Digital Agency",
-    description: "Leading AI-powered digital agency serving UK and Sri Lanka with expertise in web design, AI automation, and digital marketing.",
+    description: "ARC AI is a Colombo team that builds AI agents and business systems for Sri Lankan businesses.",
     url: "https://www.arcai.agency/about",
     siteName: "ARC AI Agency",
     images: [
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     site: "@arcaiagency",
     creator: "@arcaiagency",
     title: "About ARC AI - AI Digital Agency",
-    description: "Leading AI-powered digital agency serving UK and Sri Lanka",
+    description: "AI agents and business systems, built in Colombo",
     images: ["https://www.arcai.agency/og-image.jpg"],
   },
   alternates: {
@@ -55,7 +55,7 @@ export default function About() {
       <SchemaOrg
         type="about"
         pageTitle="About Us"
-        pageDescription="Leading AI-powered digital agency serving UK and Sri Lanka with expertise in web design, AI automation, and digital marketing."
+        pageDescription="ARC AI is a Colombo team that builds AI agents and business systems for Sri Lankan businesses."
         pageUrl="https://www.arcai.agency/about"
       />
       <Navbar />
@@ -164,7 +164,7 @@ export default function About() {
                   fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif"
                 }}
               >
-                About ARC AI — Top AI Company in Sri Lanka &amp; UK
+                About ARC AI
               </h1>
 
               {/* Subheading */}
