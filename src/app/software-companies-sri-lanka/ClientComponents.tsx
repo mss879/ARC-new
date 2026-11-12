@@ -175,6 +175,7 @@ export interface CompanyRow {
     ratingKind?: string;
     category: string;
     type: string;
+    city: string;
 }
 
 type SortField = "name" | "founded" | "rating" | "size";
@@ -206,7 +207,7 @@ export function InteractiveComparisonTable({ companies }: { companies: CompanyRo
                 (c) =>
                     (tier === "All" || c.category === tier) &&
                     (type === "All" || c.type === type) &&
-                    (!q || `${c.name} ${c.specialty} ${c.type}`.toLowerCase().includes(q))
+                    (!q || `${c.name} ${c.specialty} ${c.type} ${c.city}`.toLowerCase().includes(q))
             )
             .sort((a, b) => {
                 let cmp = 0;
@@ -262,7 +263,7 @@ export function InteractiveComparisonTable({ companies }: { companies: CompanyRo
                     type="search"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Search name or specialty"
+                    placeholder="Search name, specialty or city"
                     aria-label="Search companies"
                     className="flex-1 min-w-[180px] px-4 py-2 text-sm rounded-full bg-neutral-950 border border-neutral-800 text-neutral-200 placeholder:text-neutral-600 focus:outline-none focus:border-[rgb(255,73,37)]/60"
                 />

@@ -203,3 +203,37 @@
 }
 .faq details[open] summary::after { transform: rotate(225deg); margin-top: 0.75rem; }
 .faq details p { margin: 0; padding-bottom: 1.5rem; color: #a3a3a3; line-height: 1.7; }
+
+/* ── Top 10 (the only numbered list on the page) ── */
+.topList { list-style: none; counter-reset: top; margin: 0 0 1.5rem; padding: 0; }
+.topList li {
+    counter-increment: top;
+    position: relative;
+    padding: 0.75rem 0 0.75rem 2.75rem;
+    border-bottom: 1px solid #1c1c1c;
+    font-size: 0.875rem;
+    color: #a3a3a3;
+    line-height: 1.5;
+}
+.topList li::before {
+    content: counter(top);
+    position: absolute;
+    left: 0;
+    top: 0.75rem;
+    width: 2rem;
+    font-size: 1.125rem;
+    font-weight: 800;
+    color: rgb(255, 73, 37);
+    text-align: right;
+}
+.topList li > a { display: block; color: #fff; font-size: 1.0625rem; font-weight: 700; text-decoration: none; }
+.topList li > a:hover { color: rgb(255, 73, 37); text-decoration: underline; }
+.topList span { display: block; }
+.topList strong { color: #fff; }
+.topList span a, .plainLink { color: #a3a3a3; text-decoration: underline; text-underline-offset: 2px; }
+.topList span a:hover, .plainLink:hover { color: rgb(255, 73, 37); }
+.table td a.plainLink { color: #a3a3a3; font-weight: 400; text-decoration: underline; }
+
+/* Short "best for" line on compact cards. */
+.fit { margin: 0; font-size: 0.875rem; color: #a3a3a3; line-height: 1.5; }
+.fit b { color: #d4d4d4; font-weight: 600; }

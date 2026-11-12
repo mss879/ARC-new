@@ -33,6 +33,15 @@ export interface Project {
     sourceUrl: string;
 }
 
+/** What the company itself publishes on its Clutch profile. */
+export interface ClutchListing {
+    url: string;
+    /** Hourly rate band exactly as Clutch shows it, e.g. "$25 - $49 / hr". */
+    hourlyRate?: string;
+    /** Minimum project size exactly as Clutch shows it, e.g. "$10,000+". */
+    minProject?: string;
+}
+
 export interface Company {
     /** Anchor id on the page, e.g. "wso2". Never change once published. */
     slug: string;
@@ -44,6 +53,8 @@ export interface Company {
     type: CompanyType;
     /** Sri Lankan city of the main local office. */
     city: string;
+    /** Sri Lankan district of that office, e.g. "Colombo", "Kandy", "Jaffna". */
+    district: string;
     tagline: string;
     founded: string;
     /** Year the Sri Lanka operation began, when it differs from `founded`. */
@@ -64,6 +75,8 @@ export interface Company {
     rating?: Rating;
     /** Employee review score (Glassdoor). Stored for the careers section; not shown on the card. */
     employeeRating?: Rating;
+    /** Published rate band and minimum project size, when the company lists them on Clutch. */
+    clutch?: ClutchListing;
     notableClients?: string;
     techStack?: string;
     /** Only projects that can be linked to a published case study or press article. */

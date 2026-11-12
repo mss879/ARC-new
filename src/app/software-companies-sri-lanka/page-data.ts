@@ -99,10 +99,11 @@ export const keyStats: { value: string; text: string; source: SourceKey }[] = [
 /* Never hardcode the number of companies anywhere; use this. */
 export const companyCount = companies.length;
 
-/* Title and description shown in search results and when the page is shared. */
-export const PAGE_TITLE = `Software Companies in Sri Lanka: ${companyCount} Top Firms Compared (${GUIDE_YEAR})`;
-export const PAGE_DESCRIPTION = `Independent ${GUIDE_YEAR} review of ${companyCount} software companies in Sri Lanka — rates from $20–$60/hr, specialties, ratings and how to choose the right partner.`;
-export const PAGE_SOCIAL_TITLE = `${companyCount} Top Software Companies in Sri Lanka, Compared (${GUIDE_YEAR})`;
+/* Title and description shown in search results and when the page is shared.
+ * The title keeps the exact phrase first and stays under 55 characters. */
+export const PAGE_TITLE = `Software Companies in Sri Lanka: Top ${companyCount} List (${GUIDE_YEAR})`;
+export const PAGE_DESCRIPTION = `${companyCount} software companies in Sri Lanka compared by size, specialty, city and type, with the biggest employers, published rates and internship links.`;
+export const PAGE_SOCIAL_TITLE = `Top ${companyCount} Software Companies in Sri Lanka (${GUIDE_YEAR} List)`;
 export const PAGE_IMAGE_URL = `${PAGE_URL}/opengraph-image`;
 
 /* ── Tiers ── */
@@ -158,6 +159,66 @@ export const hireableCompanies: Company[] = companiesInRenderOrder.filter((c) =>
 export const productCompanies: Company[] = companiesInRenderOrder.filter((c) => c.type === "Product");
 export const captiveCentres: Company[] = companiesInRenderOrder.filter((c) => c.type === "Captive centre");
 
+/* ── Derived lists for the expansion sections ── */
+
+/* Biggest employers: only companies whose Sri Lanka headcount a source states, and
+ * only those with at least 300 people locally, so the ranking is not padded with
+ * small firms that happen to publish a number while larger ones do not. */
+export const topBySriLankaHeadcount: Company[] = companies
+    .filter((c) => c.slHeadcount && c.slHeadcount.approx >= 300)
+    .sort((a, b) => b.slHeadcount!.approx - a.slHeadcount!.approx || a.name.localeCompare(b.name, "en"))
+    .slice(0, 10);
+
+/* Large companies that publish only a company-wide figure: named beside the ranking, not in it. */
+export const largeWithoutLocalFigure: Company[] = companiesInRenderOrder.filter(
+    (c) => c.category === "Enterprise & Global" && !c.slHeadcount
+);
+
+export const withInternships: Company[] = companiesInRenderOrder.filter((c) => c.internshipUrl);
+
+/* Glassdoor scores resting on at least 20 employee reviews, highest first. */
+export const employeeRated: Company[] = companies
+    .filter((c) => c.employeeRating && (c.employeeRating.reviews ?? 0) >= 20)
+    .sort(
+        (a, b) =>
+            parseFloat(b.employeeRating!.value) - parseFloat(a.employeeRating!.value) || a.name.localeCompare(b.name, "en")
+    );
+
+/* Companies that publish an hourly rate band on Clutch. */
+export const publishedRates: Company[] = companiesInRenderOrder.filter((c) => c.clutch?.hourlyRate);
+
+export const companiesByDistrict: { district: string; companies: Company[] }[] = (() => {
+    const map = new Map<string, Company[]>();
+    for (const c of companiesInRenderOrder) map.set(c.district, [...(map.get(c.district) ?? []), c]);
+    return [...map.entries()]
+        .map(([district, list]) => ({ district, companies: list }))
+        .sort((a, b) => b.companies.length - a.companies.length || a.district.localeCompare(b.district, "en"));
+})();
+
+export const outsideColombo: Company[] = companiesInRenderOrder.filter((c) => c.district !== "Colombo");
+
+/* Hourly-rate bands listed by the firms on the first page of Clutch's Sri Lanka
+ * developer directory. Re-count and update `checkedOn` when you refresh the guide. */
+export const CLUTCH_SNAPSHOT = {
+    url: "https://clutch.co/lk/developers",
+    /* Organic listings on page 1, sponsored cards excluded. */
+    counted: 50,
+    under25: 10,
+    from25to49: 27,
+    from50up: 11,
+    notListed: 2,
+    checkedOn: "2026-11-12",
+};
+
+/* Self-reported pay on Levels.fyi. A small sample: say so wherever it is quoted. */
+export const PAY_SNAPSHOT = {
+    url: "https://www.levels.fyi/t/software-engineer/locations/sri-lanka",
+    medianMonthlyLkr: "373,500",
+    submissions: 40,
+    topPaying: ["WSO2", "Sysco", "IFS"],
+    checkedOn: "2026-11-12",
+};
+
 /* Review scores backed by a meaningful number of reviews, highest first.
  * Used in the FAQ so the answer always matches the profiles. */
 const wellReviewed: Company[] = companies
@@ -165,10 +226,8 @@ const wellReviewed: Company[] = companies
     .sort((a, b) => parseFloat(b.rating!.value) - parseFloat(a.rating!.value) || a.name.localeCompare(b.name, "en"));
 
 /* Largest verified Sri Lanka headcounts, used in the FAQ. */
-const largestInSriLanka: Company[] = companies
-    .filter((c) => c.slHeadcount)
-    .sort((a, b) => b.slHeadcount!.approx - a.slHeadcount!.approx || a.name.localeCompare(b.name, "en"))
-    .slice(0, 4);
+const largestInSriLanka: Company[] = topBySriLankaHeadcount.slice(0, 4);
+const headcountList = joinNames(topBySriLankaHeadcount.map((c) => `${c.name} (${c.slHeadcount!.label})`));
 
 /* ── What changed, shown on the page ── */
 
@@ -176,6 +235,9 @@ export const CHANGELOG: { date: string; items: string[] }[] = [
     {
         date: "2026-11-12",
         items: [
+            `Expanded the guide to ${companyCount} companies. Each new profile was researched from the company's own website plus at least one independent source.`,
+            "Added a ranking of the biggest employers by published Sri Lanka headcount, a jobs and internships section, and a list of companies by city.",
+            "Replaced the estimated rate tables with rates that companies publish themselves.",
             "Re-checked every company profile against the company's own website, its LinkedIn page and reputable press, and listed the sources on each profile.",
             "Corrected founding years for ten companies (Calcey Technologies, Arimac, Rootcode, 99x, Fcode Labs, Allion Technologies, Loons Lab, Surge Global, Mitra AI and Zone24x7) and updated headquarters and team sizes across the list.",
             "Recorded two changes of identity: Mitra Innovation now trades as Mitra AI, and Calcey Technologies and Surge Global merged into the Short Circuit group in 2025.",
@@ -200,11 +262,11 @@ export const faqs: { q: string; a: string }[] = [
     },
     {
         q: "Why is Sri Lanka considered a good destination for software outsourcing?",
-        a: "Sri Lanka offers an English-speaking engineering workforce of about 175,000 professionals, about 17,000 new IT graduates a year (both SLASSCOM figures), hourly rates of roughly $20–$60 USD by our estimate, and a UTC+5:30 timezone that overlaps with European and Middle Eastern business hours. Unlike larger outsourcing markets, Sri Lanka competes on quality over volume, so teams tend to be smaller and more senior.",
+        a: "Sri Lanka offers an English-speaking engineering workforce of about 175,000 professionals and about 17,000 new IT graduates a year (both SLASSCOM figures), published rates that are mostly under $50 an hour, and a UTC+5:30 timezone that overlaps with European and Middle Eastern business hours. Unlike larger outsourcing markets, Sri Lanka competes on quality over volume, so teams tend to be smaller and more senior.",
     },
     {
         q: "How much does it cost to hire a software development company in Sri Lanka?",
-        a: "By our estimate, hourly rates for software development in Sri Lanka range from about $20 to $60 USD depending on company size, specialisation, and developer seniority: roughly $20–$35/hour at boutique studios, $35–$50/hour at mid-market firms, and $45–$60/hour at enterprise-grade companies. A dedicated developer usually costs $2,500 to $7,000 per month, with specialist domains such as ERP or travel technology reaching $8,000. As a public reference point, 12 of the first 15 firms on Clutch's Sri Lanka developer directory listed rates under $50 an hour in November 2026. Always ask for a written quote.",
+        a: `Most Sri Lankan software firms that publish a rate list it at under $50 an hour. Of the ${CLUTCH_SNAPSHOT.counted} firms on the first page of Clutch's Sri Lanka developer directory in ${formatMonthYear(CLUTCH_SNAPSHOT.checkedOn)}, ${CLUTCH_SNAPSHOT.under25 + CLUTCH_SNAPSHOT.from25to49} listed rates below $50 an hour (${CLUTCH_SNAPSHOT.under25} under $25 and ${CLUTCH_SNAPSHOT.from25to49} at $25–$49), ${CLUTCH_SNAPSHOT.from50up} listed $50 or more and ${CLUTCH_SNAPSHOT.notListed} listed no rate. ${publishedRates.length > 0 ? `${publishedRates.length} companies in this guide publish their own rate band, shown in the pricing section. ` : ""}A directory band is not a quote: the price depends on seniority, engagement model and domain, so ask for a written quote against your brief.`,
     },
     {
         q: "What services do software companies in Sri Lanka typically offer?",
@@ -221,6 +283,32 @@ export const faqs: { q: string; a: string }[] = [
     {
         q: "Is Sri Lanka better than India for software outsourcing?",
         a: "It depends on your priorities. India offers far greater scale (about 5.95 million technology employees, according to NASSCOM, against Sri Lanka's 175,000) and lower entry-level rates. Sri Lanka offers smaller teams with more senior attention per project, comparable quality at competitive rates, and the same timezone advantage for European clients. For projects needing 3–30 developers with strong communication and design quality, Sri Lanka is often the better fit. For projects needing 100+ developers or very specialised niche skills, India's larger talent pool is an advantage. Many clients use both.",
+    },
+    {
+        q: "What are the biggest software companies in Sri Lanka?",
+        a: topBySriLankaHeadcount.length >= 5
+            ? `By the number of people employed in Sri Lanka, the biggest software and IT companies with a published local headcount are ${headcountList}. Each figure comes from the company or from press coverage and is linked in the list at the top of this guide. Companies that do not publish a Sri Lanka headcount are not ranked.`
+            : `The best-known large employers are ${scaleNames}. Few companies publish a Sri Lanka-specific headcount, so this guide does not rank them by size.`,
+    },
+    {
+        q: "What are the top 10 software companies in Sri Lanka?",
+        a: `There is no official top 10. The only objective ranking this guide publishes is by published Sri Lanka headcount: ${headcountList}. Other large employers, such as ${joinNames(byName(largeWithoutLocalFigure))}, publish only company-wide figures and are not ranked. For quality, compare the profiles: each lists the company's specialty, published clients, review scores where enough reviews exist, and its sources.`,
+    },
+    {
+        q: "Which software companies in Sri Lanka offer internships?",
+        a: withInternships.length > 0
+            ? `${withInternships.length} companies in this guide publish a page for internships, graduate or trainee programmes: ${joinNames(byName(withInternships))}. The jobs and internships section links to each programme page. Many other companies take interns without a dedicated page, so check the careers link on each profile.`
+            : "Most larger software companies in Sri Lanka take interns, usually through their careers pages. Check the careers link on each profile.",
+    },
+    {
+        q: "Which software companies are based outside Colombo?",
+        a: outsideColombo.length > 0
+            ? `Most of the industry is in the Colombo district, but ${outsideColombo.length} companies in this guide have their main Sri Lankan office elsewhere: ${joinNames(outsideColombo.map((c) => `${c.name} (${c.city})`))}.`
+            : "Almost all of Sri Lanka's larger software companies have their main office in the Colombo district, which includes nearby towns such as Nugegoda, Nawala, Malabe and Moratuwa.",
+    },
+    {
+        q: "Which are the highest-paying software companies in Sri Lanka?",
+        a: `There is no official pay ranking. The best public indicator is Levels.fyi, which collects self-reported pay: in ${formatMonthYear(PAY_SNAPSHOT.checkedOn)} it showed a median total compensation of LKR ${PAY_SNAPSHOT.medianMonthlyLkr} a month for software engineers in Sri Lanka and listed ${joinNames([...PAY_SNAPSHOT.topPaying])} as its top-paying companies. That rests on only ${PAY_SNAPSHOT.submissions} submissions, so treat it as a rough guide. The jobs section of this guide also lists Glassdoor scores for every company with at least 20 employee reviews.`,
     },
     {
         q: "How many software companies are there in Sri Lanka?",

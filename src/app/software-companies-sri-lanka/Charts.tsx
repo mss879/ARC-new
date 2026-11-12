@@ -80,64 +80,38 @@ export function ExportEarningsChart() {
     );
 }
 
-/* ARC AI's estimated agency hourly-rate bands (USD) — same figures as the comparison tables.
- * These are estimates, not survey data; no public rate survey was available to verify them. */
-const RATE_BANDS = [
-    { region: "United States", min: 100, max: 200, highlight: false },
-    { region: "United Kingdom", min: 80, max: 150, highlight: false },
-    { region: "Eastern Europe", min: 40, max: 80, highlight: false },
-    { region: "Sri Lanka", min: 20, max: 60, highlight: true },
-    { region: "Philippines", min: 20, max: 50, highlight: false },
-    { region: "India", min: 18, max: 50, highlight: false },
-    { region: "Vietnam", min: 18, max: 45, highlight: false },
-];
-
-export function RateComparisonChart() {
+/* Horizontal bars: people employed in Sri Lanka by the biggest software employers.
+ * Rows arrive sorted from page-data.ts; every value has a source linked in the list. */
+export function HeadcountChart({ rows }: { rows: { name: string; value: number; label: string }[] }) {
+    if (rows.length === 0) return null;
     const width = 640;
-    const rowH = 40;
-    const margin = { top: 16, right: 16, bottom: 32, left: 130 };
-    const height = margin.top + RATE_BANDS.length * rowH + margin.bottom;
+    const rowH = 34;
+    const margin = { top: 12, right: 96, bottom: 12, left: 190 };
+    const height = margin.top + rows.length * rowH + margin.bottom;
     const plotW = width - margin.left - margin.right;
-    const xMax = 200;
-    const x = (v: number) => margin.left + (v / xMax) * plotW;
-    const gridValues = [0, 50, 100, 150, 200];
+    const max = Math.max(...rows.map((r) => r.value));
 
     return (
         <figure className="my-8 mx-0">
-            <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-4 md:p-6">
+            <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-4 md:p-6 overflow-x-auto">
                 <svg
                     viewBox={`0 0 ${width} ${height}`}
-                    className="w-full h-auto"
                     role="img"
-                    aria-label="Range chart comparing estimated software development hourly rates by country: Sri Lanka 20 to 60 US dollars, India 18 to 50, Philippines 20 to 50, Vietnam 18 to 45, Eastern Europe 40 to 80, United Kingdom 80 to 150, United States 100 to 200"
+                    aria-label={`Bar chart of the ${rows.length} largest software employers in Sri Lanka by local headcount, led by ${rows[0].name} with ${rows[0].label} people`}
+                    className="w-full h-auto min-w-[480px]"
                 >
-                    <title>Estimated Software Development Hourly Rates by Country, 2026 (USD)</title>
-                    {gridValues.map((v) => (
-                        <g key={v}>
-                            <line x1={x(v)} y1={margin.top} x2={x(v)} y2={height - margin.bottom} stroke={GRID} strokeWidth="1" />
-                            <text x={x(v)} y={height - margin.bottom + 18} textAnchor="middle" fontSize="11" fill={MUTED}>
-                                ${v}
-                            </text>
-                        </g>
-                    ))}
-                    {RATE_BANDS.map((d, i) => {
-                        const cy = margin.top + i * rowH + rowH / 2;
-                        const fill = d.highlight ? ACCENT : "#404040";
+                    <title>Largest software employers in Sri Lanka by local headcount</title>
+                    {rows.map((r, i) => {
+                        const y = margin.top + i * rowH;
+                        const w = Math.max(4, (r.value / max) * plotW);
                         return (
-                            <g key={d.region}>
-                                <text
-                                    x={margin.left - 10}
-                                    y={cy + 4}
-                                    textAnchor="end"
-                                    fontSize="12"
-                                    fontWeight={d.highlight ? 700 : 400}
-                                    fill={d.highlight ? "#ffffff" : LABEL}
-                                >
-                                    {d.region}
+                            <g key={r.name}>
+                                <text x={margin.left - 10} y={y + rowH / 2 + 4} textAnchor="end" fontSize="12" fill={LABEL}>
+                                    {r.name.length > 27 ? `${r.name.slice(0, 26)}…` : r.name}
                                 </text>
-                                <rect x={x(d.min)} y={cy - 7} width={x(d.max) - x(d.min)} height={14} rx="7" fill={fill} opacity={d.highlight ? 0.95 : 0.8} />
-                                <text x={x(d.max) + 8} y={cy + 4} fontSize="11" fontWeight={d.highlight ? 700 : 400} fill={d.highlight ? "#ffffff" : MUTED}>
-                                    ${d.min}–${d.max}
+                                <rect x={margin.left} y={y + 7} width={w} height={rowH - 14} rx="4" fill={ACCENT} opacity={i === 0 ? 0.95 : 0.75} />
+                                <text x={margin.left + w + 8} y={y + rowH / 2 + 4} fontSize="12" fontWeight="700" fill="#ffffff">
+                                    {r.label}
                                 </text>
                             </g>
                         );
@@ -145,7 +119,7 @@ export function RateComparisonChart() {
                 </svg>
             </div>
             <figcaption className="text-xs text-neutral-500 mt-3 italic">
-                Estimated agency hourly-rate bands for custom software development (USD). These are ARC AI estimates, not survey data.
+                People employed in Sri Lanka, as published by each company or reported in the press. Sources are linked in the list above.
             </figcaption>
         </figure>
     );

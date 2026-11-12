@@ -1,8 +1,7 @@
 /* Section copy moved verbatim out of content.tsx so the page order can change
  * without retyping it. Edit the copy here; content.tsx only decides the order. */
 import Link from "next/link";
-import { Shield, Cpu, Briefcase, Users, TrendingUp, Globe, DollarSign, Scale, Award, Building2 } from "lucide-react";
-import { RateComparisonChart } from "../Charts";
+import { Shield, Cpu, Briefcase, Users, TrendingUp, Globe, Scale, Award, Building2 } from "lucide-react";
 import { SOURCES } from "../page-data";
 
 export function WhatToLookFor() {
@@ -69,102 +68,6 @@ export function WhatToLookFor() {
     );
 }
 
-export function Pricing() {
-    return (
-        <>
-                    <section
-                        id="pricing"
-                        className="scroll-mt-24"
-                    >
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mt-16 mb-8 flex items-center gap-3">
-                            <DollarSign className="w-8 h-8 text-[rgb(255,73,37)]" />
-                            How Much Does Software Development Cost in Sri Lanka?
-                        </h2>
-
-                        <p className="text-neutral-300 mb-6">
-                            <strong className="text-white">In short:</strong> by our estimate, expect $20–$35/hour at boutique studios, $35–$50 at mid-market firms, and $45–$60 at enterprise-grade vendors. As a public reference point, 12 of the first 15 firms on <a href={SOURCES.clutchSriLanka.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">Clutch&apos;s Sri Lanka developer directory</a> listed rates under $50 an hour in November 2026 (5 under $25, 7 at $25–$49 and 3 at $50–$99). The breakdown below is ARC AI&apos;s own estimate, not survey data. For web-specific pricing, see our <Link href="/web-design-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">web design Sri Lanka pricing guide</Link>, and for AI-specific services, visit our <Link href="/ai-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">AI companies guide</Link>.
-                        </p>
-
-                        <div className="overflow-x-auto -mx-4 md:mx-0 my-8">
-                            <table className="w-full text-sm border border-neutral-800 min-w-[600px]">
-                                <thead>
-                                    <tr className="border-b border-neutral-800 bg-neutral-950">
-                                        <th className="p-4 text-left text-neutral-400 font-semibold">Company Tier</th>
-                                        <th className="p-4 text-left text-neutral-400 font-semibold">Hourly Rate (USD)</th>
-                                        <th className="p-4 text-left text-neutral-400 font-semibold">Monthly Dedicated Dev</th>
-                                        <th className="p-4 text-left text-neutral-400 font-semibold">Typical Profile</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="text-neutral-300">
-                                    <tr className="border-b border-neutral-800/50">
-                                        <td className="p-4 font-medium text-white">Boutique / Startup</td>
-                                        <td className="p-4">$20 – $35</td>
-                                        <td className="p-4">$2,500 – $3,500</td>
-                                        <td className="p-4 text-xs text-neutral-400">Small teams, agile, founder-led.</td>
-                                    </tr>
-                                    <tr className="border-b border-neutral-800/50">
-                                        <td className="p-4 font-medium text-white">Mid-Market</td>
-                                        <td className="p-4">$35 – $50</td>
-                                        <td className="p-4">$3,500 – $5,000</td>
-                                        <td className="p-4 text-xs text-neutral-400">Established teams, structured processes.</td>
-                                    </tr>
-                                    <tr className="border-b border-neutral-800/50">
-                                        <td className="p-4 font-medium text-white">Enterprise</td>
-                                        <td className="p-4">$45 – $60</td>
-                                        <td className="p-4">$5,000 – $7,000</td>
-                                        <td className="p-4 text-xs text-neutral-400">Large-scale, compliance-ready.</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="p-4 font-medium text-white">Specialised / Niche</td>
-                                        <td className="p-4">$40 – $80</td>
-                                        <td className="p-4">$4,500 – $8,000</td>
-                                        <td className="p-4 text-xs text-neutral-400">Domain experts (ERP, travel tech, middleware).</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <h3 className="text-xl font-bold text-white mb-4">How Does Sri Lanka Compare Globally?</h3>
-                        <div className="overflow-x-auto -mx-4 md:mx-0 my-6">
-                            <table className="w-full text-sm border border-neutral-800 min-w-[500px]">
-                                <thead>
-                                    <tr className="border-b border-neutral-800 bg-neutral-950">
-                                        <th className="p-4 text-left text-neutral-400 font-semibold">Country</th>
-                                        <th className="p-4 text-left text-neutral-400 font-semibold">Average Hourly Rate (USD)</th>
-                                        <th className="p-4 text-left text-neutral-400 font-semibold">vs Sri Lanka</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="text-neutral-300">
-                                    {[
-                                        { country: "🇺🇸 United States", rate: "$100 – $200", vs: "3–6x more expensive" },
-                                        { country: "🇬🇧 United Kingdom", rate: "$80 – $150", vs: "2.5–5x more expensive" },
-                                        { country: "🇦🇺 Australia", rate: "$80 – $140", vs: "2.5–4x more expensive" },
-                                        { country: "🇵🇱 Poland / Eastern Europe", rate: "$40 – $80", vs: "1.5–2x more expensive" },
-                                        { country: "🇮🇳 India", rate: "$18 – $50", vs: "Comparable (SL often higher quality/capita)" },
-                                        { country: "🇱🇰 Sri Lanka", rate: "$20 – $60", vs: "—" },
-                                        { country: "🇵🇭 Philippines", rate: "$20 – $50", vs: "Comparable (SL stronger in engineering)" },
-                                        { country: "🇻🇳 Vietnam", rate: "$18 – $45", vs: "Comparable" },
-                                    ].map((row) => (
-                                        <tr key={row.country} className="border-b border-neutral-800/50">
-                                            <td className="p-4 font-medium whitespace-nowrap">{row.country}</td>
-                                            <td className="p-4">{row.rate}</td>
-                                            <td className="p-4 text-xs text-neutral-400">{row.vs}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <RateComparisonChart />
-
-                        <p className="text-neutral-400 text-sm italic">
-                            All rates in this section, including the country comparison, are ARC AI estimates: we could not find a public rate survey to check them against. The only figures verified against a public source are the hourly bands firms list on <a href={SOURCES.clutchSriLanka.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">Clutch</a> (checked November 2026). Actual rates vary by project complexity, seniority requirements, and engagement model, so always ask for a written quote.
-                        </p>
-                    </section>
-        </>
-    );
-}
-
 export function Versus() {
     return (
         <>
@@ -195,7 +98,6 @@ export function Versus() {
                                     {[
                                         { factor: "Talent Pool Size", sl: "About 175,000 (SLASSCOM)", india: "About 5.95 million (NASSCOM, FY26)", ph: "About 1.9 million in IT-BPM (IBPAP, 2025)" },
                                         { factor: "English Proficiency", sl: "Strong in the IT workforce; 73rd in EF EPI 2025", india: "Varies by region; 74th in EF EPI 2025", ph: "Very High (US-influenced)" },
-                                        { factor: "Average Hourly Rate (our estimate)", sl: "$20 – $60", india: "$18 – $50", ph: "$20 – $50" },
                                         { factor: "Timezone (UTC)", sl: "+5:30 (EU overlap)", india: "+5:30 (EU overlap)", ph: "+8:00 (APAC overlap)" },
                                         { factor: "Quality per Capita", sl: "Very High (selective)", india: "Varies widely", ph: "Good (BPO-focused)" },
                                         { factor: "Best For", sl: "Quality-focused teams of 3–30", india: "Scale: teams of 50–500+", ph: "BPO, support, content" },
@@ -214,7 +116,7 @@ export function Versus() {
                         </div>
 
                         <p className="text-neutral-500 text-xs italic">
-                            Talent pool figures: <a href={SOURCES.slasscomReview.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">SLASSCOM</a>, <a href={SOURCES.nasscomWorkforce.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">NASSCOM</a> and <a href={SOURCES.ibpapWorkforce.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">IBPAP</a>. English ranking: <a href={SOURCES.efEpi2025.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">EF English Proficiency Index 2025</a>. Rates and the qualitative rows are our own assessment.
+                            Talent pool figures: <a href={SOURCES.slasscomReview.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">SLASSCOM</a>, <a href={SOURCES.nasscomWorkforce.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">NASSCOM</a> and <a href={SOURCES.ibpapWorkforce.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">IBPAP</a>. English ranking: <a href={SOURCES.efEpi2025.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">EF English Proficiency Index 2025</a>. The qualitative rows are our own assessment.
                         </p>
 
                         <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-6 my-8">
@@ -263,7 +165,7 @@ export function WhyOutsource() {
                                 {
                                     icon: TrendingUp,
                                     title: "Competitive Cost Structure",
-                                    desc: "By our estimate, hourly rates of roughly $20–$60 USD sit well below typical UK or US rates, and most firms on Clutch's Sri Lanka directory list rates under $50 an hour. See the pricing section above for the breakdown.",
+                                    desc: "Most Sri Lankan firms that publish a rate on Clutch list it at under $50 an hour. See the pricing section above for the published rates of companies in this guide.",
                                 },
                                 {
                                     icon: Globe,

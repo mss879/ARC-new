@@ -22,6 +22,7 @@ import {
     keyStats,
     productCompanies,
     sizeSortValue,
+    topBySriLankaHeadcount,
 } from "../page-data";
 import type { Company } from "../types";
 import s from "../pillar.module.css";
@@ -40,12 +41,22 @@ const TYPE_LABEL: Record<Company["type"], string> = {
 /* ── Hero ── */
 
 const jumpLinks = [
+    ...(topBySriLankaHeadcount.length >= 5 ? [{ href: "#biggest", label: "Biggest employers" }] : []),
     { href: "#comparison-table", label: `Compare all ${companyCount}` },
+    { href: "#careers", label: "Jobs & internships" },
     { href: "#hire", label: "Companies you can hire" },
     { href: "#pricing", label: "Rates" },
-    { href: "#what-to-look-for", label: "How to choose" },
-    { href: "#faq", label: "FAQ" },
+    { href: "#by-city", label: "By city" },
 ];
+
+/* Direct answer for the hero: the biggest employers when headcounts are sourced. */
+const heroAnswer =
+    topBySriLankaHeadcount.length >= 5
+        ? `The largest software companies in Sri Lanka by local headcount are ${topBySriLankaHeadcount
+              .slice(0, 5)
+              .map((c) => c.name)
+              .join(", ")}.`
+        : "The best-known software companies in Sri Lanka are WSO2, Virtusa, 99x, IFS, LSEG Technology, Sysco LABS, Calcey Technologies and Rootcode.";
 
 export function Hero() {
     return (
@@ -58,15 +69,14 @@ export function Hero() {
                     Software Companies in Sri Lanka
                 </h1>
                 <p className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-5 text-transparent bg-clip-text bg-gradient-to-r from-[rgb(255,73,37)] to-orange-500">
-                    {companyCount} Top Firms Compared ({GUIDE_YEAR})
+                    Top {companyCount} Firms Compared ({GUIDE_YEAR})
                 </p>
 
                 {/* Direct answer paragraph: factual, no subjective "best". */}
                 <p className="text-base md:text-lg text-neutral-200 mb-5 max-w-3xl font-medium">
-                    The best-known software companies in Sri Lanka are WSO2, Virtusa, 99x, IFS, LSEG Technology,
-                    Sysco LABS, Calcey Technologies and Rootcode. This guide compares {companyCount} software
-                    development and IT companies by size, specialty and type, from global enterprise platforms to
-                    boutique studios, and links every profile to its sources.
+                    {heroAnswer} This guide lists {companyCount} software development and IT companies by size,
+                    specialty, city and type, from global enterprise platforms to boutique studios, and links
+                    every profile to its sources.
                 </p>
 
                 <ul className="flex flex-wrap gap-x-5 gap-y-1 text-neutral-400 text-sm list-none p-0 m-0">
@@ -112,7 +122,8 @@ export function ComparisonSection() {
             <div id="comparison-table" className="bg-neutral-950 border border-neutral-800 rounded-xl p-4 md:p-6 scroll-mt-24">
                 <h3 className="text-lg font-bold text-white mb-3 md:mb-1">Quick Comparison: Filter &amp; Sort</h3>
                 <p className="hidden md:block text-xs text-neutral-500 mb-4">
-                    Filter by size tier or company type, search by name or specialty, and sort by any column.
+                    Filter by size tier or company type, search by name, specialty or city, and sort by any column.{" "}
+                    <a href="/software-companies-sri-lanka/list.csv" className="underline hover:text-[rgb(255,73,37)]">Download the list (CSV)</a>.
                 </p>
                 <InteractiveComparisonTable
                     companies={companiesInRenderOrder.map((c) => ({
@@ -128,6 +139,7 @@ export function ComparisonSection() {
                             : undefined,
                         category: c.category,
                         type: c.type,
+                        city: c.city,
                     }))}
                 />
                 <p className="text-xs text-neutral-600 mt-3">
@@ -244,11 +256,16 @@ export function CompanyCard({ company }: { company: Company }) {
             )}
 
             {compact ? (
-                <ul className={s.services}>
-                    {company.services.map((service) => (
-                        <li key={service}>{service}</li>
-                    ))}
-                </ul>
+                <>
+                    <ul className={s.services}>
+                        {company.services.map((service) => (
+                            <li key={service}>{service}</li>
+                        ))}
+                    </ul>
+                    <p className={s.fit}>
+                        <b>Best for:</b> {company.bestFor}
+                    </p>
+                </>
             ) : (
                 <div className={s.cols}>
                     <div>
@@ -358,8 +375,8 @@ export function KeyTakeaways() {
             <ul className="space-y-3 text-neutral-300 list-none p-0 m-0">
                 <li>
                     <strong className="text-white">Sri Lanka is a premier destination for software outsourcing</strong>,
-                    offering high-quality, English-speaking engineering talent at competitive rates (roughly
-                    $20–$60/hour by our estimate).
+                    offering high-quality, English-speaking engineering talent at competitive rates: most firms
+                    that publish a rate list it at under $50 an hour.
                 </li>
                 <li>
                     <strong className="text-white">The market has three distinct tiers:</strong> Enterprise firms

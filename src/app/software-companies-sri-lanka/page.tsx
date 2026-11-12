@@ -11,6 +11,7 @@ import {
     companiesInRenderOrder,
     companyCount,
     faqs,
+    topBySriLankaHeadcount,
 } from "./page-data";
 
 export const metadata: Metadata = {
@@ -148,6 +149,26 @@ const itemListJsonLd = {
     })),
 };
 
+/* The one ordered list on the page: biggest employers by published Sri Lanka headcount.
+ * Items point at the same Organization @ids as the main list. */
+const topTenJsonLd =
+    topBySriLankaHeadcount.length >= 5
+        ? {
+              "@context": "https://schema.org",
+              "@type": "ItemList",
+              "@id": `${PAGE_URL}#biggest`,
+              name: `Biggest software companies in Sri Lanka by local headcount`,
+              numberOfItems: topBySriLankaHeadcount.length,
+              itemListOrder: "https://schema.org/ItemListOrderDescending",
+              itemListElement: topBySriLankaHeadcount.map((company, index) => ({
+                  "@type": "ListItem",
+                  position: index + 1,
+                  name: company.name,
+                  item: { "@id": `${PAGE_URL}#${company.slug}` },
+              })),
+          }
+        : null;
+
 /* Breadcrumb markup is emitted once, as microdata, by the shared <Breadcrumbs>
  * component. A second JSON-LD copy used to live here and duplicated it.
  * Organization and LocalBusiness schemas belong on /about, not an editorial guide. */
@@ -163,6 +184,12 @@ export default function Page() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
             />
+            {topTenJsonLd && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(topTenJsonLd) }}
+                />
+            )}
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
