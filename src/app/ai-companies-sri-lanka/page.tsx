@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { companyCount as softwareCompanyCount } from "@/app/software-companies-sri-lanka/page-data";
 import Navbar from "@/components/Navbar";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CTA from "@/components/CTA";
@@ -1298,7 +1299,7 @@ export default function AICompaniesSriLankaPage() {
                 href: "/software-companies-sri-lanka",
                 label: "Industry Guide",
                 title: "Software Companies in Sri Lanka (2026)",
-                desc: "The definitive guide to 15 leading software firms — with pricing, comparisons, and selection criteria.",
+                desc: `The definitive guide to ${softwareCompanyCount} leading software firms — with pricing, comparisons, and selection criteria.`,
               },
               {
                 href: "/blog/smart-websites-sri-lanka-2026",

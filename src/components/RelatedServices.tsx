@@ -37,7 +37,7 @@ export default function RelatedServices({ currentSlug }: RelatedServicesProps) {
           Explore Our Other Services
         </h2>
         <p className="text-zinc-400 mb-10 max-w-3xl">
-          Discover how ARC AI can help your business grow with our full range of AI automation, web design, and digital marketing services. As one of the <Link href="/ai-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">top AI companies in Sri Lanka</Link> and the UK, we deliver enterprise-grade solutions at competitive rates.
+          Discover how ARC AI can help your business grow with our full range of AI automation, web design, and digital marketing services. As one of the <Link href="/ai-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">top AI companies in Sri Lanka</Link> and the UK, we deliver enterprise-grade solutions at competitive rates. Comparing vendors? See our independent guide to <Link href="/software-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">software companies in Sri Lanka</Link>.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {otherServices.map((service) => (
@@ -69,6 +69,9 @@ export default function RelatedServices({ currentSlug }: RelatedServicesProps) {
           </Link>
           <Link href="/ai-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:text-white transition-colors font-medium">
             AI Companies in Sri Lanka →
+          </Link>
+          <Link href="/software-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:text-white transition-colors font-medium">
+            Software Companies in Sri Lanka →
           </Link>
           <Link href="/portfolio" className="text-zinc-400 hover:text-white transition-colors">
             View Our Portfolio →

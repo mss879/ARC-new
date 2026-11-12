@@ -61,9 +61,9 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                 style={{ animationDelay: "0.1s" }}
               >
                 <div className="flex items-center justify-between">
-                  <h3 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-[rgb(202,202,202)] group-hover:text-white transition-colors uppercase">
+                  <span className="block text-4xl lg:text-5xl xl:text-6xl font-bold text-[rgb(202,202,202)] group-hover:text-white transition-colors uppercase">
                     Home
-                  </h3>
+                  </span>
                   <div className="w-2.5 h-2.5 rounded-full bg-[rgb(255,73,37)] opacity-100"></div>
                 </div>
               </Link>
@@ -76,9 +76,9 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                 style={{ animationDelay: "0.2s" }}
               >
                 <div className="flex items-center justify-between">
-                  <h3 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-[rgb(202,202,202)] group-hover:text-white transition-colors uppercase">
+                  <span className="block text-4xl lg:text-5xl xl:text-6xl font-bold text-[rgb(202,202,202)] group-hover:text-white transition-colors uppercase">
                     Portfolio
-                  </h3>
+                  </span>
                   <div className="h-px flex-1 ml-8 bg-[rgb(255,73,37)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
               </Link>
@@ -91,9 +91,9 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                 style={{ animationDelay: "0.3s" }}
               >
                 <div className="flex items-center justify-between">
-                  <h3 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-[rgb(202,202,202)] group-hover:text-white transition-colors uppercase">
+                  <span className="block text-4xl lg:text-5xl xl:text-6xl font-bold text-[rgb(202,202,202)] group-hover:text-white transition-colors uppercase">
                     Services
-                  </h3>
+                  </span>
                   <div className="h-px flex-1 ml-8 bg-[rgb(255,73,37)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
               </Link>
@@ -106,9 +106,9 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                 style={{ animationDelay: "0.4s" }}
               >
                 <div className="flex items-center justify-between">
-                  <h3 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-[rgb(202,202,202)] group-hover:text-white transition-colors uppercase">
+                  <span className="block text-4xl lg:text-5xl xl:text-6xl font-bold text-[rgb(202,202,202)] group-hover:text-white transition-colors uppercase">
                     About
-                  </h3>
+                  </span>
                   <div className="h-px flex-1 ml-8 bg-[rgb(255,73,37)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
               </Link>
@@ -121,9 +121,9 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                 style={{ animationDelay: "0.5s" }}
               >
                 <div className="flex items-center justify-between">
-                  <h3 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-[rgb(202,202,202)] group-hover:text-white transition-colors uppercase">
+                  <span className="block text-4xl lg:text-5xl xl:text-6xl font-bold text-[rgb(202,202,202)] group-hover:text-white transition-colors uppercase">
                     Success Stories
-                  </h3>
+                  </span>
                   <div className="h-px flex-1 ml-8 bg-[rgb(255,73,37)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
               </Link>
@@ -136,9 +136,9 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                 style={{ animationDelay: "0.6s" }}
               >
                 <div className="flex items-center justify-between">
-                  <h3 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-[rgb(202,202,202)] group-hover:text-white transition-colors uppercase">
+                  <span className="block text-4xl lg:text-5xl xl:text-6xl font-bold text-[rgb(202,202,202)] group-hover:text-white transition-colors uppercase">
                     Blog
-                  </h3>
+                  </span>
                   <div className="h-px flex-1 ml-8 bg-[rgb(255,73,37)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
               </Link>
@@ -151,9 +151,9 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                 style={{ animationDelay: "0.7s" }}
               >
                 <div className="flex items-center justify-between">
-                  <h3 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-[rgb(202,202,202)] group-hover:text-white transition-colors uppercase">
+                  <span className="block text-4xl lg:text-5xl xl:text-6xl font-bold text-[rgb(202,202,202)] group-hover:text-white transition-colors uppercase">
                     Careers
-                  </h3>
+                  </span>
                   <div className="h-px flex-1 ml-8 bg-[rgb(255,73,37)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
               </Link>
@@ -166,9 +166,9 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                 style={{ animationDelay: "0.8s" }}
               >
                 <div className="flex items-center justify-between">
-                  <h3 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-[rgb(202,202,202)] group-hover:text-white transition-colors uppercase">
+                  <span className="block text-4xl lg:text-5xl xl:text-6xl font-bold text-[rgb(202,202,202)] group-hover:text-white transition-colors uppercase">
                     Contact
-                  </h3>
+                  </span>
                   <div className="h-px flex-1 ml-8 bg-[rgb(255,73,37)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
               </Link>
@@ -177,12 +177,36 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
 
           {/* Footer */}
           <div className="px-6 lg:px-12 py-8 space-y-8">
+            {/* Guides */}
+            <div className="space-y-2">
+              <p className="text-sm font-medium text-[rgb(119,119,119)] uppercase tracking-wider">
+                (GUIDES)
+              </p>
+              <ul className="space-y-1 text-lg lg:text-xl font-medium list-none p-0 m-0">
+                <li>
+                  <Link href="/software-companies-sri-lanka" onClick={onClose} className="text-[rgb(202,202,202)] hover:text-white transition-colors">
+                    Software Companies in Sri Lanka
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/ai-companies-sri-lanka" onClick={onClose} className="text-[rgb(202,202,202)] hover:text-white transition-colors">
+                    AI Companies in Sri Lanka
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/web-design-sri-lanka" onClick={onClose} className="text-[rgb(202,202,202)] hover:text-white transition-colors">
+                    Web Design in Sri Lanka
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
             {/* Email Section */}
             <div className="space-y-2">
               <p className="text-sm font-medium text-[rgb(119,119,119)] uppercase tracking-wider">
                 (EMAIL)
               </p>
-              <h3 className="text-2xl lg:text-3xl font-medium">
+              <p className="text-2xl lg:text-3xl font-medium">
                 <a
                   href="mailto:support@arcai.agency"
                   className="text-[rgb(255,73,37)] hover:text-[rgb(255,93,57)] transition-colors"
@@ -191,7 +215,7 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                 >
                   support@arcai.agency
                 </a>
-              </h3>
+              </p>
             </div>
 
             {/* WhatsApp AI Agent */}
@@ -199,7 +223,7 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
               <p className="text-sm font-medium text-[rgb(119,119,119)] uppercase tracking-wider">
                 (WHATSAPP AI AGENT)
               </p>
-              <h3 className="text-2xl lg:text-3xl font-medium">
+              <p className="text-2xl lg:text-3xl font-medium">
                 <a
                   href="https://wa.me/94764662384"
                   target="_blank"
@@ -208,7 +232,7 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                 >
                   +94 76 466 2384
                 </a>
-              </h3>
+              </p>
               <p className="text-sm text-[rgb(119,119,119)]">
                 Want to speak to our AI agent on WhatsApp?
               </p>

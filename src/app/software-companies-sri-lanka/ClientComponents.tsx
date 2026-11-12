@@ -1,40 +1,8 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { ChevronDown, Layers, ChevronRight, ChevronUp, Share2, ArrowUp, Star } from "lucide-react";
-
-/* ── FAQ Accordion Item (SSR-friendly: open by default, collapses on hydration) ── */
-
-export function FAQItem({ question, answer }: { question: string; answer: string }) {
-    const [open, setOpen] = useState(true); // SSR: open by default so Google indexes content
-    const [hydrated, setHydrated] = useState(false);
-
-    useEffect(() => {
-        setHydrated(true);
-        setOpen(false); // Collapse on client hydration
-    }, []);
-
-    return (
-        <div className="border-b border-neutral-800 last:border-b-0">
-            <button
-                onClick={() => setOpen(!open)}
-                className="w-full flex items-start justify-between gap-4 py-6 text-left group"
-            >
-                <span className="text-lg font-semibold text-white group-hover:text-[rgb(255,73,37)] transition-colors">
-                    {question}
-                </span>
-                <ChevronDown
-                    className={`w-5 h-5 text-neutral-400 mt-1 shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
-                />
-            </button>
-            <div
-                className={`overflow-hidden transition-all duration-300 ${open ? "max-h-[500px] pb-6" : "max-h-0"}`}
-            >
-                <p className="text-neutral-400 leading-relaxed">{answer}</p>
-            </div>
-        </div>
-    );
-}
+import { useState, useEffect, useCallback, useMemo } from "react";
+import { Layers, ChevronRight, Share2, ArrowUp } from "lucide-react";
+import s from "./pillar.module.css";
 
 /* ── Scroll Progress Bar (Pure CSS — zero JS, no Framer Motion) ── */
 
@@ -87,7 +55,9 @@ export function BackToTop() {
     );
 }
 
-/* ── Active TOC with Scroll Spy ──────────────────────────────── */
+/* ── Active TOC with Scroll Spy (desktop sidebar only) ───────────
+ * Hidden below `lg`: on a phone it used to sit above the article and push the
+ * company list several screens down. The hero's jump links do that job on mobile. */
 
 interface TOCItem {
     id: string;
@@ -124,25 +94,25 @@ export function ActiveTOC({ items }: { items: TOCItem[] }) {
     }, [handleScroll]);
 
     return (
-        <aside className="w-full lg:w-80 shrink-0 lg:sticky lg:top-24 mt-8">
+        <aside className="hidden lg:block w-80 shrink-0 sticky top-24 mt-4">
             <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-6">
                 <div className="text-sm font-bold text-neutral-400 uppercase tracking-widest mb-4 flex items-center gap-2">
                     <Layers className="w-4 h-4" />
                     In This Guide
                 </div>
-                <nav className="flex flex-col gap-1" aria-label="Table of contents">
+                <nav className="flex flex-col gap-0.5" aria-label="Table of contents">
                     {items.map((item, i) => {
                         const isActive = activeId === item.id;
                         return (
                             <a
                                 key={item.id}
                                 href={`#${item.id}`}
-                                className={`flex items-center gap-3 py-2 transition-colors group ${isActive ? "text-[rgb(255,73,37)]" : "text-neutral-300 hover:text-[rgb(255,73,37)]"}`}
+                                className={`flex items-center gap-3 py-1.5 transition-colors group ${isActive ? "text-[rgb(255,73,37)]" : "text-neutral-300 hover:text-[rgb(255,73,37)]"}`}
                             >
                                 <span className={`text-xs font-mono w-6 shrink-0 ${isActive ? "text-[rgb(255,73,37)]" : "text-neutral-600"}`}>
                                     {String(i + 1).padStart(2, "0")}
                                 </span>
-                                <ChevronRight className={`w-3 h-3 transition-colors ${isActive ? "text-[rgb(255,73,37)]" : "text-neutral-700 group-hover:text-[rgb(255,73,37)]"}`} />
+                                <ChevronRight className={`w-3 h-3 shrink-0 transition-colors ${isActive ? "text-[rgb(255,73,37)]" : "text-neutral-700 group-hover:text-[rgb(255,73,37)]"}`} />
                                 <span className={`font-medium text-sm ${isActive ? "text-[rgb(255,73,37)]" : ""}`}>{item.label}</span>
                             </a>
                         );
@@ -155,10 +125,8 @@ export function ActiveTOC({ items }: { items: TOCItem[] }) {
 
 /* ── Social Share Buttons ────────────────────────────────────── */
 
-export function SocialShareButtons() {
+export function SocialShareButtons({ url, title }: { url: string; title: string }) {
     const [copied, setCopied] = useState(false);
-    const url = typeof window !== "undefined" ? window.location.href : "https://www.arcai.agency/software-companies-sri-lanka";
-    const title = "Software Companies in Sri Lanka: 23 Top Firms Compared (2026)";
 
     const shareLinks = {
         linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
@@ -174,7 +142,7 @@ export function SocialShareButtons() {
     };
 
     return (
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
             <span className="text-xs text-neutral-500 uppercase tracking-wider font-semibold flex items-center gap-1.5">
                 <Share2 className="w-3.5 h-3.5" /> Share
             </span>
@@ -191,136 +159,160 @@ export function SocialShareButtons() {
     );
 }
 
-/* ── Interactive Comparison Table ────────────────────────────── */
+/* ── Interactive Comparison Table ──────────────────────────────
+ * Rows arrive already ordered from the server, and every sort uses a numeric key
+ * or an explicit locale, so the server HTML and the hydrated table always match. */
 
-interface CompanyRow {
+export interface CompanyRow {
+    slug: string;
     name: string;
     founded: string;
     specialty: string;
     size: string;
+    /** Numeric size for sorting, computed on the server. */
+    sizeSort: number;
     rating?: string;
-    bestFor: string;
+    ratingKind?: string;
     category: string;
+    type: string;
 }
 
 type SortField = "name" | "founded" | "rating" | "size";
 type SortDir = "asc" | "desc";
 
-function parseSizeForSort(size: string): number {
-    const match = size.match(/[\d,]+/);
-    if (!match) return 0;
-    return parseInt(match[0].replace(/,/g, ""), 10);
+const PILL = "px-4 py-2 text-xs font-semibold rounded-full border transition-colors";
+const PILL_ON = "bg-[rgb(255,73,37)] text-white border-[rgb(255,73,37)]";
+const PILL_OFF = "bg-neutral-950 text-neutral-400 border-neutral-800 hover:border-neutral-600 hover:text-neutral-200";
+
+function unique(values: string[]): string[] {
+    return values.filter((v, i) => values.indexOf(v) === i);
 }
 
 export function InteractiveComparisonTable({ companies }: { companies: CompanyRow[] }) {
-    const [filter, setFilter] = useState<string>("All");
-    const [sortField, setSortField] = useState<SortField>("name");
-    const [sortDir, setSortDir] = useState<SortDir>("asc");
+    const [tier, setTier] = useState("All");
+    const [type, setType] = useState("All");
+    const [query, setQuery] = useState("");
+    const [sortField, setSortField] = useState<SortField>("size");
+    const [sortDir, setSortDir] = useState<SortDir>("desc");
 
-    const categories = ["All", ...Array.from(new Set(companies.map((c) => c.category)))];
+    const tiers = useMemo(() => ["All", ...unique(companies.map((c) => c.category))], [companies]);
+    const types = useMemo(() => ["All", ...unique(companies.map((c) => c.type))], [companies]);
 
-    const filtered = filter === "All" ? companies : companies.filter((c) => c.category === filter);
-
-    const sorted = [...filtered].sort((a, b) => {
-        let cmp = 0;
-        switch (sortField) {
-            case "name":
-                cmp = a.name.localeCompare(b.name);
-                break;
-            case "founded":
-                cmp = parseInt(a.founded) - parseInt(b.founded);
-                break;
-            case "rating":
-                cmp = (parseFloat(a.rating || "0")) - (parseFloat(b.rating || "0"));
-                break;
-            case "size":
-                cmp = parseSizeForSort(a.size) - parseSizeForSort(b.size);
-                break;
-        }
-        return sortDir === "asc" ? cmp : -cmp;
-    });
+    const rows = useMemo(() => {
+        const q = query.trim().toLowerCase();
+        const dir = sortDir === "asc" ? 1 : -1;
+        return companies
+            .filter(
+                (c) =>
+                    (tier === "All" || c.category === tier) &&
+                    (type === "All" || c.type === type) &&
+                    (!q || `${c.name} ${c.specialty} ${c.type}`.toLowerCase().includes(q))
+            )
+            .sort((a, b) => {
+                let cmp = 0;
+                if (sortField === "name") cmp = a.name.localeCompare(b.name, "en");
+                else if (sortField === "founded") cmp = parseInt(a.founded, 10) - parseInt(b.founded, 10);
+                else if (sortField === "rating") cmp = parseFloat(a.rating || "0") - parseFloat(b.rating || "0");
+                else cmp = a.sizeSort - b.sizeSort;
+                return cmp * dir || a.name.localeCompare(b.name, "en");
+            });
+    }, [companies, tier, type, query, sortField, sortDir]);
 
     const handleSort = (field: SortField) => {
         if (sortField === field) {
             setSortDir(sortDir === "asc" ? "desc" : "asc");
         } else {
             setSortField(field);
-            setSortDir("asc");
+            setSortDir(field === "name" || field === "founded" ? "asc" : "desc");
         }
     };
 
-    const SortIcon = ({ field }: { field: SortField }) => (
-        <span className="inline-flex flex-col ml-1 leading-none">
-            <ChevronUp className={`w-3 h-3 ${sortField === field && sortDir === "asc" ? "text-[rgb(255,73,37)]" : "text-neutral-700"}`} />
-            <ChevronDown className={`w-3 h-3 -mt-1 ${sortField === field && sortDir === "desc" ? "text-[rgb(255,73,37)]" : "text-neutral-700"}`} />
-        </span>
-    );
+    const sortHeader = (field: SortField, label: string, className?: string) => {
+        const active = sortField === field;
+        return (
+            <th className={className} aria-sort={active ? (sortDir === "asc" ? "ascending" : "descending") : "none"}>
+                <button type="button" onClick={() => handleSort(field)}>
+                    {label}
+                    <span aria-hidden="true" className={active ? s.accent : undefined}>
+                        {active ? (sortDir === "asc" ? "▲" : "▼") : "↕"}
+                    </span>
+                </button>
+            </th>
+        );
+    };
 
     return (
         <div>
-            {/* Filter pills */}
-            <div className="flex flex-wrap gap-2 mb-6">
-                {categories.map((cat) => (
-                    <button
-                        key={cat}
-                        onClick={() => setFilter(cat)}
-                        className={`px-4 py-2 text-xs font-semibold rounded-full border transition-colors ${
-                            filter === cat
-                                ? "bg-[rgb(255,73,37)] text-white border-[rgb(255,73,37)]"
-                                : "bg-neutral-950 text-neutral-400 border-neutral-800 hover:border-neutral-600 hover:text-neutral-200"
-                        }`}
-                    >
-                        {cat} {cat !== "All" && <span className="text-neutral-500 ml-1">({companies.filter((c) => c.category === cat).length})</span>}
+            <div className="flex flex-wrap gap-2 mb-3">
+                {tiers.map((t) => (
+                    <button key={t} type="button" onClick={() => setTier(t)} aria-pressed={tier === t} className={`${PILL} ${tier === t ? PILL_ON : PILL_OFF}`}>
+                        {t === "All" ? "All sizes" : t}
+                        {t !== "All" && <span className="opacity-60 ml-1">({companies.filter((c) => c.category === t).length})</span>}
                     </button>
                 ))}
             </div>
+            <div className="flex flex-wrap items-center gap-2 mb-5">
+                {types.map((t) => (
+                    <button key={t} type="button" onClick={() => setType(t)} aria-pressed={type === t} className={`${PILL} ${type === t ? PILL_ON : PILL_OFF}`}>
+                        {t === "All" ? "All types" : t}
+                        {t !== "All" && <span className="opacity-60 ml-1">({companies.filter((c) => c.type === t).length})</span>}
+                    </button>
+                ))}
+                <input
+                    type="search"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search name or specialty"
+                    aria-label="Search companies"
+                    className="flex-1 min-w-[180px] px-4 py-2 text-sm rounded-full bg-neutral-950 border border-neutral-800 text-neutral-200 placeholder:text-neutral-600 focus:outline-none focus:border-[rgb(255,73,37)]/60"
+                />
+            </div>
 
-            {/* Sortable table */}
-            <div className="overflow-x-auto -mx-4 md:mx-0">
-                <table className="w-full text-sm border border-neutral-800 min-w-[800px]">
+            <div className={s.tableWrap}>
+                <table className={s.table}>
                     <thead>
-                        <tr className="border-b border-neutral-800 bg-neutral-950">
-                            <th className="p-3 text-left text-neutral-400 font-semibold cursor-pointer select-none hover:text-white transition-colors" onClick={() => handleSort("name")}>
-                                <span className="flex items-center">Company <SortIcon field="name" /></span>
-                            </th>
-                            <th className="p-3 text-left text-neutral-400 font-semibold cursor-pointer select-none hover:text-white transition-colors" onClick={() => handleSort("founded")}>
-                                <span className="flex items-center">Est. <SortIcon field="founded" /></span>
-                            </th>
-                            <th className="p-3 text-left text-neutral-400 font-semibold">Specialty</th>
-                            <th className="p-3 text-left text-neutral-400 font-semibold cursor-pointer select-none hover:text-white transition-colors" onClick={() => handleSort("size")}>
-                                <span className="flex items-center">Size <SortIcon field="size" /></span>
-                            </th>
-                            <th className="p-3 text-left text-neutral-400 font-semibold cursor-pointer select-none hover:text-white transition-colors" onClick={() => handleSort("rating")}>
-                                <span className="flex items-center">Rating <SortIcon field="rating" /></span>
-                            </th>
-                            <th className="p-3 text-left text-neutral-400 font-semibold">Best For</th>
+                        <tr>
+                            {sortHeader("name", "Company")}
+                            <th className={s.wide}>Type</th>
+                            {sortHeader("size", "Employees")}
+                            {sortHeader("founded", "Est.", s.wide)}
+                            <th className={s.wide}>Specialty</th>
+                            {sortHeader("rating", "Rating", s.wide)}
                         </tr>
                     </thead>
                     <tbody>
-                        {sorted.map((c) => (
-                            <tr key={c.name} className="border-b border-neutral-800/50 hover:bg-neutral-900/50 transition-colors">
-                                <td className="p-3 text-white font-semibold whitespace-nowrap">{c.name}</td>
-                                <td className="p-3 text-neutral-400">{c.founded}</td>
-                                <td className="p-3 text-neutral-400 text-xs">{c.specialty}</td>
-                                <td className="p-3 text-neutral-400 whitespace-nowrap">{c.size}</td>
-                                <td className="p-3 text-neutral-400 whitespace-nowrap">
+                        {rows.map((c) => (
+                            <tr key={c.slug}>
+                                <td>
+                                    <a href={`#${c.slug}`}>{c.name}</a>
+                                    <span className={`${s.sub} ${s.narrowOnly}`}>{c.specialty}</span>
+                                </td>
+                                <td className={`${s.wide} ${s.small}`}>{c.type}</td>
+                                <td className={s.nowrap}>{c.size}</td>
+                                <td className={s.wide}>{c.founded}</td>
+                                <td className={`${s.wide} ${s.small}`}>{c.specialty}</td>
+                                <td className={`${s.wide} ${s.nowrap}`}>
                                     {c.rating ? (
-                                        <span className="flex items-center gap-1">
-                                            <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />
-                                            {c.rating}
-                                        </span>
+                                        <>
+                                            <span className={s.star} aria-hidden="true">★</span> {c.rating}
+                                            <span className={s.sub}>{c.ratingKind}</span>
+                                        </>
                                     ) : (
-                                        <span className="text-neutral-600">—</span>
+                                        "—"
                                     )}
                                 </td>
-                                <td className="p-3 text-neutral-500 text-xs max-w-[200px]">{c.bestFor}</td>
                             </tr>
                         ))}
+                        {rows.length === 0 && (
+                            <tr>
+                                <td colSpan={6}>No companies match those filters.</td>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </div>
-            <p className="text-xs text-neutral-600 mt-3">
-                Showing {sorted.length} of {companies.length} companies · Click column headers to sort
+            <p className="text-xs text-neutral-600 mt-3" aria-live="polite">
+                Showing {rows.length} of {companies.length} companies · Select a column heading to sort
             </p>
         </div>
     );

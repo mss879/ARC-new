@@ -1,14 +1,32 @@
 import { MetadataRoute } from 'next';
 import * as fs from 'fs';
 import * as path from 'path';
+import { PAGE_DATES as SOFTWARE_GUIDE_DATES } from './software-companies-sri-lanka/page-data';
 
 export const dynamic = 'force-static';
 
+/* lastModified policy
+ * -------------------
+ * A sitemap date is only useful if it is true. File modification times are NOT:
+ * on Netlify every file is checked out at build time, so mtime is simply "the last
+ * deploy" for every page, and search engines learn to ignore dates that all change
+ * together. So a page gets a lastModified ONLY when it keeps an explicit, hand-bumped
+ * date in its own data file. Every other page omits the field, which is valid.
+ * To add a page here, export a `PAGE_DATES.modified` from its data file and list it. */
+const KNOWN_MODIFIED: Record<string, string> = {
+    'software-companies-sri-lanka': SOFTWARE_GUIDE_DATES.modified,
+};
+
+function knownDate(route: string): { lastModified?: Date } {
+    const iso = KNOWN_MODIFIED[route];
+    return iso ? { lastModified: new Date(`${iso}T00:00:00Z`) } : {};
+}
+
 /**
  * Scans a directory under src/app/ for subdirectories that contain a page.tsx.
- * Returns an array of { slug, lastModified } for each discovered page.
+ * Returns the slug of each discovered page.
  */
-function discoverPages(subDir: string): { slug: string; lastModified: Date }[] {
+function discoverPages(subDir: string): string[] {
     const dirPath = path.join(process.cwd(), 'src', 'app', subDir);
 
     // Safety: if directory doesn't exist, return empty
@@ -19,170 +37,63 @@ function discoverPages(subDir: string): { slug: string; lastModified: Date }[] {
         .filter((entry) => {
             // Only directories that contain a page.tsx (actual routes)
             if (!entry.isDirectory()) return false;
-            const pagePath = path.join(dirPath, entry.name, 'page.tsx');
-            return fs.existsSync(pagePath);
+            return fs.existsSync(path.join(dirPath, entry.name, 'page.tsx'));
         })
-        .map((entry) => {
-            const pagePath = path.join(dirPath, entry.name, 'page.tsx');
-            const stats = fs.statSync(pagePath);
-            return {
-                slug: entry.name,
-                lastModified: stats.mtime,
-            };
-        });
+        .map((entry) => entry.name)
+        .sort();
 }
 
-/**
- * Returns the actual file modification date for a page route,
- * instead of new Date() which changes on every build.
- */
-function getPageModDate(route: string): Date {
-    // For root page, look at src/app/page.tsx
-    const pagePath = route === '.'
-        ? path.join(process.cwd(), 'src', 'app', 'page.tsx')
-        : path.join(process.cwd(), 'src', 'app', route, 'page.tsx');
-    if (fs.existsSync(pagePath)) {
-        return fs.statSync(pagePath).mtime;
-    }
-    return new Date('2026-03-01'); // Fallback
-}
+type Frequency = NonNullable<MetadataRoute.Sitemap[number]['changeFrequency']>;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://www.arcai.agency';
 
-    // ─── Static pages ────────────────────────────────────────────
-    const staticPages: MetadataRoute.Sitemap = [
-        {
-            url: baseUrl,
-            lastModified: getPageModDate('.'),
-            changeFrequency: 'weekly',
-            priority: 1.0,
-        },
-        {
-            url: `${baseUrl}/about`,
-            lastModified: getPageModDate('about'),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: `${baseUrl}/portfolio`,
-            lastModified: getPageModDate('portfolio'),
-            changeFrequency: 'weekly',
-            priority: 0.9,
-        },
-        {
-            url: `${baseUrl}/contact`,
-            lastModified: getPageModDate('contact'),
-            changeFrequency: 'monthly',
-            priority: 0.7,
-        },
-        {
-            url: `${baseUrl}/blog`,
-            lastModified: getPageModDate('blog'),
-            changeFrequency: 'weekly',
-            priority: 0.8,
-        },
-        {
-            url: `${baseUrl}/services`,
-            lastModified: getPageModDate('services'),
-            changeFrequency: 'monthly',
-            priority: 0.9,
-        },
-        {
-            url: `${baseUrl}/careers`,
-            lastModified: getPageModDate('careers'),
-            changeFrequency: 'weekly',
-            priority: 0.7,
-        },
-        {
-            url: `${baseUrl}/job-request`,
-            lastModified: getPageModDate('job-request'),
-            changeFrequency: 'monthly',
-            priority: 0.6,
-        },
-        {
-            url: `${baseUrl}/privacy-policy`,
-            lastModified: getPageModDate('privacy-policy'),
-            changeFrequency: 'yearly',
-            priority: 0.3,
-        },
-        {
-            url: `${baseUrl}/terms-of-service`,
-            lastModified: getPageModDate('terms-of-service'),
-            changeFrequency: 'yearly',
-            priority: 0.3,
-        },
-        {
-            url: `${baseUrl}/refund-policy`,
-            lastModified: getPageModDate('refund-policy'),
-            changeFrequency: 'yearly',
-            priority: 0.3,
-        },
-        // NOTE: /ai-pricing and /web-pricing are intentionally excluded
-        // because they have robots: { index: false, follow: false }
-        {
-            url: `${baseUrl}/case-studies`,
-            lastModified: getPageModDate('case-studies'),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: `${baseUrl}/ai-agency-birmingham`,
-            lastModified: getPageModDate('ai-agency-birmingham'),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: `${baseUrl}/ai-automation-sri-lanka`,
-            lastModified: getPageModDate('ai-automation-sri-lanka'),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: `${baseUrl}/ai-companies-sri-lanka`,
-            lastModified: getPageModDate('ai-companies-sri-lanka'),
-            changeFrequency: 'weekly',
-            priority: 1.0,
-        },
-        {
-            url: `${baseUrl}/software-companies-sri-lanka`,
-            lastModified: getPageModDate('software-companies-sri-lanka'),
-            changeFrequency: 'weekly',
-            priority: 1.0,
-        },
-        {
-            url: `${baseUrl}/web-design-sri-lanka`,
-            lastModified: getPageModDate('web-design-sri-lanka'),
-            changeFrequency: 'weekly',
-            priority: 1.0,
-        },
-        {
-            url: `${baseUrl}/ai-consultants-sri-lanka`,
-            lastModified: getPageModDate('ai-consultants-sri-lanka'),
-            changeFrequency: 'monthly',
-            priority: 0.9,
-        },
+    // ─── Static pages: [route, changeFrequency, priority] ────────
+    // NOTE: /ai-pricing and /web-pricing are intentionally excluded
+    // because they have robots: { index: false, follow: false }
+    const routes: [string, Frequency, number][] = [
+        ['', 'weekly', 1.0],
+        ['about', 'monthly', 0.8],
+        ['portfolio', 'weekly', 0.9],
+        ['contact', 'monthly', 0.7],
+        ['blog', 'weekly', 0.8],
+        ['services', 'monthly', 0.9],
+        ['careers', 'weekly', 0.7],
+        ['job-request', 'monthly', 0.6],
+        ['privacy-policy', 'yearly', 0.3],
+        ['terms-of-service', 'yearly', 0.3],
+        ['refund-policy', 'yearly', 0.3],
+        ['case-studies', 'monthly', 0.8],
+        ['ai-agency-birmingham', 'monthly', 0.8],
+        ['ai-automation-sri-lanka', 'monthly', 0.8],
+        ['ai-companies-sri-lanka', 'weekly', 1.0],
+        ['software-companies-sri-lanka', 'weekly', 1.0],
+        ['web-design-sri-lanka', 'weekly', 1.0],
+        ['ai-consultants-sri-lanka', 'monthly', 0.9],
     ];
 
+    const staticPages: MetadataRoute.Sitemap = routes.map(([route, changeFrequency, priority]) => ({
+        url: route ? `${baseUrl}/${route}` : baseUrl,
+        ...knownDate(route),
+        changeFrequency,
+        priority,
+    }));
+
     // ─── Service pages (auto-discovered) ─────────────────────────
-    const servicePages: MetadataRoute.Sitemap = discoverPages('services').map(
-        ({ slug, lastModified }) => ({
-            url: `${baseUrl}/services/${slug}`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.9,
-        })
-    );
+    const servicePages: MetadataRoute.Sitemap = discoverPages('services').map((slug) => ({
+        url: `${baseUrl}/services/${slug}`,
+        ...knownDate(`services/${slug}`),
+        changeFrequency: 'monthly' as const,
+        priority: 0.9,
+    }));
 
     // ─── Blog posts (auto-discovered) ────────────────────────────
-    const blogPages: MetadataRoute.Sitemap = discoverPages('blog').map(
-        ({ slug, lastModified }) => ({
-            url: `${baseUrl}/blog/${slug}`,
-            lastModified,
-            changeFrequency: 'monthly' as const,
-            priority: 0.6,
-        })
-    );
+    const blogPages: MetadataRoute.Sitemap = discoverPages('blog').map((slug) => ({
+        url: `${baseUrl}/blog/${slug}`,
+        ...knownDate(`blog/${slug}`),
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }));
 
     return [...staticPages, ...servicePages, ...blogPages];
 }

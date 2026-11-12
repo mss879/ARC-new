@@ -16,10 +16,10 @@ export function optimizeFontLoading() {
   });
 
   // Preload critical fonts
-  const criticalFonts = [
-    '/flarex.otf',
-    // Inter is loaded via next/font/google in layout.tsx
-  ];
+  // Both site fonts (Inter and flarex) are self-hosted and preloaded by next/font in
+  // layout.tsx. Preloading '/flarex.otf' here as well made every page download the
+  // font a second time after hydration, so this list is intentionally empty.
+  const criticalFonts: string[] = [];
 
   criticalFonts.forEach((font) => {
     const link = document.createElement('link');

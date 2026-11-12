@@ -42,6 +42,7 @@ Next.js, React, Node.js, TypeScript, OpenAI, n8n, Make.com, Zapier, Vercel, Post
 
 - Website: https://www.arcai.agency
 - AI Companies in Sri Lanka Guide: https://www.arcai.agency/ai-companies-sri-lanka
+- Software Companies in Sri Lanka Guide: https://www.arcai.agency/software-companies-sri-lanka
 - Services: https://www.arcai.agency/services
 - Portfolio: https://www.arcai.agency/portfolio
 - Case Studies: https://www.arcai.agency/case-studies

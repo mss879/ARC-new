@@ -117,7 +117,7 @@ export default function BlogPost() {
 
                             <h2 className="text-3xl font-bold text-white mt-12 mb-6">How Much Does an AI Chatbot Cost in Sri Lanka?</h2>
                             <p>
-                                AI chatbot pricing from top AI companies in Sri Lanka typically ranges based on complexity:
+                                AI chatbot pricing from top AI companies in Sri Lanka typically ranges based on complexity (for wider build costs, see our list of <Link href="/software-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">software development companies in Sri Lanka</Link> and their rates):
                             </p>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li><strong>Basic FAQ Chatbot:</strong> Simple question-answer bot for a website. Suitable for small businesses.</li>

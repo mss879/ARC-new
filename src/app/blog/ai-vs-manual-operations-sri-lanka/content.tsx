@@ -183,7 +183,7 @@ export default function BlogPost() {
 
                             <h3 className="text-2xl font-bold text-white mt-8 mb-4">&quot;AI is too expensive for Sri Lanka&quot;</h3>
                             <p>
-                                AI from top AI companies in Sri Lanka like ARC AI is priced competitively for the local market. Starting solutions are accessible for small businesses, and the ROI typically covers the entire investment within 2-4 months. Thanks to ARC AI&apos;s dual-market model (UK + Sri Lanka), you get enterprise-grade technology at Sri Lankan prices.
+                                AI from top AI companies in Sri Lanka like ARC AI is priced competitively for the local market. For custom software beyond AI, compare the <Link href="/software-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">list of software companies in Sri Lanka</Link>. Starting solutions are accessible for small businesses, and the ROI typically covers the entire investment within 2-4 months. Thanks to ARC AI&apos;s dual-market model (UK + Sri Lanka), you get enterprise-grade technology at Sri Lankan prices.
                             </p>
 
                             <h3 className="text-2xl font-bold text-white mt-8 mb-4">&quot;My customers prefer talking to humans&quot;</h3>

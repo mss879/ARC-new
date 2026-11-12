@@ -63,7 +63,7 @@ export default function BlogPost() {
                     <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="prose prose-invert prose-lg max-w-none">
                         <div className="space-y-6 text-neutral-300 leading-relaxed">
                             <p className="text-xl text-neutral-200">
-                                AI is moving beyond simple &quot;chatbots&quot; that answer FAQs. We are entering the era of AI Agents—autonomous digital employees that can reason, plan, and execute tasks. For Sri Lankan businesses, this is the productivity leap we&apos;ve been waiting for.
+                                AI is moving beyond simple &quot;chatbots&quot; that answer FAQs. We are entering the era of AI Agents—autonomous digital employees that can reason, plan, and execute tasks. For Sri Lankan businesses, this is the productivity leap we&apos;ve been waiting for. It is also changing what <Link href="/software-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">software companies in Sri Lanka</Link> build for their clients.
                             </p>
 
                             <h2 className="text-3xl font-bold text-white mt-12 mb-6">What is an AI Agent?</h2>

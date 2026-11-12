@@ -5,7 +5,8 @@ const GRID = "#262626";
 const LABEL = "#a3a3a3";
 const MUTED = "#525252";
 
-/* EDB estimated monthly ICT/BPM export earnings, 2026 (US$ millions) */
+/* EDB estimated monthly ICT/BPM export earnings, 2026 (US$ millions), as first published each month.
+ * EDB revises earlier months, so these do not add up to its cumulative total. */
 const EXPORT_MONTHS = [
     { month: "Jan", value: 177.83 },
     { month: "Feb", value: 153.62 },
@@ -13,6 +14,9 @@ const EXPORT_MONTHS = [
     { month: "Apr", value: 146.09 },
     { month: "May", value: 158.21 },
     { month: "Jun", value: 150.49 },
+    { month: "Jul", value: 143.24 },
+    { month: "Aug", value: 135.1 },
+    { month: "Sep", value: 123.81 },
 ];
 
 export function ExportEarningsChart() {
@@ -33,9 +37,9 @@ export function ExportEarningsChart() {
                     viewBox={`0 0 ${width} ${height}`}
                     className="w-full h-auto"
                     role="img"
-                    aria-label="Bar chart of Sri Lanka's monthly ICT and BPM export earnings from January to June 2026, ranging between 146 and 178 million US dollars per month"
+                    aria-label="Bar chart of Sri Lanka's monthly ICT and BPM export earnings from January to September 2026, falling from 178 million US dollars in January to 124 million in September"
                 >
-                    <title>Sri Lanka ICT/BPM Export Earnings, January–June 2026 (US$ millions)</title>
+                    <title>Sri Lanka ICT/BPM Export Earnings, January–September 2026 (US$ millions)</title>
                     {gridValues.map((v) => {
                         const y = margin.top + plotH - (v / yMax) * plotH;
                         return (
@@ -66,8 +70,8 @@ export function ExportEarningsChart() {
                 </svg>
             </div>
             <figcaption className="text-xs text-neutral-500 mt-3 italic">
-                Sri Lanka ICT/BPM export earnings by month, 2026 (US$ millions, EDB estimates). H1 2026 total: US$885.4M, up 17.6% year-on-year; full-year 2025: US$1,644.8M. Source:{" "}
-                <a href="https://www.srilankabusiness.com/" target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">
+                Sri Lanka ICT/BPM export earnings by month, 2026 (US$ millions), as first published by the EDB each month. The EDB later revises monthly estimates, so the bars do not add up to its cumulative figure of US$1,240.67M for January–September, up 3.69% year-on-year. Source:{" "}
+                <a href="https://www.srilankabusiness.com/news/sri-lankas-exports-surpass-usd-13-6-bn-in-the-first-nine-months-of-2026-recording-5-percent-growth.html" target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">
                     Export Development Board of Sri Lanka
                 </a>
                 .
@@ -76,7 +80,8 @@ export function ExportEarningsChart() {
     );
 }
 
-/* Typical agency hourly-rate bands (USD), mid-2026 — same figures as the comparison tables */
+/* ARC AI's estimated agency hourly-rate bands (USD) — same figures as the comparison tables.
+ * These are estimates, not survey data; no public rate survey was available to verify them. */
 const RATE_BANDS = [
     { region: "United States", min: 100, max: 200, highlight: false },
     { region: "United Kingdom", min: 80, max: 150, highlight: false },
@@ -104,9 +109,9 @@ export function RateComparisonChart() {
                     viewBox={`0 0 ${width} ${height}`}
                     className="w-full h-auto"
                     role="img"
-                    aria-label="Range chart comparing typical software development hourly rates by country: Sri Lanka 20 to 60 US dollars, India 18 to 50, Philippines 20 to 50, Vietnam 18 to 45, Eastern Europe 40 to 80, United Kingdom 80 to 150, United States 100 to 200"
+                    aria-label="Range chart comparing estimated software development hourly rates by country: Sri Lanka 20 to 60 US dollars, India 18 to 50, Philippines 20 to 50, Vietnam 18 to 45, Eastern Europe 40 to 80, United Kingdom 80 to 150, United States 100 to 200"
                 >
-                    <title>Software Development Hourly Rates by Country, 2026 (USD)</title>
+                    <title>Estimated Software Development Hourly Rates by Country, 2026 (USD)</title>
                     {gridValues.map((v) => (
                         <g key={v}>
                             <line x1={x(v)} y1={margin.top} x2={x(v)} y2={height - margin.bottom} stroke={GRID} strokeWidth="1" />
@@ -140,7 +145,7 @@ export function RateComparisonChart() {
                 </svg>
             </div>
             <figcaption className="text-xs text-neutral-500 mt-3 italic">
-                Typical agency hourly-rate bands for custom software development, mid-2026 (USD). Based on Clutch country listings, GoodFirms profiles, and published 2026 rate guides.
+                Estimated agency hourly-rate bands for custom software development (USD). These are ARC AI estimates, not survey data.
             </figcaption>
         </figure>
     );
