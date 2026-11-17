@@ -64,7 +64,11 @@ const Process = () => {
         </h2>
 
         {/* Four cards, one per step, each with a small animation of its stage.
-            The last one is the orange one: it is where the work goes live. */}
+            The last one is the orange one: it is where the work goes live.
+            Each card spans four rows of this grid as a subgrid (label,
+            picture, title, text), so titles and texts line up across a row
+            of cards whatever the height of each picture or the length of
+            each title and text. */}
         <motion.div
           className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-14 xl:grid-cols-4"
           initial="hidden"
@@ -78,7 +82,7 @@ const Process = () => {
             return (
               <motion.div
                 key={step.number}
-                className={`cut-card [--cut:22px] flex min-h-[240px] flex-col overflow-hidden p-6 sm:min-h-[340px] lg:p-7 ${
+                className={`cut-card [--cut:22px] row-span-4 grid grid-rows-subgrid gap-y-0 overflow-hidden p-6 lg:p-7 ${
                   accent
                     ? "relative bg-ember text-ink"
                     : "cream-card"
@@ -105,18 +109,16 @@ const Process = () => {
 
                 {/* A small looping picture of the stage, in the space between
                     the step label and its title. */}
-                <div className="flex flex-1 items-center py-7 lg:py-8">
+                <div className="flex items-center py-7 lg:py-8">
                   <ProcessVisual kind={step.visual} />
                 </div>
 
-                <div>
-                  <h3 className="text-2xl font-medium leading-tight tracking-[-0.03em] text-ink lg:text-3xl">
-                    {step.title}
-                  </h3>
-                  <p className={`mt-3 text-base leading-relaxed ${accent ? "text-ink/80" : "text-ink-soft"}`}>
-                    {step.description}
-                  </p>
-                </div>
+                <h3 className="text-2xl font-medium leading-tight tracking-[-0.03em] text-ink lg:text-3xl">
+                  {step.title}
+                </h3>
+                <p className={`mt-3 text-base leading-relaxed ${accent ? "text-ink/80" : "text-ink-soft"}`}>
+                  {step.description}
+                </p>
               </motion.div>
             );
           })}

@@ -38,13 +38,14 @@ export function SystemsIntro() {
     >
       <div className="relative mx-auto max-w-[1400px]">
         {/* The heading takes the full width so each of its two lines stays on
-            one row; from 768px its size follows the window so the longer line
-            always fits. On a phone it is capped at 1/8.1 of its box (cqw):
-            "and the AI inside it" is 7.7 times the font size. */}
+            one row. Same sizes as the other section headings (48, 60, 72 and
+            88px by breakpoint, like "Numbers don't lie"), capped at 1/8.1 of
+            its box (cqw) so the longer line, "and the AI inside it" (7.7
+            times the font size), always fits on a narrow phone. */}
         <div className="[container-type:inline-size]">
           <h2
             id="systems-heading"
-            className="scroll-mt-28 text-[length:min(3.25rem,100cqw/8.1)] font-medium leading-[1.02] tracking-[-0.04em] text-ink md:text-[length:clamp(3.5rem,7.8vw,7rem)]"
+            className="scroll-mt-28 text-[length:min(3rem,100cqw/8.1)] font-medium leading-[0.98] tracking-[-0.04em] text-ink sm:text-[length:min(3.75rem,100cqw/8.1)] md:text-[length:min(4.5rem,100cqw/8.1)] lg:text-[length:min(5.5rem,100cqw/8.1)]"
           >
             <span className="block whitespace-nowrap">The system,</span>
             <span className="block whitespace-nowrap text-ember-ink">and the AI inside it</span>
