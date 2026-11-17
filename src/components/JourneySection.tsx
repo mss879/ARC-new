@@ -13,49 +13,49 @@ const JourneySection = () => {
       title: "ARC AI Founded",
       description: "Started our journey revolutionizing businesses through AI automation and intelligent workflow solutions.",
       icon: Flag,
-      gradient: "from-[#FF4925] to-[#E63E1F]",
+      gradient: "from-ember to-ember",
     },
     {
       year: "2023",
       title: "AI-Powered Marketing Suite Launched",
       description: "Introduced comprehensive AI-driven marketing automation tools, helping 50+ businesses scale their digital presence.",
       icon: Rocket,
-      gradient: "from-[#FF4925] to-[#D6371B]",
+      gradient: "from-ember to-[#D6371B]",
     },
     {
       year: "2024",
       title: "100+ Clients & Advanced Chatbot Platform",
       description: "Reached 100+ satisfied clients and launched our AI chatbot platform, transforming customer engagement.",
       icon: LineChart,
-      gradient: "from-[#E63E1F] to-[#FF4925]",
+      gradient: "from-ember to-ember",
     },
     {
       year: "2025",
       title: "Global Expansion & AI Content Engine",
       description: "Expanding to UK and international markets with our revolutionary AI content generation system.",
       icon: Globe,
-      gradient: "from-[#D6371B] to-[#FF4925]",
+      gradient: "from-[#D6371B] to-ember",
     },
     {
       year: "2026",
       title: "Enterprise AI Automation Suite",
       description: "Launching enterprise-grade AI automation platform for Fortune 500 companies.",
       icon: Lightbulb,
-      gradient: "from-[#FF4925] to-[#E63E1F]",
+      gradient: "from-ember to-ember",
     },
     {
       year: "2028",
       title: "AI Innovation Lab & Strategic Partnerships",
       description: "Establishing AI research lab and forming strategic partnerships with leading tech giants.",
       icon: Lightbulb,
-      gradient: "from-[#E63E1F] to-[#FF4925]",
+      gradient: "from-ember to-ember",
     },
     {
       year: "2030",
       title: "Leading Global AI Marketing Authority",
       description: "Becoming the world's most trusted AI automation and marketing company, serving 10,000+ businesses worldwide.",
       icon: Globe,
-      gradient: "from-[#FF4925] to-[#E63E1F]",
+      gradient: "from-ember to-ember",
     },
   ];
 
@@ -87,12 +87,11 @@ const JourneySection = () => {
   }, []);
 
   return (
-    <section className="py-16 px-6 relative overflow-hidden bg-black">
+    <section className="py-16 px-6 relative overflow-hidden bg-transparent">
       <div className="max-w-7xl mx-auto">
         <h2
-          className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-16 text-center"
+          className="text-3xl md:text-4xl lg:text-5xl font-medium text-ink mb-16 text-center tracking-[-0.035em]"
           style={{
-            fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif"
           }}
         >
           Our Journey
@@ -132,8 +131,8 @@ const JourneySection = () => {
                     }}
                   >
                     <div className={`w-full h-full rounded-full bg-gradient-to-r ${item.gradient} p-0.5`}>
-                      <div className="w-full h-full rounded-full bg-black flex items-center justify-center">
-                        <Icon className="w-4 h-4 text-[#FF4925]" />
+                      <div className="w-full h-full rounded-full bg-transparent flex items-center justify-center">
+                        <Icon className="w-4 h-4 text-ember-deep" />
                       </div>
                     </div>
                   </div>
@@ -153,27 +152,24 @@ const JourneySection = () => {
                       />
 
                       {/* Card */}
-                      <div className="relative bg-white/5 rounded-2xl p-6 backdrop-blur-sm border border-white/10 hover:border-[#FF4925]/30 transition-all duration-300">
+                      <div className="cut-card [--cut:18px] relative bg-white/70 p-6 [--cut-line:rgba(27,26,23,0.1)] hover:[--cut-line:rgba(255,73,37,0.3)] transition-all duration-300">
                         <span
-                          className={`text-3xl font-bold bg-gradient-to-r ${item.gradient} bg-clip-text text-transparent`}
+                          className={`text-3xl font-bold ${item.gradient} text-ink`}
                           style={{
-                            fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif"
                           }}
                         >
                           {item.year}
                         </span>
                         <h3
-                          className="text-xl font-bold text-white mt-2 mb-3"
+                          className="text-xl font-bold text-ink mt-2 mb-3"
                           style={{
-                            fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif"
                           }}
                         >
                           {item.title}
                         </h3>
                         <p
-                          className="text-gray-300"
+                          className="text-ink-soft"
                           style={{
-                            fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif"
                           }}
                         >
                           {item.description}

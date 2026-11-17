@@ -317,3 +317,1828 @@ All colors MUST be HSL.
   .demo-dot, .demo-voice-bar, .demo-caret, .chat-typing-dot { animation: none; }
   .chat-typing-dot { opacity: 1; }
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Grey-cream theme
+   Every public page's wrapper carries .home-cream (the name is from when the
+   home page was the first to use it). The admin area does not, and stays dark. Colours match the
+   `paper`, `ink` and `ember` entries in tailwind.config.ts.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* What shows when the page is pulled past its top or bottom edge. */
+html:has(.home-cream),
+html:has(.home-cream) body {
+  background-color: #E8E6E0;
+}
+
+.home-cream {
+  background-color: #E8E6E0;
+  color: #1B1A17;
+}
+
+/* Frosted card: a translucent white sheet with a lit top edge and a soft,
+   warm shadow. No backdrop blur (the page behind is a flat colour), so a page
+   full of these stays cheap to scroll. */
+.cream-card {
+  /* Cut corners (see "Buttons" below); the edge is a hairline, drawn as
+     the cut ring because a border would be missing along the cuts. There
+     is no outer shadow because clip-path would cut it off. */
+  --cut-line: rgba(27, 26, 23, 0.08);
+  position: relative;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.5) 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* The dark card used once per group for contrast. */
+.ink-card {
+  position: relative;
+  background: #1B1A17;
+  color: #FBFAF7;
+}
+
+/* Small section label: a pill with an orange dot. */
+.cream-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(27, 26, 23, 0.1);
+  background: rgba(255, 255, 255, 0.6);
+  padding: 0.375rem 0.875rem 0.375rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  color: #55524B;
+}
+.cream-pill::before {
+  content: "";
+  height: 0.375rem;
+  width: 0.375rem;
+  border-radius: 999px;
+  background: #FF4925;
+}
+.cream-pill--dark {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(251, 250, 247, 0.78);
+}
+
+/* A button or card's cut settings apply to that element only. Custom
+   properties normally pass down to children, so a card's 22px cut used to
+   reach the buttons inside it and slice into their arrow boxes. Registered
+   as non-inherited, each element reads only its own; the ring on ::before
+   gets them through --_c, --_w and --_line, which the element computes from
+   its own settings and does pass down. */
+@property --cut { syntax: "*"; inherits: false; }
+@property --cut-w { syntax: "*"; inherits: false; }
+@property --cut-line { syntax: "*"; inherits: false; }
+@property --cut-focus { syntax: "*"; inherits: false; }
+
+/* Buttons and cards. Every labelled button and every card on the site has
+   the same cut-corner shape (cards: .cut-card, .cream-card, .ink-card):
+   the top-left and bottom-right corners are cut at 45 degrees, like the
+   chamfered chip in the hero video and the angled logo tab. `.pill-btn` is
+   the button with the arrow box (the name is from when it was a pill);
+   `.cut-btn` gives the same shape to any other button.
+
+   clip-path would also cut off a border and a focus outline, so ::before
+   draws the edge as a ring: the outline shape minus the same shape inset by
+   the edge width (the evenodd rule leaves only the band between them). On a
+   45 degree cut, insetting the edge by w moves the corner point 0.414w along
+   each side, hence the 0.414.
+
+   A button can set these with a class, e.g. [--cut:12px]:
+     --cut        size of the corner cut (default 8px)
+     --cut-w      edge width (default 1px)
+     --cut-line   edge colour (default none)
+     --cut-focus  edge colour when focused from the keyboard (default orange)
+   This file comes after Tailwind's utilities, so the rules below never set
+   --cut or --cut-w themselves (that would beat the class); they read them,
+   with the defaults, through --_c and --_w. */
+.cut-btn,
+.pill-btn,
+.cut-card,
+.cream-card,
+.ink-card {
+  --_c: var(--cut, 8px);
+  --_w: var(--cut-w, 1px);
+  --_line: var(--cut-line, transparent);
+  border-radius: 0;
+  clip-path: polygon(var(--_c) 0, 100% 0, 100% calc(100% - var(--_c)), calc(100% - var(--_c)) 100%, 0 100%, 0 var(--_c));
+}
+.cut-btn,
+.pill-btn {
+  position: relative;
+}
+/* Cards take a larger cut. A card sets its own position (usually
+   `relative`; a few are placed absolutely), so none is set here. */
+.cut-card,
+.cream-card,
+.ink-card {
+  --_c: var(--cut, 20px);
+}
+.cut-btn::before,
+.pill-btn::before,
+.cut-card::before,
+.cream-card::before,
+.ink-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--_line);
+  clip-path: polygon(evenodd,
+    var(--_c) 0, 100% 0, 100% calc(100% - var(--_c)), calc(100% - var(--_c)) 100%, 0 100%, 0 var(--_c), var(--_c) 0,
+    calc(var(--_c) + var(--_w) * 0.414) var(--_w),
+    calc(100% - var(--_w)) var(--_w),
+    calc(100% - var(--_w)) calc(100% - var(--_c) - var(--_w) * 0.414),
+    calc(100% - var(--_c) - var(--_w) * 0.414) calc(100% - var(--_w)),
+    var(--_w) calc(100% - var(--_w)),
+    var(--_w) calc(var(--_c) + var(--_w) * 0.414),
+    calc(var(--_c) + var(--_w) * 0.414) var(--_w));
+}
+/* All four corners cut, for a button that sits inside the floating header
+   bar (the menu button), so its corners run parallel to the bar's instead of
+   only two of them being cut. Same edge ring as .cut-btn, with eight points. */
+.cut-btn.cut-all {
+  --_k: calc(var(--_w) * 0.414);
+  clip-path: polygon(
+    var(--_c) 0, calc(100% - var(--_c)) 0, 100% var(--_c), 100% calc(100% - var(--_c)),
+    calc(100% - var(--_c)) 100%, var(--_c) 100%, 0 calc(100% - var(--_c)), 0 var(--_c));
+}
+.cut-btn.cut-all::before {
+  clip-path: polygon(evenodd,
+    var(--_c) 0, calc(100% - var(--_c)) 0, 100% var(--_c), 100% calc(100% - var(--_c)),
+    calc(100% - var(--_c)) 100%, var(--_c) 100%, 0 calc(100% - var(--_c)), 0 var(--_c), var(--_c) 0,
+    calc(var(--_c) + var(--_k)) var(--_w),
+    calc(100% - var(--_c) - var(--_k)) var(--_w),
+    calc(100% - var(--_w)) calc(var(--_c) + var(--_k)),
+    calc(100% - var(--_w)) calc(100% - var(--_c) - var(--_k)),
+    calc(100% - var(--_c) - var(--_k)) calc(100% - var(--_w)),
+    calc(var(--_c) + var(--_k)) calc(100% - var(--_w)),
+    var(--_w) calc(100% - var(--_c) - var(--_k)),
+    var(--_w) calc(var(--_c) + var(--_k)),
+    calc(var(--_c) + var(--_k)) var(--_w));
+}
+
+/* The floating header bar (tablet width up; on phones it is a full-width
+   strip). A long thin bar with only two opposite corners cut looks lopsided,
+   one end cut at the top and the other at the bottom, so the bar has all four
+   corners cut and both ends match. It keeps its own position (fixed). The
+   edge ring works as for .cut-btn: the outline minus the same shape inset by
+   the edge width, each corner moving 0.414 x the width along its sides. */
+@media (min-width: 768px) {
+  .cut-md {
+    --_c: var(--cut, 12px);
+    --_w: var(--cut-w, 1px);
+    --_line: var(--cut-line, transparent);
+    --_k: calc(var(--_w) * 0.414);
+    border-radius: 0;
+    clip-path: polygon(
+      var(--_c) 0, calc(100% - var(--_c)) 0, 100% var(--_c), 100% calc(100% - var(--_c)),
+      calc(100% - var(--_c)) 100%, var(--_c) 100%, 0 calc(100% - var(--_c)), 0 var(--_c));
+  }
+  .cut-md::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--_line);
+    clip-path: polygon(evenodd,
+      var(--_c) 0, calc(100% - var(--_c)) 0, 100% var(--_c), 100% calc(100% - var(--_c)),
+      calc(100% - var(--_c)) 100%, var(--_c) 100%, 0 calc(100% - var(--_c)), 0 var(--_c), var(--_c) 0,
+      calc(var(--_c) + var(--_k)) var(--_w),
+      calc(100% - var(--_c) - var(--_k)) var(--_w),
+      calc(100% - var(--_w)) calc(var(--_c) + var(--_k)),
+      calc(100% - var(--_w)) calc(100% - var(--_c) - var(--_k)),
+      calc(100% - var(--_c) - var(--_k)) calc(100% - var(--_w)),
+      calc(var(--_c) + var(--_k)) calc(100% - var(--_w)),
+      var(--_w) calc(100% - var(--_c) - var(--_k)),
+      var(--_w) calc(var(--_c) + var(--_k)),
+      calc(var(--_c) + var(--_k)) var(--_w));
+  }
+}
+.cut-btn:focus-visible,
+.pill-btn:focus-visible,
+.cut-card:focus-visible,
+.cream-card:focus-visible,
+.ink-card:focus-visible {
+  outline: none;
+  --_w: 2px;
+  --cut-line: var(--cut-focus, #FF4925);
+}
+
+/* The button with the arrow box. The arrow turns to point forward on hover;
+   only the arrow turns, as a turning box would show its cut corners moving. */
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.875rem;
+  padding: 0.375rem 0.375rem 0.375rem 1.375rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+/* The arrow box takes the same cut, sized so the gap between the two
+   diagonal edges matches the gap along the sides: box cut = button cut -
+   0.586 x padding (8px cut, 6px padding: 5px; 12px and 7px: 8px). */
+.pill-btn__dot {
+  --_d: 5px;
+  display: grid;
+  height: 2.5rem;
+  width: 2.5rem;
+  flex-shrink: 0;
+  place-items: center;
+  clip-path: polygon(var(--_d) 0, 100% 0, 100% calc(100% - var(--_d)), calc(100% - var(--_d)) 100%, 0 100%, 0 var(--_d));
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.pill-btn__dot svg {
+  transition: transform 0.35s cubic-bezier(0.2, 0, 0, 1);
+}
+.pill-btn:hover .pill-btn__dot svg {
+  transform: rotate(45deg);
+}
+
+.pill-btn--ink {
+  background: #1B1A17;
+  color: #FBFAF7;
+}
+.pill-btn--ink .pill-btn__dot {
+  background: #FF4925;
+  color: #1B1A17;
+}
+.pill-btn--ink:hover {
+  background: #2A2823;
+}
+
+.pill-btn--ember {
+  --cut-focus: #1B1A17;
+  background: #FF4925;
+  color: #1B1A17;
+}
+.pill-btn--ember .pill-btn__dot {
+  background: #1B1A17;
+  color: #FBFAF7;
+}
+.pill-btn--ember:hover {
+  background: #FF5C3A;
+}
+
+.pill-btn--ghost {
+  --cut-line: rgba(27, 26, 23, 0.14);
+  background: rgba(255, 255, 255, 0.6);
+  color: #1B1A17;
+}
+.pill-btn--ghost .pill-btn__dot {
+  background: #1B1A17;
+  color: #FBFAF7;
+}
+.pill-btn--ghost:hover {
+  background: #FFFFFF;
+}
+.pill-btn--ghost:hover .pill-btn__dot {
+  background: #FF4925;
+  color: #1B1A17;
+}
+
+/* The larger button used in the hero. */
+.pill-btn--lg {
+  --cut: 12px;
+  padding: 0.4375rem 0.4375rem 0.4375rem 1.75rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+.pill-btn--lg .pill-btn__dot {
+  --_d: 8px;
+  height: 2.75rem;
+  width: 2.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pill-btn,
+  .pill-btn__dot,
+  .pill-btn__dot svg {
+    transition: none;
+  }
+}
+
+/* A patch of the page's own colour laid over something else: the angled tab
+   cut into the bottom of the hero video. */
+.paper-fill {
+  background-color: #E8E6E0;
+}
+
+/* ── Performance ──────────────────────────────────────────────────────────
+   Nothing here changes what is drawn. */
+
+/* Looping CSS animations (logo strips, the logo ring, the small demo loops)
+   stop while their block is off screen. The attribute is set by
+   useOffscreenPause in src/components/home. */
+[data-offscreen="true"],
+[data-offscreen="true"] * {
+  animation-play-state: paused !important;
+}
+
+/* Sections far down the page are not laid out or painted until they are
+   about to scroll into view. The size is a first estimate; the browser
+   remembers the real one after the first time it draws the section. */
+.render-when-near {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+/* ── Process visuals ──────────────────────────────────────────────────────
+   The small looping pictures in the "How we work" cards (ProcessVisual.tsx).
+   Every loop is 5.5s and moves only transform and opacity. An element's
+   resting style is its finished state; the keyframes start it hidden, and
+   `backwards` holds that hidden start through its delay so nothing flashes. */
+.pv {
+  position: relative;
+  width: 100%;
+  max-width: 19rem;
+}
+
+/* 1. Discovery: four topics, ticked in turn */
+.pv-discovery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.pv-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(27, 26, 23, 0.1);
+  background: #FFFFFF;
+  padding: 0.4375rem 0.75rem 0.4375rem 0.4375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  color: #55524B;
+}
+.pv-chip__mark {
+  position: relative;
+  height: 1rem;
+  width: 1rem;
+  flex-shrink: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(27, 26, 23, 0.2);
+}
+.pv-chip__tick {
+  position: absolute;
+  inset: -1px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #FF4925;
+  color: #1B1A17;
+  animation: pv-tick 5.5s cubic-bezier(0.2, 0, 0, 1) infinite backwards;
+  animation-delay: calc(var(--i) * 0.6s);
+}
+@keyframes pv-tick {
+  0%, 6% { transform: scale(0); opacity: 0; }
+  13% { transform: scale(1.18); opacity: 1; }
+  18%, 62% { transform: scale(1); opacity: 1; }
+  70%, 100% { transform: scale(0); opacity: 0; }
+}
+
+/* 2. Kickoff: a plan filling in along a timeline */
+.pv-kickoff {
+  display: grid;
+  gap: 0.625rem;
+  padding-top: 0.875rem;
+}
+.pv-ticks {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.pv-ticks span {
+  height: 5px;
+  width: 1px;
+  background: rgba(27, 26, 23, 0.25);
+}
+.pv-track {
+  position: relative;
+  height: 0.625rem;
+  border-radius: 999px;
+  background: rgba(27, 26, 23, 0.07);
+}
+.pv-bar {
+  position: absolute;
+  bottom: 0;
+  left: var(--x);
+  top: 0;
+  width: var(--w);
+  border-radius: 999px;
+  background: #1B1A17;
+  transform-origin: left center;
+  animation: pv-bar 5.5s cubic-bezier(0.2, 0, 0, 1) infinite backwards;
+  animation-delay: calc(var(--i) * 0.55s);
+}
+.pv-bar--mid { background: rgba(27, 26, 23, 0.45); }
+.pv-bar--accent { background: #FF4925; }
+@keyframes pv-bar {
+  0%, 5% { transform: scaleX(0); }
+  30%, 70% { transform: scaleX(1); }
+  78%, 100% { transform: scaleX(0); }
+}
+/* "Today", moving along the plan */
+.pv-marker {
+  position: absolute;
+  inset: 0;
+  border-left: 1.5px solid #FF4925;
+  pointer-events: none;
+  animation: pv-marker 5.5s linear infinite;
+}
+@keyframes pv-marker {
+  0% { transform: translateX(0); opacity: 0; }
+  5% { opacity: 1; }
+  74% { transform: translateX(99%); opacity: 1; }
+  82%, 100% { transform: translateX(99%); opacity: 0; }
+}
+
+/* 3. Receive and refine: a design, feedback arriving, feedback resolved */
+.pv-refine {
+  display: flex;
+  gap: 0.5rem;
+  height: 6.25rem;
+}
+.pv-frame {
+  position: relative;
+  display: grid;
+  flex: 1.7;
+  min-width: 0;
+  grid-template-columns: 42% 1fr;
+  gap: 0.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(27, 26, 23, 0.1);
+  background: #FFFFFF;
+  padding: 1.375rem 0.625rem 0.625rem;
+}
+/* Three window dots */
+.pv-frame::before {
+  content: "";
+  position: absolute;
+  left: 0.625rem;
+  top: 0.5625rem;
+  height: 0.25rem;
+  width: 0.25rem;
+  border-radius: 999px;
+  background: rgba(27, 26, 23, 0.2);
+  box-shadow: 0.4375rem 0 0 rgba(27, 26, 23, 0.2), 0.875rem 0 0 rgba(27, 26, 23, 0.2);
+}
+.pv-shot {
+  border-radius: 6px;
+  background: rgba(27, 26, 23, 0.09);
+}
+.pv-copy {
+  display: grid;
+  align-content: start;
+  gap: 0.3125rem;
+  padding-top: 0.125rem;
+}
+.pv-copy span {
+  height: 0.3125rem;
+  border-radius: 999px;
+  background: rgba(27, 26, 23, 0.14);
+}
+.pv-copy span:nth-child(2) { width: 72%; }
+/* The button in the design: grey at first, orange once the feedback is in */
+.pv-copy .pv-cta {
+  position: relative;
+  margin-top: 0.3125rem;
+  height: 0.875rem;
+  width: 62%;
+}
+.pv-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: #FF4925;
+  animation: pv-resolve 5.5s ease infinite backwards;
+  animation-delay: 0.3s;
+}
+.pv-notes {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  align-content: center;
+  gap: 0.5rem;
+}
+.pv-note {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 10px;
+  border: 1px solid rgba(27, 26, 23, 0.1);
+  background: #FFFFFF;
+  padding: 0.4375rem 0.5rem;
+  animation: pv-note 5.5s cubic-bezier(0.2, 0, 0, 1) infinite backwards;
+  animation-delay: calc(var(--i) * 0.5s);
+}
+@keyframes pv-note {
+  0%, 6% { transform: translateY(8px); opacity: 0; }
+  16%, 76% { transform: translateY(0); opacity: 1; }
+  84%, 100% { transform: translateY(8px); opacity: 0; }
+}
+.pv-note__dot {
+  position: relative;
+  height: 0.875rem;
+  width: 0.875rem;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: rgba(27, 26, 23, 0.14);
+}
+.pv-note__done {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #FF4925;
+  color: #1B1A17;
+  animation: pv-resolve 5.5s ease infinite backwards;
+  animation-delay: calc(var(--i) * 0.3s);
+}
+@keyframes pv-resolve {
+  0%, 38% { transform: scale(0.6); opacity: 0; }
+  46%, 76% { transform: scale(1); opacity: 1; }
+  84%, 100% { transform: scale(0.6); opacity: 0; }
+}
+.pv-note__lines {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+  gap: 0.25rem;
+}
+.pv-note__lines span {
+  height: 0.25rem;
+  border-radius: 999px;
+  background: rgba(27, 26, 23, 0.14);
+}
+.pv-note__lines span:last-child { width: 60%; }
+
+/* 4. Continue and grow: a chart climbing */
+.pv-grow {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  height: 6.25rem;
+}
+.pv-col {
+  position: relative;
+  display: flex;
+  height: 100%;
+  max-width: 2.25rem;
+  flex: 1;
+  align-items: flex-end;
+}
+.pv-col__bar {
+  height: var(--h);
+  width: 100%;
+  border-radius: 6px 6px 2px 2px;
+  background: rgba(27, 26, 23, 0.26);
+  transform-origin: center bottom;
+  animation: pv-col 5.5s cubic-bezier(0.2, 0, 0, 1) infinite backwards;
+  animation-delay: calc(var(--i) * 0.2s);
+}
+.pv-col__bar--top { background: #1B1A17; }
+@keyframes pv-col {
+  0%, 5% { transform: scaleY(0.12); }
+  28%, 72% { transform: scaleY(1); }
+  80%, 100% { transform: scaleY(0.12); }
+}
+/* The arrow that lands on the tallest bar */
+.pv-rise {
+  position: absolute;
+  bottom: calc(var(--h) + 0.375rem);
+  left: 50%;
+  display: grid;
+  height: 1.375rem;
+  width: 1.375rem;
+  margin-left: -0.6875rem;
+  place-items: center;
+  border-radius: 999px;
+  background: #1B1A17;
+  color: #FF4925;
+  animation: pv-rise 5.5s cubic-bezier(0.2, 0, 0, 1) infinite backwards;
+}
+@keyframes pv-rise {
+  0%, 40% { transform: translateY(8px) scale(0.6); opacity: 0; }
+  48%, 72% { transform: translateY(0) scale(1); opacity: 1; }
+  80%, 100% { transform: translateY(8px) scale(0.6); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pv *,
+  .pv *::after {
+    animation: none !important;
+  }
+}
+
+/* ── About: our journey ───────────────────────────────────────────────────
+   Two layouts for the same list (AboutJourney.tsx).
+
+   By default it is a list down the page with an upright line beside it. When
+   the script turns on the scroll-through film (wide screens, motion allowed)
+   it sets data-cinematic on the section, and the rules further down lay the
+   same cards out in one wide row under a curving line. */
+.journey__head {
+  margin-bottom: 2.5rem;
+}
+.journey__year,
+.journey__line {
+  display: none;
+}
+.journey__track {
+  position: relative;
+}
+.journey__list {
+  display: grid;
+  gap: 1rem;
+}
+.journey__rail {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 21px;
+  top: 1.5rem;
+  width: 1px;
+  background: rgba(27, 26, 23, 0.1);
+}
+.journey__rail--fill {
+  background: #FF4925;
+  transform-origin: top;
+}
+.journey__item {
+  position: relative;
+  padding-left: 4rem;
+}
+.journey__node {
+  position: absolute;
+  left: 0;
+  top: 1.25rem;
+  display: grid;
+  height: 2.75rem;
+  width: 2.75rem;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(27, 26, 23, 0.1);
+  background: #FFFFFF;
+  color: #E8380F;
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, transform 0.5s cubic-bezier(0.2, 0, 0, 1);
+}
+.journey__card {
+  /* Cut corners via .cut-card; the edge colour is --cut-line. */
+  --cut-line: rgba(27, 26, 23, 0.08);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.5) 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  padding: 1.25rem;
+  transition: background-color 0.5s ease;
+}
+@media (min-width: 1024px) {
+  .journey__card {
+    padding: 1.75rem;
+  }
+}
+/* Goals, not history: an unfilled card with a fainter edge, and a quieter
+   (dashed) node. */
+.journey__item--ahead .journey__card {
+  --cut-line: rgba(27, 26, 23, 0.22);
+  background: none;
+  box-shadow: none;
+}
+.journey__item--ahead .journey__node {
+  border-style: dashed;
+  border-color: rgba(27, 26, 23, 0.25);
+  color: #6B675F;
+}
+
+/* The scroll-through film */
+.journey[data-cinematic="true"] {
+  padding: 0;
+  overflow: hidden;
+}
+.journey[data-cinematic="true"] .journey__stage {
+  display: flex;
+  height: 100vh;
+  max-width: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(1rem, 4vh, 3rem);
+  padding: 5.5rem 0 1.5rem;
+}
+.journey[data-cinematic="true"] .journey__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 0;
+  padding: 0 5rem;
+}
+/* The year counter: a strip of years, one line tall, that slides up a line
+   each time the marker reaches the next card. */
+.journey[data-cinematic="true"] .journey__year {
+  display: block;
+  height: 1em;
+  overflow: hidden;
+  font-size: clamp(4rem, 9vw, 8.5rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: rgba(27, 26, 23, 0.13);
+  font-variant-numeric: tabular-nums;
+}
+.journey__reel {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.7s cubic-bezier(0.2, 0, 0, 1);
+}
+.journey__reel span {
+  height: 1em;
+}
+.journey[data-cinematic="true"] .journey__track {
+  position: relative;
+  height: 440px;
+  width: var(--track-w);
+  flex-shrink: 0;
+  will-change: transform;
+}
+.journey[data-cinematic="true"] .journey__line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+}
+.journey[data-cinematic="true"] .journey__list {
+  display: block;
+}
+.journey[data-cinematic="true"] .journey__rail {
+  display: none;
+}
+.journey[data-cinematic="true"] .journey__item {
+  position: absolute;
+  left: var(--x);
+  top: var(--cards-top);
+  width: var(--card-w);
+  padding-left: 0;
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.2, 0, 0, 1);
+}
+/* The node sits on the line, above its card, joined to it by a short stem. */
+.journey[data-cinematic="true"] .journey__node {
+  left: 18px;
+  top: calc(var(--node-y) - var(--cards-top) - 1.375rem);
+  z-index: 1;
+}
+.journey[data-cinematic="true"] .journey__item::before {
+  content: "";
+  position: absolute;
+  left: 39.5px;
+  top: calc(var(--node-y) - var(--cards-top) + 1.375rem);
+  height: calc(var(--cards-top) - var(--node-y) - 1.375rem);
+  width: 1px;
+  background: rgba(27, 26, 23, 0.14);
+}
+/* Still to come: faint and set a little lower. Passed: dimmed. Reached: lit. */
+.journey[data-cinematic="true"] .journey__item[data-state="next"] {
+  opacity: 0.3;
+  transform: translateY(18px);
+}
+.journey[data-cinematic="true"] .journey__item[data-state="past"] {
+  opacity: 0.62;
+}
+.journey[data-cinematic="true"] .journey__item[data-state="active"] .journey__card {
+  --cut-line: #FF4925;
+  background: #FFFFFF;
+}
+.journey[data-cinematic="true"] .journey__item[data-state="active"] .journey__node {
+  border-color: #FF4925;
+  border-style: solid;
+  background: #FF4925;
+  color: #1B1A17;
+  transform: scale(1.12);
+}
+.journey[data-cinematic="true"] .journey__item[data-state="past"] .journey__node {
+  border-color: #FF4925;
+  border-style: solid;
+  color: #E8380F;
+}
+/* A short window (a small laptop): tighten the film so it still fits. */
+@media (max-height: 760px) {
+  .journey[data-cinematic="true"] .journey__stage {
+    gap: 0.5rem;
+    padding: 4.75rem 0 1rem;
+  }
+  .journey[data-cinematic="true"] .journey__head h2 {
+    font-size: 3rem;
+  }
+  .journey[data-cinematic="true"] .journey__year {
+    font-size: clamp(3.5rem, 7vw, 6rem);
+  }
+  .journey[data-cinematic="true"] .journey__track {
+    height: 410px;
+  }
+}
+
+/* Contact icons (src/components/contact/ContactIcon.tsx). One small loop per
+   icon, 4.8s long, the first three started 1.2s apart so they take turns;
+   the clock's hands turn steadily. Transforms and opacity only. */
+.ci {
+  overflow: visible;
+}
+.ci-mail-flap,
+.ci-phone-handset,
+.ci-phone-wave,
+.ci-pin,
+.ci-pin-ripple {
+  transform-box: fill-box;
+}
+
+/* Mail: the flap lifts open, holds, and closes. */
+.ci-mail-flap {
+  transform-origin: 50% 0%;
+  animation: ci-mail-flap 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes ci-mail-flap {
+  0%, 52% { transform: scaleY(1); }
+  62%, 80% { transform: scaleY(-0.7); }
+  90%, 100% { transform: scaleY(1); }
+}
+
+/* Phone: a short ring, then the sound waves. */
+.ci-phone-handset {
+  transform-origin: 50% 50%;
+  animation: ci-phone-ring 4.8s ease-in-out 1.2s infinite;
+}
+@keyframes ci-phone-ring {
+  0% { transform: rotate(0deg); }
+  3% { transform: rotate(-12deg); }
+  6% { transform: rotate(10deg); }
+  9% { transform: rotate(-9deg); }
+  12% { transform: rotate(7deg); }
+  15% { transform: rotate(-3deg); }
+  18%, 100% { transform: rotate(0deg); }
+}
+.ci-phone-wave {
+  opacity: 0;
+  animation: ci-phone-wave 4.8s ease-out 1.2s infinite;
+}
+.ci-phone-wave--far {
+  animation-delay: 1.38s;
+}
+@keyframes ci-phone-wave {
+  0%, 4% { opacity: 0; }
+  9%, 22% { opacity: 1; }
+  32%, 100% { opacity: 0; }
+}
+
+/* Pin: a hop and a landing ripple. */
+.ci-pin {
+  animation: ci-pin-hop 4.8s cubic-bezier(0.3, 0, 0.3, 1) 2.4s infinite;
+}
+@keyframes ci-pin-hop {
+  0% { transform: translateY(0); }
+  7% { transform: translateY(-3.5px); }
+  13% { transform: translateY(0); }
+  16% { transform: translateY(-1px); }
+  19%, 100% { transform: translateY(0); }
+}
+.ci-pin-ripple {
+  opacity: 0;
+  transform-origin: 50% 50%;
+  animation: ci-pin-ripple 4.8s ease-out 2.4s infinite;
+}
+@keyframes ci-pin-ripple {
+  0%, 12% { opacity: 0; transform: scale(0.35); }
+  13% { opacity: 0.9; transform: scale(0.4); }
+  34%, 100% { opacity: 0; transform: scale(1.5); }
+}
+
+/* Clock: the minute hand goes round every 12s, the hour hand every 144s. */
+.ci-clock-minute,
+.ci-clock-hour {
+  transform-box: view-box;
+  transform-origin: 12px 12px;
+  animation: ci-clock-turn 12s linear infinite;
+}
+.ci-clock-hour {
+  animation-duration: 144s;
+}
+@keyframes ci-clock-turn {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ci * {
+    animation: none !important;
+  }
+}
+
+/* The hero's "Trusted by" strip (Hero.tsx). The track holds two identical
+   copies of the logos, so sliding it by half its width lands exactly on the
+   start again. Paused off screen by the hero's data-offscreen flag. */
+.hero-logos {
+  animation: hero-logos var(--hero-logos-duration, 16s) linear infinite;
+}
+@keyframes hero-logos {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-logos {
+    animation: none;
+  }
+}
+
+/* ── Problem visuals ──────────────────────────────────────────────────────
+   The small looping pictures in "Where the day goes missing"
+   (src/components/home/ProblemsSection.tsx). Same rules as the process
+   visuals: 6s loops that move only transform and opacity, and every
+   element's resting style is the finished picture, which is what
+   reduced-motion visitors see. A number that counts (an unread badge, a
+   stock count, a date) is a stack of spans, one per value; negative delays
+   give each its own quarter of the loop, so they stay in step. */
+.iv {
+  position: relative;
+  width: 100%;
+  max-width: 19rem;
+  font-size: 0.75rem;
+  line-height: 1.25;
+  color: #55524B;
+}
+.iv p {
+  margin: 0;
+}
+.iv-panel {
+  border: 1px solid rgba(27, 26, 23, 0.1);
+  border-radius: 10px;
+  background: #FFFFFF;
+}
+
+/* Counters: one span per value, each shown for a quarter of the loop. */
+.iv-stack {
+  display: inline-grid;
+}
+.iv-stack > span {
+  grid-area: 1 / 1;
+  opacity: 0;
+  animation: iv-quarter 6s linear infinite;
+  animation-delay: calc(var(--i) * 1.5s - 6s);
+}
+.iv-stack > span:last-child {
+  opacity: 1;
+}
+@keyframes iv-quarter {
+  0%, 24.9% { opacity: 1; }
+  25%, 100% { opacity: 0; }
+}
+
+/* Shared entrances: in one after another, out together near the end. */
+.iv-in {
+  animation: iv-in 6s cubic-bezier(0.2, 0, 0, 1) infinite backwards;
+  animation-delay: calc(var(--i, 0) * 0.7s);
+}
+@keyframes iv-in {
+  0%, 4% { opacity: 0; transform: translateY(8px) scale(0.96); }
+  12%, 84% { opacity: 1; transform: none; }
+  92%, 100% { opacity: 0; transform: translateY(-4px); }
+}
+.iv-late {
+  animation: iv-late 6s cubic-bezier(0.2, 0, 0, 1) infinite;
+}
+@keyframes iv-late {
+  0%, 62% { opacity: 0; transform: translateY(6px); }
+  70%, 92% { opacity: 1; transform: none; }
+  98%, 100% { opacity: 0; transform: none; }
+}
+
+/* Chat bubbles (messages; language) */
+.iv-chat,
+.iv-lang {
+  display: grid;
+  gap: 0.4rem;
+}
+.iv-chat__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(251, 250, 247, 0.55);
+}
+.iv-badge {
+  place-items: center;
+  min-width: 2.25rem;
+  height: 1.375rem;
+  padding: 0 0.45rem;
+  border-radius: 999px;
+  background: #FF4925;
+  color: #1B1A17;
+  font-size: 0.6875rem;
+  font-weight: 700;
+}
+.iv-bubble {
+  justify-self: start;
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  max-width: 88%;
+  padding: 0.45rem 0.65rem;
+  border-radius: 12px 12px 12px 4px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(251, 250, 247, 0.92);
+}
+.iv-bubble small {
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-size: 0.625rem;
+  color: rgba(251, 250, 247, 0.45);
+}
+.iv-bubble--light {
+  border-color: rgba(27, 26, 23, 0.1);
+  background: #FFFFFF;
+  color: #1B1A17;
+  font-size: 0.875rem;
+}
+.iv-bubble--light small {
+  color: #6B675F;
+}
+.iv-lang [lang] {
+  font-family: var(--font-display), "Noto Sans Sinhala", "Noto Sans Tamil", "Sinhala Sangam MN", "Tamil Sangam MN", "Nirmala UI", sans-serif;
+}
+.iv-typing {
+  justify-self: end;
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 12px 12px 4px 12px;
+  background: #1B1A17;
+}
+.iv-typing span {
+  height: 0.35rem;
+  width: 0.35rem;
+  border-radius: 999px;
+  background: #FBFAF7;
+  animation: iv-dot 1.2s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.15s);
+}
+@keyframes iv-dot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-3px); opacity: 1; }
+}
+.iv-wait {
+  justify-self: end;
+  font-size: 0.6875rem;
+  color: #6B675F;
+}
+
+/* Retyping: one sale, three copies, the last one wrong. A white cover over
+   each value shrinks in steps, so the figure appears as if typed. */
+.iv-retype {
+  display: grid;
+  gap: 0.35rem;
+}
+.iv-sale {
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.7rem;
+  font-weight: 500;
+  color: #55524B;
+}
+.iv-sale::before {
+  content: "";
+  height: 0.45rem;
+  width: 0.45rem;
+  border-radius: 999px;
+  background: #FF4925;
+}
+.iv-sale strong {
+  font-weight: 600;
+  color: #1B1A17;
+}
+.iv-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.35rem 0.7rem;
+}
+.iv-row__label {
+  color: #6B675F;
+}
+.iv-row__value {
+  position: relative;
+  font-weight: 600;
+  color: #1B1A17;
+  font-variant-numeric: tabular-nums;
+}
+.iv-row__value::after {
+  content: "";
+  position: absolute;
+  /* Reaches below the text so a typo's wavy underline is hidden too. */
+  inset: -1px -2px -7px;
+  background: #FFFFFF;
+  transform: scaleX(0);
+  transform-origin: right center;
+  animation: iv-type 6s steps(9, end) infinite backwards;
+  animation-delay: calc(0.4s + var(--i) * 1.1s);
+}
+@keyframes iv-type {
+  0%, 2% { transform: scaleX(1); }
+  14%, 86% { transform: scaleX(0); }
+  92%, 100% { transform: scaleX(1); }
+}
+.iv-row__value--typo {
+  color: #B62A0B;
+  text-decoration: underline wavy rgba(255, 73, 37, 0.7);
+  text-underline-offset: 3px;
+}
+/* Sits on the sale chip's line, top right, so it takes no row of its own. */
+.iv-stamp {
+  position: absolute;
+  top: 0.2rem;
+  right: 0;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid rgba(255, 73, 37, 0.45);
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #B62A0B;
+}
+
+/* Stock: the shelf runs down, the website still says 8. */
+.iv-stock {
+  display: grid;
+  gap: 0.5rem;
+}
+.iv-stock__grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.5rem;
+}
+.iv-tile {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.6rem 0.75rem;
+}
+.iv-tile__label {
+  font-size: 0.6875rem;
+  color: #6B675F;
+}
+.iv-num {
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #1B1A17;
+  font-variant-numeric: tabular-nums;
+}
+.iv-neq {
+  display: grid;
+  place-items: center;
+  height: 1.75rem;
+  width: 1.75rem;
+  border-radius: 999px;
+  background: #FF4925;
+  color: #1B1A17;
+  font-size: 0.875rem;
+  font-weight: 700;
+  animation: iv-pulse 1.5s ease-in-out infinite;
+}
+@keyframes iv-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+.iv-alert {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.65rem;
+  font-weight: 600;
+  color: #1B1A17;
+}
+.iv-alert::before {
+  content: "";
+  height: 0.45rem;
+  width: 0.45rem;
+  border-radius: 999px;
+  background: #FF4925;
+}
+
+/* Month end: the days pass over an empty chart; on the 30th it fills. */
+.iv-month {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: stretch;
+  gap: 0.75rem;
+}
+.iv-cal {
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  width: 4.25rem;
+  overflow: hidden;
+}
+.iv-cal__month {
+  width: 100%;
+  padding: 0.25rem 0;
+  background: #FF4925;
+  color: #1B1A17;
+  text-align: center;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.iv-cal__day {
+  padding: 0.55rem 0 0.6rem;
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #1B1A17;
+  justify-items: center;
+}
+.iv-chart {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.4rem;
+  height: 5.5rem;
+  padding: 0.6rem 0.7rem 0;
+}
+.iv-bar {
+  position: relative;
+  flex: 1;
+  height: var(--h);
+  border: 1px dashed rgba(27, 26, 23, 0.22);
+  border-bottom: 0;
+  border-radius: 3px 3px 0 0;
+}
+.iv-bar__fill {
+  position: absolute;
+  inset: -1px -1px 0;
+  border-radius: 3px 3px 0 0;
+  background: #1B1A17;
+  transform-origin: bottom;
+  animation: iv-fill 6s cubic-bezier(0.2, 0, 0, 1) infinite backwards;
+  animation-delay: calc(var(--i) * 0.06s);
+}
+/* The tallest bar (the 4th) is the orange one. */
+.iv-bar:nth-of-type(4) .iv-bar__fill {
+  background: #FF4925;
+}
+@keyframes iv-fill {
+  0%, 74% { transform: scaleY(0); }
+  82%, 95% { transform: scaleY(1); }
+  100% { transform: scaleY(0); }
+}
+.iv-q {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: rgba(27, 26, 23, 0.35);
+  opacity: 0;
+  animation: iv-q 6s linear infinite;
+}
+@keyframes iv-q {
+  0%, 72% { opacity: 1; }
+  76%, 100% { opacity: 0; }
+}
+
+/* Posts: a content calendar with four posts, then nothing. */
+.iv-posts {
+  display: grid;
+  gap: 0.45rem;
+}
+.iv-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.3rem;
+  padding: 0.55rem;
+}
+.iv-dow {
+  text-align: center;
+  font-size: 0.5625rem;
+  font-weight: 600;
+  color: #807C73;
+}
+.iv-day {
+  position: relative;
+  aspect-ratio: 1;
+  border: 1px dashed rgba(27, 26, 23, 0.18);
+  border-radius: 5px;
+}
+.iv-post {
+  position: absolute;
+  inset: 2px;
+  border-radius: 3px;
+  background: linear-gradient(#FF4925 0 32%, #F1ECE4 32%);
+}
+.iv-draft {
+  position: absolute;
+  inset: 2px;
+  display: grid;
+  place-items: center;
+  border-radius: 3px;
+  background: #1B1A17;
+  color: #FBFAF7;
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  animation: iv-blink 1.6s ease-in-out infinite;
+}
+@keyframes iv-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.iv-note {
+  justify-self: end;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #B62A0B;
+}
+
+/* Pause the covers too (the off-screen rule reaches elements, not ::after). */
+[data-offscreen="true"] .iv *::after {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .iv *,
+  .iv *::before,
+  .iv *::after {
+    animation: none !important;
+  }
+}
+
+/* ── Try the agents (src/components/home/TryAgents.tsx) ────────────────────
+   Small loops beside the real chat, voice and WhatsApp buttons. Same rules
+   as the other home pictures: transform and opacity only, resting style =
+   finished picture (what reduced-motion visitors see). */
+.ta {
+  position: relative;
+  width: 100%;
+  max-width: 19rem;
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+.ta p {
+  margin: 0;
+}
+@keyframes ta-in {
+  0%, 3% { opacity: 0; transform: translateY(8px); }
+  10%, 86% { opacity: 1; transform: none; }
+  94%, 100% { opacity: 0; transform: translateY(-4px); }
+}
+/* Chat: a question goes out, an answer streams back. */
+.ta-chat {
+  display: grid;
+  gap: 0.5rem;
+}
+.ta-msg {
+  padding: 0.55rem 0.75rem;
+}
+.ta-msg--you {
+  justify-self: end;
+  max-width: 85%;
+  border-radius: 12px 12px 4px 12px;
+  background: #1B1A17;
+  color: #FBFAF7;
+  animation: ta-in 7s cubic-bezier(0.2, 0, 0, 1) infinite backwards;
+}
+.ta-msg--agent {
+  justify-self: start;
+  display: grid;
+  gap: 0.4rem;
+  width: 82%;
+  border: 1px solid rgba(27, 26, 23, 0.1);
+  border-radius: 12px 12px 12px 4px;
+  background: #FFFFFF;
+  animation: ta-in 7s cubic-bezier(0.2, 0, 0, 1) 0.9s infinite backwards;
+}
+.ta-line {
+  display: block;
+  height: 0.45rem;
+  width: var(--w);
+  border-radius: 999px;
+  background: rgba(27, 26, 23, 0.14);
+  transform-origin: left center;
+  animation: ta-type 7s cubic-bezier(0.2, 0, 0, 1) infinite backwards;
+  animation-delay: calc(1.4s + var(--i, 0) * 0.45s);
+}
+.ta-line:last-child {
+  background: rgba(255, 73, 37, 0.55);
+}
+@keyframes ta-type {
+  0%, 2% { transform: scaleX(0); }
+  14%, 86% { transform: scaleX(1); }
+  94%, 100% { transform: scaleX(0); }
+}
+/* Voice: a moving sound wave and its state. */
+.ta-voice {
+  display: grid;
+  justify-items: center;
+  gap: 0.9rem;
+}
+.ta-wave {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  height: 4.5rem;
+}
+.ta-wave span {
+  height: 100%;
+  width: 0.4rem;
+  border-radius: 999px;
+  background: #FF4925;
+  transform: scaleY(calc(var(--h) * 0.55));
+  animation: ta-wave 1.1s ease-in-out infinite alternate;
+  animation-delay: calc(var(--i) * -0.13s);
+}
+@keyframes ta-wave {
+  from { transform: scaleY(calc(var(--h) * 0.25)); }
+  to { transform: scaleY(var(--h)); }
+}
+.ta-voice__state {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(251, 250, 247, 0.6);
+}
+.ta-stack {
+  display: inline-grid;
+}
+.ta-stack > span {
+  grid-area: 1 / 1;
+  text-align: center;
+  opacity: 0;
+  animation: ta-half 6s linear infinite;
+  animation-delay: -6s;
+}
+.ta-stack > span:first-child {
+  opacity: 1;
+}
+.ta-stack > span:nth-child(2) {
+  animation-delay: -3s;
+}
+@keyframes ta-half {
+  0%, 49.9% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+/* WhatsApp: a question, an answer, and the ticks turning blue. */
+.ta-wa {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 12px;
+  background: #EFE7DD;
+}
+.ta-wa__msg {
+  max-width: 88%;
+  padding: 0.45rem 0.65rem;
+  box-shadow: 0 1px 0 rgba(27, 26, 23, 0.08);
+  color: #1B1A17;
+}
+.ta-wa__msg small {
+  margin-left: 0.5rem;
+  white-space: nowrap;
+  font-size: 0.625rem;
+  color: #6B675F;
+}
+.ta-wa__msg--in {
+  justify-self: start;
+  border-radius: 10px 10px 10px 3px;
+  background: #FFFFFF;
+  animation: ta-in 7s cubic-bezier(0.2, 0, 0, 1) infinite backwards;
+}
+.ta-wa__msg--out {
+  justify-self: end;
+  border-radius: 10px 10px 3px 10px;
+  background: #D9FDD3;
+  animation: ta-in 7s cubic-bezier(0.2, 0, 0, 1) 1.4s infinite backwards;
+}
+.ta-ticks {
+  display: inline-grid;
+  margin-left: 0.3rem;
+  letter-spacing: -0.3em;
+}
+.ta-ticks > span {
+  grid-area: 1 / 1;
+}
+.ta-ticks > span:first-child {
+  color: #8696A0;
+}
+.ta-ticks > span:last-child {
+  color: #53BDEB;
+  animation: ta-read 7s linear 1.4s infinite backwards;
+}
+@keyframes ta-read {
+  0%, 30% { opacity: 0; }
+  36%, 100% { opacity: 1; }
+}
+/* The chat and mic icons in these buttons stay upright on hover (the arrow
+   on other buttons turns). */
+#try-agents .pill-btn:hover .pill-btn__dot svg {
+  transform: none;
+}
+
+/* ── In control (src/components/home/InControl.tsx) ─────────────────────── */
+.ic {
+  position: relative;
+  width: 100%;
+  max-width: 19rem;
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+.ic p {
+  margin: 0;
+}
+/* The autonomy dial: Off, Suggest, Ask first, Auto in turn. At rest it
+   shows "Ask first". */
+.ic-dial {
+  display: grid;
+  gap: 0.9rem;
+}
+.ic-track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 0.25rem;
+  border: 1px solid rgba(27, 26, 23, 0.12);
+  border-radius: 999px;
+  background: #FFFFFF;
+}
+.ic-thumb {
+  position: absolute;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  left: 0.25rem;
+  width: calc((100% - 0.5rem) / 4);
+  border-radius: 999px;
+  background: #FF4925;
+  transform: translateX(200%);
+  animation: ic-slide 8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+@keyframes ic-slide {
+  0%, 18% { transform: translateX(0); }
+  25%, 43% { transform: translateX(100%); }
+  50%, 68% { transform: translateX(200%); }
+  75%, 93% { transform: translateX(300%); }
+  100% { transform: translateX(0); }
+}
+.ic-level {
+  position: relative;
+  z-index: 1;
+  padding: 0.45rem 0;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #1B1A17;
+}
+.ic-says {
+  font-size: 0.8125rem;
+  color: #55524B;
+}
+.ic-says strong {
+  font-weight: 600;
+  color: #1B1A17;
+}
+.ic-stack {
+  display: grid;
+}
+.ic-stack > span {
+  grid-area: 1 / 1;
+  opacity: 0;
+  animation: ic-quarter 8s linear infinite;
+  animation-delay: calc(var(--i) * 2s - 8s);
+}
+.ic-stack > span:nth-child(3) {
+  opacity: 1;
+}
+@keyframes ic-quarter {
+  0%, 24.9% { opacity: 1; }
+  25%, 100% { opacity: 0; }
+}
+/* An approval: tapped, then marked approved. At rest it shows approved. */
+.ic-approve {
+  display: grid;
+  gap: 0.5rem;
+}
+.ic-approve__label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(251, 250, 247, 0.55);
+}
+.ic-approve__card {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.75rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #FBFAF7;
+}
+.ic-approve__title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.ic-approve__meta {
+  color: rgba(251, 250, 247, 0.55);
+}
+.ic-approve__actions,
+.ic-approve__done {
+  grid-row: 3;
+  grid-column: 1;
+  margin-top: 0.35rem;
+}
+.ic-approve__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  opacity: 0;
+  animation: ic-actions 6s linear infinite;
+}
+@keyframes ic-actions {
+  0%, 54% { opacity: 1; }
+  57%, 97% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.ic-btn {
+  position: relative;
+  overflow: hidden;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+.ic-btn--ghost {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(251, 250, 247, 0.8);
+}
+.ic-btn--go {
+  background: #FF4925;
+  color: #1B1A17;
+}
+.ic-tap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 1.6rem;
+  width: 1.6rem;
+  margin: -0.8rem 0 0 -0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+  opacity: 0;
+  transform: scale(0);
+  animation: ic-tap 6s ease-out infinite;
+}
+@keyframes ic-tap {
+  0%, 40% { opacity: 0; transform: scale(0); }
+  42% { opacity: 0.9; transform: scale(0.3); }
+  52%, 100% { opacity: 0; transform: scale(1.7); }
+}
+.ic-approve__done {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  font-weight: 600;
+  color: #FF4925;
+  animation: ic-done 6s cubic-bezier(0.2, 0, 0, 1) infinite;
+}
+@keyframes ic-done {
+  0%, 55% { opacity: 0; transform: translateY(4px); }
+  60%, 94% { opacity: 1; transform: none; }
+  98%, 100% { opacity: 0; transform: none; }
+}
+/* The log: entries arrive one by one; the held refund is outlined orange. */
+.ic-log {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ic-log__row {
+  display: grid;
+  grid-template-columns: 2.6rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid rgba(27, 26, 23, 0.08);
+  border-radius: 8px;
+  background: #FFFFFF;
+  animation: ic-row 7s cubic-bezier(0.2, 0, 0, 1) infinite backwards;
+  animation-delay: calc(var(--i) * 0.8s);
+}
+.ic-log__row:last-child {
+  border-color: rgba(255, 73, 37, 0.45);
+}
+.ic-log__time {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: #807C73;
+}
+.ic-log__what {
+  color: #1B1A17;
+}
+@keyframes ic-row {
+  0%, 3% { opacity: 0; transform: translateX(-6px); }
+  10%, 86% { opacity: 1; transform: none; }
+  94%, 100% { opacity: 0; transform: none; }
+}
+
+/* ── Your data icons (src/components/home/YourData.tsx) ────────────────────
+   One small movement each, 6s loops started 1.5s apart (--i on the svg). */
+.yd {
+  overflow: visible;
+}
+.yd-key {
+  transform-box: fill-box;
+  transform-origin: 72% 28%;
+  animation: yd-key 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: calc(var(--i) * 1.5s);
+}
+@keyframes yd-key {
+  0%, 10% { transform: rotate(0deg); }
+  18% { transform: rotate(-24deg); }
+  28%, 100% { transform: rotate(0deg); }
+}
+.yd-code-l,
+.yd-code-r,
+.yd-code-s {
+  animation: yd-code-l 6s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 1.5s);
+}
+.yd-code-r {
+  animation-name: yd-code-r;
+}
+.yd-code-s {
+  animation-name: yd-blink;
+}
+@keyframes yd-code-l {
+  0%, 8% { transform: translateX(0); }
+  16%, 26% { transform: translateX(-2px); }
+  34%, 100% { transform: translateX(0); }
+}
+@keyframes yd-code-r {
+  0%, 8% { transform: translateX(0); }
+  16%, 26% { transform: translateX(2px); }
+  34%, 100% { transform: translateX(0); }
+}
+@keyframes yd-blink {
+  0%, 10% { opacity: 1; }
+  18%, 24% { opacity: 0.25; }
+  32%, 100% { opacity: 1; }
+}
+.yd-refresh {
+  transform-box: view-box;
+  transform-origin: 12px 12px;
+  animation: yd-spin 6s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+  animation-delay: calc(var(--i) * 1.5s);
+}
+/* The icon looks the same turned half way round, so the loop is seamless. */
+@keyframes yd-spin {
+  0%, 10% { transform: rotate(0deg); }
+  30%, 100% { transform: rotate(180deg); }
+}
+.yd-check {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: yd-draw 6s ease-out infinite;
+  animation-delay: calc(var(--i) * 1.5s);
+}
+@keyframes yd-draw {
+  0%, 8% { stroke-dashoffset: 1; }
+  22%, 100% { stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ta *,
+  .ic *,
+  .yd,
+  .yd * {
+    animation: none !important;
+  }
+}

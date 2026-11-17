@@ -40,16 +40,16 @@ export default function ReviewsList({ reviews }: ReviewsListProps) {
                 animate={{ opacity: 1, y: 0 }}
                 className="text-center mb-16"
             >
-                <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                    Success <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF4925] to-orange-400">Stories</span>
+                <h1 className="text-4xl md:text-5xl font-medium mb-4 tracking-[-0.035em]">
+                    Success <span className="text-ember-ink">Stories</span>
                 </h1>
-                <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+                <p className="text-ink-mute max-w-2xl mx-auto text-lg">
                     See what our partners have to say about working with ARC AI to transform their digital presence and automate their operations.
                 </p>
             </motion.div>
 
             {reviews.length === 0 ? (
-                <div className="text-center py-20 text-gray-500">
+                <div className="text-center py-20 text-ink-mute">
                     <Quote className="w-12 h-12 mx-auto mb-4 opacity-50" />
                     <p className="text-xl">More reviews coming soon.</p>
                 </div>
@@ -89,11 +89,11 @@ function ReviewCard({ review, itemVariants }: ReviewCardProps) {
     return (
         <motion.div
             variants={itemVariants}
-            className="bg-zinc-900/40 backdrop-blur-sm border border-white/10 rounded-2xl p-8 flex flex-col relative group hover:border-[#FF4925]/30 transition-all duration-300 min-h-[340px] h-full"
+            className="cut-card [--cut:18px] bg-white/70 [--cut-line:rgba(27,26,23,0.1)] p-8 flex flex-col relative group hover:[--cut-line:rgba(255,73,37,0.3)] transition-all duration-300 min-h-[340px] h-full"
         >
-            <Quote className="absolute top-6 right-6 w-8 h-8 text-[#FF4925]/20 group-hover:text-[#FF4925]/40 transition-colors" />
+            <Quote className="absolute top-6 right-6 w-8 h-8 text-ember-deep group-hover:text-ember-deep transition-colors" />
             
-            <div className="flex items-center gap-1 mb-6 text-yellow-500">
+            <div className="flex items-center gap-1 mb-6 text-ember-deep">
                 {[...Array(review.rating)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-current" />
                 ))}
@@ -101,13 +101,13 @@ function ReviewCard({ review, itemVariants }: ReviewCardProps) {
             
             <div className="flex-1 flex flex-col justify-between">
                 <div className="mb-6 flex-1">
-                    <p className="text-gray-300 leading-relaxed whitespace-pre-wrap">
+                    <p className="text-ink-soft leading-relaxed whitespace-pre-wrap">
                         "{displayedText}"
                     </p>
                     {shouldTruncate && (
                         <button
                             onClick={() => setIsExpanded(!isExpanded)}
-                            className="text-xs font-semibold text-[#FF4925] hover:text-[#FF4925]/80 mt-3 transition-colors uppercase tracking-wider block"
+                            className="text-xs font-semibold text-ember-deep hover:text-ember-deep mt-3 transition-colors uppercase tracking-wider block"
                             aria-label={isExpanded ? "Show less of the review" : "Read the full review"}
                         >
                             {isExpanded ? 'Show Less' : 'Read More'}
@@ -115,10 +115,10 @@ function ReviewCard({ review, itemVariants }: ReviewCardProps) {
                     )}
                 </div>
                 
-                <div className="mt-auto pt-6 border-t border-white/5">
-                    <h3 className="font-semibold text-white">{review.client_name}</h3>
+                <div className="mt-auto pt-6 border-t border-ink/10">
+                    <h3 className="font-semibold text-ink">{review.client_name}</h3>
                     {review.client_company && (
-                        <p className="text-sm text-gray-500 mt-1">{review.client_company}</p>
+                        <p className="text-sm text-ink-mute mt-1">{review.client_company}</p>
                     )}
                 </div>
             </div>

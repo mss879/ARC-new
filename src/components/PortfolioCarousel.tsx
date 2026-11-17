@@ -1,6 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import { latestProjects, type PortfolioItem } from "@/content/portfolio";
+import { PillLink } from "./home/ui";
+import PauseOffscreen from "./home/PauseOffscreen";
 
 /**
  * "Our recent work" on the home page.
@@ -24,24 +25,34 @@ const CarouselRow = ({ projects, reverse = false }: { projects: PortfolioItem[];
             {[false, true].map((isCopy) => (
                 <div
                     key={isCopy ? "copy" : "original"}
-                    className={`flex min-w-full shrink-0 gap-6 py-4 pr-6 ${animation}`}
+                    className={`flex min-w-full shrink-0 gap-4 py-3 pr-4 md:gap-5 md:pr-5 ${animation}`}
                     aria-hidden={isCopy ? "true" : undefined}
                 >
-                    {projects.map((project) => (
-                        <div
-                            key={project.id}
-                            className="relative aspect-[16/10] w-[260px] md:w-[450px] shrink-0 overflow-hidden rounded-xl border border-white/10 bg-zinc-900/50 hover:bg-zinc-800/50 transition-colors"
-                        >
-                            <Image
-                                src={project.image}
-                                alt={isCopy ? "" : `${project.title}, built by ARC AI`}
-                                fill
-                                className="object-contain transition-transform duration-700 hover:scale-105"
-                                sizes="(max-width: 768px) 260px, 450px"
-                                quality={85}
-                            />
-                        </div>
-                    ))}
+                    {projects.map((project) => {
+                        // Every tile in a row is the same height; its width
+                        // follows the screenshot's own shape (imageSize in
+                        // the portfolio list), so the image fills the
+                        // cut-corner frame with nothing cropped, as on the
+                        // portfolio page.
+                        const size = "imageSize" in project ? project.imageSize : undefined;
+                        const ratio = size ? size.width / size.height : 16 / 10;
+                        return (
+                            <div
+                                key={project.id}
+                                className="cut-card [--cut:22px] relative h-[163px] shrink-0 overflow-hidden [--cut-line:rgba(255,255,255,0.7)] bg-paper-white md:h-[281px]"
+                                style={{ aspectRatio: String(ratio) }}
+                            >
+                                <Image
+                                    src={project.image}
+                                    alt={isCopy ? "" : `${project.title}, built by ARC AI`}
+                                    fill
+                                    className="object-cover transition-transform duration-700 hover:scale-105"
+                                    sizes={`(max-width: 768px) ${Math.round(163 * ratio)}px, ${Math.round(281 * ratio)}px`}
+                                    quality={85}
+                                />
+                            </div>
+                        );
+                    })}
                 </div>
             ))}
         </div>
@@ -54,39 +65,36 @@ export default function PortfolioCarousel() {
     const secondRow = projects.slice(PER_ROW);
 
     return (
-        <section className="relative w-full overflow-hidden bg-black py-24" aria-labelledby="recent-work-heading">
+        <section className="render-when-near relative w-full overflow-hidden py-16 lg:py-24" aria-labelledby="recent-work-heading">
             {/* Section Header */}
-            <div className="container mx-auto px-4 mb-12 text-center">
-                <h2
-                    id="recent-work-heading"
-                    className="text-4xl md:text-5xl lg:text-6xl font-bold text-white uppercase tracking-tight"
-                    style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
-                >
-                    Our Recent <span className="text-[rgb(255,73,37)]">Work</span>
-                </h2>
-                <p className="mt-4 text-zinc-400 max-w-2xl mx-auto text-lg">
-                    The latest systems, stores and websites we have shipped.
-                </p>
-                <Link
-                    href="/portfolio"
-                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[rgb(255,73,37)] hover:text-white transition-colors"
-                >
+            <div className="mx-auto mb-8 flex max-w-[1400px] flex-col gap-6 px-4 md:px-8 lg:mb-12 lg:flex-row lg:items-end lg:justify-between lg:px-20">
+                <div>
+                    <h2
+                        id="recent-work-heading"
+                        className="text-5xl font-medium leading-[0.98] tracking-[-0.04em] text-ink sm:text-6xl md:text-7xl lg:text-[5.5rem]"
+                    >
+                        Our recent <span className="text-ember-ink">work</span>
+                    </h2>
+                    <p className="mt-5 max-w-2xl text-lg text-ink-soft">
+                        The latest systems, stores and websites we have shipped.
+                    </p>
+                </div>
+                <PillLink href="/portfolio" variant="ghost" className="self-start lg:self-auto">
                     See all our work
-                    <span aria-hidden="true">↗</span>
-                </Link>
+                </PillLink>
             </div>
 
             {/* Carousel Container with faded edges */}
-            <div className="relative flex flex-col gap-4">
+            <PauseOffscreen className="relative flex flex-col gap-1">
                 {/* Left Fade */}
-                <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-[10%] bg-gradient-to-r from-black to-transparent max-md:hidden" />
+                <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-[10%] bg-gradient-to-r from-paper to-transparent max-md:hidden" />
 
                 {/* Right Fade */}
-                <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-[10%] bg-gradient-to-l from-black to-transparent max-md:hidden" />
+                <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-[10%] bg-gradient-to-l from-paper to-transparent max-md:hidden" />
 
                 <CarouselRow projects={firstRow} />
                 {secondRow.length > 0 && <CarouselRow projects={secondRow} reverse />}
-            </div>
+            </PauseOffscreen>
         </section>
     );
 }

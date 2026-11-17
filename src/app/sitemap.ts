@@ -62,6 +62,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ['privacy-policy', 'yearly', 0.3],
         ['terms-of-service', 'yearly', 0.3],
         ['refund-policy', 'yearly', 0.3],
+        ['cookie-policy', 'yearly', 0.3],
         ['case-studies', 'monthly', 0.8],
         ['ai-automation-sri-lanka', 'monthly', 0.8],
         ['ai-companies-sri-lanka', 'weekly', 1.0],

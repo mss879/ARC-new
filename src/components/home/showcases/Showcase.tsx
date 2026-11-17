@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
-import Link from "next/link";
+import { Check } from "lucide-react";
+import { PillLink } from "../ui";
+import PauseOffscreen from "../PauseOffscreen";
 
 type ShowcaseProps = {
   /** Anchor id, so the section can be linked to. */
@@ -21,9 +23,10 @@ type ShowcaseProps = {
  * A server component. The words are plain HTML that needs no script; only the
  * demo passed in as children is interactive.
  *
- * Side by side from the `lg` breakpoint, with the demo given the wider column
- * (it is the thing to look at). Below that the demo sits under the words and
- * is capped in width so it does not balloon on a tablet.
+ * Each system is one frosted card. Side by side from the `lg` breakpoint, with
+ * the demo given the wider column (it is the thing to look at). Below that the
+ * demo sits under the words and is capped in width so it does not balloon on
+ * a tablet.
  */
 export default function Showcase({
   id,
@@ -39,35 +42,44 @@ export default function Showcase({
   return (
     <article
       id={id}
-      className={`grid scroll-mt-28 items-center gap-10 border-t border-white/10 py-16 lg:gap-14 lg:py-24 xl:gap-20 ${
+      className={`cream-card grid scroll-mt-28 items-center gap-8 p-4 md:p-8 lg:gap-12 lg:p-10 xl:gap-16 xl:p-12 ${
         flip ? "lg:grid-cols-[1.15fr_0.85fr]" : "lg:grid-cols-[0.85fr_1.15fr]"
       }`}
     >
-      <div className={`min-w-0 ${flip ? "lg:order-2" : ""}`}>
-        <p className="text-xs font-medium uppercase tracking-wider text-[rgb(119,119,119)]">
-          ({index}) {label}
+      <div className={`min-w-0 px-1 pt-2 md:px-0 md:pt-0 ${flip ? "lg:order-2" : ""}`}>
+        <p className="cream-pill">
+          <span className="tabular-nums text-ink">{index}</span>
+          {label}
         </p>
-        <h3 className="mt-4 text-3xl font-black uppercase leading-[0.95] tracking-tight text-white md:text-4xl xl:text-5xl">
+        <h3 className="mt-5 text-3xl font-medium leading-[1.05] tracking-[-0.035em] text-ink md:text-4xl xl:text-5xl">
           {title}
         </h3>
-        <p className="mt-5 max-w-xl text-base leading-relaxed text-zinc-400 xl:text-lg">{body}</p>
+        <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-soft xl:text-lg">{body}</p>
         <ul className="mt-6 space-y-3">
           {points.map((point) => (
-            <li key={point} className="flex gap-3 text-sm text-zinc-300 xl:text-base">
-              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[rgb(255,73,37)]" aria-hidden="true" />
+            <li key={point} className="flex gap-3 text-sm text-ink xl:text-base">
+              <span
+                className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-ember text-ink"
+                aria-hidden="true"
+              >
+                <Check className="h-3 w-3" strokeWidth={3} />
+              </span>
               {point}
             </li>
           ))}
         </ul>
-        <Link
-          href={link.href}
-          className="mt-8 inline-flex items-center gap-2 rounded-full border-2 border-[rgb(255,73,37)] px-6 py-3 text-sm font-bold uppercase tracking-wider text-[rgb(255,73,37)] transition-colors duration-300 hover:bg-[rgb(255,73,37)] hover:text-black"
-        >
+        <PillLink href={link.href} className="mt-8">
           {link.label}
-          <span aria-hidden="true">↗</span>
-        </Link>
+        </PillLink>
       </div>
-      <div className={`min-w-0 w-full max-w-[680px] lg:max-w-none ${flip ? "lg:order-1" : ""}`}>{children}</div>
+
+      {/* The demo sits on a slightly darker stage, so the white screen lifts
+          off the card. */}
+      <div className={`relative min-w-0 w-full ${flip ? "lg:order-1" : ""}`}>
+        <div className="cut-card [--cut:22px] relative overflow-hidden bg-paper-deep/60 p-3 md:p-6 lg:p-7">
+          <PauseOffscreen className="relative mx-auto w-full max-w-[680px] lg:max-w-none">{children}</PauseOffscreen>
+        </div>
+      </div>
     </article>
   );
 }

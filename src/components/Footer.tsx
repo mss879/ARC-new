@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import "./Footer.css";
 import { trackFormSubmitted } from "@/lib/analytics/tracker";
+import { openConsentSettings } from "@/lib/consent";
 import { company, hours, office, phones, socials, whatsapp } from "@/content/site-facts";
 import { companyLinks, guideLinks, serviceLinks } from "@/content/navigation";
 
@@ -14,7 +15,17 @@ const linkGroups = [
   { title: "Guides", links: guideLinks },
 ];
 
-const Footer = () => {
+type FooterProps = {
+  /**
+   * "cream" (the default) is for a page whose last section is light: the
+   * footer starts with rounded top corners. "dark" is for a page that ends
+   * with the dark "Let's work together" block: the footer joins it, with the
+   * black fade laid over the block's lower edge.
+   */
+  tone?: "dark" | "cream";
+};
+
+const Footer = ({ tone = "cream" }: FooterProps) => {
   const footerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: footerRef,
@@ -74,9 +85,11 @@ const Footer = () => {
   ];
 
   return (
-    <footer ref={footerRef} className="relative bg-black text-white overflow-hidden" aria-label="Site footer">
+    <footer ref={footerRef} className={`relative bg-black text-white overflow-hidden ${tone === "cream" ? "rounded-t-[32px] md:rounded-t-[48px]" : ""}`} aria-label="Site footer">
       {/* Horizontal Fade at Top - positioned above footer */}
-      <div className="absolute -top-32 left-0 w-full h-32 bg-gradient-to-b from-transparent to-black z-20 pointer-events-none" aria-hidden="true"></div>
+      {tone !== "cream" && (
+        <div className="absolute -top-32 left-0 w-full h-32 bg-gradient-to-b from-transparent to-black z-20 pointer-events-none" aria-hidden="true"></div>
+      )}
       
       {/* Main Section */}
       <div className="relative bg-black">
@@ -342,19 +355,19 @@ const Footer = () => {
                   <motion.button
                     type="submit"
                     disabled={isSubscribing}
-                    className="relative w-full bg-[#333333] rounded-full p-1 overflow-hidden group magnetic-button"
+                    className="cut-btn [--cut:12px] relative w-full bg-[#333333] p-1 overflow-hidden group magnetic-button"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     <motion.div
-                      className="absolute inset-0 bg-[#FF4925] rounded-full"
+                      className="absolute inset-0 bg-[#FF4925]"
                       initial={{ scale: 0 }}
                       whileHover={{ scale: 1 }}
                       transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     />
-                    <div className="relative bg-[#0A0A0A] rounded-full py-4 px-6 overflow-hidden">
+                    <div className="cut-btn [--cut:10px] relative bg-[#0A0A0A] py-4 px-6 overflow-hidden">
                       <motion.div
-                        className="absolute inset-0 bg-[#333333] rounded-full origin-center"
+                        className="absolute inset-0 bg-[#333333] origin-center"
                         initial={{ scale: 0.8 }}
                         whileHover={{ scale: 1 }}
                         animate={{ scale: isSubscribing ? 1 : 0.8 }}
@@ -403,7 +416,7 @@ const Footer = () => {
             {/* Left */}
             <div className="space-y-4">
               <p className="text-[#777777] text-sm">©{new Date().getFullYear()} ARC AI. All Rights Reserved</p>
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                 <a
                   href="/privacy-policy"
                   className="text-[#CACACA] text-sm hover:text-white transition-colors"
@@ -424,6 +437,22 @@ const Footer = () => {
                 >
                   Refund Policy
                 </a>
+                <div className="w-px h-4 bg-[#333333]" />
+                <a
+                  href="/cookie-policy"
+                  className="text-[#CACACA] text-sm hover:text-white transition-colors"
+                >
+                  Cookie Policy
+                </a>
+                <div className="w-px h-4 bg-[#333333]" />
+                {/* Reopens the cookie banner's settings (CookieConsent). */}
+                <button
+                  type="button"
+                  onClick={openConsentSettings}
+                  className="text-[#CACACA] text-sm hover:text-white transition-colors"
+                >
+                  Cookie settings
+                </button>
               </div>
             </div>
           </motion.div>
@@ -449,7 +478,7 @@ const Footer = () => {
               transition={{ duration: 0.8 }}
             >
               <Image
-                src="/logo.png"
+                src="/arc-ai-logo-light.png"
                 alt="Arc AI Logo"
                 width={160}
                 height={160}
@@ -458,17 +487,18 @@ const Footer = () => {
               />
             </motion.div>
 
-            {/* Tagline */}
+            {/* Tagline. The right padding keeps it clear of the floating
+                chat and WhatsApp buttons, which sit over the bottom-right
+                corner of the page. */}
             <motion.div
-              className="text-center md:text-right"
+              className="text-center md:text-right md:pr-20"
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <p className="text-white text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
-                Beyond Visuals.<br />
-                Built with Vision.
+                Built to run.
               </p>
             </motion.div>
           </div>

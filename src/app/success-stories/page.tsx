@@ -98,7 +98,7 @@ export default async function ReviewsPage() {
     const reviews = await getApprovedReviews();
 
     return (
-        <div className="min-h-screen bg-black text-white flex flex-col">
+        <div className="home-cream min-h-screen bg-transparent text-ink flex flex-col">
             <SchemaOrg 
                 type="portfolio" // We map it as portfolio page for SEO breadcrumbs
                 pageTitle="Success Stories"
@@ -109,8 +109,8 @@ export default async function ReviewsPage() {
 
             <main className="flex-1 pt-48 md:pt-32 pb-24 px-6 lg:px-12 relative overflow-hidden">
                 {/* Background effects */}
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#FF4925]/5 rounded-full blur-[120px] pointer-events-none" />
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
+                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-ember/5 rounded-full blur-[120px] pointer-events-none hidden" />
+                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-ember/5 rounded-full blur-[120px] pointer-events-none hidden" />
 
                 <div className="max-w-7xl mx-auto relative z-10">
                     <ReviewsList reviews={reviews} />

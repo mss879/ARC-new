@@ -33,11 +33,11 @@ const fadeInUp: Variants = {
 
 export default function SocialMediaContent() {
     return (
-        <div className="min-h-screen bg-black text-white">
+        <div className="home-cream min-h-screen bg-transparent text-ink">
             <Navbar />
             {/* Hero Section */}
             <section className="relative min-h-[90vh] flex items-center justify-center px-4 md:px-8 pt-32 pb-20" aria-label="Social media overview">
-                <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black" aria-hidden="true" />
+                <div className="absolute inset-0 bg-gradient-to-b from-paper via-paper/95 to-paper" aria-hidden="true" />
                 <div
                     className="absolute inset-0 opacity-20"
                     aria-hidden="true"
@@ -54,7 +54,7 @@ export default function SocialMediaContent() {
                         variants={letterContainer}
                         className="mb-8"
                     >
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight">
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-[-0.035em]">
                             {["SOCIAL MEDIA", "MASTERY"].map((word, i) => (
                                 <span key={i} className="block mb-2">
                                     {word.split("").map((char, j) => (
@@ -75,7 +75,7 @@ export default function SocialMediaContent() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 0.7 }}
-                        className="text-xl md:text-2xl text-neutral-400 max-w-3xl mx-auto mb-12"
+                        className="text-xl md:text-2xl text-ink-soft max-w-3xl mx-auto mb-12"
                     >
                         Branded templates and content systems to help you stay consistent and scroll-worthy.
                         Engage your audience with stunning social media presence.
@@ -89,7 +89,7 @@ export default function SocialMediaContent() {
                     >
                         <Link
                             href="/contact"
-                            className="group relative px-8 py-4 bg-accent text-white font-semibold rounded-lg overflow-hidden transition-all hover:scale-105"
+                            className="cut-btn [--cut:12px] [--cut-focus:#1B1A17] group relative px-8 py-4 bg-ember text-ink font-semibold overflow-hidden transition-all hover:scale-105"
                         >
                             <span className="relative z-10 flex items-center gap-2">
                                 Boost Your Presence
@@ -98,7 +98,7 @@ export default function SocialMediaContent() {
                         </Link>
                         <Link
                             href="/portfolio"
-                            className="px-8 py-4 border border-neutral-700 text-white font-semibold rounded-lg hover:border-neutral-500 transition-colors"
+                            className="cut-btn [--cut:12px] px-8 py-4 [--cut-line:rgba(27,26,23,0.1)] text-ink font-semibold hover:[--cut-line:rgba(27,26,23,0.3)] transition-colors"
                         >
                             See Our Content
                         </Link>
@@ -107,7 +107,7 @@ export default function SocialMediaContent() {
             </section>
 
             {/* Platforms We Cover */}
-            <section className="py-20 px-4 md:px-8 bg-black">
+            <section className="py-20 px-4 md:px-8 bg-transparent">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial="hidden"
@@ -116,12 +116,12 @@ export default function SocialMediaContent() {
                         variants={fadeInUp}
                         className="mb-16 text-center"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                            <span className="bg-gradient-to-b from-white via-zinc-200 to-zinc-600 bg-clip-text text-transparent">
+                        <h2 className="text-4xl md:text-5xl font-medium mb-4 tracking-[-0.035em]">
+                            <span className="text-ink">
                                 Platforms We Master
                             </span>
                         </h2>
-                        <p className="text-neutral-400 text-lg">Expert content creation for all major social platforms</p>
+                        <p className="text-ink-soft text-lg">Expert content creation for all major social platforms</p>
                     </motion.div>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -129,22 +129,22 @@ export default function SocialMediaContent() {
                             {
                                 icon: <Instagram className="w-12 h-12" />,
                                 name: "Instagram",
-                                color: "from-purple-600 to-pink-600"
+                                color: "from-ember to-ember"
                             },
                             {
                                 icon: <Facebook className="w-12 h-12" />,
                                 name: "Facebook",
-                                color: "from-blue-600 to-blue-400"
+                                color: "from-ember to-ember"
                             },
                             {
                                 icon: <Twitter className="w-12 h-12" />,
                                 name: "X (Twitter)",
-                                color: "from-gray-600 to-gray-400"
+                                color: "from-paper-deep to-gray-400"
                             },
                             {
                                 icon: <Linkedin className="w-12 h-12" />,
                                 name: "LinkedIn",
-                                color: "from-blue-700 to-blue-500"
+                                color: "from-ember to-ember"
                             }
                         ].map((platform, index) => (
                             <motion.div
@@ -154,9 +154,9 @@ export default function SocialMediaContent() {
                                 viewport={{ once: true, amount: 0.3 }}
                                 variants={fadeInUp}
                                 transition={{ delay: index * 0.1 }}
-                                className="group p-8 bg-neutral-900/50 border border-neutral-800 rounded-xl hover:border-accent/50 transition-all text-center"
+                                className="cut-card [--cut:14px] relative group p-8 bg-white/70 [--cut-line:rgba(27,26,23,0.1)] hover:[--cut-line:rgba(255,73,37,0.5)] transition-all text-center"
                             >
-                                <div className={`w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${platform.color} flex items-center justify-center text-white group-hover:scale-110 transition-transform`}>
+                                <div className={`w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${platform.color} flex items-center justify-center text-ink group-hover:scale-110 transition-transform`}>
                                     {platform.icon}
                                 </div>
                                 <h3 className="text-xl font-bold">{platform.name}</h3>
@@ -167,7 +167,7 @@ export default function SocialMediaContent() {
             </section>
 
             {/* Services Offered */}
-            <section className="py-20 px-4 md:px-8 bg-neutral-950">
+            <section className="py-20 px-4 md:px-8 bg-transparent">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial="hidden"
@@ -176,12 +176,12 @@ export default function SocialMediaContent() {
                         variants={fadeInUp}
                         className="mb-16"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                            <span className="bg-gradient-to-b from-white via-zinc-200 to-zinc-600 bg-clip-text text-transparent">
+                        <h2 className="text-4xl md:text-5xl font-medium mb-4 tracking-[-0.035em]">
+                            <span className="text-ink">
                                 What We Offer
                             </span>
                         </h2>
-                        <p className="text-neutral-400 text-lg">Comprehensive social media solutions</p>
+                        <p className="text-ink-soft text-lg">Comprehensive social media solutions</p>
                     </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -224,13 +224,13 @@ export default function SocialMediaContent() {
                                 viewport={{ once: true, amount: 0.3 }}
                                 variants={fadeInUp}
                                 transition={{ delay: index * 0.1 }}
-                                className="group p-8 bg-black border border-neutral-800 rounded-xl hover:border-accent/50 transition-all hover:bg-neutral-900"
+                                className="cut-card [--cut:14px] relative group p-8 bg-white/70 [--cut-line:rgba(27,26,23,0.1)] hover:[--cut-line:rgba(255,73,37,0.5)] transition-all hover:bg-white"
                             >
-                                <div className="w-16 h-16 mb-6 rounded-lg bg-accent/10 flex items-center justify-center text-accent group-hover:scale-110 transition-transform">
+                                <div className="w-16 h-16 mb-6 rounded-lg bg-ember/10 flex items-center justify-center text-ember-deep group-hover:scale-110 transition-transform">
                                     {service.icon}
                                 </div>
                                 <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-                                <p className="text-neutral-400">{service.description}</p>
+                                <p className="text-ink-soft">{service.description}</p>
                             </motion.div>
                         ))}
                     </div>
@@ -238,7 +238,7 @@ export default function SocialMediaContent() {
             </section>
 
             {/* Template Kits */}
-            <section className="py-20 px-4 md:px-8 bg-black">
+            <section className="py-20 px-4 md:px-8 bg-transparent">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial="hidden"
@@ -247,12 +247,12 @@ export default function SocialMediaContent() {
                         variants={fadeInUp}
                         className="mb-16 text-center"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                            <span className="bg-gradient-to-b from-white via-zinc-200 to-zinc-600 bg-clip-text text-transparent">
+                        <h2 className="text-4xl md:text-5xl font-medium mb-4 tracking-[-0.035em]">
+                            <span className="text-ink">
                                 Template Kits
                             </span>
                         </h2>
-                        <p className="text-neutral-400 text-lg">Ready-to-use templates for consistent branding</p>
+                        <p className="text-ink-soft text-lg">Ready-to-use templates for consistent branding</p>
                     </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -313,16 +313,16 @@ export default function SocialMediaContent() {
                                 viewport={{ once: true, amount: 0.3 }}
                                 variants={fadeInUp}
                                 transition={{ delay: index * 0.1 }}
-                                className="p-8 bg-neutral-900/50 border border-neutral-800 rounded-xl"
+                                className="cut-card [--cut:14px] relative p-8 bg-white/70 [--cut-line:rgba(27,26,23,0.1)] "
                             >
                                 <div className="flex items-center justify-between mb-6">
                                     <h3 className="text-2xl font-bold">{kit.title}</h3>
-                                    <span className="text-4xl font-bold text-accent">{kit.count}</span>
+                                    <span className="text-4xl font-bold text-ember-ink">{kit.count}</span>
                                 </div>
                                 <ul className="grid grid-cols-2 gap-3">
                                     {kit.items.map((item, i) => (
-                                        <li key={i} className="flex items-start gap-2 text-neutral-400">
-                                            <span className="text-accent mt-1">✓</span>
+                                        <li key={i} className="flex items-start gap-2 text-ink-soft">
+                                            <span className="text-ember-deep mt-1">✓</span>
                                             <span>{item}</span>
                                         </li>
                                     ))}
@@ -334,7 +334,7 @@ export default function SocialMediaContent() {
             </section>
 
             {/* Content Strategy Process */}
-            <section className="py-20 px-4 md:px-8 bg-neutral-950">
+            <section className="py-20 px-4 md:px-8 bg-transparent">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial="hidden"
@@ -343,17 +343,17 @@ export default function SocialMediaContent() {
                         variants={fadeInUp}
                         className="mb-16 text-center"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                            <span className="bg-gradient-to-b from-white via-zinc-200 to-zinc-600 bg-clip-text text-transparent">
+                        <h2 className="text-4xl md:text-5xl font-medium mb-4 tracking-[-0.035em]">
+                            <span className="text-ink">
                                 Our Approach
                             </span>
                         </h2>
-                        <p className="text-neutral-400 text-lg">Strategic content creation that delivers results</p>
+                        <p className="text-ink-soft text-lg">Strategic content creation that delivers results</p>
                     </motion.div>
 
                     <div className="relative">
                         {/* Connection Line */}
-                        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent via-accent/50 to-transparent hidden md:block" />
+                        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-ember via-ember/50 to-transparent hidden md:block" />
 
                         {[
                             {
@@ -397,16 +397,16 @@ export default function SocialMediaContent() {
                                 className="relative mb-12 last:mb-0 md:pl-24"
                             >
                                 {/* Step Number Circle */}
-                                <div className="absolute left-0 w-16 h-16 bg-accent rounded-full items-center justify-center font-bold text-xl hidden md:flex">
+                                <div className="absolute left-0 w-16 h-16 bg-ember rounded-full items-center justify-center font-bold text-xl hidden md:flex">
                                     {item.step}
                                 </div>
 
-                                <div className="p-8 bg-black border border-neutral-800 rounded-xl hover:border-accent/50 transition-all">
+                                <div className="cut-card [--cut:14px] relative p-8 bg-white/70 [--cut-line:rgba(27,26,23,0.1)] hover:[--cut-line:rgba(255,73,37,0.5)] transition-all">
                                     <div className="flex items-center gap-4 mb-3 md:hidden">
-                                        <span className="text-3xl font-bold text-accent">{item.step}</span>
+                                        <span className="text-3xl font-bold text-ember-ink">{item.step}</span>
                                     </div>
                                     <h3 className="text-2xl font-bold mb-3">{item.title}</h3>
-                                    <p className="text-neutral-400 text-lg">{item.description}</p>
+                                    <p className="text-ink-soft text-lg">{item.description}</p>
                                 </div>
                             </motion.div>
                         ))}
@@ -415,7 +415,7 @@ export default function SocialMediaContent() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-black to-neutral-950" aria-label="Get started with social media">
+            <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-paper to-paper" aria-label="Get started with social media">
                 <div className="max-w-4xl mx-auto text-center">
                     <motion.div
                         initial="hidden"
@@ -423,15 +423,15 @@ export default function SocialMediaContent() {
                         viewport={{ once: true, amount: 0.3 }}
                         variants={fadeInUp}
                     >
-                        <h2 className="text-4xl md:text-6xl font-bold mb-6">
+                        <h2 className="text-4xl md:text-6xl font-medium mb-6 tracking-[-0.035em]">
                             Ready to Dominate Social Media?
                         </h2>
-                        <p className="text-xl text-neutral-400 mb-8">
+                        <p className="text-xl text-ink-soft mb-8">
                             Transform your social presence with stunning, consistent content. Let's grow your audience together.
                         </p>
                         <Link
                             href="/contact"
-                            className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white font-semibold rounded-lg hover:scale-105 transition-transform"
+                            className="cut-btn [--cut:12px] [--cut-focus:#1B1A17] inline-flex items-center gap-2 px-8 py-4 bg-ember text-ink font-semibold hover:scale-105 transition-transform"
                         >
                             Elevate Your Brand
                             <ArrowUpRight className="w-5 h-5" />

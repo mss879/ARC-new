@@ -17,7 +17,7 @@ const fadeInUp: Variants = {
 
 export default function BlogPost() {
     return (
-        <div className="min-h-screen bg-black text-white">
+        <div className="home-cream min-h-screen bg-transparent text-ink">
             <Navbar />
 
             {/* Hero Section */}
@@ -29,13 +29,13 @@ export default function BlogPost() {
                         height={900}
                         className="w-full h-full object-cover"
                         loading="lazy" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/40" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-paper via-paper/80 to-paper/40" />
                 </div>
 
                 <div className="relative z-10 max-w-4xl mx-auto w-full">
                     <Link
                         href="/blog"
-                        className="inline-flex items-center gap-2 text-neutral-300 hover:text-accent transition-colors mb-6"
+                        className="inline-flex items-center gap-2 text-ink-soft hover:text-ember-deep transition-colors mb-6"
                     >
                         <ArrowLeft className="w-4 h-4" />
                         Back to Blog
@@ -46,13 +46,13 @@ export default function BlogPost() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <span className="inline-block px-4 py-1.5 bg-accent/20 backdrop-blur-sm text-accent text-sm font-semibold rounded-full border border-accent/30 mb-4">
+                        <span className="inline-block px-4 py-1.5 bg-ember/20 text-ember-deep text-sm font-semibold rounded-full border border-ember/30 mb-4">
                             Digital Marketing
                         </span>
-                        <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                        <h1 className="text-4xl md:text-6xl font-medium mb-6 tracking-[-0.035em]">
                             SEO Optimization Best Practices to Rank #1 on Google
                         </h1>
-                        <div className="flex items-center gap-6 text-neutral-400">
+                        <div className="flex items-center gap-6 text-ink-soft">
                             <div className="flex items-center gap-2">
                                 <Calendar className="w-4 h-4" />
                                 <span>Sep 20, 2024</span>
@@ -76,12 +76,12 @@ export default function BlogPost() {
                         variants={fadeInUp}
                         className="prose prose-invert prose-lg max-w-none"
                     >
-                        <div className="space-y-6 text-neutral-300 leading-relaxed">
-                            <p className="text-xl text-neutral-200">
+                        <div className="space-y-6 text-ink-soft leading-relaxed">
+                            <p className="text-xl text-ink">
                                 Want to dominate Google search results and drive massive organic traffic? This comprehensive SEO guide reveals proven strategies, techniques, and best practices that will skyrocket your search engine rankings in 2024 and beyond.
                             </p>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Understanding Modern SEO in 2024</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Understanding Modern SEO in 2024</h2>
                             <p>
                                 Search Engine Optimization (SEO) has evolved dramatically. Google's algorithm now uses over 200 ranking factors, with artificial intelligence (RankBrain, BERT, MUM) playing a central role. Success requires a holistic approach combining technical excellence, quality content, authoritative backlinks, and exceptional user experience.
                             </p>
@@ -89,37 +89,37 @@ export default function BlogPost() {
                                 The fundamentals remain: Google wants to show the best, most relevant results for every search query. Your job is to prove your content deserves that top spot.
                             </p>
 
-                            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 my-8">
-                                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                                    <Target className="w-6 h-6 text-accent" />
+                            <div className="cut-card [--cut:14px] relative bg-white/70 [--cut-line:rgba(27,26,23,0.1)] p-6 my-8">
+                                <h3 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
+                                    <Target className="w-6 h-6 text-ember-ink" />
                                     Core SEO Pillars for 2024
                                 </h3>
                                 <ul className="space-y-2">
                                     <li className="flex items-center gap-2">
-                                        <span className="text-accent">→</span>
+                                        <span className="text-ember-deep">→</span>
                                         <span><strong>Technical SEO:</strong> Site speed, mobile optimization, structured data</span>
                                     </li>
                                     <li className="flex items-center gap-2">
-                                        <span className="text-accent">→</span>
+                                        <span className="text-ember-deep">→</span>
                                         <span><strong>On-Page SEO:</strong> Content quality, keyword optimization, meta tags</span>
                                     </li>
                                     <li className="flex items-center gap-2">
-                                        <span className="text-accent">→</span>
+                                        <span className="text-ember-deep">→</span>
                                         <span><strong>Off-Page SEO:</strong> Backlinks, domain authority, social signals</span>
                                     </li>
                                     <li className="flex items-center gap-2">
-                                        <span className="text-accent">→</span>
+                                        <span className="text-ember-deep">→</span>
                                         <span><strong>User Experience:</strong> Engagement metrics, dwell time, bounce rate</span>
                                     </li>
                                 </ul>
                             </div>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">1. Master Keyword Research</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">1. Master Keyword Research</h2>
                             <p>
                                 Effective SEO starts with understanding what your audience searches for. Keyword research reveals the exact phrases people use to find solutions you provide.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Strategic Keyword Selection</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Strategic Keyword Selection</h3>
                             <p>
                                 <strong>Target three keyword types:</strong>
                             </p>
@@ -133,7 +133,7 @@ export default function BlogPost() {
                                 <strong>Pro tip:</strong> Long-tail keywords convert 2.5x better than head terms. They indicate specific intent and face less competition, making them perfect for quick wins.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Top Keyword Research Tools</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Top Keyword Research Tools</h3>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li><strong>Ahrefs:</strong> Comprehensive keyword data, difficulty scores, SERP analysis</li>
                                 <li><strong>SEMrush:</strong> Competitive research, keyword gap analysis, ranking tracking</li>
@@ -142,7 +142,7 @@ export default function BlogPost() {
                                 <li><strong>Ubersuggest:</strong> Budget-friendly alternative with solid keyword suggestions</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Search Intent Optimization</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Search Intent Optimization</h3>
                             <p>
                                 Understanding search intent is crucial. Google categorizes intent into four types:
                             </p>
@@ -153,12 +153,12 @@ export default function BlogPost() {
                                 <li><strong>Transactional:</strong> "Buy SEO services" → Optimize product/service pages</li>
                             </ul>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">2. Create High-Quality, Comprehensive Content</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">2. Create High-Quality, Comprehensive Content</h2>
                             <p>
                                 Content is king, but not all content ranks. Google rewards in-depth, authoritative content that completely answers user queries.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">The Content Depth Formula</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">The Content Depth Formula</h3>
                             <p>
                                 Studies show top-ranking content averages 1,890 words. However, length alone doesn't guarantee rankings—comprehensiveness does.
                             </p>
@@ -173,58 +173,58 @@ export default function BlogPost() {
                                 <li>Include visuals: images, infographics, videos, diagrams</li>
                             </ol>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Content Optimization Checklist</h3>
-                            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 my-6">
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Content Optimization Checklist</h3>
+                            <div className="cut-card [--cut:14px] relative bg-white/70 [--cut-line:rgba(27,26,23,0.1)] p-6 my-6">
                                 <ul className="space-y-3">
                                     <li className="flex items-start gap-3">
-                                        <span className="text-accent text-xl">✓</span>
+                                        <span className="text-ember-deep text-xl">✓</span>
                                         <span>Use target keyword in title (preferably at the beginning)</span>
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <span className="text-accent text-xl">✓</span>
+                                        <span className="text-ember-deep text-xl">✓</span>
                                         <span>Include keyword in first 100 words naturally</span>
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <span className="text-accent text-xl">✓</span>
+                                        <span className="text-ember-deep text-xl">✓</span>
                                         <span>Optimize H2 and H3 headings with related keywords</span>
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <span className="text-accent text-xl">✓</span>
+                                        <span className="text-ember-deep text-xl">✓</span>
                                         <span>Use LSI keywords (semantically related terms) throughout</span>
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <span className="text-accent text-xl">✓</span>
+                                        <span className="text-ember-deep text-xl">✓</span>
                                         <span>Add internal links to related content (3-5 per article)</span>
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <span className="text-accent text-xl">✓</span>
+                                        <span className="text-ember-deep text-xl">✓</span>
                                         <span>Include authoritative external links to support claims</span>
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <span className="text-accent text-xl">✓</span>
+                                        <span className="text-ember-deep text-xl">✓</span>
                                         <span>Optimize images with descriptive alt text and file names</span>
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <span className="text-accent text-xl">✓</span>
+                                        <span className="text-ember-deep text-xl">✓</span>
                                         <span>Write compelling meta descriptions (150-160 characters)</span>
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <span className="text-accent text-xl">✓</span>
+                                        <span className="text-ember-deep text-xl">✓</span>
                                         <span>Use short paragraphs (2-3 sentences) for readability</span>
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <span className="text-accent text-xl">✓</span>
+                                        <span className="text-ember-deep text-xl">✓</span>
                                         <span>Add table of contents for long-form content</span>
                                     </li>
                                 </ul>
                             </div>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">3. Technical SEO Excellence</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">3. Technical SEO Excellence</h2>
                             <p>
                                 Technical SEO ensures search engines can crawl, index, and understand your website. Even amazing content won't rank if technical foundations are weak.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Page Speed Optimization</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Page Speed Optimization</h3>
                             <p>
                                 Page speed is a direct ranking factor. Google's Core Web Vitals measure loading performance, interactivity, and visual stability.
                             </p>
@@ -244,7 +244,7 @@ export default function BlogPost() {
                                 <strong>Target metrics:</strong> Largest Contentful Paint (LCP) under 2.5s, First Input Delay (FID) under 100ms, Cumulative Layout Shift (CLS) under 0.1.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Mobile-First Optimization</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Mobile-First Optimization</h3>
                             <p>
                                 Google uses mobile-first indexing—your mobile site determines rankings. With 60%+ of searches happening on mobile, mobile optimization is non-negotiable.
                             </p>
@@ -260,7 +260,7 @@ export default function BlogPost() {
                                 <li>Simplified navigation for mobile users</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Structured Data (Schema Markup)</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Structured Data (Schema Markup)</h3>
                             <p>
                                 Schema markup helps Google understand your content and enables rich snippets—enhanced search results with ratings, prices, images, and more.
                             </p>
@@ -276,17 +276,17 @@ export default function BlogPost() {
                                 <li><strong>BreadcrumbList Schema:</strong> Improves site navigation understanding</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">XML Sitemap & Robots.txt</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">XML Sitemap & Robots.txt</h3>
                             <p>
                                 Submit an XML sitemap to Google Search Console to ensure all important pages are discovered and indexed. Use robots.txt to control which pages search engines can crawl.
                             </p>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">4. Build High-Quality Backlinks</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">4. Build High-Quality Backlinks</h2>
                             <p>
                                 Backlinks remain one of Google's top ranking factors. Quality backlinks from authoritative websites signal trust and relevance to search engines.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">White-Hat Link Building Strategies</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">White-Hat Link Building Strategies</h3>
 
                             <p><strong>1. Create Link-Worthy Content</strong></p>
                             <p>
@@ -318,7 +318,7 @@ export default function BlogPost() {
                                 Analyze where competitors get backlinks using SEMrush or Ahrefs. Target the same websites with better content or unique angles.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Link Quality Over Quantity</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Link Quality Over Quantity</h3>
                             <p>
                                 One link from a high-authority site (DR 70+) is worth more than 100 links from low-quality sites. Focus on:
                             </p>
@@ -330,12 +330,12 @@ export default function BlogPost() {
                                 <li>DoFollow vs NoFollow (both are valuable)</li>
                             </ul>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">5. Optimize for User Experience (UX)</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">5. Optimize for User Experience (UX)</h2>
                             <p>
                                 Google tracks user behavior signals: bounce rate, dwell time, click-through rate. Positive engagement signals indicate content quality and relevance.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Improving User Engagement</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Improving User Engagement</h3>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li><strong>Write compelling titles:</strong> Include power words, numbers, brackets for 20%+ higher CTR</li>
                                 <li><strong>Hook readers immediately:</strong> First paragraph must capture attention and promise value</li>
@@ -345,12 +345,12 @@ export default function BlogPost() {
                                 <li><strong>Include CTAs:</strong> Guide users to next actions (subscribe, download, read more)</li>
                             </ul>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">6. Local SEO Strategies</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">6. Local SEO Strategies</h2>
                             <p>
                                 For businesses serving specific geographic areas, local SEO drives foot traffic and local customers.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Google Business Profile Optimization</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Google Business Profile Optimization</h3>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li>Claim and verify your Google Business Profile</li>
                                 <li>Complete all information fields (hours, phone, website, services)</li>
@@ -361,17 +361,17 @@ export default function BlogPost() {
                                 <li>Add products/services with descriptions and prices</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Local Citations & NAP Consistency</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Local Citations & NAP Consistency</h3>
                             <p>
                                 List your business on local directories ensuring Name, Address, and Phone (NAP) are identical across all platforms. Inconsistent information confuses search engines and hurts rankings.
                             </p>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">7. Track, Measure, and Optimize</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">7. Track, Measure, and Optimize</h2>
                             <p>
                                 SEO is an ongoing process. Regular monitoring and optimization based on data ensures continued improvement.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Essential SEO Metrics</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Essential SEO Metrics</h3>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li><strong>Organic Traffic:</strong> Overall traffic from search engines</li>
                                 <li><strong>Keyword Rankings:</strong> Position for target keywords</li>
@@ -383,7 +383,7 @@ export default function BlogPost() {
                                 <li><strong>Backlink Growth:</strong> New quality backlinks acquired</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Essential SEO Tools</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Essential SEO Tools</h3>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li><strong>Google Search Console:</strong> Monitor search performance, index status, technical issues</li>
                                 <li><strong>Google Analytics 4:</strong> Track user behavior, traffic sources, conversions</li>
@@ -392,7 +392,7 @@ export default function BlogPost() {
                                 <li><strong>PageSpeed Insights:</strong> Core Web Vitals and performance metrics</li>
                             </ul>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Common SEO Mistakes to Avoid</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Common SEO Mistakes to Avoid</h2>
                             <ol className="list-decimal pl-6 space-y-2">
                                 <li><strong>Keyword Stuffing:</strong> Using keywords unnaturally harms readability and rankings</li>
                                 <li><strong>Buying Backlinks:</strong> Paid links violate Google guidelines and risk penalties</li>
@@ -404,7 +404,7 @@ export default function BlogPost() {
                                 <li><strong>Neglecting Technical SEO:</strong> Great content won't rank with technical issues</li>
                             </ol>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Conclusion: Your Path to #1 Rankings</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Conclusion: Your Path to #1 Rankings</h2>
                             <p>
                                 Ranking #1 on Google requires a comprehensive, sustained SEO effort combining technical optimization, quality content, authoritative backlinks, and exceptional user experience. There are no shortcuts, but following these best practices will dramatically improve your search visibility.
                             </p>
@@ -423,17 +423,17 @@ export default function BlogPost() {
                                 SEO is a marathon, not a sprint. Results typically appear within 3-6 months, with significant improvements by month 12. Stay consistent, keep learning, and adapt to algorithm updates. Your #1 ranking awaits.
                             </p>
 
-                            <div className="bg-gradient-to-r from-accent/20 to-orange-600/20 border border-accent/30 rounded-xl p-8 mt-12">
-                                <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                            <div className="cut-card [--cut:14px] relative bg-gradient-to-r from-ember/20 to-ember/20 [--cut-line:rgba(255,73,37,0.3)] p-8 mt-12">
+                                <h3 className="text-2xl font-bold text-ink mb-4 flex items-center gap-2">
                                     <TrendingUp className="w-6 h-6" />
                                     Ready to Dominate Google Rankings?
                                 </h3>
-                                <p className="text-neutral-200 mb-6">
+                                <p className="text-ink mb-6">
                                     Our SEO experts have helped hundreds of businesses achieve first-page Google rankings and drive massive organic traffic growth. We'll create a custom SEO strategy tailored to your industry, competition, and goals.
                                 </p>
                                 <Link
                                     href="/contact"
-                                    className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-accent/90 transition-colors"
+                                    className="cut-btn [--cut:10px] [--cut-focus:#1B1A17] inline-flex items-center gap-2 px-6 py-3 bg-ember text-ink font-semibold hover:bg-[#FF5C3A] transition-colors"
                                 >
                                     Get Your Free SEO Audit
                                     <ArrowRight className="w-4 h-4" />
@@ -448,14 +448,14 @@ export default function BlogPost() {
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={fadeInUp}
-                        className="mt-12 pt-8 border-t border-neutral-800"
+                        className="mt-12 pt-8 border-t border-ink/10"
                     >
-                        <h4 className="text-sm font-semibold text-neutral-400 uppercase tracking-wider mb-4">Tags</h4>
+                        <h4 className="text-sm font-semibold text-ink-soft uppercase tracking-wider mb-4">Tags</h4>
                         <div className="flex flex-wrap gap-2">
                             {["SEO", "Google Rankings", "Keyword Research", "Content Optimization", "Link Building", "Technical SEO", "On-Page SEO", "Search Engine Marketing"].map((tag) => (
                                 <span
                                     key={tag}
-                                    className="px-4 py-2 bg-neutral-900 text-neutral-300 text-sm rounded-full border border-neutral-800 hover:border-accent transition-colors cursor-pointer"
+                                    className="px-4 py-2 bg-white/70 text-ink-soft text-sm rounded-full border border-ink/10 hover:border-ember transition-colors cursor-pointer"
                                 >
                                     {tag}
                                 </span>
@@ -469,11 +469,11 @@ export default function BlogPost() {
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={fadeInUp}
-                        className="mt-12 pt-8 border-t border-neutral-800 flex items-center justify-between"
+                        className="mt-12 pt-8 border-t border-ink/10 flex items-center justify-between"
                     >
                         <Link
                             href="/blog/ai-chatbots-customer-service"
-                            className="group flex items-center gap-2 text-neutral-400 hover:text-accent transition-colors"
+                            className="group flex items-center gap-2 text-ink-soft hover:text-ember-deep transition-colors"
                         >
                             <ArrowLeft className="w-5 h-5" />
                             <div>
@@ -483,7 +483,7 @@ export default function BlogPost() {
                         </Link>
                         <Link
                             href="/ai-automation-sri-lanka"
-                            className="group flex items-center gap-2 text-neutral-400 hover:text-accent transition-colors text-right"
+                            className="group flex items-center gap-2 text-ink-soft hover:text-ember-deep transition-colors text-right"
                         >
                             <div>
                                 <div className="text-xs uppercase tracking-wider mb-1">Next</div>
@@ -499,11 +499,11 @@ export default function BlogPost() {
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={fadeInUp}
-                        className="mt-8 pt-8 border-t border-neutral-800"
+                        className="mt-8 pt-8 border-t border-ink/10"
                     >
                         <div className="flex items-center gap-4">
-                            <span className="text-neutral-400 text-sm font-semibold">Share this article:</span>
-                            <button className="p-2 bg-neutral-900 rounded-lg hover:bg-accent transition-colors">
+                            <span className="text-ink-soft text-sm font-semibold">Share this article:</span>
+                            <button className="p-2 bg-white/70 rounded-lg hover:bg-[#FF5C3A] transition-colors">
                                 <Share2 className="w-5 h-5" />
                             </button>
                         </div>

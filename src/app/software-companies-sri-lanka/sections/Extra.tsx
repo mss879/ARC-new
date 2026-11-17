@@ -24,10 +24,10 @@ import {
 import type { Company } from "../types";
 import s from "../pillar.module.css";
 
-const H2 = "text-2xl md:text-4xl font-bold text-white mt-16 mb-6 flex items-center gap-3";
-const H3 = "text-xl font-bold text-white mt-10 mb-4";
-const ICON = "hidden md:block w-8 h-8 shrink-0 text-[rgb(255,73,37)]";
-const LINK = "text-[rgb(255,73,37)] hover:underline";
+const H2 = "text-2xl md:text-4xl font-bold text-ink mt-16 mb-6 flex items-center gap-3";
+const H3 = "text-xl font-bold text-ink mt-10 mb-4";
+const ICON = "hidden md:block w-8 h-8 shrink-0 text-ember-deep";
+const LINK = "text-ember-deep hover:underline";
 const EXTERNAL = { target: "_blank", rel: "nofollow noopener noreferrer" } as const;
 
 const TYPE_SHORT: Record<Company["type"], string> = {
@@ -58,11 +58,11 @@ export function TopTen() {
     if (top.length < 5) return null;
     return (
         <section id="biggest" className="scroll-mt-24">
-            <h2 className="text-2xl md:text-4xl font-bold text-white mt-2 md:mt-4 mb-3 md:mb-4 flex items-center gap-3">
+            <h2 className="text-2xl md:text-4xl font-medium text-ink mt-2 md:mt-4 mb-3 md:mb-4 flex items-center gap-3 tracking-[-0.035em]">
                 <Trophy className={ICON} />
                 Biggest Software Companies in Sri Lanka: Top {top.length} by Local Headcount
             </h2>
-            <p className="text-neutral-400 mb-6">
+            <p className="text-ink-soft mb-6">
                 The biggest software and IT employers in Sri Lanka, ranked by the number of people each one
                 employs in the country. Every figure is one the company or reputable press has published,
                 and each links to its source. Size is not a measure of quality.
@@ -82,7 +82,7 @@ export function TopTen() {
                 ))}
             </ol>
             <HeadcountChart rows={top.map((c) => ({ name: c.name, value: c.slHeadcount!.approx, label: c.slHeadcount!.label }))} />
-            <p className="text-xs text-neutral-600">
+            <p className="text-xs text-ink-mute">
                 The ranking stops at 300 people: below that, too many larger companies publish no local figure for
                 the order to mean anything. Companies that do not publish a Sri Lanka headcount are not ranked here,
                 however large they are.
@@ -92,7 +92,7 @@ export function TopTen() {
                         {largeWithoutLocalFigure.map((c) => `${c.name} (${c.size})`).join(", ")}.
                     </>
                 )}{" "}
-                They are all in the <a href="#comparison-table" className="underline hover:text-[rgb(255,73,37)]">full comparison of {companyCount} companies</a> below.
+                They are all in the <a href="#comparison-table" className="underline hover:text-ember-deep">full comparison of {companyCount} companies</a> below.
             </p>
         </section>
     );
@@ -108,7 +108,7 @@ export function CareersSection() {
                 <Briefcase className={ICON} />
                 Software Company Jobs and Internships in Sri Lanka
             </h2>
-            <p className="text-neutral-300 mb-4">
+            <p className="text-ink-soft mb-4">
                 If you are a student or an engineer looking for work rather than a vendor, this is the part of
                 the guide for you. It lists which <strong>software companies in Sri Lanka</strong> run internship
                 programmes, what employees say about them, and where each company posts its vacancies.
@@ -117,7 +117,7 @@ export function CareersSection() {
             {withInternships.length > 0 && (
                 <>
                     <h3 className={H3}>Software companies in Sri Lanka with internship programmes</h3>
-                    <p className="text-neutral-400 text-sm mb-2">
+                    <p className="text-ink-soft text-sm mb-2">
                         {withInternships.length} companies in this guide publish a page for internships,
                         graduate or trainee programmes:
                     </p>
@@ -140,7 +140,7 @@ export function CareersSection() {
             {employeeRated.length > 0 && (
                 <>
                     <h3 className={H3}>What employees say</h3>
-                    <p className="text-neutral-400 text-sm mb-4">
+                    <p className="text-ink-soft text-sm mb-4">
                         Glassdoor scores for companies in this guide with at least 20 employee reviews, highest
                         first. A score reflects the reviews posted on Glassdoor, which for global companies cover
                         every country, not only Sri Lanka.
@@ -173,14 +173,14 @@ export function CareersSection() {
                             </tbody>
                         </table>
                     </div>
-                    <p className="text-xs text-neutral-600 mt-3">
+                    <p className="text-xs text-ink-mute mt-3">
                         Scores checked in {formatMonthYear(employeeRated[0].verifiedOn)}.
                     </p>
                 </>
             )}
 
             <h3 className={H3}>Highest-paying software companies in Sri Lanka</h3>
-            <p className="text-neutral-400 text-sm mb-3">
+            <p className="text-ink-soft text-sm mb-3">
                 There is no official pay ranking. The best public indicator is{" "}
                 <a href={PAY_SNAPSHOT.url} {...EXTERNAL} className={s.plainLink}>Levels.fyi</a>, which collects
                 self-reported pay. In {formatMonthYear(PAY_SNAPSHOT.checkedOn)} it showed a median total
@@ -191,21 +191,21 @@ export function CareersSection() {
             </p>
 
             <h3 className={H3}>Product company, services company or captive centre?</h3>
-            <p className="text-neutral-400 text-sm mb-3">
-                The kind of company shapes the work. <strong className="text-neutral-200">Product companies</strong>{" "}
+            <p className="text-ink-soft text-sm mb-3">
+                The kind of company shapes the work. <strong className="text-ink">Product companies</strong>{" "}
                 ({productCompanies.length} in this guide, including <Names list={productCompanies.slice(0, 4)} />)
                 build and sell their own software, so engineers stay with one product for years.{" "}
-                <strong className="text-neutral-200">Services companies</strong> ({hireableCompanies.length},
+                <strong className="text-ink">Services companies</strong> ({hireableCompanies.length},
                 including <Names list={hireableCompanies.slice(0, 4)} />) build software for clients, which
                 means more variety across projects and industries.{" "}
-                <strong className="text-neutral-200">Captive centres</strong> ({captiveCentres.length}:{" "}
+                <strong className="text-ink">Captive centres</strong> ({captiveCentres.length}:{" "}
                 <Names list={captiveCentres} />) are the in-house engineering arms of large overseas groups.
             </p>
 
             {careers.length > 0 && (
                 <>
                     <h3 className={H3}>Careers pages</h3>
-                    <p className="text-neutral-400 text-sm leading-7">
+                    <p className="text-ink-soft text-sm leading-7">
                         {careers.map((c, i) => (
                             <span key={c.slug}>
                                 {i > 0 && " · "}
@@ -231,7 +231,7 @@ export function CitySection() {
                 Software Companies in Colombo and Other Cities
             </h2>
             {colombo && (
-                <p className="text-neutral-300 mb-4">
+                <p className="text-ink-soft mb-4">
                     Sri Lanka&apos;s software industry is concentrated in and around the capital:{" "}
                     {colombo.companies.length} of the {companyCount} companies in this guide have their main Sri
                     Lankan office in the Colombo district, which includes Colombo itself and nearby towns such as
@@ -259,7 +259,7 @@ export function CitySection() {
             {colombo && (
                 <>
                     <h3 className={H3}>Software companies in Colombo</h3>
-                    <p className="text-neutral-400 text-sm leading-7">
+                    <p className="text-ink-soft text-sm leading-7">
                         <Names list={colombo.companies} />.
                     </p>
                 </>
@@ -275,13 +275,13 @@ export function Pricing() {
     const under50 = snap.under25 + snap.from25to49;
     return (
         <section id="pricing" className="scroll-mt-24">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mt-16 mb-8 flex items-center gap-3">
-                <DollarSign className="w-8 h-8 text-[rgb(255,73,37)]" />
+            <h2 className="text-3xl md:text-4xl font-medium text-ink mt-16 mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                <DollarSign className="w-8 h-8 text-ember-ink" />
                 How Much Does Software Development Cost in Sri Lanka?
             </h2>
 
-            <p className="text-neutral-300 mb-6">
-                <strong className="text-white">In short:</strong> most Sri Lankan software firms that publish a
+            <p className="text-ink-soft mb-6">
+                <strong className="text-ink">In short:</strong> most Sri Lankan software firms that publish a
                 rate list it at under $50 an hour. Of the {snap.counted} firms on the first page of{" "}
                 <a href={snap.url} target="_blank" rel="noopener noreferrer" className={LINK}>
                     Clutch&apos;s Sri Lanka developer directory
@@ -291,7 +291,7 @@ export function Pricing() {
                 $50 or more and {snap.notListed} listed no rate.
             </p>
 
-            <p className="text-neutral-400 text-sm mb-6">
+            <p className="text-ink-soft text-sm mb-6">
                 Every figure in this section is a rate a company has published itself. Earlier editions of this
                 guide carried estimated rate tables; we removed them because we could not trace them to a source.
                 For web-specific pricing, see our{" "}
@@ -302,7 +302,7 @@ export function Pricing() {
 
             {publishedRates.length > 0 && (
                 <>
-                    <h3 className="text-xl font-bold text-white mb-4">Published rates of companies in this guide</h3>
+                    <h3 className="text-xl font-bold text-ink mb-4">Published rates of companies in this guide</h3>
                     <div className={s.tableWrap}>
                         <table className={s.table}>
                             <thead>
@@ -330,7 +330,7 @@ export function Pricing() {
                             </tbody>
                         </table>
                     </div>
-                    <p className="text-xs text-neutral-600 mt-3">
+                    <p className="text-xs text-ink-mute mt-3">
                         Rate bands and minimum project sizes as each company lists them on its Clutch profile,
                         checked in {formatMonthYear(snap.checkedOn)}. Companies that do not publish a rate are not
                         shown.
@@ -338,14 +338,14 @@ export function Pricing() {
                 </>
             )}
 
-            <h3 className="text-xl font-bold text-white mt-10 mb-4">What moves the price</h3>
+            <h3 className="text-xl font-bold text-ink mt-10 mb-4">What moves the price</h3>
             <ul className={s.services}>
                 <li>Seniority: a team of senior engineers costs more per hour and usually needs fewer hours.</li>
                 <li>Engagement model: a fixed-price project, a dedicated team and staff augmentation are quoted differently.</li>
                 <li>Domain: regulated or specialist work such as banking, healthcare or ERP is priced above general web and mobile development.</li>
                 <li>Scope certainty: a clear specification gets a firmer quote than an open-ended brief.</li>
             </ul>
-            <p className="text-neutral-400 text-sm mt-6">
+            <p className="text-ink-soft text-sm mt-6">
                 Rates change, and a directory band is not a quote. Ask at least three companies for a written
                 quote against the same brief.
             </p>

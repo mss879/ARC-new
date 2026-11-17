@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import Script from "next/script";
-import { Inter } from "next/font/google";
-import localFont from "next/font/local";
+import { Instrument_Sans } from "next/font/google";
 import "@/index.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -9,22 +7,20 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryProvider } from "@/components/providers/query-provider";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
+import CookieConsent from "@/components/CookieConsent";
 import FloatingActions from "@/components/FloatingActions";
 import { SITE_URL, company } from "@/content/site-facts";
 
-const inter = Inter({
+// The site's typeface, also exposed as --font-display for Tailwind's font-display.
+const siteFont = Instrument_Sans({
   subsets: ["latin"],
+  variable: "--font-display",
   display: 'swap',
   preload: true,
   adjustFontFallback: true,
   fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Arial', 'sans-serif'],
 });
 
-const flarex = localFont({
-  src: "./fonts/flarex.otf",
-  variable: "--font-flarex",
-  display: "swap",
-});
 
 // Site-wide defaults. A page that sets its own title, description or canonical
 // replaces these; they are what a page falls back to when it sets none.
@@ -114,14 +110,11 @@ export default function RootLayout({
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-        {/* DNS Prefetch & Preconnect - Reduce request latency */}
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* No Google Fonts preconnect: the site font (Instrument Sans) is
+            self-hosted by next/font, so those early connections were never
+            used. */}
 
         {/* Preload Critical Resources - Reduce LCP */}
-        <link rel="preload" as="image" href="/logo.png" type="image/png" fetchPriority="high" />
         {/* Remove video preload - let browser decide based on bandwidth */}
 
 
@@ -136,46 +129,10 @@ export default function RootLayout({
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
-        {/* Google tag (gtag.js) */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-0447V2XK5V"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-              gtag('config', 'G-0447V2XK5V');
-          `}
-        </Script>
-
-        {/* Meta Pixel Code */}
-        <Script id="meta-pixel" strategy="lazyOnload">
-          {`
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '1489884839479188');
-            fbq('track', 'PageView');
-          `}
-        </Script>
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=1489884839479188&ev=PageView&noscript=1"
-            alt=""
-          />
-        </noscript>
+        {/* Google Analytics and the Meta pixel are not loaded here: they wait
+            for the visitor's consent and are loaded by <CookieConsent />. */}
       </head>
-      <body className={`${inter.className} ${flarex.variable}`}>
+      <body className={`${siteFont.className} ${siteFont.variable}`}>
         {/* Skip-to-content link — visible on keyboard focus, hidden otherwise */}
         <a
           href="#main-content"
@@ -185,6 +142,7 @@ export default function RootLayout({
         </a>
         <PerformanceMonitor />
         <AnalyticsTracker />
+        <CookieConsent />
         <QueryProvider>
           <TooltipProvider>
             <main id="main-content">

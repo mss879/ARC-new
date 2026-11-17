@@ -2,8 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { ArrowDot } from "./home/ui";
 
-const CTA = () => {
+type CTAProps = {
+  /**
+   * "cream" is for a page with a light background (the home page). The block
+   * stays dark, as the page's closing chapter with the footer, but its top
+   * corners are rounded so it sits on the cream as a card, and its heading and
+   * button follow that page's type.
+   */
+  tone?: "dark" | "cream";
+};
+
+const CTA = ({ tone = "dark" }: CTAProps) => {
+  const cream = tone === "cream";
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -43,7 +55,7 @@ const CTA = () => {
           }
         }
       `}</style>
-      <section ref={sectionRef} className="relative bg-[rgb(10,10,10)] overflow-hidden" aria-label="Call to action">
+      <section ref={sectionRef} className={`relative bg-[rgb(10,10,10)] overflow-hidden ${cream ? "mt-8 rounded-t-[32px] md:rounded-t-[48px] lg:mt-12" : ""}`} aria-label="Call to action">
       <div className="relative min-h-[600px] lg:min-h-[500px]">
         {/* Background with gradient overlay */}
         <div className="absolute inset-0">
@@ -75,28 +87,28 @@ const CTA = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 items-center">
             {/* Left - Title */}
             <div className="lg:col-span-1">
-              <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-[rgb(230,230,230)] leading-[1.1] tracking-tighter">
+              <h2 className={cream ? "text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-medium text-paper-white leading-[1.02] tracking-[-0.04em]" : "text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-[rgb(230,230,230)] leading-[1.1] tracking-tighter"}>
                 <span style={{whiteSpace: 'nowrap'}}>
                   <span 
                     className={`inline-block transition-all duration-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                     style={{willChange: 'transform', transitionDelay: '0.1s'}}
                   >
-                    LET'S
+                    {cream ? "Let's" : "LET'S"}
                   </span>
                   {' '}
                   <span 
                     className={`inline-block transition-all duration-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                     style={{willChange: 'transform', transitionDelay: '0.2s'}}
                   >
-                    WORK
+                    {cream ? "work" : "WORK"}
                   </span>
                 </span>
                 <br />
                 <span 
-                  className={`inline-block transition-all duration-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                  className={`inline-block transition-all duration-600 ${cream ? 'text-ember' : ''} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                   style={{whiteSpace: 'nowrap', willChange: 'transform', transitionDelay: '0.3s'}}
                 >
-                  TOGETHER
+                  {cream ? "together" : "TOGETHER"}
                 </span>
               </h2>
             </div>
@@ -111,15 +123,26 @@ const CTA = () => {
               </p>
 
               {/* CTA Button */}
+              {cream ? (
+                <a
+                  href="/contact"
+                  className="pill-btn pill-btn--ember pill-btn--lg"
+                  aria-label="Contact ARC AI to discuss your project"
+                >
+                  Get in touch
+                  <ArrowDot />
+                </a>
+              ) : (
               <a
                 href="/contact"
-                className="group relative inline-block bg-transparent border-2 border-[rgb(255,73,37)] text-[rgb(255,73,37)] hover:bg-[rgb(255,73,37)] hover:text-white font-bold py-4 px-12 rounded-full overflow-hidden transition-all duration-300"
+                className="cut-btn [--cut:12px] group relative inline-block bg-transparent [--cut-w:2px] [--cut-line:rgb(255,73,37)] text-[rgb(255,73,37)] hover:bg-[rgb(255,73,37)] hover:text-white font-bold py-4 px-12 overflow-hidden transition-all duration-300"
                 aria-label="Contact ARC AI to discuss your project"
               >
                   <span className="relative z-10 text-lg tracking-wide">
                     GET IN TOUCH
                   </span>
               </a>
+              )}
             </div>
           </div>
         </div>

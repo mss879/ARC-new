@@ -33,14 +33,14 @@ const fadeInUp: Variants = {
 
 export default function AIVoiceAssistantsContent() {
     return (
-        <div className="min-h-screen bg-black text-white selection:bg-orange-500/30">
+        <div className="home-cream min-h-screen bg-transparent text-ink selection:bg-ember/30">
             <Navbar />
             
             {/* Hero Section */}
             <section className="relative min-h-[90vh] flex items-center justify-center px-4 md:px-8 pt-32 pb-20 overflow-hidden" aria-label="AI Voice Assistants overview">
                 {/* Background Effects */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black z-0" aria-hidden="true" />
-                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-orange-600/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-b from-paper via-paper/95 to-paper z-0" aria-hidden="true" />
+                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-ember/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none hidden" />
                 <div
                     className="absolute inset-0 opacity-20 z-0"
                     aria-hidden="true"
@@ -59,11 +59,11 @@ export default function AIVoiceAssistantsContent() {
                     >
                         <motion.span 
                             variants={letterVariant}
-                            className="px-3 py-1 border border-orange-500/50 bg-orange-500/10 text-orange-400 rounded-full text-xs font-bold tracking-widest uppercase mb-6 inline-block"
+                            className="px-3 py-1 border border-ember/50 bg-ember/10 text-ember-deep rounded-full text-xs font-bold tracking-widest uppercase mb-6 inline-block"
                         >
                             Beta Testing
                         </motion.span>
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight">
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-[-0.035em]">
                             {["COGNITIVE", "VOICE AI"].map((word, i) => (
                                 <span key={i} className="block mb-2">
                                     {word.split("").map((char, j) => (
@@ -84,7 +84,7 @@ export default function AIVoiceAssistantsContent() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 0.7 }}
-                        className="text-xl md:text-2xl text-neutral-400 max-w-3xl mx-auto mb-12 font-medium leading-relaxed"
+                        className="text-xl md:text-2xl text-ink-soft max-w-3xl mx-auto mb-12 font-medium leading-relaxed"
                     >
                         Human-sounding AI voice agents that dial inbound leads in under 60 seconds, qualify prospects, and answer support calls 24/7.
                     </motion.p>
@@ -97,14 +97,14 @@ export default function AIVoiceAssistantsContent() {
                     >
                         <Link
                             href="/contact"
-                            className="w-full sm:w-auto px-8 py-4 bg-orange-600 hover:bg-orange-500 text-white font-bold rounded-xl transition-all hover:scale-105 shadow-[0_0_20px_rgba(234,88,12,0.3)] flex items-center justify-center gap-2"
+                            className="cut-btn [--cut:12px] [--cut-focus:#1B1A17] w-full sm:w-auto px-8 py-4 bg-ember hover:bg-[#FF5C3A] text-ink font-bold transition-all hover:scale-105 flex items-center justify-center gap-2"
                         >
                             <PhoneCall className="w-5 h-5" />
                             Deploy Your Agent
                         </Link>
                         <a
                             href="#features"
-                            className="w-full sm:w-auto px-8 py-4 border border-white/10 hover:border-white/20 text-white font-semibold rounded-xl transition-colors flex items-center justify-center"
+                            className="cut-btn [--cut:12px] w-full sm:w-auto px-8 py-4 [--cut-line:rgba(27,26,23,0.1)] hover:[--cut-line:rgba(27,26,23,0.3)] text-ink font-semibold transition-colors flex items-center justify-center"
                         >
                             Hear the Difference
                         </a>
@@ -113,7 +113,7 @@ export default function AIVoiceAssistantsContent() {
             </section>
 
             {/* Problem / Solution Grid */}
-            <section id="features" className="py-24 px-4 md:px-8 bg-black relative border-t border-white/5">
+            <section id="features" className="py-24 px-4 md:px-8 bg-transparent relative border-t border-ink/10">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial="hidden"
@@ -122,11 +122,11 @@ export default function AIVoiceAssistantsContent() {
                         variants={fadeInUp}
                         className="mb-16 md:text-center max-w-3xl mx-auto"
                     >
-                        <span className="text-orange-500 font-bold tracking-widest text-sm uppercase mb-4 block">The "Speed to Lead" Problem</span>
-                        <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                        <span className="text-ember-deep font-bold tracking-widest text-sm uppercase mb-4 block">The "Speed to Lead" Problem</span>
+                        <h2 className="text-3xl md:text-5xl font-medium mb-6 tracking-[-0.035em]">
                             Missing calls means missing revenue.
                         </h2>
-                        <p className="text-neutral-400 text-lg leading-relaxed">
+                        <p className="text-ink-soft text-lg leading-relaxed">
                             If you do not call a web lead within 5 minutes, your close rate drops by 80%. But having human SDRs dial instantly 24/7 is impossible. Our Voice AI solves this permanently.
                         </p>
                     </motion.div>
@@ -171,13 +171,13 @@ export default function AIVoiceAssistantsContent() {
                                 viewport={{ once: true, margin: "100px" }}
                                 variants={fadeInUp}
                                 transition={{ delay: idx * 0.1 }}
-                                className="bg-white/[0.02] border border-white/5 p-8 rounded-2xl hover:bg-white/[0.04] transition-colors group"
+                                className="cut-card [--cut:18px] relative bg-white/70 [--cut-line:rgba(27,26,23,0.1)] p-8 hover:bg-white transition-colors group"
                             >
-                                <div className="w-14 h-14 bg-orange-500/10 rounded-xl flex items-center justify-center text-orange-500 mb-6 group-hover:scale-110 transition-transform">
+                                <div className="w-14 h-14 bg-ember/10 rounded-xl flex items-center justify-center text-ember-deep mb-6 group-hover:scale-110 transition-transform">
                                     {feature.icon}
                                 </div>
                                 <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                                <p className="text-neutral-400 leading-relaxed text-sm">{feature.desc}</p>
+                                <p className="text-ink-soft leading-relaxed text-sm">{feature.desc}</p>
                             </motion.div>
                         ))}
                     </div>
@@ -185,7 +185,7 @@ export default function AIVoiceAssistantsContent() {
             </section>
 
             {/* ROI Section */}
-            <section className="py-24 px-4 md:px-8 bg-neutral-950 border-t border-white/5">
+            <section className="py-24 px-4 md:px-8 bg-transparent border-t border-ink/10">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
                     <motion.div 
                         initial="hidden"
@@ -194,9 +194,9 @@ export default function AIVoiceAssistantsContent() {
                         variants={fadeInUp}
                         className="flex-1 space-y-8"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold leading-tight">
+                        <h2 className="text-4xl md:text-5xl font-medium leading-tight tracking-[-0.035em]">
                             More booked meetings.<br/>
-                            <span className="text-orange-500">Zero salary costs.</span>
+                            <span className="text-ember-ink">Zero salary costs.</span>
                         </h2>
                         <ul className="space-y-4">
                             {[
@@ -207,10 +207,10 @@ export default function AIVoiceAssistantsContent() {
                                 "Scales up and down instantly with ad spend"
                             ].map((item, i) => (
                                 <li key={i} className="flex items-center gap-3">
-                                    <div className="w-6 h-6 rounded-full bg-orange-500/20 flex items-center justify-center shrink-0">
-                                        <div className="w-2 h-2 rounded-full bg-orange-500" />
+                                    <div className="w-6 h-6 rounded-full bg-ember/20 flex items-center justify-center shrink-0">
+                                        <div className="w-2 h-2 rounded-full bg-ember" />
                                     </div>
-                                    <span className="text-neutral-300 font-medium">{item}</span>
+                                    <span className="text-ink-soft font-medium">{item}</span>
                                 </li>
                             ))}
                         </ul>
@@ -221,23 +221,23 @@ export default function AIVoiceAssistantsContent() {
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={fadeInUp}
-                        className="flex-1 w-full bg-black border border-white/10 rounded-3xl p-8 relative overflow-hidden"
+                        className="cut-card [--cut:22px] flex-1 w-full bg-white/70 [--cut-line:rgba(27,26,23,0.1)] p-8 relative overflow-hidden"
                     >
                         {/* Abstract Chart Graphic */}
                         <div className="absolute inset-0 opacity-10 blur-xl">
-                            <div className="absolute top-1/4 -right-1/4 w-96 h-96 bg-orange-500 rounded-full mix-blend-screen" />
+                            <div className="absolute top-1/4 -right-1/4 w-96 h-96 bg-ember rounded-full mix-blend-screen hidden" />
                         </div>
                         <div className="relative z-10 space-y-6">
-                            <div className="flex items-center justify-between border-b border-white/10 pb-6">
+                            <div className="flex items-center justify-between border-b border-ink/10 pb-6">
                                 <div>
-                                    <p className="text-sm text-neutral-400 font-bold uppercase tracking-wider mb-1">Increase in Contact Rate</p>
-                                    <p className="text-4xl font-black text-white">+ 340%</p>
+                                    <p className="text-sm text-ink-soft font-bold uppercase tracking-wider mb-1">Increase in Contact Rate</p>
+                                    <p className="text-4xl font-black text-ink">+ 340%</p>
                                 </div>
-                                <LineChart className="w-12 h-12 text-orange-500 opacity-50" />
+                                <LineChart className="w-12 h-12 text-ember-deep opacity-50" />
                             </div>
                             <div>
                                 <h3 className="text-lg font-bold mb-2">The ROI is instantaneous</h3>
-                                <p className="text-neutral-400 text-sm leading-relaxed">
+                                <p className="text-ink-soft text-sm leading-relaxed">
                                     Our clients typically see their voice agent pay for its entire annual build and maintenance cost within the first 14 days of operation simply by catching leads that human reps normally miss.
                                 </p>
                             </div>
@@ -247,8 +247,8 @@ export default function AIVoiceAssistantsContent() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-32 px-4 md:px-8 bg-black relative border-t border-white/5 text-center">
-                <div className="absolute inset-0 bg-gradient-to-t from-orange-900/10 to-transparent pointer-events-none" />
+            <section className="py-32 px-4 md:px-8 bg-transparent relative border-t border-ink/10 text-center">
+                <div className="absolute inset-0 bg-gradient-to-t from-ember/10 to-transparent pointer-events-none hidden" />
                 <div className="max-w-3xl mx-auto relative z-10">
                     <motion.div
                         initial="hidden"
@@ -256,15 +256,15 @@ export default function AIVoiceAssistantsContent() {
                         viewport={{ once: true }}
                         variants={fadeInUp}
                     >
-                        <h2 className="text-4xl md:text-6xl font-black mb-6">
+                        <h2 className="text-4xl md:text-6xl font-medium mb-6 tracking-[-0.035em]">
                             Ready to hire the perfect SDR?
                         </h2>
-                        <p className="text-xl text-neutral-400 mb-10">
+                        <p className="text-xl text-ink-soft mb-10">
                             Book a call to hear a live demo of the voice agent in action. Prepare to be amazed.
                         </p>
                         <Link
                             href="/contact"
-                            className="inline-flex items-center gap-2 px-10 py-5 bg-orange-600 text-white font-bold rounded-full hover:bg-orange-500 transition-all hover:scale-105 shadow-[0_0_30px_rgba(234,88,12,0.2)] uppercase tracking-wide text-sm"
+                            className="cut-btn [--cut:12px] [--cut-focus:#1B1A17] inline-flex items-center gap-2 px-10 py-5 bg-ember text-ink font-bold hover:bg-[#FF5C3A] transition-all hover:scale-105 uppercase tracking-wide text-sm"
                         >
                             HEAR IT FOR YOURSELF
                             <ArrowUpRight className="w-5 h-5" />

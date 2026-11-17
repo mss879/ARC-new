@@ -4,9 +4,9 @@ import MockFrame from "./MockFrame";
 import { useDemoTimeline } from "@/components/gsap/useDemoTimeline";
 
 const customerBubble =
-  "ml-auto max-w-[85%] rounded-2xl rounded-br-md bg-zinc-800 px-3.5 py-2.5 text-[13px] leading-snug text-zinc-100";
+  "ml-auto max-w-[85%] rounded-2xl rounded-br-md bg-ink px-3.5 py-2.5 text-[13px] leading-snug text-paper-white";
 const agentBubble =
-  "max-w-[88%] rounded-2xl rounded-bl-md border border-[rgb(255,73,37)]/30 bg-[rgb(255,73,37)]/10 px-3.5 py-2.5 text-[13px] leading-snug text-zinc-100";
+  "max-w-[88%] rounded-2xl rounded-bl-md border border-[rgb(255,73,37)]/30 bg-[rgb(255,73,37)]/10 px-3.5 py-2.5 text-[13px] leading-snug text-ink";
 
 const VOICE_BARS = [0.35, 0.7, 1, 0.55, 0.85, 0.4, 0.95, 0.6, 0.3, 0.8, 0.5, 0.9, 0.45, 0.65];
 
@@ -39,13 +39,13 @@ export default function AgentsMock() {
         description="Illustration: an AI agent on WhatsApp checks stock and delivery before answering a customer, drafts the order, and a staff member approves it. Below, a voice agent confirms a service booking on a phone call."
       >
         {/* Chat header */}
-        <div className="flex items-center gap-3 border-b border-white/10 pb-3">
+        <div className="flex items-center gap-3 border-b border-ink/10 pb-3">
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[rgb(255,73,37)] text-xs font-black text-black">
             AI
           </span>
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold text-white">Your shop&apos;s agent</p>
-            <p className="flex items-center gap-1.5 text-[11px] text-zinc-500">
+            <p className="truncate text-sm font-semibold text-ink">Your shop&apos;s agent</p>
+            <p className="flex items-center gap-1.5 text-[11px] text-ink-mute">
               <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
               Online, day and night
             </p>
@@ -54,7 +54,7 @@ export default function AgentsMock() {
             {["English", "සිංහල", "தமிழ்"].map((language) => (
               <span
                 key={language}
-                className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] text-zinc-400"
+                className="rounded-full border border-ink/10 px-2 py-0.5 text-[10px] text-ink-mute"
               >
                 {language}
               </span>
@@ -73,9 +73,9 @@ export default function AgentsMock() {
               <span
                 key={lookup}
                 data-s="lookup"
-                className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[11px] text-zinc-400"
+                className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-ink/10 bg-white px-2.5 py-1 text-[11px] text-ink-mute"
               >
-                <span className="text-green-500">✓</span>
+                <span className="text-green-600">✓</span>
                 {lookup}
               </span>
             ))}
@@ -84,11 +84,11 @@ export default function AgentsMock() {
           <div className="relative">
             <span
               data-s="typing"
-              className="invisible absolute left-0 top-0 inline-flex gap-1 rounded-2xl rounded-bl-md border border-white/10 bg-white/[0.04] px-3.5 py-3 opacity-0"
+              className="invisible absolute left-0 top-0 inline-flex gap-1 rounded-2xl rounded-bl-md border border-ink/10 bg-white px-3.5 py-3 opacity-0"
             >
-              <span className="demo-dot h-1.5 w-1.5 rounded-full bg-zinc-400" />
-              <span className="demo-dot h-1.5 w-1.5 rounded-full bg-zinc-400 [animation-delay:150ms]" />
-              <span className="demo-dot h-1.5 w-1.5 rounded-full bg-zinc-400 [animation-delay:300ms]" />
+              <span className="demo-dot h-1.5 w-1.5 rounded-full bg-ink-mute" />
+              <span className="demo-dot h-1.5 w-1.5 rounded-full bg-ink-mute [animation-delay:150ms]" />
+              <span className="demo-dot h-1.5 w-1.5 rounded-full bg-ink-mute [animation-delay:300ms]" />
             </span>
             <p data-s="a1" className={agentBubble}>
               Yes, 4 in stock. We can deliver to Kandy tomorrow before 5 PM. Shall I book it for you?
@@ -101,22 +101,22 @@ export default function AgentsMock() {
 
           <div
             data-s="order"
-            className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-3"
+            className="flex items-center gap-3 rounded-xl border border-ink/10 bg-white px-3.5 py-3"
           >
             <div className="min-w-0">
-              <p className="text-[13px] font-semibold text-white">Order #1042 drafted</p>
-              <p className="truncate text-[11px] text-zinc-500">Fridge × 1 · Kandy</p>
+              <p className="text-[13px] font-semibold text-ink">Order #1042 drafted</p>
+              <p className="truncate text-[11px] text-ink-mute">Fridge × 1 · Kandy</p>
             </div>
             <div className="relative ml-auto h-6 w-[7.5rem] shrink-0 whitespace-nowrap text-[11px] font-semibold">
               <span
                 data-s="pending"
-                className="invisible absolute inset-0 flex items-center justify-center rounded-full border border-amber-500/40 bg-amber-500/10 text-amber-400 opacity-0"
+                className="invisible absolute inset-0 flex items-center justify-center rounded-full border border-amber-600/40 bg-amber-500/10 text-amber-700 opacity-0"
               >
                 Waiting for staff
               </span>
               <span
                 data-s="approved"
-                className="absolute inset-0 flex items-center justify-center rounded-full border border-green-500/40 bg-green-500/10 text-green-400"
+                className="absolute inset-0 flex items-center justify-center rounded-full border border-green-600/30 bg-green-500/10 text-green-700"
               >
                 ✓ Approved
               </span>
@@ -127,17 +127,17 @@ export default function AgentsMock() {
         {/* Voice call */}
         <div
           data-s="voice"
-          className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-3"
+          className="flex items-center gap-3 rounded-xl border border-ink/10 bg-white px-3.5 py-3"
         >
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[rgb(255,73,37)]/15 text-[rgb(255,73,37)]">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ember/15 text-ember-deep">
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
               <rect x="9" y="3" width="6" height="11" rx="3" />
               <path d="M5 11a7 7 0 0 0 14 0M12 18v3" strokeLinecap="round" />
             </svg>
           </span>
           <div className="min-w-0 flex-1">
-            <p className="text-[10px] uppercase tracking-wider text-zinc-500">Voice call · 00:42</p>
-            <p className="text-[13px] leading-snug text-zinc-200">
+            <p className="text-[10px] uppercase tracking-wider text-ink-mute">Voice call · 00:42</p>
+            <p className="text-[13px] leading-snug text-ink">
               &ldquo;Your service visit is booked for Friday at 10.&rdquo;
             </p>
           </div>

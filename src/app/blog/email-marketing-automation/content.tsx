@@ -17,7 +17,7 @@ const fadeInUp: Variants = {
 
 export default function BlogPost() {
     return (
-        <div className="min-h-screen bg-black text-white">
+        <div className="home-cream min-h-screen bg-transparent text-ink">
             <Navbar />
 
             <section className="relative min-h-[60vh] flex items-end px-4 md:px-8 pt-32 pb-12">
@@ -28,23 +28,23 @@ export default function BlogPost() {
                         height={900}
                         className="w-full h-full object-cover"
                         loading="lazy" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/40" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-paper via-paper/80 to-paper/40" />
                 </div>
 
                 <div className="relative z-10 max-w-4xl mx-auto w-full">
-                    <Link href="/blog" className="inline-flex items-center gap-2 text-neutral-300 hover:text-accent transition-colors mb-6">
+                    <Link href="/blog" className="inline-flex items-center gap-2 text-ink-soft hover:text-ember-deep transition-colors mb-6">
                         <ArrowLeft className="w-4 h-4" />
                         Back to Blog
                     </Link>
 
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-                        <span className="inline-block px-4 py-1.5 bg-accent/20 backdrop-blur-sm text-accent text-sm font-semibold rounded-full border border-accent/30 mb-4">
+                        <span className="inline-block px-4 py-1.5 bg-ember/20 text-ember-deep text-sm font-semibold rounded-full border border-ember/30 mb-4">
                             Marketing Automation
                         </span>
-                        <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                        <h1 className="text-4xl md:text-6xl font-medium mb-6 tracking-[-0.035em]">
                             Email Marketing Automation: Complete 2024 Playbook
                         </h1>
-                        <div className="flex items-center gap-6 text-neutral-400">
+                        <div className="flex items-center gap-6 text-ink-soft">
                             <div className="flex items-center gap-2">
                                 <Calendar className="w-4 h-4" />
                                 <span>Aug 30, 2024</span>
@@ -61,22 +61,22 @@ export default function BlogPost() {
             <article className="py-12 px-4 md:px-8">
                 <div className="max-w-4xl mx-auto">
                     <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="prose prose-invert prose-lg max-w-none">
-                        <div className="space-y-6 text-neutral-300 leading-relaxed">
-                            <p className="text-xl text-neutral-200">
+                        <div className="space-y-6 text-ink-soft leading-relaxed">
+                            <p className="text-xl text-ink">
                                 Email marketing automation delivers the highest ROI of any marketing channel—$42 for every $1 spent. Master the strategies, workflows, and best practices that transform email from manual broadcasts into sophisticated, revenue-generating machines.
                             </p>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Why Email Automation Matters</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Why Email Automation Matters</h2>
                             <p>
                                 Manual email marketing doesn't scale. Automation enables personalized communication with thousands or millions of contacts based on behavior, preferences, and lifecycle stage—all while your team focuses on strategy and creative.
                             </p>
 
-                            <div className="bg-gradient-to-r from-accent/20 to-orange-600/20 border border-accent/30 rounded-xl p-6 my-8">
-                                <h4 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                            <div className="cut-card [--cut:14px] relative bg-gradient-to-r from-ember/20 to-ember/20 [--cut-line:rgba(255,73,37,0.3)] p-6 my-8">
+                                <h4 className="text-xl font-bold text-ink mb-3 flex items-center gap-2">
                                     <TrendingUp className="w-5 h-5" />
                                     Email Automation Impact
                                 </h4>
-                                <ul className="space-y-2 text-neutral-200">
+                                <ul className="space-y-2 text-ink">
                                     <li>• 320% more revenue than non-automated emails</li>
                                     <li>• 70.5% higher open rates</li>
                                     <li>• 152% higher click-through rates</li>
@@ -85,9 +85,9 @@ export default function BlogPost() {
                                 </ul>
                             </div>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Essential Email Automation Workflows</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Essential Email Automation Workflows</h2>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">1. Welcome Series (First Impression)</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">1. Welcome Series (First Impression)</h3>
                             <p><strong>Trigger:</strong> New subscriber joins list</p>
                             <p><strong>Goal:</strong> Build relationship, set expectations, deliver value</p>
                             <p><strong>Workflow structure:</strong></p>
@@ -100,7 +100,7 @@ export default function BlogPost() {
                             </ol>
                             <p><strong>Performance benchmarks:</strong> 50-60% open rate, 15-20% click rate</p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">2. Abandoned Cart Recovery</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">2. Abandoned Cart Recovery</h3>
                             <p><strong>Trigger:</strong> User adds items to cart but doesn't purchase</p>
                             <p><strong>Goal:</strong> Recover lost revenue (average recovery rate: 8-15%)</p>
                             <p><strong>Workflow structure:</strong></p>
@@ -111,7 +111,7 @@ export default function BlogPost() {
                             </ol>
                             <p><strong>Pro tip:</strong> Recover 10-30% of abandoned carts with this sequence</p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">3. Post-Purchase Follow-Up</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">3. Post-Purchase Follow-Up</h3>
                             <p><strong>Trigger:</strong> Customer completes purchase</p>
                             <p><strong>Goal:</strong> Increase satisfaction, generate reviews, drive repeat purchases</p>
                             <ol className="list-decimal pl-6 space-y-2">
@@ -121,7 +121,7 @@ export default function BlogPost() {
                                 <li><strong>Email 4 (30 days):</strong> Cross-sell/upsell recommendations</li>
                             </ol>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">4. Re-engagement / Win-Back</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">4. Re-engagement / Win-Back</h3>
                             <p><strong>Trigger:</strong> Subscriber inactive for 60-90 days</p>
                             <p><strong>Goal:</strong> Reactivate dormant subscribers or clean list</p>
                             <ol className="list-decimal pl-6 space-y-2">
@@ -131,7 +131,7 @@ export default function BlogPost() {
                             </ol>
                             <p><strong>Result:</strong> Re-engage 5-15% or clean list for better deliverability</p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">5. Lead Nurturing Drip Campaign</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">5. Lead Nurturing Drip Campaign</h3>
                             <p><strong>Trigger:</strong> Lead enters sales funnel</p>
                             <p><strong>Goal:</strong> Educate, build trust, move toward purchase decision</p>
                             <ol className="list-decimal pl-6 space-y-2">
@@ -141,7 +141,7 @@ export default function BlogPost() {
                             </ol>
                             <p><strong>Duration:</strong> 4-12 weeks depending on sales cycle</p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">6. Birthday/Anniversary Campaigns</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">6. Birthday/Anniversary Campaigns</h3>
                             <p><strong>Trigger:</strong> Customer birthday or purchase anniversary</p>
                             <p><strong>Goal:</strong> Build loyalty, drive purchases during peak engagement</p>
                             <ul className="list-disc pl-6 space-y-2">
@@ -151,11 +151,11 @@ export default function BlogPost() {
                             </ul>
                             <p><strong>Performance:</strong> 2-5x higher conversion than regular emails</p>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Segmentation Strategies</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Segmentation Strategies</h2>
 
                             <p>Generic emails generate generic results. Segmentation enables relevant, personalized messaging.</p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Key Segmentation Criteria</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Key Segmentation Criteria</h3>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li><strong>Demographics:</strong> Age, location, gender, income</li>
                                 <li><strong>Behavior:</strong> Purchase history, browsing activity, engagement level</li>
@@ -167,16 +167,16 @@ export default function BlogPost() {
 
                             <p><strong>Impact of segmentation:</strong> 760% increase in revenue compared to non-segmented campaigns</p>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Personalization Tactics</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Personalization Tactics</h2>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Basic Personalization</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Basic Personalization</h3>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li>First name in subject line and body</li>
                                 <li>Location-based content</li>
                                 <li>Birthday/anniversary messages</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Advanced Personalization</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Advanced Personalization</h3>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li><strong>Dynamic content blocks:</strong> Show different content to different segments in same email</li>
                                 <li><strong>Product recommendations:</strong> Based on browse and purchase history</li>
@@ -184,9 +184,9 @@ export default function BlogPost() {
                                 <li><strong>Behavior-triggered content:</strong> Recent page views, cart contents, search queries</li>
                             </ul>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Top Email Automation Platforms</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Top Email Automation Platforms</h2>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">1. HubSpot</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">1. HubSpot</h3>
                             <p><strong>Best for:</strong> All-in-one marketing automation</p>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li>Visual workflow builder</li>
@@ -195,7 +195,7 @@ export default function BlogPost() {
                                 <li><strong>Pricing:</strong> Free tier; Professional from $800/month</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">2. ActiveCampaign</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">2. ActiveCampaign</h3>
                             <p><strong>Best for:</strong> SMBs needing powerful automation</p>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li>Sophisticated automation workflows</li>
@@ -204,7 +204,7 @@ export default function BlogPost() {
                                 <li><strong>Pricing:</strong> From $29/month</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">3. Klaviyo</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">3. Klaviyo</h3>
                             <p><strong>Best for:</strong> E-commerce email automation</p>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li>E-commerce platform integrations</li>
@@ -213,7 +213,7 @@ export default function BlogPost() {
                                 <li><strong>Pricing:</strong> Free to 250 contacts; scales with list</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">4. Mailchimp</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">4. Mailchimp</h3>
                             <p><strong>Best for:</strong> Beginners and small businesses</p>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li>User-friendly interface</li>
@@ -222,7 +222,7 @@ export default function BlogPost() {
                                 <li><strong>Pricing:</strong> Free to 500 contacts; from $13/month</li>
                             </ul>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Deliverability Best Practices</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Deliverability Best Practices</h2>
                             <p>The best email is worthless if it doesn't reach the inbox.</p>
 
                             <ul className="list-disc pl-6 space-y-2">
@@ -235,7 +235,7 @@ export default function BlogPost() {
                                 <li><strong>Engagement matters:</strong> ISPs prioritize emails recipients engage with</li>
                             </ul>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">A/B Testing for Optimization</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">A/B Testing for Optimization</h2>
 
                             <p><strong>Elements to test:</strong></p>
                             <ul className="list-disc pl-6 space-y-2">
@@ -254,7 +254,7 @@ export default function BlogPost() {
                                 <li>Implement winners, then test next variable</li>
                             </ul>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Key Metrics to Track</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Key Metrics to Track</h2>
 
                             <ul className="list-disc pl-6 space-y-2">
                                 <li><strong>Deliverability rate:</strong> % of emails that reached inbox (aim for 95%+)</li>
@@ -266,20 +266,20 @@ export default function BlogPost() {
                                 <li><strong>List growth rate:</strong> (New subscribers - unsubscribes) / total subscribers</li>
                             </ul>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Conclusion</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Conclusion</h2>
                             <p>
                                 Email automation transforms email marketing from time-consuming manual work into scalable, personalized communication that drives consistent revenue. Start with essential workflows (welcome, abandoned cart, post-purchase), implement robust segmentation, continuously test and optimize, and watch email become your highest-ROI marketing channel.
                             </p>
 
-                            <div className="bg-gradient-to-r from-accent/20 to-orange-600/20 border border-accent/30 rounded-xl p-8 mt-12">
-                                <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                            <div className="cut-card [--cut:14px] relative bg-gradient-to-r from-ember/20 to-ember/20 [--cut-line:rgba(255,73,37,0.3)] p-8 mt-12">
+                                <h3 className="text-2xl font-bold text-ink mb-4 flex items-center gap-2">
                                     <Mail className="w-6 h-6" />
                                     Build Your Email Automation Engine
                                 </h3>
-                                <p className="text-neutral-200 mb-6">
+                                <p className="text-ink mb-6">
                                     Our email marketing specialists will audit your current strategy, design custom automation workflows, implement advanced segmentation, and optimize for maximum ROI.
                                 </p>
-                                <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-accent/90 transition-colors">
+                                <Link href="/contact" className="cut-btn [--cut:10px] [--cut-focus:#1B1A17] inline-flex items-center gap-2 px-6 py-3 bg-ember text-ink font-semibold hover:bg-[#FF5C3A] transition-colors">
                                     Get Email Automation Audit
                                     <ArrowRight className="w-4 h-4" />
                                 </Link>
@@ -288,26 +288,26 @@ export default function BlogPost() {
                     </motion.div>
 
                     {/* Tags */}
-                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mt-12 pt-8 border-t border-neutral-800">
-                        <h4 className="text-sm font-semibold text-neutral-400 uppercase tracking-wider mb-4">Tags</h4>
+                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mt-12 pt-8 border-t border-ink/10">
+                        <h4 className="text-sm font-semibold text-ink-soft uppercase tracking-wider mb-4">Tags</h4>
                         <div className="flex flex-wrap gap-2">
                             {["Email Marketing", "Marketing Automation", "Email Automation", "Lead Nurturing", "Cart Abandonment", "Email Strategy", "Conversion Optimization", "Digital Marketing"].map((tag) => (
-                                <span key={tag} className="px-4 py-2 bg-neutral-900 text-neutral-300 text-sm rounded-full border border-neutral-800 hover:border-accent transition-colors cursor-pointer">
+                                <span key={tag} className="px-4 py-2 bg-white/70 text-ink-soft text-sm rounded-full border border-ink/10 hover:border-ember transition-colors cursor-pointer">
                                     {tag}
                                 </span>
                             ))}
                         </div>
                     </motion.div>
 
-                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mt-12 pt-8 border-t border-neutral-800 flex items-center justify-between">
-                        <Link href="/blog/ai-content-generation-marketing" className="group flex items-center gap-2 text-neutral-400 hover:text-accent transition-colors">
+                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mt-12 pt-8 border-t border-ink/10 flex items-center justify-between">
+                        <Link href="/blog/ai-content-generation-marketing" className="group flex items-center gap-2 text-ink-soft hover:text-ember-deep transition-colors">
                             <ArrowLeft className="w-5 h-5" />
                             <div>
                                 <div className="text-xs uppercase tracking-wider mb-1">Previous</div>
                                 <div className="font-semibold">AI Content Generation</div>
                             </div>
                         </Link>
-                        <Link href="/blog/ai-analytics-business-intelligence" className="group flex items-center gap-2 text-neutral-400 hover:text-accent transition-colors text-right">
+                        <Link href="/blog/ai-analytics-business-intelligence" className="group flex items-center gap-2 text-ink-soft hover:text-ember-deep transition-colors text-right">
                             <div>
                                 <div className="text-xs uppercase tracking-wider mb-1">Next</div>
                                 <div className="font-semibold">AI Analytics & BI</div>
@@ -316,10 +316,10 @@ export default function BlogPost() {
                         </Link>
                     </motion.div>
 
-                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mt-8 pt-8 border-t border-neutral-800">
+                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mt-8 pt-8 border-t border-ink/10">
                         <div className="flex items-center gap-4">
-                            <span className="text-neutral-400 text-sm font-semibold">Share this article:</span>
-                            <button className="p-2 bg-neutral-900 rounded-lg hover:bg-accent transition-colors">
+                            <span className="text-ink-soft text-sm font-semibold">Share this article:</span>
+                            <button className="p-2 bg-white/70 rounded-lg hover:bg-[#FF5C3A] transition-colors">
                                 <Share2 className="w-5 h-5" />
                             </button>
                         </div>

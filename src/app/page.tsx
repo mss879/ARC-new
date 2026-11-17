@@ -6,6 +6,11 @@ import Hero from "@/components/Hero";
 import SchemaOrg from "@/components/SchemaOrg";
 import PreloaderProvider from "@/components/PreloaderProvider";
 import HomeFaq from "@/components/home/HomeFaq";
+import ProblemsSection from "@/components/home/ProblemsSection";
+import TryAgents from "@/components/home/TryAgents";
+import InControl from "@/components/home/InControl";
+import YourData from "@/components/home/YourData";
+import GuidesSection from "@/components/home/GuidesSection";
 import { SystemsIntro, SystemsPreviews } from "@/components/home/SystemsShowcase";
 import { homeFaq } from "@/content/home-faq";
 
@@ -22,7 +27,6 @@ const Process = dynamic(() => import("@/components/Process"));
 const CTA = dynamic(() => import("@/components/CTA"));
 const Footer = dynamic(() => import("@/components/Footer"));
 
-// Client-only component - imported separately
 
 // SEO Metadata for Homepage
 export const metadata: Metadata = {
@@ -72,12 +76,16 @@ export const metadata: Metadata = {
 
 // Loading fallback component — invisible to search engines
 const SectionLoader = () => (
-  <div className="w-full h-96 bg-black" aria-busy="true" aria-label="Loading section" />
+  <div className="w-full h-96" aria-busy="true" aria-label="Loading section" />
 );
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-background dark">
+    // .home-cream turns on the grey-cream theme for this page only (see
+    // "Home page: grey-cream theme" in src/index.css). The header, the
+    // logo ring and the closing block are shared with the dark pages, so each
+    // is told which look to use.
+    <div className="home-cream min-h-screen">
       {/* Start the hero video download as soon as the HTML arrives — before any
           JavaScript loads — so it finishes while the preloader plays. React
           hoists this into <head>; crossOrigin="anonymous" makes it match the
@@ -85,7 +93,7 @@ export default function HomePage() {
       <link
         rel="preload"
         as="fetch"
-        href="/Recreate_video_with_logo_202605251335.mp4"
+        href="/hero-arc-ai-glass-1080p.mp4"
         crossOrigin="anonymous"
       />
 
@@ -97,7 +105,7 @@ export default function HomePage() {
       {/* Page-level preloader: covers everything (navbar, hero, all sections)
           from the first paint and holds until the homepage assets are loaded */}
       <PreloaderProvider>
-        <Navbar />
+        <Navbar lightTop={false} />
 
         {/* Main content wrapper with semantic HTML */}
         <article>
@@ -113,22 +121,39 @@ export default function HomePage() {
         {/* Third on the page, straight after "What we build". */}
         <WhyUs />
 
+        {/* The everyday problems, each linking down to the preview of the
+            system that fixes it, so the previews read as the answer. */}
+        <ProblemsSection />
+
         <SystemsPreviews />
+
+        {/* Straight after watching the previews: try a real agent while the
+            interest is highest. Then the doubt that follows ("what if it gets
+            it wrong?") is answered at once. */}
+        <TryAgents />
+        <InControl />
 
         {/* Below the fold - dynamically imported and lazy loaded */}
         <ServicesSection />
-        <ClientsSection />
+        <ClientsSection tone="cream" />
         <PortfolioCarousel />
         <Process />
+
+        {/* Near the decision: ownership and data, which is when lock-in
+            worries surface. Then the guides, a next step for anyone still
+            comparing, before the page ends on questions and the call to
+            action. */}
+        <YourData />
+        <GuidesSection />
 
         {/* The guide and location links that used to sit here as a "Locations
             We Serve" grid are now in the footer, on every page. */}
         <HomeFaq />
 
-          <CTA />
+          <CTA tone="cream" />
         </article>
 
-        <Footer />
+        <Footer tone="dark" />
       </PreloaderProvider>
     </div>
   );

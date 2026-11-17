@@ -3,6 +3,8 @@
 import { motion, Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import "./ServicesSection.css";
+import { PillLink } from "./home/ui";
+import ServicesCircuit from "./home/ServicesCircuit";
 
 const headingVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -251,14 +253,6 @@ const ServicesSection = () => {
             viewport={{ once: true, amount: 0.3 }}
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
           >
-            <motion.div
-              className="services-tag-wrapper"
-              variants={headingVariants}
-            >
-              <div className="services-tag">
-                <p className="services-tag-text">services</p>
-              </div>
-            </motion.div>
 
             <motion.div
               className="services-text-container"
@@ -266,12 +260,21 @@ const ServicesSection = () => {
             >
               <h2 className="services-subtitle">How can we help</h2>
               <p className="services-title">Your business grow</p>
+              <PillLink href="/services" variant="ghost" className="mt-6 self-start">
+                See all services
+              </PillLink>
             </motion.div>
           </motion.div>
+
+          {/* Fills the column beside the list on wide screens, where the
+              heading stays in view while the list scrolls. */}
+          <div className="services-visual cream-card">
+            <ServicesCircuit />
+          </div>
         </div>
 
         <motion.div
-          className="services-list"
+          className="services-list cut-card [--cut:22px] relative"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.05 }}
@@ -281,6 +284,7 @@ const ServicesSection = () => {
             <motion.div
               key={service.id}
               className="services-item"
+              data-open={expandedId === service.id}
               ref={(el) => {
                 itemRefs.current[service.id] = el;
               }}
@@ -340,14 +344,9 @@ const ServicesSection = () => {
                       </li>
                     ))}
                   </ul>
-                  <a
-                    href={service.href}
-                    tabIndex={expandedId === service.id ? 0 : -1}
-                    className="mt-8 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[rgb(255,73,37)] transition-colors hover:text-white"
-                  >
+                  <PillLink href={service.href} tabIndex={expandedId === service.id ? 0 : -1}>
                     {service.href === "/contact" ? `Ask about ${service.title}` : `More on ${service.title}`}
-                    <span aria-hidden="true">↗</span>
-                  </a>
+                  </PillLink>
                 </div>
               </motion.div>
             </motion.div>

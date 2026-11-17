@@ -60,6 +60,7 @@ const fadeInUp: Variants = {
 
 interface ServiceDetails {
     icon: React.ReactNode;
+    artwork: string;
     number: string;
     title: string;
     description: string;
@@ -83,6 +84,7 @@ export default function ServicesList() {
     const digitalServices: ServiceDetails[] = [
         {
             icon: <Laptop className="w-8 h-8" />,
+            artwork: "smart-websites",
             number: "01",
             title: "Smart Websites",
             description: "High-converting, intelligent websites designed to capture attention and drive action. Not just a pretty face—a powerful sales engine.",
@@ -114,6 +116,7 @@ export default function ServicesList() {
         },
         {
             icon: <Rocket className="w-8 h-8" />,
+            artwork: "smart-ad-campaigns",
             number: "02",
             title: "Smart Ad Campaigns",
             description: "Data-driven advertising campaigns that find your ideal customers and scale your revenue with surgical precision.",
@@ -146,6 +149,7 @@ export default function ServicesList() {
         },
         {
             icon: <Code2 className="w-8 h-8" />,
+            artwork: "web-apps",
             number: "03",
             title: "Web Apps",
             description: "Custom web applications built with modern tech stacks to solve complex business problems and streamline operations.",
@@ -178,6 +182,7 @@ export default function ServicesList() {
         },
         {
             icon: <Search className="w-8 h-8" />,
+            artwork: "smart-funnels",
             number: "04",
             title: "Smart Funnels",
             description: "Intelligent systems that nurture leads from curiosity to conversion on autopilot, 24/7/365.",
@@ -210,6 +215,7 @@ export default function ServicesList() {
         },
         {
             icon: <BrainCircuit className="w-8 h-8" />,
+            artwork: "custom-backend",
             number: "05",
             title: "Custom Backend Systems",
             description: "Robust, secure backend infrastructure designed for scale, speed, and rock-solid reliability.",
@@ -242,6 +248,7 @@ export default function ServicesList() {
         },
         {
             icon: <Palette className="w-8 h-8" />,
+            artwork: "brand-kits",
             number: "06",
             title: "Brand Kits",
             description: "Comprehensive visual identities that command authority and distinguish you from the competition.",
@@ -277,6 +284,7 @@ export default function ServicesList() {
     const aiServices: ServiceDetails[] = [
         {
             icon: <Search className="w-8 h-8" />,
+            artwork: "consulting-audits",
             number: "01",
             title: "Consulting & Automation Audits",
             description: "Expert guidance to map your current processes and identify the exact areas where AI will drive the highest ROI.",
@@ -307,6 +315,7 @@ export default function ServicesList() {
         },
         {
             icon: <Bot className="w-8 h-8" />,
+            artwork: "ai-chatbots",
             number: "02",
             title: "Website AI Agents (Engage)",
             description: "Smart website agents that provide 24/7 support, answer FAQs instantly, and qualify leads while you sleep.",
@@ -337,6 +346,7 @@ export default function ServicesList() {
         },
         {
             icon: <Zap className="w-8 h-8" />,
+            artwork: "ai-automated-workflows",
             number: "03",
             title: "Automated Workflows (Flow)",
             description: "Connect your apps and eliminate repetitive copy-paste tasks. Data moves seamlessly across your business.",
@@ -367,6 +377,7 @@ export default function ServicesList() {
         },
         {
             icon: <FileText className="w-8 h-8" />,
+            artwork: "ai-data-processing",
             number: "04",
             title: "AI Data Processing",
             description: "Automatically extract clean, structured data from messy PDFs, receipts, and emails directly into your database.",
@@ -397,6 +408,7 @@ export default function ServicesList() {
         },
         {
             icon: <Palette className="w-8 h-8" />,
+            artwork: "ai-content-generation",
             number: "05",
             title: "AI Content Generation",
             description: "Produce SEO-optimized articles, newsletters, and social copy scaled across multiple tone-of-voice profiles.",
@@ -427,6 +439,7 @@ export default function ServicesList() {
         },
         {
             icon: <MessageSquare className="w-8 h-8" />,
+            artwork: "ai-voice-assistants",
             number: "06",
             title: "AI Voice Assistants (Qualify)",
             description: "Human-sounding AI voice agents that call inbound leads within 5 minutes or handle your customer support line.",
@@ -457,6 +470,7 @@ export default function ServicesList() {
         },
         {
             icon: <Share2 className="w-8 h-8" />,
+            artwork: "ai-sales-sdrs",
             number: "07",
             title: "AI Sales Reps (SDRs)",
             description: "Automated prospectors that research targets, write hyper-personalized cold emails, and manage follow-ups.",
@@ -487,6 +501,7 @@ export default function ServicesList() {
         },
         {
             icon: <BrainCircuit className="w-8 h-8" />,
+            artwork: "ai-multi-agent-systems",
             number: "08",
             title: "AI Multi-Agent Systems (Command)",
             description: "Complete organizational intelligence. Multiple specialized AI agents working together to run entire departments.",
@@ -517,14 +532,7 @@ export default function ServicesList() {
         }
     ];
 
-    const ServiceCard = ({ service, index, type }: { service: ServiceDetails; index: number; type: 'ai' | 'digital' }) => {
-        // AI theme gets orange/purple vibes, Digital gets blue/emerald vibes
-        const themeColor = type === 'ai' ? 'orange' : 'blue';
-        const glowColor = type === 'ai' ? 'from-orange-500/30 to-purple-600/30' : 'from-blue-500/30 to-emerald-500/30';
-        const textHighlight = type === 'ai' ? 'text-orange-400' : 'text-blue-400';
-        const bgHighlight = type === 'ai' ? 'bg-orange-500/10 text-orange-400 border-orange-500/20 group-hover:bg-orange-500 group-hover:text-white group-hover:border-orange-500/50' : 'bg-blue-500/10 text-blue-400 border-blue-500/20 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-500/50';
-        const tagStyle = type === 'ai' ? 'bg-orange-500/5 text-orange-300 border-orange-500/10 group-hover:border-orange-500/30 group-hover:bg-orange-500/10' : 'bg-blue-500/5 text-blue-300 border-blue-500/10 group-hover:border-blue-500/30 group-hover:bg-blue-500/10';
-
+    const ServiceCard = ({ service }: { service: ServiceDetails }) => {
         const handleClick = (e: React.MouseEvent) => {
             if (!service.link) {
                 e.preventDefault();
@@ -534,48 +542,42 @@ export default function ServicesList() {
 
         return (
             <motion.div variants={itemVariants} className="h-full">
-                <Link href={service.link || "#"} onClick={handleClick} className="block h-full">
-                    <div className="group relative h-full bg-[#050505] border border-white/5 rounded-[24px] p-8 sm:p-10 hover:bg-[#0a0a0a] transition-all duration-500 overflow-hidden isolate">
-                        {/* Premium Glow Effect */}
-                        <div className={`absolute inset-0 bg-gradient-to-br ${glowColor} opacity-0 group-hover:opacity-100 blur-3xl transition-opacity duration-700 -z-10`} />
-                        <div className="absolute inset-x-0 -top-px h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        
-                        <div className="relative z-10 flex flex-col h-full">
-                            {/* Header: Icon & Number */}
-                            <div className="flex justify-between items-start mb-8">
-                                <div className={`p-4 rounded-2xl border transition-all duration-500 ${bgHighlight}`}>
-                                    {service.icon}
-                                </div>
-                                <span className="text-5xl font-black text-white/5 group-hover:text-white/10 transition-colors duration-500 tracking-tighter">
-                                    {service.number}
+                <Link
+                    href={service.link || "#"}
+                    onClick={handleClick}
+                    className="cut-card [--cut:22px] relative group flex h-full flex-col [--cut-line:rgba(27,26,23,0.1)] bg-paper-white/70 p-3 transition-colors duration-300 hover:[--cut-line:rgba(255,73,37,0.4)] hover:bg-paper-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ember-deep sm:p-4"
+                >
+                    <div
+                        aria-hidden="true"
+                        className="cut-card [--cut:14px] relative isolate grid h-44 shrink-0 place-items-center overflow-hidden bg-[radial-gradient(ellipse_at_center,#F9DBCD,#F3EBE2_74%)] sm:h-48"
+                    >
+                        <div className="absolute inset-0 -z-10 bg-[radial-gradient(#B62A0B_1px,transparent_1px)] bg-[size:18px_18px] opacity-[0.10]" />
+                        <Image
+                            src={`/service-icons/${service.artwork}.webp`}
+                            alt=""
+                            width={432}
+                            height={360}
+                            unoptimized
+                            className="h-40 w-48 max-w-full object-contain drop-shadow-[0_10px_12px_rgba(94,45,20,0.14)] motion-safe:transition-transform motion-safe:duration-500 motion-safe:group-hover:-translate-y-1 sm:h-[180px] sm:w-[216px]"
+                        />
+                        <span className="absolute right-3 top-3 grid size-9 place-items-center rounded-full border border-ink/10 bg-paper-white/80 text-ember-deep transition-colors duration-300 group-hover:border-ember group-hover:bg-ember group-hover:text-ink">
+                            <ArrowUpRight className="size-4" />
+                        </span>
+                    </div>
+
+                    <div className="flex flex-1 flex-col px-3 pb-4 pt-6 sm:px-4 sm:pb-5">
+                        <h3 className="mb-3 text-2xl font-bold tracking-tight text-ink transition-colors duration-300 group-hover:text-ember-deep sm:text-[1.75rem] sm:leading-tight">
+                            {service.title}
+                        </h3>
+                        <p className="mb-6 text-sm font-medium leading-relaxed text-ink-soft sm:text-base">
+                            {service.description}
+                        </p>
+                        <div className="mt-auto flex flex-wrap gap-2">
+                            {service.tags.map((tag) => (
+                                <span key={tag} className="rounded-md border border-ember/10 bg-ember/5 px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-ember-deep">
+                                    {tag}
                                 </span>
-                            </div>
-
-                            {/* Content */}
-                            <div className="flex-1">
-                                <h3 className={`text-2xl sm:text-3xl font-bold text-white mb-4 group-hover:${textHighlight} transition-colors duration-300 tracking-tight`}>
-                                    {service.title}
-                                </h3>
-                                <p className="text-neutral-400 leading-relaxed text-sm sm:text-base mb-8 font-medium">
-                                    {service.description}
-                                </p>
-                            </div>
-
-                            {/* Tags */}
-                            <div className="flex flex-wrap gap-2 mt-auto">
-                                {service.tags.map((tag, i) => (
-                                    <span key={i} className={`px-3 py-1.5 text-[10px] font-bold tracking-widest uppercase rounded-md border transition-all duration-300 ${tagStyle}`}>
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
-
-                            {/* Hover Arrow */}
-                            <div className="absolute bottom-10 right-10 opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-500 ease-out">
-                                <div className={`w-10 h-10 rounded-full flex items-center justify-center bg-white/5 backdrop-blur-md border border-white/10 ${textHighlight}`}>
-                                    <ArrowUpRight className="w-5 h-5" />
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
                 </Link>
@@ -584,21 +586,20 @@ export default function ServicesList() {
     };
 
     return (
-        <div className="min-h-screen bg-black text-white selection:bg-orange-500/30 selection:text-orange-200">
+        <div className="home-cream min-h-screen bg-transparent text-ink selection:bg-ember/30 selection:text-orange-200">
             <Navbar />
 
             {/* Background Effects */}
             <div className="fixed inset-0 z-0 pointer-events-none">
-                <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-purple-900/20 rounded-full blur-[120px] mix-blend-screen opacity-30" />
-                <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-orange-900/20 rounded-full blur-[120px] mix-blend-screen opacity-30" />
-                <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay" />
+                <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-ember/[0.06] rounded-full blur-[120px] mix-blend-screen opacity-30 hidden" />
+                <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-ember/[0.06] rounded-full blur-[120px] mix-blend-screen opacity-30 hidden hidden" />
             </div>
 
             <div className="relative z-10 w-full overflow-hidden">
                 {/* Hero Section */}
                 <section className="relative min-h-[90vh] flex items-center justify-center px-4 md:px-8 pt-32 pb-20 w-full">
                     {/* The Dark Seamless Fade */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black z-0" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-paper via-paper/95 to-paper z-0" />
                     
                     {/* Geometric grid mesh overlay */}
                     <div
@@ -646,8 +647,8 @@ export default function ServicesList() {
                             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                             className="mb-8"
                         >
-                            <span className="px-6 py-2 rounded-full bg-white/5 backdrop-blur-md text-xs font-bold tracking-widest uppercase text-neutral-300 border border-white/10 shadow-[0_0_30px_rgba(249,115,22,0.3)] flex items-center gap-2 mx-auto w-max">
-                                <Search className="w-4 h-4 text-orange-500 animate-[pulse_2s_linear_infinite]" />
+                            <span className="px-6 py-2 rounded-full bg-white/70 text-xs font-bold tracking-widest uppercase text-ink-soft border border-ink/10 flex items-center gap-2 mx-auto w-max">
+                                <Search className="w-4 h-4 text-ember-deep animate-[pulse_2s_linear_infinite]" />
                                 Explore Future Tech
                             </span>
                         </motion.div>
@@ -658,7 +659,7 @@ export default function ServicesList() {
                             variants={letterContainer}
                             className="mb-8"
                         >
-                            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tight text-white mix-blend-lighten">
+                            <h1 className="text-6xl md:text-8xl lg:text-9xl font-medium tracking-[-0.035em] text-ink mix-blend-lighten">
                                 {["OUR", "SERVICES"].map((word, i) => (
                                     <span key={i} className="block mb-2">
                                         {word.split("").map((char, j) => (
@@ -679,7 +680,7 @@ export default function ServicesList() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5, duration: 0.7 }}
-                            className="text-xl md:text-2xl text-neutral-400 max-w-3xl mx-auto mb-12"
+                            className="text-xl md:text-2xl text-ink-soft max-w-3xl mx-auto mb-12"
                         >
                             From digital marketing to AI-powered solutions, we deliver comprehensive services
                             that drive growth and transform your business securely.
@@ -688,17 +689,17 @@ export default function ServicesList() {
                 </section>
 
                 {/* AI Services Grid (Showcased First) */}
-                <section className="py-24 px-4 md:px-8 border-t border-white/5 bg-[#020202] relative overflow-hidden">
-                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-orange-900/20 via-black to-black pointer-events-none mix-blend-screen" />
+                <section className="py-24 px-4 md:px-8 border-t border-ink/10 bg-transparent relative overflow-hidden">
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-ember/20 via-paper to-paper pointer-events-none mix-blend-screen hidden" />
                     <div className="max-w-[1400px] mx-auto relative z-10 w-full">
-                        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+                        <div id="ai-services" className="flex scroll-mt-28 flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
                             <div>
-                                <h2 className="text-sm font-black text-orange-500 uppercase tracking-[0.3em] mb-4">Core Competency</h2>
-                                <h3 className="text-4xl md:text-5xl lg:text-7xl font-black text-white tracking-tight">
-                                    Artificial <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">Intelligence.</span>
+                                <h2 className="text-sm font-medium text-ember-deep tracking-[0.3em] mb-4">Core Competency</h2>
+                                <h3 className="text-4xl md:text-5xl lg:text-7xl font-semibold text-ink tracking-tight">
+                                    Artificial <span className="text-ember-ink">Intelligence.</span>
                                 </h3>
                             </div>
-                            <p className="text-neutral-400 text-base md:text-lg max-w-sm md:text-right font-medium leading-relaxed">
+                            <p className="text-ink-soft text-base md:text-lg max-w-sm md:text-right font-medium leading-relaxed">
                                 Unfair advantages built in code. Scale your revenue and cut operational bloat instantly.
                             </p>
                         </div>
@@ -710,25 +711,25 @@ export default function ServicesList() {
                             variants={containerVariants}
                             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full"
                         >
-                            {aiServices.map((service, index) => (
-                                <ServiceCard key={index} service={service} index={index} type="ai" />
+                            {aiServices.map((service) => (
+                                <ServiceCard key={service.artwork} service={service} />
                             ))}
                         </motion.div>
                     </div>
                 </section>
 
                 {/* Digital Services Grid (Showcased Second) */}
-                <section className="py-24 px-4 md:px-8 bg-black relative w-full">
-                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-900/20 via-black to-black pointer-events-none mix-blend-screen" />
-                    <div className="max-w-[1400px] mx-auto relative z-10 w-full border-t border-white/5 pt-24">
-                        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+                <section className="py-24 px-4 md:px-8 bg-transparent relative w-full">
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-ember/20 via-paper to-paper pointer-events-none mix-blend-screen hidden" />
+                    <div className="max-w-[1400px] mx-auto relative z-10 w-full border-t border-ink/10 pt-24">
+                        <div id="digital-services" className="flex scroll-mt-28 flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
                             <div>
-                                <h2 className="text-sm font-black text-blue-500 uppercase tracking-[0.3em] mb-4">Foundation</h2>
-                                <h3 className="text-4xl md:text-5xl lg:text-7xl font-black text-white tracking-tight">
-                                    Digital <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-emerald-500">Infrastructure.</span>
+                                <h2 className="text-sm font-medium text-ember-deep tracking-[0.3em] mb-4">Foundation</h2>
+                                <h3 className="text-4xl md:text-5xl lg:text-7xl font-semibold text-ink tracking-tight">
+                                    Digital <span className="text-ember-ink">Infrastructure.</span>
                                 </h3>
                             </div>
-                            <p className="text-neutral-400 text-base md:text-lg max-w-sm md:text-right font-medium leading-relaxed">
+                            <p className="text-ink-soft text-base md:text-lg max-w-sm md:text-right font-medium leading-relaxed">
                                 High-performance software, websites, and funnels engineered to convert traffic into cash.
                             </p>
                         </div>
@@ -738,18 +739,18 @@ export default function ServicesList() {
                             whileInView="visible"
                             viewport={{ once: true, amount: 0.1 }}
                             variants={containerVariants}
-                            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 w-full"
+                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full"
                         >
-                            {digitalServices.map((service, index) => (
-                                <ServiceCard key={index} service={service} index={index} type="digital" />
+                            {digitalServices.map((service) => (
+                                <ServiceCard key={service.artwork} service={service} />
                             ))}
                         </motion.div>
                     </div>
                 </section>
 
                 {/* Dark Custom CTA section */}
-                <section className="py-32 px-6 md:px-12 text-center relative overflow-hidden bg-[#050505] border-t border-white/5">
-                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500/5 via-transparent to-blue-500/5" />
+                <section className="py-32 px-6 md:px-12 text-center relative overflow-hidden bg-transparent border-t border-ink/10">
+                    <div className="absolute inset-0 bg-gradient-to-r from-ember/5 via-transparent to-ember/5" />
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -757,15 +758,15 @@ export default function ServicesList() {
                         transition={{ duration: 0.8 }}
                         className="max-w-3xl mx-auto relative z-10"
                     >
-                        <h2 className="text-5xl md:text-7xl font-black mb-8 text-white tracking-tight">
-                            Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">Scale?</span>
+                        <h2 className="text-5xl md:text-7xl font-medium mb-8 text-ink tracking-[-0.035em]">
+                            Ready to <span className="text-ember-ink">Scale?</span>
                         </h2>
-                        <p className="text-xl text-neutral-400 mb-10 font-medium leading-relaxed">
+                        <p className="text-xl text-ink-soft mb-10 font-medium leading-relaxed">
                             Stop guessing and start growing. Let's discuss how we can transform your operations today.
                         </p>
                         <Link href="/contact">
-                            <button className="group relative px-10 py-5 rounded-full bg-orange-500 hover:bg-orange-600 transition-all duration-300 shadow-[0_0_30px_rgba(249,115,22,0.4)] hover:shadow-[0_0_50px_rgba(249,115,22,0.6)]">
-                                <span className="relative z-10 flex items-center gap-2 text-white font-bold tracking-widest text-sm uppercase">
+                            <button className="cut-btn [--cut:12px] [--cut-focus:#1B1A17] group relative px-10 py-5 bg-ember hover:bg-[#FF5C3A] transition-all duration-300">
+                                <span className="relative z-10 flex items-center gap-2 text-ink font-bold tracking-widest text-sm uppercase">
                                     START A PROJECT
                                     <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                                 </span>
@@ -796,32 +797,32 @@ export default function ServicesList() {
                             animate={{ scale: 1, opacity: 1, y: 0 }}
                             exit={{ scale: 0.95, opacity: 0, y: 20 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.8)] custom-scrollbar"
+                            className="cut-card [--cut:18px] relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-transparent [--cut-line:rgba(27,26,23,0.1)] custom-scrollbar"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Close Button */}
                             <button
                                 onClick={() => setSelectedService(null)}
-                                className="sticky top-6 right-6 float-right z-10 p-3 bg-black/50 hover:bg-white/10 backdrop-blur-md rounded-full border border-white/10 transition-colors"
+                                className="sticky top-6 right-6 float-right z-10 p-3 bg-paper/50 hover:bg-white rounded-full border border-ink/10 transition-colors"
                             >
-                                <X className="w-5 h-5 text-white" />
+                                <X className="w-5 h-5 text-ink" />
                             </button>
 
                             <div className="p-8 md:p-12 relative z-0">
                                 {/* Header */}
                                 <div className="flex flex-col md:flex-row gap-8 mb-12">
                                     <div className="shrink-0">
-                                        <div className="w-24 h-24 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-500 border border-orange-500/20 shadow-[0_0_20px_rgba(249,115,22,0.2)]">
+                                        <div className="w-24 h-24 rounded-2xl bg-ember/10 flex items-center justify-center text-ember-deep border border-ember/20">
                                             {selectedService.icon}
                                         </div>
                                     </div>
                                     <div>
                                         <div className="flex items-center gap-4 mb-3">
-                                            <span className="text-orange-500 font-bold tracking-widest text-sm uppercase">Service {selectedService.number}</span>
-                                            <div className="h-px flex-1 bg-gradient-to-r from-orange-500/50 to-transparent" />
+                                            <span className="text-ember-deep font-bold tracking-widest text-sm uppercase">Service {selectedService.number}</span>
+                                            <div className="h-px flex-1 bg-gradient-to-r from-ember/50 to-transparent" />
                                         </div>
-                                        <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">{selectedService.title}</h2>
-                                        <h3 className="text-xl md:text-2xl text-neutral-300 font-medium leading-relaxed">
+                                        <h2 className="text-4xl md:text-5xl font-medium text-ink mb-4 tracking-[-0.035em]">{selectedService.title}</h2>
+                                        <h3 className="text-xl md:text-2xl text-ink-soft font-medium leading-relaxed">
                                             {selectedService.modalContent.headline}
                                         </h3>
                                     </div>
@@ -830,23 +831,23 @@ export default function ServicesList() {
                                 {/* Main Content Grid */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
                                     {/* Problem */}
-                                    <div className="p-8 rounded-2xl bg-[#0d0d0d] border border-red-500/10 hover:border-red-500/20 transition-colors">
-                                        <h4 className="text-lg font-bold text-red-400 mb-4 flex items-center gap-3">
-                                            <span className="w-3 h-3 rounded-full bg-red-400 shadow-[0_0_10px_rgba(248,113,113,0.5)] animate-pulse" />
+                                    <div className="cut-card [--cut:18px] relative p-8 bg-transparent [--cut-line:rgba(239,68,68,0.1)] hover:[--cut-line:rgba(239,68,68,0.2)] transition-colors">
+                                        <h4 className="text-lg font-bold text-red-700 mb-4 flex items-center gap-3">
+                                            <span className="w-3 h-3 rounded-full bg-red-400 animate-pulse" />
                                             The Challenge
                                         </h4>
-                                        <p className="text-neutral-400 leading-relaxed font-medium">
+                                        <p className="text-ink-soft leading-relaxed font-medium">
                                             {selectedService.modalContent.problem}
                                         </p>
                                     </div>
 
                                     {/* Solution */}
-                                    <div className="p-8 rounded-2xl bg-[#0d0d0d] border border-emerald-500/10 hover:border-emerald-500/20 transition-colors">
-                                        <h4 className="text-lg font-bold text-emerald-400 mb-4 flex items-center gap-3">
-                                            <span className="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.5)] animate-pulse" />
+                                    <div className="cut-card [--cut:18px] relative p-8 bg-transparent [--cut-line:rgba(255,73,37,0.1)] hover:[--cut-line:rgba(255,73,37,0.2)] transition-colors">
+                                        <h4 className="text-lg font-bold text-ember-deep mb-4 flex items-center gap-3">
+                                            <span className="w-3 h-3 rounded-full bg-ember animate-pulse" />
                                             Our Solution
                                         </h4>
-                                        <p className="text-neutral-400 leading-relaxed font-medium">
+                                        <p className="text-ink-soft leading-relaxed font-medium">
                                             {selectedService.modalContent.solution}
                                         </p>
                                     </div>
@@ -855,31 +856,31 @@ export default function ServicesList() {
                                 {/* Benefits & Process */}
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
                                     <div>
-                                        <h4 className="text-xl font-bold text-white mb-8 flex items-center gap-3">
-                                            <Check className="w-6 h-6 text-orange-500" />
+                                        <h4 className="text-xl font-bold text-ink mb-8 flex items-center gap-3">
+                                            <Check className="w-6 h-6 text-ember-ink" />
                                             Key Benefits
                                         </h4>
                                         <div className="space-y-4">
                                             {selectedService.modalContent.benefits.map((benefit, i) => (
-                                                <div key={i} className="flex items-start gap-4 p-5 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all">
-                                                    <div className="w-2 h-2 rounded-full bg-orange-500 mt-2 shrink-0 shadow-[0_0_10px_rgba(249,115,22,0.8)]" />
-                                                    <span className="text-base text-neutral-300 font-medium leading-relaxed">{benefit}</span>
+                                                <div key={i} className="cut-card [--cut:14px] relative flex items-start gap-4 p-5 bg-white/70 [--cut-line:rgba(27,26,23,0.1)] hover:bg-white hover:[--cut-line:rgba(27,26,23,0.3)] transition-all">
+                                                    <div className="w-2 h-2 rounded-full bg-ember mt-2 shrink-0" />
+                                                    <span className="text-base text-ink-soft font-medium leading-relaxed">{benefit}</span>
                                                 </div>
                                             ))}
                                         </div>
                                     </div>
 
                                     <div>
-                                        <h4 className="text-xl font-bold text-white mb-8 flex items-center gap-3">
-                                            <Sparkles className="w-6 h-6 text-orange-500" />
+                                        <h4 className="text-xl font-bold text-ink mb-8 flex items-center gap-3">
+                                            <Sparkles className="w-6 h-6 text-ember-ink" />
                                             The Process
                                         </h4>
-                                        <div className="relative border-l border-white/10 ml-4 space-y-10 py-2">
+                                        <div className="relative border-l border-ink/10 ml-4 space-y-10 py-2">
                                             {selectedService.modalContent.process.map((step, i) => (
                                                 <div key={i} className="relative pl-8">
-                                                    <span className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-neutral-800 border-2 border-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.5)]" />
-                                                    <span className="block text-xs font-bold text-orange-500 mb-2 tracking-widest uppercase">STEP 0{i + 1}</span>
-                                                    <span className="text-base text-neutral-300 font-medium leading-relaxed block">{step}</span>
+                                                    <span className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-ink/[0.05] border-2 border-ember" />
+                                                    <span className="block text-xs font-bold text-ember-deep mb-2 tracking-widest uppercase">STEP 0{i + 1}</span>
+                                                    <span className="text-base text-ink-soft font-medium leading-relaxed block">{step}</span>
                                                 </div>
                                             ))}
                                         </div>
@@ -887,22 +888,21 @@ export default function ServicesList() {
                                 </div>
 
                                 {/* Bottom Results & CTA */}
-                                <div className="p-10 rounded-2xl bg-gradient-to-br from-orange-500/10 to-purple-500/5 border border-orange-500/20 text-center relative overflow-hidden">
-                                    <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay" />
+                                <div className="cut-card [--cut:18px] p-10 bg-gradient-to-br from-ember/10 to-ember/5 [--cut-line:rgba(255,73,37,0.2)] text-center relative overflow-hidden">
                                     
-                                    <h4 className="text-sm font-bold tracking-widest text-orange-400 mb-6 uppercase">Proven Results</h4>
-                                    <p className="text-xl md:text-2xl text-white max-w-2xl mx-auto mb-10 font-medium leading-relaxed italic">
+                                    <h4 className="text-sm font-bold tracking-widest text-ember-deep mb-6 uppercase">Proven Results</h4>
+                                    <p className="text-xl md:text-2xl text-ink max-w-2xl mx-auto mb-10 font-medium leading-relaxed italic">
                                         "{selectedService.modalContent.results}"
                                     </p>
 
-                                    <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent mb-10" />
+                                    <div className="h-px w-full bg-gradient-to-r from-transparent via-ink/5 to-transparent mb-10" />
 
-                                    <h4 className="text-2xl md:text-4xl font-black text-white mb-8 tracking-tight">
+                                    <h4 className="text-2xl md:text-4xl font-semibold text-ink mb-8 tracking-tight">
                                         {selectedService.modalContent.cta}
                                     </h4>
 
                                     <Link href="/contact" onClick={() => setSelectedService(null)}>
-                                        <button className="relative px-10 py-5 rounded-full bg-white text-black font-bold uppercase tracking-widest hover:bg-neutral-200 hover:scale-[1.02] transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                                        <button className="cut-btn [--cut:12px] relative px-10 py-5 bg-white text-ink font-bold uppercase tracking-widest hover:bg-neutral-200 hover:scale-[1.02] transition-all duration-300">
                                             Let's Talk Business
                                         </button>
                                     </Link>

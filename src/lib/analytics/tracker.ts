@@ -36,6 +36,7 @@
  *     CRM was handed too. See `trackFormSubmitted`.
  */
 
+import { hasConsent } from "@/lib/consent";
 import type {
   AnalyticsChannel,
   AnalyticsEventKind,
@@ -87,8 +88,14 @@ const K = {
 // ── storage that cannot throw ───────────────────────────────────────────────
 // Safari in private mode and a hard cookie block both throw on write. An
 // analytics script is never the right thing to break a page over.
+//
+// Consent: nothing is read from or written to the device until the visitor
+// has agreed to analytics (src/lib/consent.ts). Without it `initAnalytics`
+// does not start, so there is no session and `flush` sends nothing; events
+// fired before then wait in memory and are dropped if consent never comes.
 
 function read(key: string): string | null {
+  if (!hasConsent("analytics")) return null;
   try {
     return window.localStorage.getItem(key);
   } catch {
@@ -97,6 +104,7 @@ function read(key: string): string | null {
 }
 
 function write(key: string, value: string): void {
+  if (!hasConsent("analytics")) return;
   try {
     window.localStorage.setItem(key, value);
   } catch {
@@ -1282,6 +1290,7 @@ export function trackWebVital(name: string, value: number, rating: string): void
  */
 export function initAnalytics(path: string): void {
   if (started || typeof window === "undefined") return;
+  if (!hasConsent("analytics")) return;
   started = true;
 
   try {

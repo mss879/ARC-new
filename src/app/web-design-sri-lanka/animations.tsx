@@ -53,7 +53,7 @@ export function HeroImageAnimation({ children }: { children: ReactNode }) {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative aspect-video rounded-2xl overflow-hidden border border-neutral-800 shadow-2xl mt-10"
+            className="cut-card [--cut:18px] relative aspect-video overflow-hidden [--cut-line:rgba(27,26,23,0.1)] shadow-2xl mt-10"
         >
             {children}
         </motion.div>

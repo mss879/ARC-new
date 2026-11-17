@@ -1,130 +1,81 @@
 "use client";
 
-/* Auto-generated WhyUs section translated from provided Framer export.
-   NOTE: The original markup relied on Framer-specific class names and animations.
-   We preserve structure and IDs while making it valid React/JSX. Minimal styling
-   is kept; for pixel perfection you'd port the original CSS from Framer or
-   recreate with Tailwind / Framer Motion.
-*/
+/* "Why us" on the home page: the heading, one line of proof, and three
+   figures as a row of cards (the first one dark, for contrast).
+
+   The figures come from src/content/site-facts.ts, so they are set in one
+   place. Each card starts on its real number in the server HTML and replays a
+   count-up from zero when the row scrolls into view. The orange on the page
+   is carried by icons and thin lines, not glows. */
 import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { motion, useInView, Variants } from "framer-motion";
+import { CalendarClock, FolderCheck, ThumbsUp, type LucideIcon } from "lucide-react";
 import { stats as siteStats } from "@/content/site-facts";
+import { PillLink } from "./home/ui";
 
-const title = "NUMBERS DON'T LIE";
+const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
-const letterContainer: Variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.04, delayChildren: 0.15 },
-  },
+const wordContainer: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.09, delayChildren: 0.1 } },
 };
 
-const letterVariant: Variants = {
-  hidden: { y: `0.55em`, opacity: 0 },
-  show: {
-    y: 0,
-    opacity: 1,
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
-  },
+const wordVariant: Variants = {
+  hidden: { y: "0.45em", opacity: 0 },
+  show: { y: 0, opacity: 1, transition: { duration: 0.7, ease: EASE } },
 };
 
 const WhyUs: React.FC = () => {
   return (
-    <section className="framer-18rrafk relative overflow-hidden bg-black text-white" data-framer-name="Why us" id="why-us">
-      {/* Background Image Wrapper */}
-      <div className="framer-btynsp absolute inset-0 -z-10" data-framer-name="BG">
-        <div style={{ position: "absolute", borderRadius: "inherit", top: 0, right: 0, bottom: 0, left: 0 }}>
-          <Image
-            src="/images/why-us-bg.webp"
-            alt="Abstract dark background pattern for ARC AI statistics section"
-            fill
-            sizes="100vw"
-            quality={85}
-            priority={false}
-            style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", objectPosition: "center", objectFit: "cover" }}
-          />
-        </div>
-      </div>
+    <section className="relative overflow-hidden px-4 py-16 md:px-8 lg:px-20 lg:py-24" id="why-us">
+      <div className="relative mx-auto max-w-[1400px]">
+        <div className="grid gap-8 lg:grid-cols-2 lg:items-end lg:gap-16">
+          <motion.h2
+            className="text-5xl font-medium leading-[0.98] tracking-[-0.04em] text-ink sm:text-6xl md:text-7xl lg:text-[5.5rem]"
+            variants={wordContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.6 }}
+            aria-label="Numbers don't lie"
+          >
+            <span className="block overflow-hidden pb-[0.08em]" aria-hidden="true">
+              <motion.span className="inline-block will-change-transform" variants={wordVariant}>
+                Numbers
+              </motion.span>
+            </span>
+            <span className="block overflow-hidden pb-[0.08em] text-ember-ink" aria-hidden="true">
+              <motion.span className="inline-block will-change-transform" variants={wordVariant}>
+                don&apos;t
+              </motion.span>{" "}
+              <motion.span className="inline-block will-change-transform" variants={wordVariant}>
+                lie
+              </motion.span>
+            </span>
+          </motion.h2>
 
-      <div className="framer-2pyb2i relative mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-24 backdrop-blur-[1px]">
-        {/* Heading Section with Title and Description Side by Side */}
-        <div className="framer-87mhgl mb-16 md:mb-20" data-framer-name="Heading">
-          <div className="framer-jdz43l mb-6" data-framer-name="(why us)">
-            <p className="framer-text text-xs tracking-[0.25em] text-neutral-500 uppercase">(WHY US)</p>
-          </div>
-
-          <div className="grid gap-8 lg:grid-cols-2 lg:gap-16">
-            {/* Left: Large Title */}
-            <div className="framer-nrymqv" data-framer-name="Title">
-              <motion.h2
-                className="text-5xl font-black leading-[0.9] tracking-tighter text-white sm:text-6xl md:text-7xl lg:text-8xl"
-                variants={letterContainer}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.6 }}
-                aria-label={title}
-              >
-                <div className="flex flex-wrap">
-                  {"NUMBERS".split("").map((char, i) => (
-                    <motion.span
-                      key={i + char}
-                      className="inline-block will-change-transform"
-                      variants={letterVariant}
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
-                </div>
-                <div className="flex flex-wrap">
-                  {"DON'T LIE".split("").map((char, i) => (
-                    <motion.span
-                      key={i + char}
-                      className="inline-block will-change-transform"
-                      variants={letterVariant}
-                      style={char === " " ? { width: "0.5ch" } : undefined}
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
-                </div>
-              </motion.h2>
-            </div>
-
-            {/* Right: Description aligned with second line */}
-            <div className="flex items-end lg:pb-4">
-              <div
-                className="framer-7efyph max-w-xl text-lg leading-relaxed text-neutral-400 md:text-xl"
-                data-framer-name="Description"
-              >
-                <p>
-                  With {siteStats.yearsOfExperience}+ years of experience and {siteStats.projectsCompleted}+ projects delivered, we build the AI agents, business systems and websites that Sri Lankan businesses run on.
-                </p>
-              </div>
-            </div>
-          </div>
+          <p className="max-w-xl text-lg leading-relaxed text-ink-soft md:text-xl lg:pb-3">
+            With {siteStats.yearsOfExperience}+ years of experience and {siteStats.projectsCompleted}+ projects delivered, we build the AI agents, business systems and websites that Sri Lankan businesses run on.
+          </p>
         </div>
 
-        {/* Stats Grid */}
         <StatsGrid />
+
+        <div className="mt-8 lg:mt-10">
+          <PillLink href="/about">More about us</PillLink>
+        </div>
       </div>
     </section>
   );
 };
 
-interface StatItem { value: string; suffix: string; label: string; }
+interface StatItem { value: string; suffix: string; label: string; icon: LucideIcon; }
 
 const StatsGrid = () => {
   const gridRef = useRef<HTMLDivElement | null>(null);
   const inView = useInView(gridRef, { once: true, amount: 0.3 });
 
   return (
-    <div
-      ref={gridRef}
-      className="framer-hg4gxq grid gap-8 border-t border-white/10 pt-16 sm:grid-cols-2 lg:grid-cols-3"
-      data-framer-name="Content"
-    >
+    <div ref={gridRef} className="mt-10 grid gap-4 md:grid-cols-[1.25fr_1fr_1fr] lg:mt-14">
       {stats.map((item, idx) => (
         <Stat key={item.label} item={item} index={idx} inView={inView} />
       ))}
@@ -158,30 +109,41 @@ const Stat = ({ item, index, inView }: { item: StatItem; index: number; inView: 
     }
   }, [inView, item.value, index]);
 
+  const dark = index === 0;
+  const Icon = item.icon;
+
   return (
     <motion.div
-      className="group relative flex flex-col items-center border-l border-white/5 pl-6 sm:pl-8"
+      className={`${dark ? "ink-card" : "cream-card"} flex min-h-[190px] flex-col justify-between overflow-hidden p-6 lg:min-h-[250px] lg:p-8`}
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: index * 0.1 }}
+      transition={{ duration: 0.7, ease: EASE, delay: index * 0.1 }}
     >
-      <div className="flex items-baseline gap-1 text-6xl font-bold tracking-tight text-white md:text-7xl lg:text-8xl">
-        <span className="tabular-nums">{displayValue}</span>
-        <span className="text-orange-500">{item.suffix}</span>
+      <div className="flex items-start justify-between gap-4">
+        <p className={`max-w-[16ch] text-sm leading-snug md:text-base ${dark ? "text-paper-white/75" : "text-ink-soft"}`}>
+          {item.label}
+        </p>
+        <span
+          className={`grid h-11 w-11 shrink-0 place-items-center rounded-full border ${dark ? "border-white/15 text-ember" : "border-ink/10 bg-white text-ember-ink"}`}
+          aria-hidden="true"
+        >
+          <Icon className="h-5 w-5" strokeWidth={2} />
+        </span>
       </div>
-      <p className="mt-6 text-center text-sm leading-relaxed text-neutral-400 md:text-base">
-        {item.label}
-      </p>
-      <div className="pointer-events-none absolute -left-px top-0 h-full w-px bg-gradient-to-b from-white/10 via-white/0 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <div
+        className={`relative flex items-baseline gap-1 text-6xl font-medium leading-none tracking-[-0.05em] lg:text-7xl ${dark ? "text-paper-white" : "text-ink"}`}
+      >
+        <span className="tabular-nums">{displayValue}</span>
+        <span className={dark ? "text-ember" : "text-ember-ink"}>{item.suffix}</span>
+      </div>
     </motion.div>
   );
 };
 
 const stats: StatItem[] = [
-  { value: String(siteStats.projectsCompleted), suffix: "+", label: "Successful projects completed" },
-  { value: String(siteStats.yearsOfExperience), suffix: "+", label: "Years of experience in creative industry" },
-  { value: "99", suffix: "%", label: "Customer satisfaction rate" },
+  { value: String(siteStats.projectsCompleted), suffix: "+", label: "Successful projects completed", icon: FolderCheck },
+  { value: String(siteStats.yearsOfExperience), suffix: "+", label: "Years of experience in creative industry", icon: CalendarClock },
+  { value: "99", suffix: "%", label: "Customer satisfaction rate", icon: ThumbsUp },
 ];
 
 export default WhyUs;
-

@@ -35,26 +35,26 @@ export default function RelatedServices() {
   const otherServices = allServices.filter(s => s.slug !== currentSlug);
 
   return (
-    <section className="bg-black py-20 px-6 lg:px-12 border-t border-zinc-800/50" aria-label="Related services">
+    <section className="bg-transparent py-20 px-6 lg:px-12 border-t border-ink/10" aria-label="Related services">
       <div className="max-w-[1800px] mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold text-white mb-8 tracking-tight">
+        <h2 className="text-2xl md:text-3xl font-medium text-ink mb-8 tracking-[-0.035em]">
           Explore Our Other Services
         </h2>
-        <p className="text-zinc-400 mb-10 max-w-3xl">
-          ARC AI builds AI agents, automation and the business systems they run inside. Comparing providers? See our guides to <Link href="/ai-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">AI companies in Sri Lanka</Link> and <Link href="/software-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">software companies in Sri Lanka</Link>.
+        <p className="text-ink-soft mb-10 max-w-3xl">
+          ARC AI builds AI agents, automation and the business systems they run inside. Comparing providers? See our guides to <Link href="/ai-companies-sri-lanka" className="text-ember-deep hover:underline">AI companies in Sri Lanka</Link> and <Link href="/software-companies-sri-lanka" className="text-ember-deep hover:underline">software companies in Sri Lanka</Link>.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {otherServices.map((service) => (
             <Link
               key={service.slug}
               href={`/services/${service.slug}`}
-              className="group flex items-center gap-3 p-4 rounded-lg border border-zinc-800/50 hover:border-zinc-600 hover:bg-zinc-900/50 transition-all duration-300"
+              className="cut-card [--cut:12px] relative group flex items-center gap-3 p-4 [--cut-line:rgba(27,26,23,0.1)] hover:[--cut-line:rgba(27,26,23,0.3)] hover:bg-white transition-all duration-300"
             >
-              <span className="text-sm text-zinc-300 group-hover:text-white transition-colors">
+              <span className="text-sm text-ink-soft group-hover:text-ink transition-colors">
                 {service.name}
               </span>
               <svg
-                className="w-3 h-3 text-zinc-600 group-hover:text-[rgb(255,73,37)] transition-colors ml-auto flex-shrink-0"
+                className="w-3 h-3 text-ink-mute group-hover:text-ember-deep transition-colors ml-auto flex-shrink-0"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -67,23 +67,23 @@ export default function RelatedServices() {
         </div>
 
         {/* Cross-link to main services hub and other key pages */}
-        <div className="mt-12 pt-8 border-t border-zinc-800/50 flex flex-wrap gap-6 text-sm">
-          <Link href="/services" className="text-zinc-400 hover:text-white transition-colors">
+        <div className="mt-12 pt-8 border-t border-ink/10 flex flex-wrap gap-6 text-sm">
+          <Link href="/services" className="text-ink-soft hover:text-ink transition-colors">
             ← All Services
           </Link>
-          <Link href="/ai-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:text-white transition-colors font-medium">
+          <Link href="/ai-companies-sri-lanka" className="text-ember-deep hover:text-ink transition-colors font-medium">
             AI Companies in Sri Lanka →
           </Link>
-          <Link href="/software-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:text-white transition-colors font-medium">
+          <Link href="/software-companies-sri-lanka" className="text-ember-deep hover:text-ink transition-colors font-medium">
             Software Companies in Sri Lanka →
           </Link>
-          <Link href="/portfolio" className="text-zinc-400 hover:text-white transition-colors">
+          <Link href="/portfolio" className="text-ink-soft hover:text-ink transition-colors">
             View Our Portfolio →
           </Link>
-          <Link href="/contact" className="text-zinc-400 hover:text-white transition-colors">
+          <Link href="/contact" className="text-ink-soft hover:text-ink transition-colors">
             Get a Free Quote →
           </Link>
-          <Link href="/about" className="text-zinc-400 hover:text-white transition-colors">
+          <Link href="/about" className="text-ink-soft hover:text-ink transition-colors">
             About ARC AI →
           </Link>
         </div>

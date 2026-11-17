@@ -81,25 +81,25 @@ export default function PosMock() {
       >
         {/* Status row */}
         <div className="flex items-center justify-between gap-3 pb-3">
-          <p className="min-w-0 truncate text-[11px] uppercase tracking-wider text-zinc-500">
+          <p className="min-w-0 truncate text-[11px] uppercase tracking-wider text-ink-mute">
             Shift open
           </p>
           <div className="relative h-6 w-[9.75rem] shrink-0 text-[11px] font-semibold">
             <span
               data-s="online"
-              className={`${connectionPill} invisible border-white/10 bg-white/[0.04] text-zinc-300 opacity-0`}
+              className={`${connectionPill} invisible border-ink/10 bg-white text-ink-soft opacity-0`}
             >
               <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
               Online
             </span>
             <span
               data-s="offline"
-              className={`${connectionPill} invisible border-amber-500/40 bg-amber-500/10 text-amber-400 opacity-0`}
+              className={`${connectionPill} invisible border-amber-600/40 bg-amber-500/10 text-amber-700 opacity-0`}
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
               Offline · still selling
             </span>
-            <span data-s="synced" className={`${connectionPill} border-green-500/40 bg-green-500/10 text-green-400`}>
+            <span data-s="synced" className={`${connectionPill} border-green-600/30 bg-green-500/10 text-green-700`}>
               ✓ Back online · synced
             </span>
           </div>
@@ -111,7 +111,7 @@ export default function PosMock() {
             {PRODUCTS.map((product) => (
               <div
                 key={product.name}
-                className="relative flex flex-col justify-between rounded-xl border border-white/10 bg-white/[0.03] p-2.5 screen-wide:p-3"
+                className="relative flex flex-col justify-between rounded-xl border border-ink/10 bg-white p-2.5 screen-wide:p-3"
               >
                 {product.sold && (
                   <span
@@ -119,10 +119,10 @@ export default function PosMock() {
                     className="invisible absolute inset-0 rounded-xl border-2 border-[rgb(255,73,37)] bg-[rgb(255,73,37)]/15 opacity-0"
                   />
                 )}
-                <p className="min-h-[2.5em] text-[11px] leading-tight text-zinc-300 screen-wide:text-xs">
+                <p className="min-h-[2.5em] text-[11px] leading-tight text-ink-soft screen-wide:text-xs">
                   {product.name}
                 </p>
-                <p className="mt-1.5 whitespace-nowrap text-[11px] font-semibold text-white screen-wide:text-xs">
+                <p className="mt-1.5 whitespace-nowrap text-[11px] font-semibold text-ink screen-wide:text-xs">
                   {rupees(product.price)}
                 </p>
               </div>
@@ -130,12 +130,12 @@ export default function PosMock() {
           </div>
 
           {/* Cart */}
-          <div className="flex min-w-0 flex-col rounded-xl border border-white/10 bg-black/40 p-3">
+          <div className="flex min-w-0 flex-col rounded-xl border border-ink/10 bg-paper-soft p-3">
             <div className="flex h-5 items-center justify-between gap-2">
-              <p className="text-[10px] uppercase tracking-wider text-zinc-500">Current sale</p>
+              <p className="text-[10px] uppercase tracking-wider text-ink-mute">Current sale</p>
               <span
                 data-s="paid"
-                className="inline-block -rotate-6 rounded border-2 border-green-500 px-1.5 text-[10px] font-black leading-4 tracking-widest text-green-500"
+                className="inline-block -rotate-6 rounded border-2 border-green-600 px-1.5 text-[10px] font-black leading-4 tracking-widest text-green-600"
               >
                 PAID
               </span>
@@ -145,30 +145,30 @@ export default function PosMock() {
                 <li
                   key={product.name}
                   data-s="line"
-                  className="flex items-baseline justify-between gap-2 text-[12px] text-zinc-300"
+                  className="flex items-baseline justify-between gap-2 text-[12px] text-ink-soft"
                 >
                   <span className="min-w-0 truncate">{product.name}</span>
-                  <span className="shrink-0 whitespace-nowrap tabular-nums text-white">{rupees(product.price)}</span>
+                  <span className="shrink-0 whitespace-nowrap tabular-nums text-ink">{rupees(product.price)}</span>
                 </li>
               ))}
             </ul>
-            <div className="mt-3 flex items-baseline justify-between gap-2 border-t border-white/10 pt-3">
-              <span className="text-[11px] uppercase tracking-wider text-zinc-500">Total</span>
+            <div className="mt-3 flex items-baseline justify-between gap-2 border-t border-ink/10 pt-3">
+              <span className="text-[11px] uppercase tracking-wider text-ink-mute">Total</span>
               <span
                 data-s="total"
-                className="whitespace-nowrap text-xl font-black tabular-nums text-white screen-wide:text-[length:clamp(1.15rem,4.2cqw,1.6rem)]"
+                className="whitespace-nowrap text-xl font-black tabular-nums text-ink screen-wide:text-[length:clamp(1.15rem,4.2cqw,1.6rem)]"
               >
                 {rupees(TOTAL)}
               </span>
             </div>
             <div className="mt-3 grid grid-cols-3 gap-1.5 text-center text-[11px] font-semibold">
-              <span className="rounded-lg border border-white/10 py-2 text-zinc-400">Cash</span>
-              <span className="rounded-lg border border-white/10 py-2 text-zinc-400">Card</span>
+              <span className="rounded-lg border border-ink/10 py-2 text-ink-mute">Cash</span>
+              <span className="rounded-lg border border-ink/10 py-2 text-ink-mute">Card</span>
               <span data-s="pay" className="whitespace-nowrap rounded-lg bg-[rgb(255,73,37)] py-2 text-black">
                 LankaQR
               </span>
             </div>
-            <p data-s="receipt" className="mt-2.5 text-center text-[11px] text-zinc-500">
+            <p data-s="receipt" className="mt-2.5 text-center text-[11px] text-ink-mute">
               Receipt printed · stock updated
             </p>
           </div>

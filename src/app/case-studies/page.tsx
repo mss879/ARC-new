@@ -113,7 +113,7 @@ const caseStudies = [
 
 export default function CaseStudiesPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="home-cream min-h-screen bg-transparent text-ink">
       <SchemaOrg
         type="services"
         pageTitle="Case Studies"
@@ -131,19 +131,19 @@ export default function CaseStudiesPage() {
       {/* Hero */}
       <section className="relative pt-32 pb-20 px-6 lg:px-12">
         <div className="max-w-5xl mx-auto space-y-6">
-          <p className="text-sm uppercase tracking-[0.2em] text-[rgb(255,73,37)]">
+          <p className="text-sm uppercase tracking-[0.2em] text-ember-deep">
             Client Success Stories
           </p>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05]">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-[-0.035em] leading-[1.05]">
             Real Results from{" "}
-            <span className="bg-gradient-to-r from-[rgb(255,73,37)] to-orange-400 bg-clip-text text-transparent">
+            <span className="text-ember-ink">
               Real Clients
             </span>
           </h1>
-          <p className="text-xl text-zinc-300 max-w-3xl leading-relaxed">
-            See how ARC AI, one of the <Link href="/ai-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">top AI companies in Sri Lanka</Link> and the UK, has helped businesses
+          <p className="text-xl text-ink-soft max-w-3xl leading-relaxed">
+            See how ARC AI, one of the <Link href="/ai-companies-sri-lanka" className="text-ember-deep hover:underline">top AI companies in Sri Lanka</Link> and the UK, has helped businesses
             achieve measurable growth through AI automation, smart web design,
-            and data-driven digital marketing. For a comprehensive look at the <Link href="/software-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">leading software development companies in Sri Lanka</Link>, see our industry guide. These case studies demonstrate
+            and data-driven digital marketing. For a comprehensive look at the <Link href="/software-companies-sri-lanka" className="text-ember-deep hover:underline">leading software development companies in Sri Lanka</Link>, see our industry guide. These case studies demonstrate
             real results — not hypothetical projections.
           </p>
         </div>
@@ -155,42 +155,42 @@ export default function CaseStudiesPage() {
           {caseStudies.map((cs, index) => (
             <article
               key={index}
-              className="rounded-2xl border border-zinc-800/50 overflow-hidden"
+              className="cut-card [--cut:18px] relative [--cut-line:rgba(27,26,23,0.1)] overflow-hidden"
             >
               {/* Header */}
-              <div className="bg-zinc-900/50 p-8 md:p-10 border-b border-zinc-800/50">
+              <div className="bg-white/70 p-8 md:p-10 border-b border-ink/10">
                 <div className="flex flex-wrap items-center gap-3 mb-4">
                   {cs.services.map((svc) => (
                     <span
                       key={svc}
-                      className="text-xs px-3 py-1 rounded-full bg-[rgb(255,73,37)]/10 text-[rgb(255,73,37)] border border-[rgb(255,73,37)]/20"
+                      className="text-xs px-3 py-1 rounded-full bg-ember/10 text-ember-deep border border-ember/20"
                     >
                       {svc}
                     </span>
                   ))}
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold mb-2">
+                <h2 className="text-2xl md:text-3xl font-medium mb-2 tracking-[-0.035em]">
                   {cs.client}
                 </h2>
-                <p className="text-zinc-400">{cs.location}</p>
+                <p className="text-ink-soft">{cs.location}</p>
               </div>
 
               {/* Content */}
               <div className="p-8 md:p-10 space-y-8">
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="space-y-3">
-                    <h3 className="text-lg font-semibold text-[rgb(255,73,37)]">
+                    <h3 className="text-lg font-semibold text-ember-deep">
                       The Challenge
                     </h3>
-                    <p className="text-zinc-400 leading-relaxed">
+                    <p className="text-ink-soft leading-relaxed">
                       {cs.challenge}
                     </p>
                   </div>
                   <div className="space-y-3">
-                    <h3 className="text-lg font-semibold text-[rgb(255,73,37)]">
+                    <h3 className="text-lg font-semibold text-ember-deep">
                       Our Solution
                     </h3>
-                    <p className="text-zinc-400 leading-relaxed">
+                    <p className="text-ink-soft leading-relaxed">
                       {cs.solution}
                     </p>
                   </div>
@@ -203,15 +203,15 @@ export default function CaseStudiesPage() {
                     {cs.results.map((r) => (
                       <div
                         key={r.metric}
-                        className="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800/50 text-center space-y-2"
+                        className="cut-card [--cut:14px] relative p-4 bg-white/70 [--cut-line:rgba(27,26,23,0.1)] text-center space-y-2"
                       >
-                        <p className="text-xs text-zinc-500 uppercase tracking-wider">
+                        <p className="text-xs text-ink-mute uppercase tracking-wider">
                           {r.metric}
                         </p>
-                        <p className="text-2xl font-bold text-[rgb(255,73,37)]">
+                        <p className="text-2xl font-bold text-ember-deep">
                           {r.change}
                         </p>
-                        <p className="text-xs text-zinc-500">
+                        <p className="text-xs text-ink-mute">
                           {r.before} → {r.after}
                         </p>
                       </div>
@@ -225,30 +225,30 @@ export default function CaseStudiesPage() {
       </section>
 
       {/* Social Proof */}
-      <section className="py-20 px-6 lg:px-12 border-t border-zinc-800/50">
+      <section className="py-20 px-6 lg:px-12 border-t border-ink/10">
         <div className="max-w-5xl mx-auto space-y-12">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-center">
+          <h2 className="text-3xl md:text-4xl font-medium tracking-[-0.035em] text-center">
             Trusted by 100+ Businesses
           </h2>
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div className="space-y-2">
-              <p className="text-5xl font-black text-[rgb(255,73,37)]">4.9/5</p>
-              <p className="text-zinc-400">Google Reviews Rating</p>
+              <p className="text-5xl font-black text-ember-ink">4.9/5</p>
+              <p className="text-ink-soft">Google Reviews Rating</p>
             </div>
             <div className="space-y-2">
-              <p className="text-5xl font-black text-[rgb(255,73,37)]">100+</p>
-              <p className="text-zinc-400">Projects Delivered</p>
+              <p className="text-5xl font-black text-ember-ink">100+</p>
+              <p className="text-ink-soft">Projects Delivered</p>
             </div>
             <div className="space-y-2">
-              <p className="text-5xl font-black text-[rgb(255,73,37)]">67%</p>
-              <p className="text-zinc-400">Average Lead Increase</p>
+              <p className="text-5xl font-black text-ember-ink">67%</p>
+              <p className="text-ink-soft">Average Lead Increase</p>
             </div>
           </div>
 
           <div className="text-center pt-8">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[rgb(255,73,37)] text-white font-semibold rounded-lg hover:scale-105 transition-transform"
+              className="cut-btn [--cut:12px] [--cut-focus:#1B1A17] inline-flex items-center gap-2 px-8 py-4 bg-ember text-ink font-semibold hover:scale-105 transition-transform"
             >
               Start Your Success Story
             </Link>
@@ -256,8 +256,8 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      <CTA />
-      <Footer />
+      <CTA tone="cream" />
+      <Footer tone="dark" />
     </div>
   );
 }

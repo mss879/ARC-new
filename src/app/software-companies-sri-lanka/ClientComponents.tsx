@@ -47,7 +47,7 @@ export function BackToTop() {
     return (
         <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="fixed bottom-8 right-8 z-40 w-11 h-11 bg-neutral-900 border border-neutral-700 rounded-full flex items-center justify-center text-neutral-400 hover:text-[rgb(255,73,37)] hover:border-[rgb(255,73,37)]/40 transition-all shadow-xl"
+            className="fixed bottom-8 right-8 z-40 w-11 h-11 bg-white/70 border border-ink/10 rounded-full flex items-center justify-center text-ink-soft hover:text-ember-deep hover:border-ember/40 transition-all shadow-xl"
             aria-label="Back to top"
         >
             <ArrowUp className="w-5 h-5" />
@@ -95,8 +95,8 @@ export function ActiveTOC({ items }: { items: TOCItem[] }) {
 
     return (
         <aside className="hidden lg:block w-80 shrink-0 sticky top-24 mt-4">
-            <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-6">
-                <div className="text-sm font-bold text-neutral-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+            <div className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-6">
+                <div className="text-sm font-bold text-ink-soft uppercase tracking-widest mb-4 flex items-center gap-2">
                     <Layers className="w-4 h-4" />
                     In This Guide
                 </div>
@@ -107,13 +107,13 @@ export function ActiveTOC({ items }: { items: TOCItem[] }) {
                             <a
                                 key={item.id}
                                 href={`#${item.id}`}
-                                className={`flex items-center gap-3 py-1.5 transition-colors group ${isActive ? "text-[rgb(255,73,37)]" : "text-neutral-300 hover:text-[rgb(255,73,37)]"}`}
+                                className={`flex items-center gap-3 py-1.5 transition-colors group ${isActive ? "text-ember-deep" : "text-ink-soft hover:text-ember-deep"}`}
                             >
-                                <span className={`text-xs font-mono w-6 shrink-0 ${isActive ? "text-[rgb(255,73,37)]" : "text-neutral-600"}`}>
+                                <span className={`text-xs font-mono w-6 shrink-0 ${isActive ? "text-ember-deep" : "text-ink-mute"}`}>
                                     {String(i + 1).padStart(2, "0")}
                                 </span>
-                                <ChevronRight className={`w-3 h-3 shrink-0 transition-colors ${isActive ? "text-[rgb(255,73,37)]" : "text-neutral-700 group-hover:text-[rgb(255,73,37)]"}`} />
-                                <span className={`font-medium text-sm ${isActive ? "text-[rgb(255,73,37)]" : ""}`}>{item.label}</span>
+                                <ChevronRight className={`w-3 h-3 shrink-0 transition-colors ${isActive ? "text-ember-deep" : "text-ink/30 group-hover:text-ember-deep"}`} />
+                                <span className={`font-medium text-sm ${isActive ? "text-ember-deep" : ""}`}>{item.label}</span>
                             </a>
                         );
                     })}
@@ -143,16 +143,16 @@ export function SocialShareButtons({ url, title }: { url: string; title: string 
 
     return (
         <div className="flex flex-wrap items-center gap-3">
-            <span className="text-xs text-neutral-500 uppercase tracking-wider font-semibold flex items-center gap-1.5">
+            <span className="text-xs text-ink-mute uppercase tracking-wider font-semibold flex items-center gap-1.5">
                 <Share2 className="w-3.5 h-3.5" /> Share
             </span>
-            <a href={shareLinks.linkedin} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 text-xs bg-neutral-900 border border-neutral-800 rounded-full text-neutral-400 hover:text-[rgb(255,73,37)] hover:border-[rgb(255,73,37)]/30 transition-colors no-underline">
+            <a href={shareLinks.linkedin} target="_blank" rel="noopener noreferrer" className="cut-btn px-3 py-1.5 text-xs bg-white/70 [--cut-line:rgba(27,26,23,0.1)] text-ink-soft hover:text-ember-deep hover:[--cut-line:rgba(255,73,37,0.3)] transition-colors no-underline">
                 LinkedIn
             </a>
-            <a href={shareLinks.twitter} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 text-xs bg-neutral-900 border border-neutral-800 rounded-full text-neutral-400 hover:text-[rgb(255,73,37)] hover:border-[rgb(255,73,37)]/30 transition-colors no-underline">
+            <a href={shareLinks.twitter} target="_blank" rel="noopener noreferrer" className="cut-btn px-3 py-1.5 text-xs bg-white/70 [--cut-line:rgba(27,26,23,0.1)] text-ink-soft hover:text-ember-deep hover:[--cut-line:rgba(255,73,37,0.3)] transition-colors no-underline">
                 X / Twitter
             </a>
-            <button onClick={copyLink} className="px-3 py-1.5 text-xs bg-neutral-900 border border-neutral-800 rounded-full text-neutral-400 hover:text-[rgb(255,73,37)] hover:border-[rgb(255,73,37)]/30 transition-colors">
+            <button onClick={copyLink} className="cut-btn px-3 py-1.5 text-xs bg-white/70 [--cut-line:rgba(27,26,23,0.1)] text-ink-soft hover:text-ember-deep hover:[--cut-line:rgba(255,73,37,0.3)] transition-colors">
                 {copied ? "Copied!" : "Copy Link"}
             </button>
         </div>
@@ -181,9 +181,11 @@ export interface CompanyRow {
 type SortField = "name" | "founded" | "rating" | "size";
 type SortDir = "asc" | "desc";
 
-const PILL = "px-4 py-2 text-xs font-semibold rounded-full border transition-colors";
-const PILL_ON = "bg-[rgb(255,73,37)] text-white border-[rgb(255,73,37)]";
-const PILL_OFF = "bg-neutral-950 text-neutral-400 border-neutral-800 hover:border-neutral-600 hover:text-neutral-200";
+// Filter buttons use the site's cut-corner button shape (.cut-btn); the edge
+// colour is --cut-line rather than a border.
+const PILL = "cut-btn px-4 py-2 text-xs font-semibold transition-colors";
+const PILL_ON = "bg-ember text-ink [--cut-focus:#1B1A17]";
+const PILL_OFF = "bg-transparent text-ink-soft [--cut-line:rgba(27,26,23,0.1)] hover:[--cut-line:rgba(27,26,23,0.3)] hover:text-ink";
 
 function unique(values: string[]): string[] {
     return values.filter((v, i) => values.indexOf(v) === i);
@@ -265,7 +267,7 @@ export function InteractiveComparisonTable({ companies }: { companies: CompanyRo
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search name, specialty or city"
                     aria-label="Search companies"
-                    className="flex-1 min-w-[180px] px-4 py-2 text-sm rounded-full bg-neutral-950 border border-neutral-800 text-neutral-200 placeholder:text-neutral-600 focus:outline-none focus:border-[rgb(255,73,37)]/60"
+                    className="flex-1 min-w-[180px] px-4 py-2 text-sm rounded-full bg-transparent border border-ink/10 text-ink placeholder:text-ink-mute focus:outline-none focus:border-ember/60"
                 />
             </div>
 
@@ -312,7 +314,7 @@ export function InteractiveComparisonTable({ companies }: { companies: CompanyRo
                     </tbody>
                 </table>
             </div>
-            <p className="text-xs text-neutral-600 mt-3" aria-live="polite">
+            <p className="text-xs text-ink-mute mt-3" aria-live="polite">
                 Showing {rows.length} of {companies.length} companies · Select a column heading to sort
             </p>
         </div>

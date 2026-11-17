@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -11,24 +11,46 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
  * Trigger positions are measured when a timeline is created. The home page
  * keeps changing height after that (the preloader releases the scroll lock,
  * images and lazy sections arrive), so the measurements are refreshed whenever
- * the document's height settles on a new value. Set up once per page load.
+ * the document's height settles on a new value.
+ *
+ * The watcher runs only while a demo is on the page. It used to run for the
+ * rest of the visit: after a client-side navigation away from the home page
+ * the new page's height change set off a refresh, and ScrollTrigger put back
+ * the scroll position it had recorded on the home page (clamped to the new
+ * page's length), so a visitor clicking "Contact" from far down the home page
+ * landed at the bottom of the contact page.
  */
-let refreshWatcherStarted = false;
+let activeDemos = 0;
+let observer: ResizeObserver | null = null;
+let refreshTimer: number | undefined;
 
-function startRefreshWatcher() {
-  if (refreshWatcherStarted || typeof window === "undefined") return;
-  refreshWatcherStarted = true;
+function scheduleRefresh() {
+  window.clearTimeout(refreshTimer);
+  refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 200);
+}
 
-  let timer: number | undefined;
-  const refresh = () => {
-    window.clearTimeout(timer);
-    timer = window.setTimeout(() => ScrollTrigger.refresh(), 200);
-  };
-
-  window.addEventListener("load", refresh, { once: true });
-  if ("ResizeObserver" in window) {
-    new ResizeObserver(refresh).observe(document.body);
+function demoMounted() {
+  activeDemos += 1;
+  if (activeDemos > 1 || typeof window === "undefined") return;
+  if (document.readyState !== "complete") {
+    window.addEventListener("load", scheduleRefresh, { once: true });
   }
+  if ("ResizeObserver" in window) {
+    observer = new ResizeObserver(scheduleRefresh);
+    observer.observe(document.body);
+  }
+}
+
+function demoUnmounted() {
+  activeDemos = Math.max(0, activeDemos - 1);
+  if (activeDemos > 0) return;
+  observer?.disconnect();
+  observer = null;
+  window.clearTimeout(refreshTimer);
+  window.removeEventListener("load", scheduleRefresh);
+  // Forget the scroll position recorded on this page, so no later refresh
+  // on another page restores it.
+  ScrollTrigger.clearScrollMemory();
 }
 
 export type DemoSelector = (selector: string) => Element[];
@@ -52,10 +74,15 @@ export function useDemoTimeline<T extends HTMLElement>(
 ) {
   const scope = useRef<T>(null);
 
+  // Runs after useGSAP's own clean-up on unmount (layout effects are cleaned
+  // up first), so the triggers are gone before the watcher stops.
+  useEffect(() => {
+    demoMounted();
+    return demoUnmounted;
+  }, []);
+
   useGSAP(
     () => {
-      startRefreshWatcher();
-
       const media = gsap.matchMedia();
       media.add("(prefers-reduced-motion: no-preference)", () => {
         const timeline = gsap.timeline({

@@ -209,7 +209,7 @@ export function generateProposalEmail(
                                     ARC <span style="background: linear-gradient(135deg, #FF7B54 0%, #FF4925 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: #FF4925;">AI</span>
                                 </h1>
                                 <p style="margin: 8px 0 0 0; font-size: 11px; color: #86868b; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;">
-                                    Beyond Visuals. Built with Vision.
+                                    Built to run.
                                 </p>
                             </td>
                             <td style="text-align: right; vertical-align: top; position: relative; z-index: 1;">

@@ -87,7 +87,7 @@ const IndustriesSection = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative py-20 px-6 bg-black overflow-hidden"
+      className="relative py-20 px-6 bg-transparent overflow-hidden"
       style={{
         willChange: 'transform',
         opacity: isVisible ? 1 : 0,
@@ -99,17 +99,15 @@ const IndustriesSection = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6"
+            className="text-3xl md:text-4xl lg:text-5xl font-medium text-ink mb-6 tracking-[-0.035em]"
             style={{
-              fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif"
             }}
           >
             Industries We Serve
           </h2>
           <p 
-            className="text-base md:text-lg text-white/70 max-w-3xl mx-auto"
+            className="text-base md:text-lg text-ink-soft max-w-3xl mx-auto"
             style={{
-              fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif"
             }}
           >
             Empowering businesses across diverse sectors with cutting-edge AI automation and digital marketing solutions
@@ -142,12 +140,12 @@ const IndustriesSection = () => {
                     >
                       {/* Glow Effect */}
                       <div 
-                        className="absolute inset-0 bg-gradient-to-r from-[#FF4925] to-[#E63E1F] rounded-2xl blur-xl opacity-0 group-hover:opacity-20 transition-all duration-300"
+                        className="absolute inset-0 bg-gradient-to-r from-ember to-ember rounded-2xl blur-xl opacity-0 group-hover:opacity-20 transition-all duration-300"
                       />
                       
                       {/* Card */}
                       <div 
-                        className="relative bg-white/5 rounded-2xl p-6 backdrop-blur-sm border border-white/10 hover:border-[#FF4925]/30 transition-all duration-300 h-full"
+                        className="cut-card [--cut:18px] relative bg-white/70 p-6 [--cut-line:rgba(27,26,23,0.1)] hover:[--cut-line:rgba(255,73,37,0.3)] transition-all duration-300 h-full"
                       >
                         {/* Icon */}
                         <div 
@@ -157,22 +155,20 @@ const IndustriesSection = () => {
                             border: '1px solid rgba(255, 73, 37, 0.3)'
                           }}
                         >
-                          <Icon className="w-7 h-7 text-[#FF4925]" />
+                          <Icon className="w-7 h-7 text-ember-deep" />
                         </div>
 
                         {/* Content */}
                         <h3 
-                          className="text-xl font-bold text-white mb-3"
+                          className="text-xl font-bold text-ink mb-3"
                           style={{
-                            fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif"
                           }}
                         >
                           {industry.name}
                         </h3>
                         <p 
-                          className="text-sm text-gray-300"
+                          className="text-sm text-ink-soft"
                           style={{
-                            fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif"
                           }}
                         >
                           {industry.description}
@@ -189,9 +185,8 @@ const IndustriesSection = () => {
         {/* Bottom Text */}
         <div className="text-center mt-12">
           <p 
-            className="text-white/40 text-sm uppercase tracking-wider"
+            className="text-ink-mute text-sm uppercase tracking-wider"
             style={{
-              fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif"
             }}
           >
             And Many More Industries

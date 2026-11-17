@@ -69,7 +69,7 @@ export default function UpcomingLaunchesCarousel({ launches }: { launches: Launc
                         {carouselItems.map((launch, index) => (
                             <div
                                 key={`${launch.id}-${index}`}
-                                className="relative w-[320px] md:w-[500px] lg:w-[600px] aspect-[16/9] group rounded-2xl overflow-hidden border border-white/10 bg-zinc-900/50 shadow-xl shrink-0"
+                                className="cut-card [--cut:18px] relative w-[320px] md:w-[500px] lg:w-[600px] aspect-[16/9] group overflow-hidden [--cut-line:rgba(255,255,255,0.1)] bg-zinc-900/50 shadow-xl shrink-0"
                             >
                                 <NextImage
                                     src={launch.image_url}

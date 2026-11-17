@@ -11,16 +11,16 @@ export function ProvenResults() {
                         id="proven-results"
                         className="scroll-mt-24"
                     >
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mt-16 mb-8 flex items-center gap-3">
-                            <BarChart3 className="w-8 h-8 text-[rgb(255,73,37)]" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mt-16 mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                            <BarChart3 className="w-8 h-8 text-ember-ink" />
                             Proven Results from This Market
                         </h2>
 
-                        <p className="text-neutral-300 mb-4">
-                            Research is only half the story. We don&apos;t just write about Sri Lanka&apos;s software industry — we build in it every week. The outcomes below come from our own client engagements across Sri Lanka and the UK — see our <Link href="/case-studies" className="text-[rgb(255,73,37)] hover:underline">Sri Lanka software case studies</Link> for the full write-ups. We include them for transparency about the hands-on experience behind this guide, and to illustrate what a capable <strong>software company in Sri Lanka</strong> can realistically deliver.
+                        <p className="text-ink-soft mb-4">
+                            Research is only half the story. We don&apos;t just write about Sri Lanka&apos;s software industry — we build in it every week. The outcomes below come from our own client engagements across Sri Lanka and the UK — see our <Link href="/case-studies" className="text-ember-deep hover:underline">Sri Lanka software case studies</Link> for the full write-ups. We include them for transparency about the hands-on experience behind this guide, and to illustrate what a capable <strong>software company in Sri Lanka</strong> can realistically deliver.
                         </p>
-                        <p className="text-neutral-500 text-sm italic mb-8">
-                            As stated in our <a href="#methodology" className="text-[rgb(255,73,37)] hover:underline no-underline">methodology</a>, ARC AI publishes this guide and is <em>deliberately excluded from the {companyCount}-company list above</em>. The figures here describe our own delivery record — not a competitive placement.
+                        <p className="text-ink-mute text-sm italic mb-8">
+                            As stated in our <a href="#methodology" className="text-ember-deep hover:underline no-underline">methodology</a>, ARC AI publishes this guide and is <em>deliberately excluded from the {companyCount}-company list above</em>. The figures here describe our own delivery record — not a competitive placement.
                         </p>
 
                         {/* Aggregate stats strip */}
@@ -31,14 +31,14 @@ export function ProvenResults() {
                                 { icon: TrendingUp, value: "+67%", label: "Avg. lead increase" },
                                 { icon: Rocket, value: "50+", label: "Products shipped" },
                             ].map((stat) => (
-                                <div key={stat.label} className="bg-neutral-950 border border-neutral-800 rounded-xl p-5 text-center">
-                                    <stat.icon className="w-5 h-5 text-[rgb(255,73,37)] mx-auto mb-2" />
-                                    <div className="text-2xl md:text-3xl font-bold text-white">{stat.value}</div>
-                                    <div className="text-xs text-neutral-500 mt-1">{stat.label}</div>
+                                <div key={stat.label} className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-5 text-center">
+                                    <stat.icon className="w-5 h-5 text-ember-deep mx-auto mb-2" />
+                                    <div className="text-2xl md:text-3xl font-bold text-ink">{stat.value}</div>
+                                    <div className="text-xs text-ink-mute mt-1">{stat.label}</div>
                                 </div>
                             ))}
                         </div>
-                        <p className="text-xs text-neutral-600 -mt-4 mb-8">
+                        <p className="text-xs text-ink-mute -mt-4 mb-8">
                             Based on verified ARC AI client reviews and delivered projects across the UK and Sri Lanka.
                         </p>
 
@@ -79,22 +79,22 @@ export function ProvenResults() {
                                     ],
                                 },
                             ].map((cs) => (
-                                <div key={cs.client} className="bg-neutral-950 border border-neutral-800 rounded-xl p-6 flex flex-col">
+                                <div key={cs.client} className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-6 flex flex-col">
                                     <div className="flex flex-wrap gap-2 mb-3">
                                         {cs.tags.map((t) => (
-                                            <span key={t} className="text-[10px] px-2.5 py-1 rounded-full bg-[rgb(255,73,37)]/10 text-[rgb(255,73,37)] border border-[rgb(255,73,37)]/20 uppercase tracking-wider font-semibold">
+                                            <span key={t} className="text-[10px] px-2.5 py-1 rounded-full bg-ember/10 text-ember-deep border border-ember/20 uppercase tracking-wider font-semibold">
                                                 {t}
                                             </span>
                                         ))}
                                     </div>
-                                    <h3 className="text-lg font-bold text-white mb-0.5 m-0">{cs.client}</h3>
-                                    <p className="text-xs text-neutral-500 mb-3 m-0">{cs.location}</p>
-                                    <p className="text-sm text-neutral-400 mb-4 m-0">{cs.summary}</p>
-                                    <div className="mt-auto space-y-2 border-t border-neutral-800 pt-4">
+                                    <h3 className="text-lg font-bold text-ink mb-0.5 m-0">{cs.client}</h3>
+                                    <p className="text-xs text-ink-mute mb-3 m-0">{cs.location}</p>
+                                    <p className="text-sm text-ink-soft mb-4 m-0">{cs.summary}</p>
+                                    <div className="mt-auto space-y-2 border-t border-ink/10 pt-4">
                                         {cs.metrics.map((m) => (
                                             <div key={m.label} className="flex items-center justify-between gap-2">
-                                                <span className="text-xs text-neutral-500">{m.label}</span>
-                                                <span className="text-sm font-bold text-[rgb(255,73,37)]">{m.value}</span>
+                                                <span className="text-xs text-ink-mute">{m.label}</span>
+                                                <span className="text-sm font-bold text-ember-deep">{m.value}</span>
                                             </div>
                                         ))}
                                     </div>
@@ -103,11 +103,11 @@ export function ProvenResults() {
                         </div>
 
                         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-6">
-                            <Link href="/case-studies" className="inline-flex items-center gap-2 text-sm font-semibold text-[rgb(255,73,37)] hover:underline no-underline">
+                            <Link href="/case-studies" className="inline-flex items-center gap-2 text-sm font-semibold text-ember-deep hover:underline no-underline">
                                 Read the full case studies
                                 <ArrowRight className="w-4 h-4" />
                             </Link>
-                            <Link href="/success-stories" className="inline-flex items-center gap-2 text-sm font-semibold text-[rgb(255,73,37)] hover:underline no-underline">
+                            <Link href="/success-stories" className="inline-flex items-center gap-2 text-sm font-semibold text-ember-deep hover:underline no-underline">
                                 Browse client success stories &amp; reviews
                                 <ArrowRight className="w-4 h-4" />
                             </Link>
@@ -123,7 +123,7 @@ export function RelatedReading() {
                     <section
                         className="mt-16"
                     >
-                        <h2 className="text-2xl font-bold text-white mb-6">Related Reading</h2>
+                        <h2 className="text-2xl font-medium text-ink mb-6 tracking-[-0.035em]">Related Reading</h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             {[
                                 {
@@ -170,12 +170,12 @@ export function RelatedReading() {
                                 <Link
                                     key={article.href}
                                     href={article.href}
-                                    className="bg-neutral-950 border border-neutral-800 rounded-xl p-5 hover:border-[rgb(255,73,37)]/30 transition-colors no-underline group"
+                                    className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-5 hover:[--cut-line:rgba(255,73,37,0.3)] transition-colors no-underline group"
                                 >
-                                    <span className="text-xs text-[rgb(255,73,37)] font-semibold uppercase tracking-wider">
+                                    <span className="text-xs text-ember-deep font-semibold uppercase tracking-wider">
                                         {article.tag}
                                     </span>
-                                    <p className="text-white font-semibold mt-2 mb-0 group-hover:text-[rgb(255,73,37)] transition-colors text-sm">
+                                    <p className="text-ink font-semibold mt-2 mb-0 group-hover:text-ember-deep transition-colors text-sm">
                                         {article.title}
                                     </p>
                                 </Link>
@@ -192,30 +192,30 @@ export function BottomCta() {
                     <section
                         className="mt-16"
                     >
-                        <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-8 text-center">
+                        <div className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-8 text-center">
                             <div className="flex items-center justify-center gap-1.5 mb-3">
                                 {[...Array(5)].map((_, i) => (
-                                    <Star key={i} className="w-4 h-4 text-[rgb(255,73,37)] fill-[rgb(255,73,37)]" />
+                                    <Star key={i} className="w-4 h-4 text-ember-deep fill-[rgb(255,73,37)]" />
                                 ))}
-                                <span className="text-sm text-neutral-400 ml-2">4.9/5 from 100+ projects delivered</span>
+                                <span className="text-sm text-ink-soft ml-2">4.9/5 from 100+ projects delivered</span>
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-3">
+                            <h3 className="text-xl font-bold text-ink mb-3">
                                 Need help choosing the right software partner?
                             </h3>
-                            <p className="text-neutral-400 mb-6 max-w-xl mx-auto text-sm">
+                            <p className="text-ink-soft mb-6 max-w-xl mx-auto text-sm">
                                 Every project has unique requirements — budget, timeline, technology stack, and team size. If you&apos;re evaluating Sri Lankan software partners for your next project, we&apos;re happy to share our perspective based on years of operating in this market — no strings attached.
                             </p>
                             <div className="flex flex-wrap items-center justify-center gap-3">
                                 <Link
                                     href="/contact"
-                                    className="inline-flex items-center gap-2 px-6 py-3 bg-[rgb(255,73,37)] text-white font-semibold rounded-lg hover:bg-[rgb(255,73,37)]/90 transition-colors text-sm no-underline"
+                                    className="cut-btn [--cut:10px] [--cut-focus:#1B1A17] inline-flex items-center gap-2 px-6 py-3 bg-ember text-ink font-semibold hover:bg-ember/90 transition-colors text-sm no-underline"
                                 >
                                     Get a Free Consultation
                                     <ArrowRight className="w-4 h-4" />
                                 </Link>
                                 <Link
                                     href="/success-stories"
-                                    className="inline-flex items-center gap-2 px-6 py-3 border border-neutral-700 text-neutral-200 font-semibold rounded-lg hover:border-[rgb(255,73,37)]/40 hover:text-[rgb(255,73,37)] transition-colors text-sm no-underline"
+                                    className="cut-btn [--cut:10px] inline-flex items-center gap-2 px-6 py-3 [--cut-line:rgba(27,26,23,0.1)] text-ink font-semibold hover:[--cut-line:rgba(255,73,37,0.4)] hover:text-ember-deep transition-colors text-sm no-underline"
                                 >
                                     See client success stories
                                 </Link>
@@ -232,32 +232,32 @@ export function AuthorBox() {
                     <section
                         className="mt-16"
                     >
-                        <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-6 md:p-8">
+                        <div className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-6 md:p-8">
                             <div className="flex items-start gap-5">
-                                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[rgb(255,73,37)] to-orange-600 flex items-center justify-center shrink-0" role="img" aria-label="Shahid Shamir — Founder of ARC AI">
-                                    <span className="text-white text-xl font-black tracking-wide">SS</span>
+                                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-ember to-ember flex items-center justify-center shrink-0" role="img" aria-label="Shahid Shamir — Founder of ARC AI">
+                                    <span className="text-ink text-xl font-black tracking-wide">SS</span>
                                 </div>
                                 <div>
-                                    <h3 className="text-lg font-bold text-white mb-1 m-0">About the Author</h3>
-                                    <p className="text-sm text-[rgb(255,73,37)] font-medium mb-3 m-0">
+                                    <h3 className="text-lg font-bold text-ink mb-1 m-0">About the Author</h3>
+                                    <p className="text-sm text-ember-deep font-medium mb-3 m-0">
                                         <a href="https://www.linkedin.com/in/shahid-shamir-2ab901105/" target="_blank" rel="noopener noreferrer" className="hover:underline">Shahid Shamir</a> &middot; Founder &amp; Lead Engineer, <a href="https://www.linkedin.com/company/105845719" target="_blank" rel="noopener noreferrer" className="hover:underline">ARC AI</a>
                                     </p>
-                                    <p className="text-sm text-neutral-400 m-0">
+                                    <p className="text-sm text-ink-soft m-0">
                                         This guide was researched and compiled by Shahid Shamir, founder of ARC AI, with 4+ years of hands-on experience building software products across Colombo and Birmingham (UK). Having delivered 100+ projects for clients in tourism, real estate, fintech, and e-commerce, Shahid evaluates the Sri Lankan software landscape from direct industry participation — not desk research.
                                     </p>
-                                    <p className="text-sm text-neutral-400 mt-3 m-0">
-                                        Industry figures come from the <a href="https://www.srilankabusiness.com/ict-services/" target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">Export Development Board (EDB)</a>, <a href="https://slasscom.lk/" target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">SLASSCOM</a>, the Ministry of Finance&apos;s Budget Speech 2026 and DataReportal; ratings from <a href="https://clutch.co/lk" target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">Clutch</a>, <a href="https://www.gartner.com/reviews" target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">Gartner Peer Insights</a> and G2; and company facts from each company&apos;s own website, LinkedIn page and reputable press. Every profile lists its sources — readers are encouraged to verify details via the listed websites and third-party review platforms.
+                                    <p className="text-sm text-ink-soft mt-3 m-0">
+                                        Industry figures come from the <a href="https://www.srilankabusiness.com/ict-services/" target="_blank" rel="noopener noreferrer" className="text-ember-deep hover:underline">Export Development Board (EDB)</a>, <a href="https://slasscom.lk/" target="_blank" rel="noopener noreferrer" className="text-ember-deep hover:underline">SLASSCOM</a>, the Ministry of Finance&apos;s Budget Speech 2026 and DataReportal; ratings from <a href="https://clutch.co/lk" target="_blank" rel="noopener noreferrer" className="text-ember-deep hover:underline">Clutch</a>, <a href="https://www.gartner.com/reviews" target="_blank" rel="noopener noreferrer" className="text-ember-deep hover:underline">Gartner Peer Insights</a> and G2; and company facts from each company&apos;s own website, LinkedIn page and reputable press. Every profile lists its sources — readers are encouraged to verify details via the listed websites and third-party review platforms.
                                     </p>
                                     <div className="flex flex-wrap gap-3 mt-4">
-                                        <a href="https://www.linkedin.com/in/shahid-shamir-2ab901105/" target="_blank" rel="noopener noreferrer" className="text-xs text-neutral-500 hover:text-[rgb(255,73,37)] transition-colors no-underline">LinkedIn (Personal)</a>
-                                        <span className="text-neutral-800">|</span>
-                                        <a href="https://www.linkedin.com/company/105845719" target="_blank" rel="noopener noreferrer" className="text-xs text-neutral-500 hover:text-[rgb(255,73,37)] transition-colors no-underline">LinkedIn (ARC AI)</a>
-                                        <span className="text-neutral-800">|</span>
-                                        <Link href="/about" className="text-xs text-neutral-500 hover:text-[rgb(255,73,37)] transition-colors no-underline">About ARC AI</Link>
-                                        <span className="text-neutral-800">|</span>
-                                        <Link href="/contact" className="text-xs text-neutral-500 hover:text-[rgb(255,73,37)] transition-colors no-underline">Contact Us</Link>
-                                        <span className="text-neutral-800">|</span>
-                                        <Link href="/blog" className="text-xs text-neutral-500 hover:text-[rgb(255,73,37)] transition-colors no-underline">More Articles</Link>
+                                        <a href="https://www.linkedin.com/in/shahid-shamir-2ab901105/" target="_blank" rel="noopener noreferrer" className="text-xs text-ink-mute hover:text-ember-deep transition-colors no-underline">LinkedIn (Personal)</a>
+                                        <span className="text-ink/20">|</span>
+                                        <a href="https://www.linkedin.com/company/105845719" target="_blank" rel="noopener noreferrer" className="text-xs text-ink-mute hover:text-ember-deep transition-colors no-underline">LinkedIn (ARC AI)</a>
+                                        <span className="text-ink/20">|</span>
+                                        <Link href="/about" className="text-xs text-ink-mute hover:text-ember-deep transition-colors no-underline">About ARC AI</Link>
+                                        <span className="text-ink/20">|</span>
+                                        <Link href="/contact" className="text-xs text-ink-mute hover:text-ember-deep transition-colors no-underline">Contact Us</Link>
+                                        <span className="text-ink/20">|</span>
+                                        <Link href="/blog" className="text-xs text-ink-mute hover:text-ember-deep transition-colors no-underline">More Articles</Link>
                                     </div>
                                 </div>
                             </div>
@@ -271,11 +271,11 @@ export function PageNav() {
     return (
         <>
                     <div
-                        className="mt-12 pt-8 border-t border-neutral-800 flex items-center justify-between"
+                        className="mt-12 pt-8 border-t border-ink/10 flex items-center justify-between"
                     >
                         <Link
                             href="/blog"
-                            className="group flex items-center gap-2 text-neutral-400 hover:text-[rgb(255,73,37)] transition-colors"
+                            className="group flex items-center gap-2 text-ink-soft hover:text-ember-deep transition-colors"
                         >
                             <ArrowLeft className="w-5 h-5" />
                             <div>
@@ -285,7 +285,7 @@ export function PageNav() {
                         </Link>
                         <Link
                             href="/ai-companies-sri-lanka"
-                            className="group flex items-center gap-2 text-neutral-400 hover:text-[rgb(255,73,37)] transition-colors text-right"
+                            className="group flex items-center gap-2 text-ink-soft hover:text-ember-deep transition-colors text-right"
                         >
                             <div>
                                 <div className="text-xs uppercase tracking-wider mb-1">Related</div>
@@ -297,15 +297,15 @@ export function PageNav() {
 
                     {/* Cross-link to Web Design Guide */}
                     <div
-                        className="mt-8 bg-gradient-to-br from-[rgb(255,73,37)]/10 via-neutral-950 to-black border border-[rgb(255,73,37)]/20 rounded-xl p-6"
+                        className="cut-card [--cut:14px] relative mt-8 bg-gradient-to-br from-ember/10 via-paper to-paper [--cut-line:rgba(255,73,37,0.2)] p-6"
                     >
                         <Link href="/web-design-sri-lanka" className="flex items-center justify-between gap-4 group no-underline">
                             <div>
-                                <div className="text-xs font-bold text-[rgb(255,73,37)] uppercase tracking-widest mb-1">Related Pillar Guide</div>
-                                <h4 className="text-lg font-bold text-white group-hover:text-[rgb(255,73,37)] transition-colors m-0">Web Design Companies in Sri Lanka — The Complete 2026 Guide</h4>
-                                <p className="text-sm text-neutral-400 mt-1 m-0">12 agencies evaluated · Pricing benchmarks · WordPress vs Next.js</p>
+                                <div className="text-xs font-bold text-ember-deep uppercase tracking-widest mb-1">Related Pillar Guide</div>
+                                <h4 className="text-lg font-bold text-ink group-hover:text-ember-ink transition-colors m-0">Web Design Companies in Sri Lanka — The Complete 2026 Guide</h4>
+                                <p className="text-sm text-ink-soft mt-1 m-0">12 agencies evaluated · Pricing benchmarks · WordPress vs Next.js</p>
                             </div>
-                            <ArrowRight className="w-6 h-6 text-neutral-400 group-hover:text-[rgb(255,73,37)] transition-colors shrink-0" />
+                            <ArrowRight className="w-6 h-6 text-ink-soft group-hover:text-ember-deep transition-colors shrink-0" />
                         </Link>
                     </div>
         </>

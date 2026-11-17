@@ -63,12 +63,12 @@ export default function ErpMock() {
             <div
               key={kpi.label}
               data-s="kpi"
-              className="flex min-w-0 flex-col justify-between rounded-xl border border-white/10 bg-white/[0.03] p-3 screen-wide:p-2.5"
+              className="flex min-w-0 flex-col justify-between rounded-xl border border-ink/10 bg-white p-3 screen-wide:p-2.5"
             >
-              <p className="text-[10px] uppercase leading-tight tracking-wider text-zinc-500">{kpi.label}</p>
+              <p className="text-[10px] uppercase leading-tight tracking-wider text-ink-mute">{kpi.label}</p>
               <p
                 data-s="figure"
-                className="mt-2 whitespace-nowrap text-lg font-black tabular-nums text-white screen-wide:text-[length:clamp(0.8rem,2.9cqw,1.3rem)]"
+                className="mt-2 whitespace-nowrap text-lg font-black tabular-nums text-ink screen-wide:text-[length:clamp(0.8rem,2.9cqw,1.3rem)]"
               >
                 {millions(kpi.value)}
               </p>
@@ -78,15 +78,15 @@ export default function ErpMock() {
 
         <div className="mt-3 grid gap-3 screen-wide:grid-cols-[1fr_1.4fr]">
           {/* Chart */}
-          <div className="flex min-w-0 flex-col rounded-xl border border-white/10 bg-black/40 p-3">
-            <p className="text-[10px] uppercase tracking-wider text-zinc-500">Income, last 8 weeks</p>
+          <div className="flex min-w-0 flex-col rounded-xl border border-ink/10 bg-paper-soft p-3">
+            <p className="text-[10px] uppercase tracking-wider text-ink-mute">Income, last 8 weeks</p>
             <div className="mt-3 flex h-24 flex-1 items-end gap-1.5">
               {BARS.map((height, index) => (
                 <span
                   key={index}
                   data-s="bar"
                   className={`flex-1 rounded-t-sm ${
-                    index === BARS.length - 1 ? "bg-[rgb(255,73,37)]" : "bg-white/15"
+                    index === BARS.length - 1 ? "bg-[rgb(255,73,37)]" : "bg-ink/15"
                   }`}
                   style={{ height: `${height}%` }}
                 />
@@ -95,15 +95,15 @@ export default function ErpMock() {
           </div>
 
           {/* Approval and posting */}
-          <div className="min-w-0 rounded-xl border border-white/10 bg-black/40 p-3">
-            <p className="text-[10px] uppercase tracking-wider text-zinc-500">Reorder needs your approval</p>
+          <div className="min-w-0 rounded-xl border border-ink/10 bg-paper-soft p-3">
+            <p className="text-[10px] uppercase tracking-wider text-ink-mute">Reorder needs your approval</p>
             <div
               data-s="request"
-              className="mt-2 flex items-center justify-between gap-2 rounded-lg border border-white/10 bg-white/[0.03] p-2.5"
+              className="mt-2 flex items-center justify-between gap-2 rounded-lg border border-ink/10 bg-white p-2.5"
             >
               <div className="min-w-0">
-                <p className="whitespace-nowrap text-[12px] font-semibold text-white">PO-0231</p>
-                <p className="whitespace-nowrap text-[11px] text-zinc-500">Rs. 184,500</p>
+                <p className="whitespace-nowrap text-[12px] font-semibold text-ink">PO-0231</p>
+                <p className="whitespace-nowrap text-[11px] text-ink-mute">Rs. 184,500</p>
               </div>
               <div className="relative h-6 w-[5.75rem] shrink-0 text-[11px] font-semibold">
                 <span
@@ -114,20 +114,20 @@ export default function ErpMock() {
                 </span>
                 <span
                   data-s="approved"
-                  className="absolute inset-0 flex items-center justify-center whitespace-nowrap rounded-full border border-green-500/40 bg-green-500/10 text-green-400"
+                  className="absolute inset-0 flex items-center justify-center whitespace-nowrap rounded-full border border-green-600/30 bg-green-500/10 text-green-700"
                 >
                   ✓ Approved
                 </span>
               </div>
             </div>
-            <ul className="mt-2.5 space-y-1 font-mono text-[10.5px] text-zinc-400">
+            <ul className="mt-2.5 space-y-1 font-mono text-[10.5px] text-ink-mute">
               <li data-s="posting" className="flex justify-between gap-2">
                 <span>Dr Inventory</span>
-                <span className="tabular-nums text-zinc-200">184,500</span>
+                <span className="tabular-nums text-ink">184,500</span>
               </li>
               <li data-s="posting" className="flex justify-between gap-2">
                 <span>Cr Supplier payable</span>
-                <span className="tabular-nums text-zinc-200">184,500</span>
+                <span className="tabular-nums text-ink">184,500</span>
               </li>
             </ul>
           </div>
@@ -141,7 +141,7 @@ export default function ErpMock() {
           <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[rgb(255,73,37)] text-[9px] font-black text-black">
             AI
           </span>
-          <p className="text-[12px] leading-snug text-zinc-200">
+          <p className="text-[12px] leading-snug text-ink">
             Three invoices are more than 30 days overdue. Shall I draft the reminders for you to review?
           </p>
         </div>

@@ -59,8 +59,9 @@ export const clientLogos = [
 
 export const LOGO_COUNT = clientLogos.length;
 
-/** The hero strip loads eagerly, so it carries only the newest few. */
-export const heroLogos = clientLogos.slice(0, 16);
+/** The hero strip shows every client: it is how a visitor sees how many
+ *  businesses we have worked with (about 300 KB of small badges in all). */
+export const heroLogos = clientLogos;
 
 /** The spinning ring on the home page has room for this many before logos touch. */
 export const ringLogos = clientLogos.slice(0, 28);

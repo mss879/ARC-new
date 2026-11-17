@@ -78,12 +78,12 @@ const faqs = [
 
 export default function AIConsultantsContent() {
     return (
-        <div className="min-h-screen bg-black text-neutral-200 font-sans selection:bg-[rgb(255,73,37)]/30 selection:text-white">
+        <div className="home-cream min-h-screen bg-transparent text-ink font-sans selection:bg-ember/30 selection:text-ink">
             <Navbar />
 
             {/* ── Hero Section ───────────────────────────── */}
-            <section className="relative pt-32 pb-20 md:pt-48 md:pb-24 overflow-hidden px-4 md:px-8 border-b border-neutral-800">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900/40 via-black to-black" />
+            <section className="relative pt-32 pb-20 md:pt-48 md:pb-24 overflow-hidden px-4 md:px-8 border-b border-ink/10">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-paper/40 via-paper to-paper" />
                 <div className="max-w-4xl mx-auto relative z-10">
                     <Breadcrumbs
                         items={[
@@ -93,10 +93,10 @@ export default function AIConsultantsContent() {
                     />
 
                     <HeroAnimation>
-                        <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-white tracking-tight mt-8 mb-6 leading-[1.1]">
-                            The Definitive Guide to AI Consultants in <span className="text-transparent bg-clip-text bg-gradient-to-r from-[rgb(255,73,37)] to-orange-500">Sri Lanka (2026)</span>
+                        <h1 className="text-4xl md:text-5xl lg:text-7xl font-medium text-ink tracking-[-0.035em] mt-8 mb-6 leading-[1.1]">
+                            The Definitive Guide to AI Consultants in <span className="text-ember-ink">Sri Lanka (2026)</span>
                         </h1>
-                        <p className="text-xl text-neutral-400 max-w-3xl leading-relaxed font-light mb-8">
+                        <p className="text-xl text-ink-soft max-w-3xl leading-relaxed font-light mb-8">
                             An authoritative industry report for C-Suite executives and founders navigating the Sri Lankan AI landscape. We deconstruct the difference between AI hype and operational ROI, how to evaluate traditional consultancies versus agile engineering firms, and the exact frameworks required for enterprise deployment.
                         </p>
                     </HeroAnimation>
@@ -108,9 +108,9 @@ export default function AIConsultantsContent() {
                 <div className="max-w-4xl mx-auto">
                     
                     {/* ── Table of Contents ─────────────────── */}
-                    <AnimatedSection className="bg-neutral-900/50 border border-neutral-800 rounded-2xl p-6 md:p-8 mb-20 backdrop-blur-sm">
-                        <h2 className="text-sm font-bold text-neutral-400 mb-6 uppercase tracking-widest flex items-center gap-2">
-                            <CircleDot className="w-4 h-4 text-[rgb(255,73,37)]" /> Report Directory
+                    <AnimatedSection className="bg-white/70 border border-ink/10 rounded-2xl p-6 md:p-8 mb-20">
+                        <h2 className="text-sm font-medium text-ink-soft mb-6 tracking-[-0.035em] flex items-center gap-2">
+                            <CircleDot className="w-4 h-4 text-ember-ink" /> Report Directory
                         </h2>
                         <nav>
                             <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 m-0 p-0 list-none">
@@ -118,9 +118,9 @@ export default function AIConsultantsContent() {
                                     <li key={idx}>
                                         <Link
                                             href={`#${item.id}`}
-                                            className="group flex items-center gap-3 text-neutral-300 hover:text-white transition-colors text-sm font-medium"
+                                            className="group flex items-center gap-3 text-ink-soft hover:text-ink transition-colors text-sm font-medium"
                                         >
-                                            <span className="w-5 h-5 rounded bg-neutral-950 border border-neutral-800 flex items-center justify-center text-[10px] text-neutral-500 group-hover:border-[rgb(255,73,37)] group-hover:text-[rgb(255,73,37)] transition-colors shrink-0">
+                                            <span className="w-5 h-5 rounded bg-transparent border border-ink/10 flex items-center justify-center text-[10px] text-ink-mute group-hover:border-ember group-hover:text-ember-deep transition-colors shrink-0">
                                                 {idx + 1}
                                             </span>
                                             <span className="leading-tight">{item.label}</span>
@@ -133,10 +133,10 @@ export default function AIConsultantsContent() {
 
                     {/* ── Section: Executive Summary ──────── */}
                     <AnimatedSection id="executive-summary" className="scroll-mt-32 mb-24">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-6 tracking-[-0.035em]">
                             1. Executive Summary: AI Reality vs. Corporate Hype
                         </h2>
-                        <div className="prose prose-invert prose-lg max-w-none text-neutral-300 font-light leading-relaxed">
+                        <div className="prose prose-invert prose-lg max-w-none text-ink-soft font-light leading-relaxed">
                             <p>
                                 The boardroom discourse in Colombo regarding Artificial Intelligence has reached a fever pitch. Propelled by media narratives surrounding Large Language Models (LLMs) and generative automation, executives are under immense pressure to "deploy AI" to remain competitive. However, this reactionary approach has created a lucrative market for predatory consulting.
                             </p>
@@ -147,15 +147,15 @@ export default function AIConsultantsContent() {
                                 The distinction between a genuine AI consultant and a software vendor is critical. A vendor will present a polished demo of their pre-built tool and convince you it solves your problem. A consultant will spend weeks inside your organization—interviewing department heads, auditing data pipelines, mapping customer journey friction points—before even mentioning a technology stack. The consultant's primary output is not software; it is a <strong>strategic thesis</strong> backed by operational telemetry that mathematically justifies whether AI intervention will yield a positive return within 12 to 18 months.
                             </p>
                             <p>
-                                In Sri Lanka specifically, this distinction matters because the local market is flooded with <Link href="/software-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">software agencies</Link> rebranding themselves as "AI companies" after adding a simple ChatGPT API wrapper to their existing products. True AI consulting requires deep expertise in Natural Language Processing (NLP), Machine Learning Operations (MLOps), Vector Database architecture, and—critically—an understanding of the specific regulatory and data infrastructure challenges unique to the Sri Lankan corporate environment.
+                                In Sri Lanka specifically, this distinction matters because the local market is flooded with <Link href="/software-companies-sri-lanka" className="text-ember-deep hover:underline">software agencies</Link> rebranding themselves as "AI companies" after adding a simple ChatGPT API wrapper to their existing products. True AI consulting requires deep expertise in Natural Language Processing (NLP), Machine Learning Operations (MLOps), Vector Database architecture, and—critically—an understanding of the specific regulatory and data infrastructure challenges unique to the Sri Lankan corporate environment.
                             </p>
                             
-                            <div className="my-10 bg-neutral-950 border-l-4 border-[rgb(255,73,37)] p-6 rounded-r-xl">
+                            <div className="my-10 bg-transparent border-l-4 border-ember p-6 rounded-r-xl">
                                 <div className="flex items-start gap-4">
-                                    <AlertTriangle className="w-6 h-6 text-[rgb(255,73,37)] shrink-0 mt-1" />
+                                    <AlertTriangle className="w-6 h-6 text-ember-deep shrink-0 mt-1" />
                                     <div>
-                                        <h4 className="text-lg font-bold text-white mb-2 m-0">The Role of the Consultant</h4>
-                                        <p className="text-neutral-400 text-sm leading-relaxed m-0">
+                                        <h4 className="text-lg font-bold text-ink mb-2 m-0">The Role of the Consultant</h4>
+                                        <p className="text-ink-soft text-sm leading-relaxed m-0">
                                             The primary duty of a legitimate AI consultant is risk mitigation. Before a single line of code is written, the consultant must audit the company's data infrastructure, identify high-friction workflows, and prove—mathematically—that an algorithmic intervention will reduce Customer Acquisition Cost (CAC) or increase operational yield. Often, a good consultant will advise a company that they are <em>not ready</em> for AI. That honesty is the hallmark of a trustworthy engagement.
                                         </p>
                                     </div>
@@ -166,11 +166,11 @@ export default function AIConsultantsContent() {
 
                     {/* ── Section: Auditing Framework ─────── */}
                     <AnimatedSection id="the-auditing-framework" className="scroll-mt-32 mb-24">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center gap-3">
-                            <Search className="w-8 h-8 text-[rgb(255,73,37)] shrink-0" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                            <Search className="w-8 h-8 text-ember-ink shrink-0" />
                             2. How Real AI Consultants Approach a Business
                         </h2>
-                        <p className="text-neutral-300 mb-8 font-light leading-relaxed text-lg">
+                        <p className="text-ink-soft mb-8 font-light leading-relaxed text-lg">
                             If a consulting firm immediately attempts to sell you an AI software license without first understanding your P&L statement, they are software vendors, not strategists. A rigorous AI consulting engagement follows a strict, phased framework.
                         </p>
 
@@ -193,10 +193,10 @@ export default function AIConsultantsContent() {
                                     desc: "A true consultancy deploys a hyper-focused 'Proof of Concept' (PoC) to a single department. They measure the exact time saved and error rate reduction before authorizing a company-wide rollout."
                                 }
                             ].map((step, idx) => (
-                                <div key={idx} className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-xl relative overflow-hidden group">
-                                    <div className="absolute top-0 left-0 w-1 h-full bg-[rgb(255,73,37)] opacity-50 group-hover:opacity-100 transition-opacity" />
-                                    <h3 className="text-xl font-bold text-white mb-2 ml-4">{step.phase}</h3>
-                                    <p className="text-neutral-400 text-sm leading-relaxed m-0 ml-4">
+                                <div key={idx} className="cut-card [--cut:14px] bg-white/70 [--cut-line:rgba(27,26,23,0.1)] p-6 relative overflow-hidden group">
+                                    <div className="absolute top-0 left-0 w-1 h-full bg-ember opacity-50 group-hover:opacity-100 transition-opacity" />
+                                    <h3 className="text-xl font-bold text-ink mb-2 ml-4">{step.phase}</h3>
+                                    <p className="text-ink-soft text-sm leading-relaxed m-0 ml-4">
                                         {step.desc}
                                     </p>
                                 </div>
@@ -206,11 +206,11 @@ export default function AIConsultantsContent() {
 
                     {/* ── Section: Data Readiness ─────────── */}
                     <AnimatedSection id="data-readiness" className="scroll-mt-32 mb-24">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 flex items-center gap-3">
-                            <Database className="w-8 h-8 text-[rgb(255,73,37)] shrink-0" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-6 flex items-center gap-3 tracking-[-0.035em]">
+                            <Database className="w-8 h-8 text-ember-ink shrink-0" />
                             3. The Data Readiness Problem in Sri Lanka
                         </h2>
-                        <div className="prose prose-invert prose-lg max-w-none text-neutral-300 font-light leading-relaxed mb-8">
+                        <div className="prose prose-invert prose-lg max-w-none text-ink-soft font-light leading-relaxed mb-8">
                             <p>
                                 The single greatest barrier to AI adoption in Sri Lanka is not budget; it is data infrastructure. An AI model, regardless of its sophistication, is entirely dependent on the quality of the data it ingests. This principle is known in computer science as <em>Garbage In, Garbage Out (GIGO)</em>.
                             </p>
@@ -225,11 +225,11 @@ export default function AIConsultantsContent() {
 
                     {/* ── Section: Industry Use Cases ─────── */}
                     <AnimatedSection id="industry-use-cases" className="scroll-mt-32 mb-24">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center gap-3">
-                            <LineChart className="w-8 h-8 text-[rgb(255,73,37)] shrink-0" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                            <LineChart className="w-8 h-8 text-ember-ink shrink-0" />
                             4. Industry-Specific AI Use Cases in Sri Lanka
                         </h2>
-                        <p className="text-neutral-300 mb-8 font-light leading-relaxed text-lg">
+                        <p className="text-ink-soft mb-8 font-light leading-relaxed text-lg">
                             AI consulting is not a generic service. The value of a consultant is measured by their ability to identify the precise operational leverage point within a specific industry vertical. Here is how AI is being deployed across key sectors of the Sri Lankan economy in 2026.
                         </p>
 
@@ -260,19 +260,19 @@ export default function AIConsultantsContent() {
                                     metric: "Early adopters report 40% faster radiology report turnaround and measurably improved triage accuracy."
                                 }
                             ].map((useCase, idx) => (
-                                <div key={idx} className="bg-neutral-950 border border-neutral-800 rounded-xl p-6 space-y-4">
-                                    <h3 className="text-xl font-bold text-white">{useCase.industry}</h3>
+                                <div key={idx} className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-6 space-y-4">
+                                    <h3 className="text-xl font-bold text-ink">{useCase.industry}</h3>
                                     <div>
-                                        <div className="text-xs font-bold text-red-400 uppercase tracking-wider mb-1">The Problem</div>
-                                        <p className="text-sm text-neutral-400 leading-relaxed m-0">{useCase.problem}</p>
+                                        <div className="text-xs font-bold text-red-700 uppercase tracking-wider mb-1">The Problem</div>
+                                        <p className="text-sm text-ink-soft leading-relaxed m-0">{useCase.problem}</p>
                                     </div>
                                     <div>
-                                        <div className="text-xs font-bold text-green-400 uppercase tracking-wider mb-1">The AI Solution</div>
-                                        <p className="text-sm text-neutral-300 leading-relaxed m-0">{useCase.solution}</p>
+                                        <div className="text-xs font-bold text-green-700 uppercase tracking-wider mb-1">The AI Solution</div>
+                                        <p className="text-sm text-ink-soft leading-relaxed m-0">{useCase.solution}</p>
                                     </div>
-                                    <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-3">
-                                        <div className="text-xs font-bold text-[rgb(255,73,37)] uppercase tracking-wider mb-1">Measured Impact</div>
-                                        <p className="text-sm text-neutral-300 leading-relaxed m-0 italic">{useCase.metric}</p>
+                                    <div className="bg-white/70 border border-ink/10 rounded-lg p-3">
+                                        <div className="text-xs font-bold text-ember-deep uppercase tracking-wider mb-1">Measured Impact</div>
+                                        <p className="text-sm text-ink-soft leading-relaxed m-0 italic">{useCase.metric}</p>
                                     </div>
                                 </div>
                             ))}
@@ -281,39 +281,39 @@ export default function AIConsultantsContent() {
 
                     {/* ── Section: Big 4 vs Agile ─────────── */}
                     <AnimatedSection id="big-4-vs-agile" className="scroll-mt-32 mb-24">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center gap-3">
-                            <Briefcase className="w-8 h-8 text-[rgb(255,73,37)] shrink-0" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                            <Briefcase className="w-8 h-8 text-ember-ink shrink-0" />
                             5. The Competitor Landscape: Big 4 vs. Agile Firms
                         </h2>
-                        <p className="text-neutral-300 mb-8 font-light leading-relaxed text-lg">
+                        <p className="text-ink-soft mb-8 font-light leading-relaxed text-lg">
                             When procuring AI consulting services in Colombo, executives generally choose between two distinct archetypes. Understanding their operational differences is vital to controlling your capital expenditure.
                         </p>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             {/* The Big 4 */}
-                            <div className="border border-neutral-800 rounded-2xl p-8 bg-neutral-900/20">
-                                <h3 className="text-2xl font-bold text-white mb-4">The Legacy "Big 4" Consultancies</h3>
-                                <p className="text-sm text-neutral-400 mb-6 leading-relaxed">
+                            <div className="cut-card [--cut:18px] relative [--cut-line:rgba(27,26,23,0.1)] p-8 bg-white/70">
+                                <h3 className="text-2xl font-bold text-ink mb-4">The Legacy "Big 4" Consultancies</h3>
+                                <p className="text-sm text-ink-soft mb-6 leading-relaxed">
                                     Traditional management consulting firms (e.g., KPMG, EY, PwC) have aggressively expanded into the "Digital Transformation" space. They are highly adept at corporate governance and board-level risk compliance.
                                 </p>
                                 <div className="space-y-4">
-                                    <div className="bg-neutral-950 p-4 rounded-lg border border-neutral-800">
-                                        <div className="text-xs font-bold text-red-400 uppercase tracking-wider mb-1">The Drawback</div>
-                                        <div className="text-sm text-neutral-300"><strong>The Output is Often Just a PDF.</strong> They excel at producing 100-page strategic roadmaps and feasibility studies. However, they rarely possess deep, in-house software engineering talent. Once the massive consulting fee is paid, they often outsource the actual coding to a third-party agency, drastically inflating the project timeline and cost.</div>
+                                    <div className="cut-card [--cut:12px] relative bg-transparent p-4 [--cut-line:rgba(27,26,23,0.1)]">
+                                        <div className="text-xs font-bold text-red-700 uppercase tracking-wider mb-1">The Drawback</div>
+                                        <div className="text-sm text-ink-soft"><strong>The Output is Often Just a PDF.</strong> They excel at producing 100-page strategic roadmaps and feasibility studies. However, they rarely possess deep, in-house software engineering talent. Once the massive consulting fee is paid, they often outsource the actual coding to a third-party agency, drastically inflating the project timeline and cost.</div>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Agile Engineering */}
-                            <div className="border border-[rgb(255,73,37)]/30 rounded-2xl p-8 bg-gradient-to-br from-[rgb(255,73,37)]/5 to-transparent">
-                                <h3 className="text-2xl font-bold text-white mb-4">Agile AI Engineering Firms</h3>
-                                <p className="text-sm text-neutral-400 mb-6 leading-relaxed">
+                            <div className="cut-card [--cut:18px] relative [--cut-line:rgba(255,73,37,0.3)] p-8 bg-gradient-to-br from-ember/5 to-transparent">
+                                <h3 className="text-2xl font-bold text-ink mb-4">Agile AI Engineering Firms</h3>
+                                <p className="text-sm text-ink-soft mb-6 leading-relaxed">
                                     A newer archetype of highly specialized boutiques that merge high-level C-suite strategy with rigorous, in-house software engineering. They consult on the strategy, and then immediately build the architecture.
                                 </p>
                                 <div className="space-y-4">
-                                    <div className="bg-neutral-950 p-4 rounded-lg border border-[rgb(255,73,37)]/30">
-                                        <div className="text-xs font-bold text-green-400 uppercase tracking-wider mb-1">The Advantage</div>
-                                        <div className="text-sm text-neutral-300"><strong>Strategy Married to Execution.</strong> Firms fitting this archetype (such as ARC AI) do not hand off a strategy document to a separate coding team. The consultants architecting the workflow are directly managing the engineers deploying the Python and Next.js code. This eliminates the "translation gap," ensures tight security compliance, and vastly accelerates deployment.</div>
+                                    <div className="cut-card [--cut:12px] relative bg-transparent p-4 [--cut-line:rgba(255,73,37,0.3)]">
+                                        <div className="text-xs font-bold text-green-700 uppercase tracking-wider mb-1">The Advantage</div>
+                                        <div className="text-sm text-ink-soft"><strong>Strategy Married to Execution.</strong> Firms fitting this archetype (such as ARC AI) do not hand off a strategy document to a separate coding team. The consultants architecting the workflow are directly managing the engineers deploying the Python and Next.js code. This eliminates the "translation gap," ensures tight security compliance, and vastly accelerates deployment.</div>
                                     </div>
                                 </div>
                             </div>
@@ -322,42 +322,42 @@ export default function AIConsultantsContent() {
 
                     {/* ── Section: Pricing & TCO ────────────── */}
                     <AnimatedSection id="roi-and-pricing" className="scroll-mt-32 mb-24">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center gap-3">
-                            <DollarSign className="w-8 h-8 text-[rgb(255,73,37)] shrink-0" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                            <DollarSign className="w-8 h-8 text-ember-ink shrink-0" />
                             5. Pricing the Unpriceable: TCO in LKR
                         </h2>
-                        <p className="text-neutral-300 mb-8 font-light leading-relaxed text-lg">
+                        <p className="text-ink-soft mb-8 font-light leading-relaxed text-lg">
                             AI consulting operates differently than standard web design procurement. Because the output is intellectual property and operational efficiency rather than a static website, pricing structures vary. Here is the realistic benchmark for the Sri Lankan market.
                         </p>
 
-                        <div className="overflow-x-auto -mx-4 md:mx-0 rounded-xl border border-neutral-800 shadow-xl mb-10">
+                        <div className="overflow-x-auto -mx-4 md:mx-0 rounded-xl border border-ink/10 shadow-xl mb-10">
                             <table className="w-full text-sm border-collapse min-w-[800px]">
                                 <thead>
-                                    <tr className="border-b border-neutral-800 bg-neutral-900">
-                                        <th className="p-5 text-left text-neutral-200 font-bold uppercase tracking-wider text-xs w-1/4">Engagement Type</th>
-                                        <th className="p-5 text-left text-neutral-200 font-bold uppercase tracking-wider text-xs w-1/4">Estimated Cost (LKR)</th>
-                                        <th className="p-5 text-left text-neutral-200 font-bold uppercase tracking-wider text-xs w-1/2">Deliverables & Reality</th>
+                                    <tr className="border-b border-ink/10 bg-white/70">
+                                        <th className="p-5 text-left text-ink font-bold uppercase tracking-wider text-xs w-1/4">Engagement Type</th>
+                                        <th className="p-5 text-left text-ink font-bold uppercase tracking-wider text-xs w-1/4">Estimated Cost (LKR)</th>
+                                        <th className="p-5 text-left text-ink font-bold uppercase tracking-wider text-xs w-1/2">Deliverables & Reality</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-neutral-800/50 bg-neutral-950">
-                                    <tr className="hover:bg-neutral-900/30 transition-colors">
-                                        <td className="p-5 font-bold text-white">The Feasibility Audit<br/><span className="text-xs font-normal text-neutral-500">Fixed Fee</span></td>
-                                        <td className="p-5 font-mono text-green-400 font-bold">LKR 150,000 – 400,000</td>
-                                        <td className="p-5 text-neutral-400 text-sm leading-relaxed">
+                                <tbody className="divide-y divide-ink/10 bg-transparent">
+                                    <tr className="hover:bg-white transition-colors">
+                                        <td className="p-5 font-bold text-ink">The Feasibility Audit<br/><span className="text-xs font-normal text-ink-mute">Fixed Fee</span></td>
+                                        <td className="p-5 font-mono text-green-700 font-bold">LKR 150,000 – 400,000</td>
+                                        <td className="p-5 text-ink-soft text-sm leading-relaxed">
                                             A 2 to 4-week deep dive into company data infrastructure and workflows. Yields a technical roadmap detailing exactly where AI will save money and what APIs/models are required.
                                         </td>
                                     </tr>
-                                    <tr className="hover:bg-neutral-900/30 transition-colors">
-                                        <td className="p-5 font-bold text-white">Proof of Concept (PoC)<br/><span className="text-xs font-normal text-neutral-500">Prototype Build</span></td>
-                                        <td className="p-5 font-mono text-green-400 font-bold">LKR 350,000 – 800,000</td>
-                                        <td className="p-5 text-neutral-400 text-sm leading-relaxed">
+                                    <tr className="hover:bg-white transition-colors">
+                                        <td className="p-5 font-bold text-ink">Proof of Concept (PoC)<br/><span className="text-xs font-normal text-ink-mute">Prototype Build</span></td>
+                                        <td className="p-5 font-mono text-green-700 font-bold">LKR 350,000 – 800,000</td>
+                                        <td className="p-5 text-ink-soft text-sm leading-relaxed">
                                             Building a functional, internal AI agent (e.g., an LLM trained on the company's HR handbook) to test latency, accuracy, and employee adoption before enterprise rollout.
                                         </td>
                                     </tr>
-                                    <tr className="hover:bg-neutral-900/30 transition-colors bg-[rgb(255,73,37)]/5">
-                                        <td className="p-5 font-bold text-white border-l-2 border-[rgb(255,73,37)]">Full Pipeline Deployment<br/><span className="text-xs font-normal text-[rgb(255,73,37)]/80">Enterprise Scale</span></td>
-                                        <td className="p-5 font-mono text-white font-bold">LKR 1.5M – 5M+</td>
-                                        <td className="p-5 text-neutral-300 text-sm leading-relaxed">
+                                    <tr className="hover:bg-white transition-colors bg-ember/5">
+                                        <td className="p-5 font-bold text-ink border-l-2 border-ember">Full Pipeline Deployment<br/><span className="text-xs font-normal text-ember-deep">Enterprise Scale</span></td>
+                                        <td className="p-5 font-mono text-ink font-bold">LKR 1.5M – 5M+</td>
+                                        <td className="p-5 text-ink-soft text-sm leading-relaxed">
                                             A massive undertaking involving custom Vector Databases (RAG), secure OpenAI/Anthropic API integrations, automated trigger workflows, and comprehensive employee training.
                                         </td>
                                     </tr>
@@ -368,11 +368,11 @@ export default function AIConsultantsContent() {
 
                     {/* ── Section: Post-Audit Roadmap ────── */}
                     <AnimatedSection id="post-audit-roadmap" className="scroll-mt-32 mb-24">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center gap-3">
-                            <TrendingUp className="w-8 h-8 text-[rgb(255,73,37)] shrink-0" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                            <TrendingUp className="w-8 h-8 text-ember-ink shrink-0" />
                             7. The Post-Audit Roadmap: From Strategy to Deployment
                         </h2>
-                        <p className="text-neutral-300 mb-8 font-light leading-relaxed text-lg">
+                        <p className="text-ink-soft mb-8 font-light leading-relaxed text-lg">
                             After the feasibility audit is complete, the transition from strategy document to live AI system is where most consulting engagements fail. A rigorous post-audit deployment follows a strict, gated process that prevents scope creep and budget overrun.
                         </p>
 
@@ -399,14 +399,14 @@ export default function AIConsultantsContent() {
                                     desc: "Once pilot data validates the system, it is scaled across the organization. This stage includes comprehensive employee onboarding workshops, integration with existing workflow tools (Slack, Teams, internal dashboards), and establishing monitoring dashboards that track AI accuracy, usage volume, and monthly API costs in real-time."
                                 }
                             ].map((gate, idx) => (
-                                <div key={idx} className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-xl relative overflow-hidden group">
-                                    <div className="absolute top-0 left-0 w-1 h-full bg-[rgb(255,73,37)] opacity-50 group-hover:opacity-100 transition-opacity" />
+                                <div key={idx} className="cut-card [--cut:14px] bg-white/70 [--cut-line:rgba(27,26,23,0.1)] p-6 relative overflow-hidden group">
+                                    <div className="absolute top-0 left-0 w-1 h-full bg-ember opacity-50 group-hover:opacity-100 transition-opacity" />
                                     <div className="ml-4">
                                         <div className="flex items-center justify-between mb-2">
-                                            <h3 className="text-xl font-bold text-white">{gate.stage}</h3>
-                                            <span className="text-xs font-mono text-[rgb(255,73,37)] bg-[rgb(255,73,37)]/10 px-3 py-1 rounded-full">{gate.timeline}</span>
+                                            <h3 className="text-xl font-bold text-ink">{gate.stage}</h3>
+                                            <span className="text-xs font-mono text-ember-deep bg-ember/10 px-3 py-1 rounded-full">{gate.timeline}</span>
                                         </div>
-                                        <p className="text-neutral-400 text-sm leading-relaxed m-0">{gate.desc}</p>
+                                        <p className="text-ink-soft text-sm leading-relaxed m-0">{gate.desc}</p>
                                     </div>
                                 </div>
                             ))}
@@ -415,11 +415,11 @@ export default function AIConsultantsContent() {
 
                     {/* ── Section: Data Privacy ──────────── */}
                     <AnimatedSection id="data-privacy" className="scroll-mt-32 mb-24">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 flex items-center gap-3">
-                            <Shield className="w-8 h-8 text-[rgb(255,73,37)] shrink-0" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-6 flex items-center gap-3 tracking-[-0.035em]">
+                            <Shield className="w-8 h-8 text-ember-ink shrink-0" />
                             8. Data Privacy & Compliance in Sri Lanka
                         </h2>
-                        <div className="prose prose-invert prose-lg max-w-none text-neutral-300 font-light leading-relaxed mb-8">
+                        <div className="prose prose-invert prose-lg max-w-none text-ink-soft font-light leading-relaxed mb-8">
                             <p>
                                 One of the most overlooked aspects of AI deployment is data sovereignty and regulatory compliance. Sri Lanka enacted the <strong>Personal Data Protection Act No. 9 of 2022</strong>, which imposes strict obligations on how organisations collect, process, and store personal data. Any AI consultant operating in Sri Lanka must architect systems that comply with these regulations or expose their client to significant legal liability.
                             </p>
@@ -446,9 +446,9 @@ export default function AIConsultantsContent() {
                                     desc: "Every AI interaction must be logged with timestamps, user IDs, and data categories accessed. Role-based access control (RBAC) ensures that only authorised personnel can query sensitive data through the AI system."
                                 }
                             ].map((tier, idx) => (
-                                <div key={idx} className="bg-neutral-950 border border-neutral-800 rounded-xl p-6">
-                                    <h3 className="text-lg font-bold text-white mb-3">{tier.tier}</h3>
-                                    <p className="text-sm text-neutral-400 leading-relaxed m-0">{tier.desc}</p>
+                                <div key={idx} className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-6">
+                                    <h3 className="text-lg font-bold text-ink mb-3">{tier.tier}</h3>
+                                    <p className="text-sm text-ink-soft leading-relaxed m-0">{tier.desc}</p>
                                 </div>
                             ))}
                         </div>
@@ -456,11 +456,11 @@ export default function AIConsultantsContent() {
 
                     {/* ── Section: Procurement Framework ────── */}
                     <AnimatedSection id="procurement-checklist" className="scroll-mt-32 mb-24">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center gap-3">
-                            <Cpu className="w-8 h-8 text-[rgb(255,73,37)] shrink-0" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                            <Cpu className="w-8 h-8 text-ember-ink shrink-0" />
                             9. The 5-Point Procurement Checklist
                         </h2>
-                        <p className="text-neutral-300 mb-8 font-light leading-relaxed text-lg">
+                        <p className="text-ink-soft mb-8 font-light leading-relaxed text-lg">
                             Protect your corporate data and capital. Do not engage an AI consultant in Sri Lanka without establishing these five critical safeguards during the RFP process.
                         </p>
 
@@ -492,11 +492,11 @@ export default function AIConsultantsContent() {
                                     desc: "AI relies on 'tokens' (the cost of processing words via APIs). The consultant must provide a mathematical forecast of your monthly recurring API costs (OpEx) at scale, before you commit to the build."
                                 }
                             ].map((point, idx) => (
-                                <div key={idx} className="flex gap-6 p-6 rounded-xl hover:bg-neutral-900/30 transition-colors border border-transparent hover:border-neutral-800">
-                                    <div className="text-4xl font-black text-neutral-800 shrink-0">{point.num}</div>
+                                <div key={idx} className="cut-card [--cut:14px] relative flex gap-6 p-6 hover:bg-white transition-colors hover:[--cut-line:rgba(27,26,23,0.3)]">
+                                    <div className="text-4xl font-black text-ink/20 shrink-0">{point.num}</div>
                                     <div>
-                                        <h4 className="text-lg font-bold text-white mb-2">{point.title}</h4>
-                                        <p className="text-neutral-400 text-sm leading-relaxed m-0">{point.desc}</p>
+                                        <h4 className="text-lg font-bold text-ink mb-2">{point.title}</h4>
+                                        <p className="text-ink-soft text-sm leading-relaxed m-0">{point.desc}</p>
                                     </div>
                                 </div>
                             ))}
@@ -505,11 +505,11 @@ export default function AIConsultantsContent() {
 
                     {/* ── Section: FAQ ──────────────────────── */}
                     <AnimatedSection id="faq" className="scroll-mt-32 mb-20">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center gap-3 border-t border-neutral-800 pt-16">
-                            <HelpCircle className="w-8 h-8 text-[rgb(255,73,37)] shrink-0" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-8 flex items-center gap-3 border-t border-ink/10 pt-16 tracking-[-0.035em]">
+                            <HelpCircle className="w-8 h-8 text-ember-ink shrink-0" />
                             7. Frequently Asked Questions
                         </h2>
-                        <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-6 md:p-8">
+                        <div className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-6 md:p-8">
                             {faqs.map((faq, idx) => (
                                 <FAQItem key={idx} question={faq.q} answer={faq.a} />
                             ))}
@@ -517,18 +517,17 @@ export default function AIConsultantsContent() {
                     </AnimatedSection>
 
                     {/* ── Conclusion / CTA ──────────────────────── */}
-                    <AnimatedSection className="mt-20 pt-16 pb-16 border-t border-neutral-800">
-                        <div className="bg-gradient-to-br from-[rgb(255,73,37)]/20 via-neutral-950 to-black border border-[rgb(255,73,37)]/30 rounded-2xl p-8 md:p-12 text-center relative overflow-hidden shadow-2xl">
-                            <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay" />
-                            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 relative z-10">
+                    <AnimatedSection className="mt-20 pt-16 pb-16 border-t border-ink/10">
+                        <div className="cut-card [--cut:18px] bg-gradient-to-br from-ember/20 via-paper to-paper [--cut-line:rgba(255,73,37,0.3)] p-8 md:p-12 text-center relative overflow-hidden shadow-2xl">
+                            <h2 className="text-3xl md:text-4xl font-medium text-ink mb-6 relative z-10 tracking-[-0.035em]">
                                 Execute Strategy. <br className="hidden md:block" /> Engineer Reality.
                             </h2>
-                            <p className="text-lg text-neutral-300 mb-8 max-w-2xl mx-auto relative z-10 font-light">
+                            <p className="text-lg text-ink-soft mb-8 max-w-2xl mx-auto relative z-10 font-light">
                                 If you require an agile consulting partner capable of not only auditing your data readiness but immediately deploying secure, enterprise-grade AI architecture, let's architect your digital superiority.
                             </p>
                             <Link
                                 href="/contact"
-                                className="inline-flex items-center gap-2 px-8 py-4 bg-[rgb(255,73,37)] text-white font-bold rounded-full hover:bg-[rgb(220,50,20)] transition-all relative z-10 shadow-[0_0_40px_rgba(255,73,37,0.4)] hover:shadow-[0_0_60px_rgba(255,73,37,0.6)] hover:-translate-y-1"
+                                className="cut-btn [--cut:12px] [--cut-focus:#1B1A17] inline-flex items-center gap-2 px-8 py-4 bg-ember text-ink font-bold hover:bg-[#FF5C3A] transition-all relative z-10 hover:-translate-y-1"
                             >
                                 Schedule a Feasibility Audit
                                 <ArrowRight className="w-5 h-5" />

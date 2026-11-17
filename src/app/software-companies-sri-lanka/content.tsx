@@ -34,7 +34,7 @@ const tocItems = [
 
 export default function SoftwareCompaniesContent() {
     return (
-        <div className="min-h-screen bg-black text-white">
+        <div className="home-cream min-h-screen bg-transparent text-ink">
             <ScrollProgressBar />
             <BackToTop />
             <Navbar />
@@ -81,7 +81,7 @@ export default function SoftwareCompaniesContent() {
                     <BottomCta />
                     <AuthorBox />
 
-                    <div className="mt-12 pt-8 border-t border-neutral-800">
+                    <div className="mt-12 pt-8 border-t border-ink/10">
                         <SocialShareButtons url={PAGE_URL} title={PAGE_TITLE} />
                     </div>
                     <PageNav />

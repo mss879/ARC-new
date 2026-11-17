@@ -33,11 +33,11 @@ const fadeInUp: Variants = {
 
 export default function AIAgentsContent() {
     return (
-        <div className="min-h-screen bg-black text-white">
+        <div className="home-cream min-h-screen bg-transparent text-ink">
             <Navbar />
             {/* Hero Section */}
             <section className="relative min-h-[90vh] flex items-center justify-center px-4 md:px-8 pt-32 pb-20" aria-label="AI agents overview">
-                <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black" aria-hidden="true" />
+                <div className="absolute inset-0 bg-gradient-to-b from-paper via-paper/95 to-paper" aria-hidden="true" />
                 <div
                     className="absolute inset-0 opacity-20"
                     aria-hidden="true"
@@ -54,7 +54,7 @@ export default function AIAgentsContent() {
                         variants={letterContainer}
                         className="mb-8"
                     >
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight">
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-[-0.035em]">
                             {["AI-POWERED", "CHATBOTS"].map((word, i) => (
                                 <span key={i} className="block mb-2">
                                     {word.split("").map((char, j) => (
@@ -75,7 +75,7 @@ export default function AIAgentsContent() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 0.7 }}
-                        className="text-xl md:text-2xl text-neutral-400 max-w-3xl mx-auto mb-12"
+                        className="text-xl md:text-2xl text-ink-soft max-w-3xl mx-auto mb-12"
                     >
                         AI-driven AI agents with advanced cognitive technologies to elevate customer support
                         and automate business operations. 24/7 intelligent assistance.
@@ -89,7 +89,7 @@ export default function AIAgentsContent() {
                     >
                         <Link
                             href="/contact"
-                            className="group relative px-8 py-4 bg-accent text-white font-semibold rounded-lg overflow-hidden transition-all hover:scale-105"
+                            className="cut-btn [--cut:12px] [--cut-focus:#1B1A17] group relative px-8 py-4 bg-ember text-ink font-semibold overflow-hidden transition-all hover:scale-105"
                         >
                             <span className="relative z-10 flex items-center gap-2">
                                 Build Your AI Agent
@@ -98,7 +98,7 @@ export default function AIAgentsContent() {
                         </Link>
                         <Link
                             href="#demo"
-                            className="px-8 py-4 border border-neutral-700 text-white font-semibold rounded-lg hover:border-neutral-500 transition-colors"
+                            className="cut-btn [--cut:12px] px-8 py-4 [--cut-line:rgba(27,26,23,0.1)] text-ink font-semibold hover:[--cut-line:rgba(27,26,23,0.3)] transition-colors"
                         >
                             Try Demo
                         </Link>
@@ -107,7 +107,7 @@ export default function AIAgentsContent() {
             </section>
 
             {/* Key Features */}
-            <section className="py-20 px-4 md:px-8 bg-black" aria-label="AI Agent capabilities">
+            <section className="py-20 px-4 md:px-8 bg-transparent" aria-label="AI Agent capabilities">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial="hidden"
@@ -116,12 +116,12 @@ export default function AIAgentsContent() {
                         variants={fadeInUp}
                         className="mb-16"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                            <span className="bg-gradient-to-b from-white via-zinc-200 to-zinc-600 bg-clip-text text-transparent">
+                        <h2 className="text-4xl md:text-5xl font-medium mb-4 tracking-[-0.035em]">
+                            <span className="text-ink">
                                 AI Agent Capabilities
                             </span>
                         </h2>
-                        <p className="text-neutral-400 text-lg">Advanced AI features for superior customer interactions</p>
+                        <p className="text-ink-soft text-lg">Advanced AI features for superior customer interactions</p>
                     </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -164,13 +164,13 @@ export default function AIAgentsContent() {
                                 viewport={{ once: true, amount: 0.3 }}
                                 variants={fadeInUp}
                                 transition={{ delay: index * 0.1 }}
-                                className="group p-8 bg-neutral-900/50 border border-neutral-800 rounded-xl hover:border-accent/50 transition-all hover:bg-neutral-900"
+                                className="cut-card [--cut:14px] relative group p-8 bg-white/70 [--cut-line:rgba(27,26,23,0.1)] hover:[--cut-line:rgba(255,73,37,0.5)] transition-all hover:bg-white"
                             >
-                                <div className="w-16 h-16 mb-6 rounded-lg bg-accent/10 flex items-center justify-center text-accent group-hover:scale-110 transition-transform">
+                                <div className="w-16 h-16 mb-6 rounded-lg bg-ember/10 flex items-center justify-center text-ember-deep group-hover:scale-110 transition-transform">
                                     {feature.icon}
                                 </div>
                                 <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                                <p className="text-neutral-400">{feature.description}</p>
+                                <p className="text-ink-soft">{feature.description}</p>
                             </motion.div>
                         ))}
                     </div>
@@ -178,7 +178,7 @@ export default function AIAgentsContent() {
             </section>
 
             {/* Use Cases */}
-            <section className="py-20 px-4 md:px-8 bg-neutral-950" aria-label="AI Agent use cases">
+            <section className="py-20 px-4 md:px-8 bg-transparent" aria-label="AI Agent use cases">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial="hidden"
@@ -187,12 +187,12 @@ export default function AIAgentsContent() {
                         variants={fadeInUp}
                         className="mb-16 text-center"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                            <span className="bg-gradient-to-b from-white via-zinc-200 to-zinc-600 bg-clip-text text-transparent">
+                        <h2 className="text-4xl md:text-5xl font-medium mb-4 tracking-[-0.035em]">
+                            <span className="text-ink">
                                 Use Cases
                             </span>
                         </h2>
-                        <p className="text-neutral-400 text-lg">Perfect applications for AI agents</p>
+                        <p className="text-ink-soft text-lg">Perfect applications for AI agents</p>
                     </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -235,16 +235,16 @@ export default function AIAgentsContent() {
                                 viewport={{ once: true, amount: 0.3 }}
                                 variants={fadeInUp}
                                 transition={{ delay: index * 0.1 }}
-                                className="p-8 bg-black border border-neutral-800 rounded-xl"
+                                className="cut-card [--cut:14px] relative p-8 bg-white/70 [--cut-line:rgba(27,26,23,0.1)] "
                             >
-                                <MessageSquare className="w-10 h-10 text-accent mb-4" />
+                                <MessageSquare className="w-10 h-10 text-ember-deep mb-4" />
                                 <h3 className="text-2xl font-bold mb-3">{useCase.title}</h3>
-                                <p className="text-neutral-400 mb-6">{useCase.description}</p>
+                                <p className="text-ink-soft mb-6">{useCase.description}</p>
                                 <div className="flex flex-wrap gap-2">
                                     {useCase.examples.map((example, i) => (
                                         <span
                                             key={i}
-                                            className="px-3 py-1 bg-neutral-900 border border-neutral-700 rounded-full text-sm text-neutral-300"
+                                            className="px-3 py-1 bg-white/70 border border-ink/10 rounded-full text-sm text-ink-soft"
                                         >
                                             {example}
                                         </span>
@@ -257,7 +257,7 @@ export default function AIAgentsContent() {
             </section>
 
             {/* Platform Integrations */}
-            <section className="py-20 px-4 md:px-8 bg-black" aria-label="Platform integrations">
+            <section className="py-20 px-4 md:px-8 bg-transparent" aria-label="Platform integrations">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial="hidden"
@@ -266,12 +266,12 @@ export default function AIAgentsContent() {
                         variants={fadeInUp}
                         className="mb-16 text-center"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                            <span className="bg-gradient-to-b from-white via-zinc-200 to-zinc-600 bg-clip-text text-transparent">
+                        <h2 className="text-4xl md:text-5xl font-medium mb-4 tracking-[-0.035em]">
+                            <span className="text-ink">
                                 Platform Integrations
                             </span>
                         </h2>
-                        <p className="text-neutral-400 text-lg">Deploy your AI agent anywhere your customers are</p>
+                        <p className="text-ink-soft text-lg">Deploy your AI agent anywhere your customers are</p>
                     </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
@@ -300,13 +300,13 @@ export default function AIAgentsContent() {
                                 viewport={{ once: true, amount: 0.3 }}
                                 variants={fadeInUp}
                                 transition={{ delay: index * 0.1 }}
-                                className="p-6 bg-neutral-900/50 border border-neutral-800 rounded-xl"
+                                className="cut-card [--cut:14px] relative p-6 bg-white/70 [--cut-line:rgba(27,26,23,0.1)] "
                             >
-                                <h3 className="text-lg font-bold mb-4 text-accent">{group.category}</h3>
+                                <h3 className="text-lg font-bold mb-4 text-ember-deep">{group.category}</h3>
                                 <ul className="space-y-2">
                                     {group.platforms.map((platform, i) => (
-                                        <li key={i} className="text-neutral-400 flex items-center gap-2">
-                                            <span className="text-accent">•</span>
+                                        <li key={i} className="text-ink-soft flex items-center gap-2">
+                                            <span className="text-ember-deep">•</span>
                                             {platform}
                                         </li>
                                     ))}
@@ -318,7 +318,7 @@ export default function AIAgentsContent() {
             </section>
 
             {/* Implementation Process */}
-            <section className="py-20 px-4 md:px-8 bg-neutral-950" aria-label="Implementation process">
+            <section className="py-20 px-4 md:px-8 bg-transparent" aria-label="Implementation process">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial="hidden"
@@ -327,17 +327,17 @@ export default function AIAgentsContent() {
                         variants={fadeInUp}
                         className="mb-16 text-center"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                            <span className="bg-gradient-to-b from-white via-zinc-200 to-zinc-600 bg-clip-text text-transparent">
+                        <h2 className="text-4xl md:text-5xl font-medium mb-4 tracking-[-0.035em]">
+                            <span className="text-ink">
                                 How We Build Your AI Agent
                             </span>
                         </h2>
-                        <p className="text-neutral-400 text-lg">From concept to deployment in weeks</p>
+                        <p className="text-ink-soft text-lg">From concept to deployment in weeks</p>
                     </motion.div>
 
                     <div className="relative">
                         {/* Connection Line */}
-                        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent via-accent/50 to-transparent hidden md:block" aria-hidden="true" />
+                        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-ember via-ember/50 to-transparent hidden md:block" aria-hidden="true" />
 
                         {[
                             {
@@ -381,16 +381,16 @@ export default function AIAgentsContent() {
                                 className="relative mb-12 last:mb-0 md:pl-24"
                             >
                                 {/* Step Number Circle */}
-                                <div className="absolute left-0 w-16 h-16 bg-accent rounded-full items-center justify-center font-bold text-xl hidden md:flex">
+                                <div className="absolute left-0 w-16 h-16 bg-ember rounded-full items-center justify-center font-bold text-xl hidden md:flex">
                                     {item.step}
                                 </div>
 
-                                <div className="p-8 bg-black border border-neutral-800 rounded-xl hover:border-accent/50 transition-all">
+                                <div className="cut-card [--cut:14px] relative p-8 bg-white/70 [--cut-line:rgba(27,26,23,0.1)] hover:[--cut-line:rgba(255,73,37,0.5)] transition-all">
                                     <div className="flex items-center gap-4 mb-3 md:hidden">
-                                        <span className="text-3xl font-bold text-accent">{item.step}</span>
+                                        <span className="text-3xl font-bold text-ember-ink">{item.step}</span>
                                     </div>
                                     <h3 className="text-2xl font-bold mb-3">{item.title}</h3>
-                                    <p className="text-neutral-400 text-lg">{item.description}</p>
+                                    <p className="text-ink-soft text-lg">{item.description}</p>
                                 </div>
                             </motion.div>
                         ))}
@@ -399,7 +399,7 @@ export default function AIAgentsContent() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-black to-neutral-950" aria-label="Get started with AI agents">
+            <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-paper to-paper" aria-label="Get started with AI agents">
                 <div className="max-w-4xl mx-auto text-center">
                     <motion.div
                         initial="hidden"
@@ -407,15 +407,15 @@ export default function AIAgentsContent() {
                         viewport={{ once: true, amount: 0.3 }}
                         variants={fadeInUp}
                     >
-                        <h2 className="text-4xl md:text-6xl font-bold mb-6">
+                        <h2 className="text-4xl md:text-6xl font-medium mb-6 tracking-[-0.035em]">
                             Transform Customer Support with AI
                         </h2>
-                        <p className="text-xl text-neutral-400 mb-8">
+                        <p className="text-xl text-ink-soft mb-8">
                             Deploy intelligent AI agents that delight customers and reduce support costs. Get started today.
                         </p>
                         <Link
                             href="/contact"
-                            className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white font-semibold rounded-lg hover:scale-105 transition-transform"
+                            className="cut-btn [--cut:12px] [--cut-focus:#1B1A17] inline-flex items-center gap-2 px-8 py-4 bg-ember text-ink font-semibold hover:scale-105 transition-transform"
                         >
                             Build Your AI Agent
                             <ArrowUpRight className="w-5 h-5" />

@@ -22,8 +22,18 @@ export default {
     extend: {
       fontFamily: {
         flarex: ["var(--font-flarex)", "sans-serif"],
+        // The home page's text face (loaded in src/app/page.tsx).
+        display: ["var(--font-display)", "Inter", "system-ui", "sans-serif"],
       },
       colors: {
+        // Grey-cream home page palette. `paper` is the page, `ink` the text,
+        // `ember` the ARC orange. Text shades are picked for contrast on
+        // paper: ink-soft and ink-mute pass 4.5:1, ink-ghost and ember-ink
+        // are for large headings only (3:1), ember-deep is orange that is
+        // dark enough for small text.
+        paper: { DEFAULT: "#E8E6E0", deep: "#DDDAD2", soft: "#F4F2EC", white: "#FBFAF7" },
+        ink: { DEFAULT: "#1B1A17", soft: "#55524B", mute: "#6B675F", ghost: "#807C73" },
+        ember: { DEFAULT: "#FF4925", ink: "#E8380F", deep: "#B62A0B" },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

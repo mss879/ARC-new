@@ -48,11 +48,21 @@ export const office = {
 } as const;
 
 export const hours = {
-  days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-  opens: "09:00",
-  closes: "18:00",
+  /** One entry per run of days with the same hours, Sri Lanka time. `opens`
+   *  and `closes` (24-hour) go into the structured data; `label` and `time`
+   *  are how a visitor reads them. Set by the owner on 16 Nov 2026. */
+  periods: [
+    {
+      days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "19:00",
+      label: "Monday to Friday",
+      time: "9 AM to 7 PM",
+    },
+    { days: ["Saturday"], opens: "09:00", closes: "16:00", label: "Saturday", time: "9 AM to 4 PM" },
+  ],
   /** As a visitor reads it. */
-  oneLine: "Monday to Friday, 9 AM to 6 PM (Sri Lanka time)",
+  oneLine: "Monday to Friday 9 AM to 7 PM, Saturday 9 AM to 4 PM (Sri Lanka time)",
 } as const;
 
 export const phones = {

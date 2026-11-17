@@ -33,16 +33,16 @@ const fadeInUp: Variants = {
 
 export default function CustomBackendContent() {
     return (
-        <div className="min-h-screen bg-black text-white">
+        <div className="home-cream min-h-screen bg-transparent text-ink">
             <Navbar />
             {/* Hero Section */}
             <section className="relative min-h-[90vh] flex items-center justify-center px-4 md:px-8 pt-32 pb-20" aria-label="Custom backend overview">
-                <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black" aria-hidden="true" />
+                <div className="absolute inset-0 bg-gradient-to-b from-paper via-paper/95 to-paper" aria-hidden="true" />
                 <div
                     className="absolute inset-0 opacity-20"
                     aria-hidden="true"
                     style={{
-                        backgroundImage: `radial-gradient(circle at 2px 2px, rgba(16, 185, 129, 0.15) 1px, transparent 0)`,
+                        backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255, 73, 37, 0.15) 1px, transparent 0)`,
                         backgroundSize: '40px 40px'
                     }}
                 />
@@ -54,7 +54,7 @@ export default function CustomBackendContent() {
                         variants={letterContainer}
                         className="mb-8"
                     >
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight">
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-[-0.035em]">
                             {["BACKEND", "SYSTEMS"].map((word, i) => (
                                 <span key={i} className="block mb-2">
                                     {word.split("").map((char, j) => (
@@ -75,7 +75,7 @@ export default function CustomBackendContent() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 0.7 }}
-                        className="text-xl md:text-2xl text-neutral-400 max-w-3xl mx-auto mb-12"
+                        className="text-xl md:text-2xl text-ink-soft max-w-3xl mx-auto mb-12"
                     >
                         Build the engine that powers your business. Robust, secure, and scalable
                         backend infrastructure designed for growth.
@@ -89,7 +89,7 @@ export default function CustomBackendContent() {
                     >
                         <Link
                             href="/contact"
-                            className="group relative px-8 py-4 bg-accent text-white font-semibold rounded-lg overflow-hidden transition-all hover:scale-105"
+                            className="cut-btn [--cut:12px] [--cut-focus:#1B1A17] group relative px-8 py-4 bg-ember text-ink font-semibold overflow-hidden transition-all hover:scale-105"
                         >
                             <span className="relative z-10 flex items-center gap-2">
                                 Start Architecting
@@ -101,7 +101,7 @@ export default function CustomBackendContent() {
             </section>
 
             {/* Problem/Solution Section */}
-            <section className="py-20 px-4 md:px-8 bg-neutral-950">
+            <section className="py-20 px-4 md:px-8 bg-transparent">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <motion.div
                         initial="hidden"
@@ -109,10 +109,10 @@ export default function CustomBackendContent() {
                         viewport={{ once: true, amount: 0.3 }}
                         variants={fadeInUp}
                     >
-                        <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                        <h2 className="text-3xl md:text-4xl font-medium mb-6 tracking-[-0.035em]">
                             Is your infrastructure holding you back?
                         </h2>
-                        <div className="space-y-6 text-neutral-400 text-lg">
+                        <div className="space-y-6 text-ink-soft text-lg">
                             <p>
                                 Fragile systems crash under load. Slow APIs kill user experience. Security vulnerabilities keep you up at night.
                             </p>
@@ -126,10 +126,10 @@ export default function CustomBackendContent() {
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.3 }}
                         variants={fadeInUp}
-                        className="bg-neutral-900 border border-neutral-800 p-8 rounded-2xl"
+                        className="cut-card [--cut:18px] relative bg-white/70 [--cut-line:rgba(27,26,23,0.1)] p-8 "
                     >
-                        <h3 className="text-2xl font-bold mb-4 text-white">The Robust Solution</h3>
-                        <p className="text-neutral-400 mb-6">
+                        <h3 className="text-2xl font-bold mb-4 text-ink">The Robust Solution</h3>
+                        <p className="text-ink-soft mb-6">
                             We architect and build enterprise-grade backend systems. Clean APIs, optimized databases, and cloud-native infrastructure that scales with your ambition.
                         </p>
                         <ul className="space-y-4">
@@ -139,9 +139,9 @@ export default function CustomBackendContent() {
                                 "Bank-level security",
                                 "Reduce server costs by 60%"
                             ].map((item, i) => (
-                                <li key={i} className="flex items-center gap-3 text-white">
-                                    <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center">
-                                        <div className="w-2 h-2 rounded-full bg-accent" />
+                                <li key={i} className="flex items-center gap-3 text-ink">
+                                    <div className="w-6 h-6 rounded-full bg-ember/20 flex items-center justify-center">
+                                        <div className="w-2 h-2 rounded-full bg-ember" />
                                     </div>
                                     {item}
                                 </li>
@@ -152,7 +152,7 @@ export default function CustomBackendContent() {
             </section>
 
             {/* Key Features Section */}
-            <section className="py-20 px-4 md:px-8 bg-black">
+            <section className="py-20 px-4 md:px-8 bg-transparent">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial="hidden"
@@ -161,12 +161,12 @@ export default function CustomBackendContent() {
                         variants={fadeInUp}
                         className="mb-16"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                            <span className="bg-gradient-to-b from-white via-zinc-200 to-zinc-600 bg-clip-text text-transparent">
+                        <h2 className="text-4xl md:text-5xl font-medium mb-4 tracking-[-0.035em]">
+                            <span className="text-ink">
                                 System Capabilities
                             </span>
                         </h2>
-                        <p className="text-neutral-400 text-lg">Infrastructure built for performance and peace of mind</p>
+                        <p className="text-ink-soft text-lg">Infrastructure built for performance and peace of mind</p>
                     </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -209,13 +209,13 @@ export default function CustomBackendContent() {
                                 viewport={{ once: true, amount: 0.3 }}
                                 variants={fadeInUp}
                                 transition={{ delay: index * 0.1 }}
-                                className="group p-8 bg-neutral-900/50 border border-neutral-800 rounded-xl hover:border-accent/50 transition-all hover:bg-neutral-900"
+                                className="cut-card [--cut:14px] relative group p-8 bg-white/70 [--cut-line:rgba(27,26,23,0.1)] hover:[--cut-line:rgba(255,73,37,0.5)] transition-all hover:bg-white"
                             >
-                                <div className="w-16 h-16 mb-6 rounded-lg bg-accent/10 flex items-center justify-center text-accent group-hover:scale-110 transition-transform">
+                                <div className="w-16 h-16 mb-6 rounded-lg bg-ember/10 flex items-center justify-center text-ember-deep group-hover:scale-110 transition-transform">
                                     {feature.icon}
                                 </div>
                                 <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                                <p className="text-neutral-400">{feature.description}</p>
+                                <p className="text-ink-soft">{feature.description}</p>
                             </motion.div>
                         ))}
                     </div>
@@ -223,7 +223,7 @@ export default function CustomBackendContent() {
             </section>
 
             {/* Tech Stack Section */}
-            <section className="py-20 px-4 md:px-8 bg-neutral-950">
+            <section className="py-20 px-4 md:px-8 bg-transparent">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial="hidden"
@@ -232,12 +232,12 @@ export default function CustomBackendContent() {
                         variants={fadeInUp}
                         className="mb-16 text-center"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                            <span className="bg-gradient-to-b from-white via-zinc-200 to-zinc-600 bg-clip-text text-transparent">
+                        <h2 className="text-4xl md:text-5xl font-medium mb-4 tracking-[-0.035em]">
+                            <span className="text-ink">
                                 Backend Technology
                             </span>
                         </h2>
-                        <p className="text-neutral-400 text-lg">We engineer with the best</p>
+                        <p className="text-ink-soft text-lg">We engineer with the best</p>
                     </motion.div>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
@@ -253,7 +253,7 @@ export default function CustomBackendContent() {
                                 viewport={{ once: true, amount: 0.3 }}
                                 variants={fadeInUp}
                                 transition={{ delay: index * 0.05 }}
-                                className="p-6 bg-black border border-neutral-800 rounded-lg text-center hover:border-accent/50 transition-all hover:scale-105"
+                                className="cut-card [--cut:12px] relative p-6 bg-transparent [--cut-line:rgba(27,26,23,0.1)] text-center hover:[--cut-line:rgba(255,73,37,0.5)] transition-all hover:scale-105"
                             >
                                 <p className="font-semibold">{tech}</p>
                             </motion.div>
@@ -263,7 +263,7 @@ export default function CustomBackendContent() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-black to-neutral-950" aria-label="Get started">
+            <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-paper to-paper" aria-label="Get started">
                 <div className="max-w-4xl mx-auto text-center">
                     <motion.div
                         initial="hidden"
@@ -271,15 +271,15 @@ export default function CustomBackendContent() {
                         viewport={{ once: true, amount: 0.3 }}
                         variants={fadeInUp}
                     >
-                        <h2 className="text-4xl md:text-6xl font-bold mb-6">
+                        <h2 className="text-4xl md:text-6xl font-medium mb-6 tracking-[-0.035em]">
                             Ready to Scale?
                         </h2>
-                        <p className="text-xl text-neutral-400 mb-8">
+                        <p className="text-xl text-ink-soft mb-8">
                             Build a backend that supports your growth for years to come.
                         </p>
                         <Link
                             href="/contact"
-                            className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white font-semibold rounded-lg hover:scale-105 transition-transform"
+                            className="cut-btn [--cut:12px] [--cut-focus:#1B1A17] inline-flex items-center gap-2 px-8 py-4 bg-ember text-ink font-semibold hover:scale-105 transition-transform"
                         >
                             Start Your Project
                             <ArrowUpRight className="w-5 h-5" />

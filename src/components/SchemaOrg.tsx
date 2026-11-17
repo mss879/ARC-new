@@ -39,7 +39,7 @@ const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 
 const logo = {
   "@type": "ImageObject",
-  "url": `${SITE_URL}/logo.png`,
+  "url": `${SITE_URL}/arc-ai-logo.png`,
   "width": 512,
   "height": 512,
 };
@@ -122,12 +122,12 @@ export default function SchemaOrg({
       "longitude": office.geo.longitude,
     },
     "areaServed": sriLanka,
-    "openingHoursSpecification": {
+    "openingHoursSpecification": hours.periods.map((period) => ({
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": hours.days,
-      "opens": hours.opens,
-      "closes": hours.closes,
-    },
+      "dayOfWeek": period.days,
+      "opens": period.opens,
+      "closes": period.closes,
+    })),
     "sameAs": socialUrls,
     "parentOrganization": { "@id": ORGANIZATION_ID },
   };

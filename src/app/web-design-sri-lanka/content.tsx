@@ -79,12 +79,12 @@ const faqs = [
 
 export default function WebDesignContent() {
     return (
-        <div className="min-h-screen bg-black text-neutral-200 font-sans selection:bg-[rgb(255,73,37)]/30 selection:text-white">
+        <div className="home-cream min-h-screen bg-transparent text-ink font-sans selection:bg-ember/30 selection:text-ink">
             <Navbar />
 
             {/* ── Hero Section ───────────────────────────── */}
-            <section className="relative pt-32 pb-20 md:pt-48 md:pb-24 overflow-hidden px-4 md:px-8 border-b border-neutral-800">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900/40 via-black to-black" />
+            <section className="relative pt-32 pb-20 md:pt-48 md:pb-24 overflow-hidden px-4 md:px-8 border-b border-ink/10">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-paper/40 via-paper to-paper" />
                 <div className="max-w-4xl mx-auto relative z-10">
                     <Breadcrumbs
                         items={[
@@ -94,10 +94,10 @@ export default function WebDesignContent() {
                     />
 
                     <HeroAnimation>
-                        <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-white tracking-tight mt-8 mb-6 leading-[1.1]">
-                            Web Design & Development Services in <span className="text-transparent bg-clip-text bg-gradient-to-r from-[rgb(255,73,37)] to-orange-500">Sri Lanka (2026)</span>
+                        <h1 className="text-4xl md:text-5xl lg:text-7xl font-medium text-ink tracking-[-0.035em] mt-8 mb-6 leading-[1.1]">
+                            Web Design & Development Services in <span className="text-ember-ink">Sri Lanka (2026)</span>
                         </h1>
-                        <p className="text-xl text-neutral-400 max-w-3xl leading-relaxed font-light mb-8">
+                        <p className="text-xl text-ink-soft max-w-3xl leading-relaxed font-light mb-8">
                             The definitive guide to web design and web development services in Sri Lanka. We analyze architecture choices, LKR pricing benchmarks, technology stacks, service offerings, and how to select the right web development company in Colombo for your business.
                         </p>
                     </HeroAnimation>
@@ -109,9 +109,9 @@ export default function WebDesignContent() {
                 <div className="max-w-4xl mx-auto">
                     
                     {/* ── Table of Contents ─────────────────── */}
-                    <AnimatedSection className="bg-neutral-900/50 border border-neutral-800 rounded-2xl p-6 md:p-8 mb-20 backdrop-blur-sm">
-                        <h2 className="text-sm font-bold text-neutral-400 mb-6 uppercase tracking-widest flex items-center gap-2">
-                            <CircleDot className="w-4 h-4 text-[rgb(255,73,37)]" /> Report Directory
+                    <AnimatedSection className="bg-white/70 border border-ink/10 rounded-2xl p-6 md:p-8 mb-20">
+                        <h2 className="text-sm font-medium text-ink-soft mb-6 tracking-[-0.035em] flex items-center gap-2">
+                            <CircleDot className="w-4 h-4 text-ember-ink" /> Report Directory
                         </h2>
                         <nav>
                             <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 m-0 p-0 list-none">
@@ -119,9 +119,9 @@ export default function WebDesignContent() {
                                     <li key={idx}>
                                         <Link
                                             href={`#${item.id}`}
-                                            className="group flex items-center gap-3 text-neutral-300 hover:text-white transition-colors text-sm font-medium"
+                                            className="group flex items-center gap-3 text-ink-soft hover:text-ink transition-colors text-sm font-medium"
                                         >
-                                            <span className="w-5 h-5 rounded bg-neutral-950 border border-neutral-800 flex items-center justify-center text-[10px] text-neutral-500 group-hover:border-[rgb(255,73,37)] group-hover:text-[rgb(255,73,37)] transition-colors shrink-0">
+                                            <span className="w-5 h-5 rounded bg-transparent border border-ink/10 flex items-center justify-center text-[10px] text-ink-mute group-hover:border-ember group-hover:text-ember-deep transition-colors shrink-0">
                                                 {idx + 1}
                                             </span>
                                             <span className="leading-tight">{item.label}</span>
@@ -134,23 +134,23 @@ export default function WebDesignContent() {
 
                     {/* ── Section: Executive Summary ──────── */}
                     <AnimatedSection id="executive-summary" className="scroll-mt-32 mb-24">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-6 tracking-[-0.035em]">
                             1. Executive Summary: The State of the Market
                         </h2>
-                        <div className="prose prose-invert prose-lg max-w-none text-neutral-300 font-light leading-relaxed">
+                        <div className="prose prose-invert prose-lg max-w-none text-ink-soft font-light leading-relaxed">
                             <p>
                                 The digital landscape in Sri Lanka is undergoing a brutal, rapid maturation phase. Historically, local businesses treated corporate websites as static digital brochures—a checkbox exercise in corporate legitimacy. In 2026, algorithmic shifts by major search engines have fundamentally altered this dynamic. A website is no longer a passive entity; it is the primary engine for Customer Acquisition Cost (CAC) reduction and pipeline generation.
                             </p>
                             <p>
-                                Despite this, an estimated <strong>80% of corporate websites launched in Sri Lanka fail to generate measurable organic revenue</strong>. The culprit is rarely visual design. Sri Lankan UI/UX talent is world-class, heavily utilized by Australian and UK firms for offshore operations. The failure lies in <em>underlying technical architecture</em>. The local market remains dangerously addicted to legacy, template-driven development that fails modern web performance standards. For a comprehensive evaluation of the broader <Link href="/software-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">software companies in Sri Lanka</Link>, see our industry guide.
+                                Despite this, an estimated <strong>80% of corporate websites launched in Sri Lanka fail to generate measurable organic revenue</strong>. The culprit is rarely visual design. Sri Lankan UI/UX talent is world-class, heavily utilized by Australian and UK firms for offshore operations. The failure lies in <em>underlying technical architecture</em>. The local market remains dangerously addicted to legacy, template-driven development that fails modern web performance standards. For a comprehensive evaluation of the broader <Link href="/software-companies-sri-lanka" className="text-ember-deep hover:underline">software companies in Sri Lanka</Link>, see our industry guide.
                             </p>
                             
-                            <div className="my-10 bg-neutral-950 border-l-4 border-[rgb(255,73,37)] p-6 rounded-r-xl">
+                            <div className="my-10 bg-transparent border-l-4 border-ember p-6 rounded-r-xl">
                                 <div className="flex items-start gap-4">
-                                    <AlertTriangle className="w-6 h-6 text-[rgb(255,73,37)] shrink-0 mt-1" />
+                                    <AlertTriangle className="w-6 h-6 text-ember-deep shrink-0 mt-1" />
                                     <div>
-                                        <h4 className="text-lg font-bold text-white mb-2 m-0">The Core Market Failure</h4>
-                                        <p className="text-neutral-400 text-sm leading-relaxed m-0">
+                                        <h4 className="text-lg font-bold text-ink mb-2 m-0">The Core Market Failure</h4>
+                                        <p className="text-ink-soft text-sm leading-relaxed m-0">
                                             Many Sri Lankan agencies compete entirely on upfront pricing, sacrificing structural integrity to win contracts. They utilize heavy, unoptimized monolithic templates (primarily WordPress) that collapse under Google's strict Core Web Vitals assessments. The client receives a visually pleasing site that is mathematically incapable of ranking on the first page for competitive keywords.
                                         </p>
                                     </div>
@@ -161,73 +161,73 @@ export default function WebDesignContent() {
 
                     {/* ── Section: Technology Divide ──────── */}
                     <AnimatedSection id="technology-divide" className="scroll-mt-32 mb-24">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center gap-3">
-                            <Cpu className="w-8 h-8 text-[rgb(255,73,37)] shrink-0" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                            <Cpu className="w-8 h-8 text-ember-ink shrink-0" />
                             2. The Technology Divide: Monolith vs. Headless
                         </h2>
-                        <p className="text-neutral-300 mb-8 font-light leading-relaxed text-lg">
+                        <p className="text-ink-soft mb-8 font-light leading-relaxed text-lg">
                             When procuring digital services in Colombo, you are ultimately making an architectural decision. The global enterprise standard has aggressively shifted toward <strong>Headless Architecture</strong>, while the local SME market remains entrenched in the <strong>Legacy Monolith</strong>. Understanding this divergence is the most critical factor in your ROI.
                         </p>
 
                         <div className="space-y-8">
                             {/* The Monolith */}
-                            <div className="border border-neutral-800 rounded-2xl p-8 bg-neutral-900/20">
-                                <div className="flex items-center gap-4 mb-6 pb-6 border-b border-neutral-800">
-                                    <div className="w-12 h-12 rounded-xl bg-neutral-900 border border-neutral-700 flex items-center justify-center">
-                                        <Database className="w-6 h-6 text-neutral-400" />
+                            <div className="cut-card [--cut:18px] relative [--cut-line:rgba(27,26,23,0.1)] p-8 bg-white/70">
+                                <div className="flex items-center gap-4 mb-6 pb-6 border-b border-ink/10">
+                                    <div className="w-12 h-12 rounded-xl bg-white/70 border border-ink/10 flex items-center justify-center">
+                                        <Database className="w-6 h-6 text-ink-soft" />
                                     </div>
                                     <div>
-                                        <h3 className="text-2xl font-bold text-white m-0">The Legacy Monolith (WordPress/PHP)</h3>
-                                        <p className="text-sm text-neutral-500 m-0 mt-1">The ubiquitous standard of the 2010s.</p>
+                                        <h3 className="text-2xl font-bold text-ink m-0">The Legacy Monolith (WordPress/PHP)</h3>
+                                        <p className="text-sm text-ink-mute m-0 mt-1">The ubiquitous standard of the 2010s.</p>
                                     </div>
                                 </div>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <div>
-                                        <h4 className="text-white font-bold mb-3 flex items-center gap-2">
-                                            <Search className="w-4 h-4 text-neutral-400" /> How it Works
+                                        <h4 className="text-ink font-bold mb-3 flex items-center gap-2">
+                                            <Search className="w-4 h-4 text-ink-soft" /> How it Works
                                         </h4>
-                                        <p className="text-sm text-neutral-400 leading-relaxed">
+                                        <p className="text-sm text-ink-soft leading-relaxed">
                                             The frontend code (HTML/CSS) and the backend database are physically tethered. When a user requests a page, the server must run complex PHP scripts, query the MySQL database, assemble the HTML, and send it to the browser in real-time.
                                         </p>
                                     </div>
                                     <div className="space-y-4">
-                                        <div className="bg-neutral-950 p-4 rounded-lg border border-neutral-800">
-                                            <div className="text-xs font-bold text-red-400 uppercase tracking-wider mb-1">The Critical Flaw</div>
-                                            <div className="text-sm text-neutral-300"><strong>Time To First Byte (TTFB) Latency.</strong> Dynamic assembly on every single page load severely impacts speed metrics. Furthermore, relying on dozens of third-party plugins creates a massive attack surface for automated SQL injections (Plugin Rot).</div>
+                                        <div className="cut-card [--cut:12px] relative bg-transparent p-4 [--cut-line:rgba(27,26,23,0.1)]">
+                                            <div className="text-xs font-bold text-red-700 uppercase tracking-wider mb-1">The Critical Flaw</div>
+                                            <div className="text-sm text-ink-soft"><strong>Time To First Byte (TTFB) Latency.</strong> Dynamic assembly on every single page load severely impacts speed metrics. Furthermore, relying on dozens of third-party plugins creates a massive attack surface for automated SQL injections (Plugin Rot).</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Headless Next.js */}
-                            <div className="border border-[rgb(255,73,37)]/30 rounded-2xl p-8 bg-gradient-to-br from-[rgb(255,73,37)]/5 to-transparent relative overflow-hidden">
-                                <div className="absolute top-0 right-0 w-64 h-64 bg-[rgb(255,73,37)]/5 rounded-full blur-3xl -mr-20 -mt-20" />
-                                <div className="flex items-center gap-4 mb-6 pb-6 border-b border-[rgb(255,73,37)]/20 relative z-10">
-                                    <div className="w-12 h-12 rounded-xl bg-black border border-[rgb(255,73,37)]/50 flex items-center justify-center shadow-[0_0_15px_rgba(255,73,37,0.2)]">
-                                        <Zap className="w-6 h-6 text-[rgb(255,73,37)]" />
+                            <div className="cut-card [--cut:18px] [--cut-line:rgba(255,73,37,0.3)] p-8 bg-gradient-to-br from-ember/5 to-transparent relative overflow-hidden">
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-ember/5 rounded-full blur-3xl -mr-20 -mt-20 hidden" />
+                                <div className="flex items-center gap-4 mb-6 pb-6 border-b border-ember/20 relative z-10">
+                                    <div className="w-12 h-12 rounded-xl bg-white/70 border border-ember/50 flex items-center justify-center">
+                                        <Zap className="w-6 h-6 text-ember-deep" />
                                     </div>
                                     <div>
-                                        <h3 className="text-2xl font-bold text-white m-0">The Modern Headless Web (Next.js)</h3>
-                                        <p className="text-sm text-[rgb(255,73,37)]/80 m-0 mt-1">The global standard for enterprise performance.</p>
+                                        <h3 className="text-2xl font-bold text-ink m-0">The Modern Headless Web (Next.js)</h3>
+                                        <p className="text-sm text-ember-deep m-0 mt-1">The global standard for enterprise performance.</p>
                                     </div>
                                 </div>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
                                     <div>
-                                        <h4 className="text-white font-bold mb-3 flex items-center gap-2">
-                                            <Layers className="w-4 h-4 text-[rgb(255,73,37)]" /> How it Works
+                                        <h4 className="text-ink font-bold mb-3 flex items-center gap-2">
+                                            <Layers className="w-4 h-4 text-ember-ink" /> How it Works
                                         </h4>
-                                        <p className="text-sm text-neutral-300 leading-relaxed">
+                                        <p className="text-sm text-ink-soft leading-relaxed">
                                             The frontend is entirely decoupled from the database. Next.js statically pre-renders the entire website during the build process and distributes it across a global Edge Network (CDN). The CMS (Contentful, Sanity, or even Headless WordPress) simply pushes data via secure APIs.
                                         </p>
                                     </div>
                                     <div className="space-y-3">
                                         <div className="flex items-start gap-3">
-                                            <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
-                                            <span className="text-sm text-neutral-300"><strong>Zero-Latency Delivery:</strong> Pages load instantaneously globally, natively passing Google's Core Web Vitals.</span>
+                                            <CheckCircle2 className="w-5 h-5 text-green-700 shrink-0 mt-0.5" />
+                                            <span className="text-sm text-ink-soft"><strong>Zero-Latency Delivery:</strong> Pages load instantaneously globally, natively passing Google's Core Web Vitals.</span>
                                         </div>
                                         <div className="flex items-start gap-3">
-                                            <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
-                                            <span className="text-sm text-neutral-300"><strong>Impenetrable Security:</strong> Hackers cannot inject malicious code into the database because the public frontend has zero direct connection to it.</span>
+                                            <CheckCircle2 className="w-5 h-5 text-green-700 shrink-0 mt-0.5" />
+                                            <span className="text-sm text-ink-soft"><strong>Impenetrable Security:</strong> Hackers cannot inject malicious code into the database because the public frontend has zero direct connection to it.</span>
                                         </div>
                                     </div>
                                 </div>
@@ -237,11 +237,11 @@ export default function WebDesignContent() {
 
                     {/* ── Section: Core Web Vitals ──────────── */}
                     <AnimatedSection id="core-web-vitals" className="scroll-mt-32 mb-24">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 flex items-center gap-3">
-                            <TrendingUp className="w-8 h-8 text-[rgb(255,73,37)]" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-6 flex items-center gap-3 tracking-[-0.035em]">
+                            <TrendingUp className="w-8 h-8 text-ember-ink" />
                             3. Core Web Vitals: The Mathematical Reality of SEO
                         </h2>
-                        <div className="prose prose-invert prose-lg max-w-none text-neutral-300 font-light leading-relaxed mb-8">
+                        <div className="prose prose-invert prose-lg max-w-none text-ink-soft font-light leading-relaxed mb-8">
                             <p>
                                 Search Engine Optimization (SEO) is no longer a dark art of keyword stuffing. Google's algorithm has evolved into a rigid, mathematical evaluation of user experience known as <strong>Core Web Vitals</strong>. Visual aesthetics do not factor into the algorithm; Google's bots only see raw performance telemetry.
                             </p>
@@ -271,13 +271,13 @@ export default function WebDesignContent() {
                                     desc: "Measures visual stability. Does the layout 'jump' unpredictably while images load, causing the user to misclick?"
                                 }
                             ].map((vital, idx) => (
-                                <div key={idx} className="bg-neutral-950 border border-neutral-800 rounded-xl p-6">
-                                    <div className="text-[rgb(255,73,37)] font-black text-2xl mb-1">{vital.metric}</div>
-                                    <div className="text-white font-bold text-sm mb-4">{vital.name}</div>
-                                    <div className="bg-neutral-900 border border-neutral-800 rounded text-xs font-mono text-center py-2 mb-4 text-neutral-400">
-                                        TARGET: <span className="text-green-400">{vital.target}</span>
+                                <div key={idx} className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-6">
+                                    <div className="text-ember-deep font-black text-2xl mb-1">{vital.metric}</div>
+                                    <div className="text-ink font-bold text-sm mb-4">{vital.name}</div>
+                                    <div className="bg-white/70 border border-ink/10 rounded text-xs font-mono text-center py-2 mb-4 text-ink-soft">
+                                        TARGET: <span className="text-green-700">{vital.target}</span>
                                     </div>
-                                    <p className="text-sm text-neutral-400 m-0 leading-relaxed">{vital.desc}</p>
+                                    <p className="text-sm text-ink-soft m-0 leading-relaxed">{vital.desc}</p>
                                 </div>
                             ))}
                         </div>
@@ -285,50 +285,50 @@ export default function WebDesignContent() {
 
                     {/* ── Section: Pricing & TCO ────────────── */}
                     <AnimatedSection id="true-cost-ownership" className="scroll-mt-32 mb-24">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center gap-3">
-                            <DollarSign className="w-8 h-8 text-[rgb(255,73,37)]" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                            <DollarSign className="w-8 h-8 text-ember-ink" />
                             4. The True Cost of Ownership (TCO)
                         </h2>
-                        <p className="text-neutral-300 mb-8 font-light leading-relaxed text-lg">
+                        <p className="text-ink-soft mb-8 font-light leading-relaxed text-lg">
                             The Sri Lankan market suffers from severe pricing opacity. The initial quote provided by an agency is rarely the final cost. When calculating capital expenditure, executives must look at the <strong>3-Year Total Cost of Ownership (TCO)</strong>, which includes technical debt, hosting, and security mitigation.
                         </p>
 
                         {/* Pricing Table */}
-                        <div className="overflow-x-auto -mx-4 md:mx-0 rounded-xl border border-neutral-800 shadow-xl mb-10">
+                        <div className="overflow-x-auto -mx-4 md:mx-0 rounded-xl border border-ink/10 shadow-xl mb-10">
                             <table className="w-full text-sm border-collapse min-w-[800px]">
                                 <thead>
-                                    <tr className="border-b border-neutral-800 bg-neutral-900">
-                                        <th className="p-5 text-left text-neutral-200 font-bold uppercase tracking-wider text-xs w-1/4">Digital Asset Tier</th>
-                                        <th className="p-5 text-left text-neutral-200 font-bold uppercase tracking-wider text-xs w-1/4">Initial CapEx (LKR)</th>
-                                        <th className="p-5 text-left text-neutral-200 font-bold uppercase tracking-wider text-xs w-1/2">The Hidden Operational Costs</th>
+                                    <tr className="border-b border-ink/10 bg-white/70">
+                                        <th className="p-5 text-left text-ink font-bold uppercase tracking-wider text-xs w-1/4">Digital Asset Tier</th>
+                                        <th className="p-5 text-left text-ink font-bold uppercase tracking-wider text-xs w-1/4">Initial CapEx (LKR)</th>
+                                        <th className="p-5 text-left text-ink font-bold uppercase tracking-wider text-xs w-1/2">The Hidden Operational Costs</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-neutral-800/50 bg-neutral-950">
-                                    <tr className="hover:bg-neutral-900/30 transition-colors">
-                                        <td className="p-5 font-bold text-white">Entry-Level CMS<br/><span className="text-xs font-normal text-neutral-500">1-5 Page Template</span></td>
-                                        <td className="p-5 font-mono text-green-400 font-bold">LKR 40,000 – 100,000</td>
-                                        <td className="p-5 text-neutral-400 text-sm leading-relaxed">
+                                <tbody className="divide-y divide-ink/10 bg-transparent">
+                                    <tr className="hover:bg-white transition-colors">
+                                        <td className="p-5 font-bold text-ink">Entry-Level CMS<br/><span className="text-xs font-normal text-ink-mute">1-5 Page Template</span></td>
+                                        <td className="p-5 font-mono text-green-700 font-bold">LKR 40,000 – 100,000</td>
+                                        <td className="p-5 text-ink-soft text-sm leading-relaxed">
                                             <strong>High Risk.</strong> Agencies use cheap shared hosting (LKR 2,000/mo). Premium plugins required for security/speed will incur recurring USD subscriptions. Usually requires a full rebuild within 18 months as the business outgrows the template.
                                         </td>
                                     </tr>
-                                    <tr className="hover:bg-neutral-900/30 transition-colors">
-                                        <td className="p-5 font-bold text-white">Custom Corporate CMS<br/><span className="text-xs font-normal text-neutral-500">Bespoke Design</span></td>
-                                        <td className="p-5 font-mono text-green-400 font-bold">LKR 120,000 – 250,000</td>
-                                        <td className="p-5 text-neutral-400 text-sm leading-relaxed">
+                                    <tr className="hover:bg-white transition-colors">
+                                        <td className="p-5 font-bold text-ink">Custom Corporate CMS<br/><span className="text-xs font-normal text-ink-mute">Bespoke Design</span></td>
+                                        <td className="p-5 font-mono text-green-700 font-bold">LKR 120,000 – 250,000</td>
+                                        <td className="p-5 text-ink-soft text-sm leading-relaxed">
                                             <strong>Moderate Risk.</strong> Needs dedicated VPS hosting (LKR 8,000+/mo). Requires a mandatory ongoing retainer for plugin vulnerability patching and version updates. Failure to maintain results in catastrophic hacks within 2 years.
                                         </td>
                                     </tr>
-                                    <tr className="hover:bg-neutral-900/30 transition-colors bg-[rgb(255,73,37)]/5">
-                                        <td className="p-5 font-bold text-white border-l-2 border-[rgb(255,73,37)]">Next.js Headless App<br/><span className="text-xs font-normal text-[rgb(255,73,37)]/80">Enterprise Standard</span></td>
-                                        <td className="p-5 font-mono text-white font-bold">LKR 200,000 – 450,000+</td>
-                                        <td className="p-5 text-neutral-300 text-sm leading-relaxed">
+                                    <tr className="hover:bg-white transition-colors bg-ember/5">
+                                        <td className="p-5 font-bold text-ink border-l-2 border-ember">Next.js Headless App<br/><span className="text-xs font-normal text-ember-deep">Enterprise Standard</span></td>
+                                        <td className="p-5 font-mono text-ink font-bold">LKR 200,000 – 450,000+</td>
+                                        <td className="p-5 text-ink-soft text-sm leading-relaxed">
                                             <strong>Low TCO.</strong> High initial engineering cost, but near-zero maintenance. Edge CDN hosting (Vercel) is often free or negligible. No plugins to update. Impervious to SQL injection. Highest ROI via organic SEO capture.
                                         </td>
                                     </tr>
-                                    <tr className="hover:bg-neutral-900/30 transition-colors">
-                                        <td className="p-5 font-bold text-white">E-Commerce System<br/><span className="text-xs font-normal text-neutral-500">WooCommerce / Custom</span></td>
-                                        <td className="p-5 font-mono text-green-400 font-bold">LKR 150,000 – 600,000+</td>
-                                        <td className="p-5 text-neutral-400 text-sm leading-relaxed">
+                                    <tr className="hover:bg-white transition-colors">
+                                        <td className="p-5 font-bold text-ink">E-Commerce System<br/><span className="text-xs font-normal text-ink-mute">WooCommerce / Custom</span></td>
+                                        <td className="p-5 font-mono text-green-700 font-bold">LKR 150,000 – 600,000+</td>
+                                        <td className="p-5 text-ink-soft text-sm leading-relaxed">
                                             <strong>Variable.</strong> Extremely complex pricing dependent on payment gateway integrations (PayHere/Webxpay), inventory logic, and server scaling during high-traffic events (Black Friday).
                                         </td>
                                     </tr>
@@ -339,11 +339,11 @@ export default function WebDesignContent() {
 
                     {/* ── Section: Agency Archetypes ────────── */}
                     <AnimatedSection id="agency-archetypes" className="scroll-mt-32 mb-24">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center gap-3">
-                            <Globe className="w-8 h-8 text-[rgb(255,73,37)]" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                            <Globe className="w-8 h-8 text-ember-ink" />
                             5. The 5 Agency Archetypes in Colombo
                         </h2>
-                        <p className="text-neutral-300 mb-8 font-light leading-relaxed text-lg">
+                        <p className="text-ink-soft mb-8 font-light leading-relaxed text-lg">
                             The Sri Lankan agency ecosystem is highly fragmented. To procure effectively, you must identify the correct archetype for your specific business objective. An objective analysis reveals five distinct categories dominating the market.
                         </p>
 
@@ -380,13 +380,13 @@ export default function WebDesignContent() {
                                     desc: "Highly reliable agencies offering the complete package for small to medium enterprises. They deliver scalable, responsive designs paired with aggressive foundational SEO strategies."
                                 }
                             ].map((archetype, idx) => (
-                                <div key={idx} className="bg-neutral-950 border border-neutral-800 p-6 rounded-xl relative overflow-hidden group hover:border-neutral-600 transition-colors">
-                                    <div className="absolute top-0 right-0 px-3 py-1 bg-neutral-900 border-b border-l border-neutral-800 text-[10px] font-bold text-neutral-500 uppercase tracking-widest rounded-bl-lg">
-                                        Notable Example: <span className="text-white">{archetype.example}</span>
+                                <div key={idx} className="cut-card [--cut:14px] bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-6 relative overflow-hidden group hover:[--cut-line:rgba(27,26,23,0.3)] transition-colors">
+                                    <div className="absolute top-0 right-0 px-3 py-1 bg-white/70 border-b border-l border-ink/10 text-[10px] font-bold text-ink-mute uppercase tracking-widest rounded-bl-lg">
+                                        Notable Example: <span className="text-ink">{archetype.example}</span>
                                     </div>
-                                    <h3 className="text-xl font-bold text-white mb-2 mt-4">{archetype.name}</h3>
-                                    <div className="text-sm font-semibold text-[rgb(255,73,37)] mb-4">{archetype.focus}</div>
-                                    <p className="text-neutral-400 text-sm leading-relaxed m-0">
+                                    <h3 className="text-xl font-bold text-ink mb-2 mt-4">{archetype.name}</h3>
+                                    <div className="text-sm font-semibold text-ember-deep mb-4">{archetype.focus}</div>
+                                    <p className="text-ink-soft text-sm leading-relaxed m-0">
                                         {archetype.desc}
                                     </p>
                                 </div>
@@ -396,11 +396,11 @@ export default function WebDesignContent() {
 
                     {/* ── Section: Procurement Framework ────── */}
                     <AnimatedSection id="procurement-framework" className="scroll-mt-32 mb-24">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center gap-3">
-                            <Shield className="w-8 h-8 text-[rgb(255,73,37)]" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                            <Shield className="w-8 h-8 text-ember-ink" />
                             6. The 5-Point Procurement Framework
                         </h2>
-                        <p className="text-neutral-300 mb-8 font-light leading-relaxed text-lg">
+                        <p className="text-ink-soft mb-8 font-light leading-relaxed text-lg">
                             Do not sign a web design contract in Sri Lanka without subjecting the agency to this rigorous 5-point interrogation. This framework protects your capital and ensures delivery of a high-yield digital asset.
                         </p>
 
@@ -432,11 +432,11 @@ export default function WebDesignContent() {
                                     desc: "Ensure you are not locked into a proprietary, custom-built CMS that only the agency understands. Demand standard data export capabilities so you can migrate to another vendor in the future without rebuilding from scratch."
                                 }
                             ].map((point, idx) => (
-                                <div key={idx} className="flex gap-6 p-6 rounded-xl hover:bg-neutral-900/30 transition-colors border border-transparent hover:border-neutral-800">
-                                    <div className="text-4xl font-black text-neutral-800 shrink-0">{point.num}</div>
+                                <div key={idx} className="cut-card [--cut:14px] relative flex gap-6 p-6 hover:bg-white transition-colors hover:[--cut-line:rgba(27,26,23,0.3)]">
+                                    <div className="text-4xl font-black text-ink/20 shrink-0">{point.num}</div>
                                     <div>
-                                        <h4 className="text-lg font-bold text-white mb-2">{point.title}</h4>
-                                        <p className="text-neutral-400 text-sm leading-relaxed m-0">{point.desc}</p>
+                                        <h4 className="text-lg font-bold text-ink mb-2">{point.title}</h4>
+                                        <p className="text-ink-soft text-sm leading-relaxed m-0">{point.desc}</p>
                                     </div>
                                 </div>
                             ))}
@@ -445,11 +445,11 @@ export default function WebDesignContent() {
 
                     {/* ── Section: Web Development Services ───── */}
                     <AnimatedSection id="web-development-services" className="scroll-mt-32 mb-24">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center gap-3">
-                            <Briefcase className="w-8 h-8 text-[rgb(255,73,37)]" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                            <Briefcase className="w-8 h-8 text-ember-ink" />
                             7. Web Development Services — What We Build
                         </h2>
-                        <div className="prose prose-invert prose-lg max-w-none text-neutral-300 font-light leading-relaxed mb-10">
+                        <div className="prose prose-invert prose-lg max-w-none text-ink-soft font-light leading-relaxed mb-10">
                             <p>
                                 Web development services in Sri Lanka have evolved far beyond basic template installations. Modern businesses require <strong>custom-engineered digital platforms</strong> that serve as revenue engines — not static brochures. At ARC AI, every web development project is built from scratch using enterprise-grade frameworks, ensuring your digital asset outperforms competitors in speed, security, and search engine visibility.
                             </p>
@@ -483,12 +483,12 @@ export default function WebDesignContent() {
                                     tag: "Custom Quote"
                                 }
                             ].map((service, idx) => (
-                                <div key={idx} className="bg-neutral-950 border border-neutral-800 p-6 rounded-xl hover:border-neutral-600 transition-colors group relative overflow-hidden">
-                                    <div className="absolute top-0 right-0 px-3 py-1 bg-neutral-900 border-b border-l border-neutral-800 text-[10px] font-bold text-[rgb(255,73,37)] uppercase tracking-widest rounded-bl-lg">
+                                <div key={idx} className="cut-card [--cut:14px] bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-6 hover:[--cut-line:rgba(27,26,23,0.3)] transition-colors group relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 px-3 py-1 bg-white/70 border-b border-l border-ink/10 text-[10px] font-bold text-ember-deep uppercase tracking-widest rounded-bl-lg">
                                         {service.tag}
                                     </div>
-                                    <h3 className="text-xl font-bold text-white mb-3 mt-4">{service.title}</h3>
-                                    <p className="text-neutral-400 text-sm leading-relaxed m-0">{service.desc}</p>
+                                    <h3 className="text-xl font-bold text-ink mb-3 mt-4">{service.title}</h3>
+                                    <p className="text-ink-soft text-sm leading-relaxed m-0">{service.desc}</p>
                                 </div>
                             ))}
                         </div>
@@ -496,11 +496,11 @@ export default function WebDesignContent() {
 
                     {/* ── Section: Industries We Serve ───────── */}
                     <AnimatedSection id="industries-we-serve" className="scroll-mt-32 mb-24">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center gap-3">
-                            <Building2 className="w-8 h-8 text-[rgb(255,73,37)]" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                            <Building2 className="w-8 h-8 text-ember-ink" />
                             8. Industries We Serve Across Sri Lanka
                         </h2>
-                        <p className="text-neutral-300 mb-8 font-light leading-relaxed text-lg">
+                        <p className="text-ink-soft mb-8 font-light leading-relaxed text-lg">
                             Our web development services in Sri Lanka span every major industry vertical. We build domain-specific digital platforms that address the unique operational, regulatory, and customer acquisition challenges of each sector.
                         </p>
 
@@ -551,9 +551,9 @@ export default function WebDesignContent() {
                                     desc: "Job listing platforms, applicant tracking systems (ATS), candidate assessment portals, and BOI (Board of Investment) compliant company profile websites for recruitment agencies and investment-zone enterprises."
                                 }
                             ].map((industry, idx) => (
-                                <div key={idx} className="bg-neutral-950 border border-neutral-800 p-5 rounded-xl hover:border-neutral-600 transition-colors">
-                                    <h3 className="text-base font-bold text-white mb-2">{industry.name}</h3>
-                                    <p className="text-neutral-400 text-xs leading-relaxed m-0">{industry.desc}</p>
+                                <div key={idx} className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-5 hover:[--cut-line:rgba(27,26,23,0.3)] transition-colors">
+                                    <h3 className="text-base font-bold text-ink mb-2">{industry.name}</h3>
+                                    <p className="text-ink-soft text-xs leading-relaxed m-0">{industry.desc}</p>
                                 </div>
                             ))}
                         </div>
@@ -561,97 +561,97 @@ export default function WebDesignContent() {
 
                     {/* ── Section: Web Development Pricing ────── */}
                     <AnimatedSection id="web-development-pricing" className="scroll-mt-32 mb-24">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center gap-3">
-                            <Tag className="w-8 h-8 text-[rgb(255,73,37)]" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                            <Tag className="w-8 h-8 text-ember-ink" />
                             9. Web Development Pricing Breakdown (LKR)
                         </h2>
-                        <div className="prose prose-invert prose-lg max-w-none text-neutral-300 font-light leading-relaxed mb-8">
+                        <div className="prose prose-invert prose-lg max-w-none text-ink-soft font-light leading-relaxed mb-8">
                             <p>
                                 Unlike the Total Cost of Ownership (TCO) analysis above — which compares architecture-level costs — this section provides a <strong>direct, service-level pricing breakdown</strong> for web development services in Sri Lanka. These are ARC AI&apos;s actual 2026 pricing tiers, designed for transparency in a market plagued by hidden fees and scope creep.
                             </p>
                         </div>
 
-                        <div className="overflow-x-auto -mx-4 md:mx-0 rounded-xl border border-neutral-800 shadow-xl mb-10">
+                        <div className="overflow-x-auto -mx-4 md:mx-0 rounded-xl border border-ink/10 shadow-xl mb-10">
                             <table className="w-full text-sm border-collapse min-w-[700px]">
                                 <thead>
-                                    <tr className="border-b border-neutral-800 bg-neutral-900">
-                                        <th className="p-5 text-left text-neutral-200 font-bold uppercase tracking-wider text-xs">Package</th>
-                                        <th className="p-5 text-left text-neutral-200 font-bold uppercase tracking-wider text-xs">Price (LKR)</th>
-                                        <th className="p-5 text-left text-neutral-200 font-bold uppercase tracking-wider text-xs">Pages</th>
-                                        <th className="p-5 text-left text-neutral-200 font-bold uppercase tracking-wider text-xs">Timeline</th>
-                                        <th className="p-5 text-left text-neutral-200 font-bold uppercase tracking-wider text-xs">Key Features</th>
+                                    <tr className="border-b border-ink/10 bg-white/70">
+                                        <th className="p-5 text-left text-ink font-bold uppercase tracking-wider text-xs">Package</th>
+                                        <th className="p-5 text-left text-ink font-bold uppercase tracking-wider text-xs">Price (LKR)</th>
+                                        <th className="p-5 text-left text-ink font-bold uppercase tracking-wider text-xs">Pages</th>
+                                        <th className="p-5 text-left text-ink font-bold uppercase tracking-wider text-xs">Timeline</th>
+                                        <th className="p-5 text-left text-ink font-bold uppercase tracking-wider text-xs">Key Features</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-neutral-800/50 bg-neutral-950">
-                                    <tr className="hover:bg-neutral-900/30 transition-colors">
-                                        <td className="p-5 font-bold text-white">Starter</td>
-                                        <td className="p-5 font-mono text-green-400 font-bold">Rs 60,000</td>
-                                        <td className="p-5 text-neutral-300">5 pages</td>
-                                        <td className="p-5 text-neutral-300">2–3 days</td>
-                                        <td className="p-5 text-neutral-400 text-sm">Modern responsive design, WhatsApp button, contact form, mobile-optimised, free hosting</td>
+                                <tbody className="divide-y divide-ink/10 bg-transparent">
+                                    <tr className="hover:bg-white transition-colors">
+                                        <td className="p-5 font-bold text-ink">Starter</td>
+                                        <td className="p-5 font-mono text-green-700 font-bold">Rs 60,000</td>
+                                        <td className="p-5 text-ink-soft">5 pages</td>
+                                        <td className="p-5 text-ink-soft">2–3 days</td>
+                                        <td className="p-5 text-ink-soft text-sm">Modern responsive design, WhatsApp button, contact form, mobile-optimised, free hosting</td>
                                     </tr>
-                                    <tr className="hover:bg-neutral-900/30 transition-colors">
-                                        <td className="p-5 font-bold text-white">Launch</td>
-                                        <td className="p-5 font-mono text-green-400 font-bold">Rs 90,000</td>
-                                        <td className="p-5 text-neutral-300">8 pages</td>
-                                        <td className="p-5 text-neutral-300">3–5 days</td>
-                                        <td className="p-5 text-neutral-400 text-sm">Premium animations, parallax, glassmorphism, bespoke hero, full SEO with structured data</td>
+                                    <tr className="hover:bg-white transition-colors">
+                                        <td className="p-5 font-bold text-ink">Launch</td>
+                                        <td className="p-5 font-mono text-green-700 font-bold">Rs 90,000</td>
+                                        <td className="p-5 text-ink-soft">8 pages</td>
+                                        <td className="p-5 text-ink-soft">3–5 days</td>
+                                        <td className="p-5 text-ink-soft text-sm">Premium animations, parallax, glassmorphism, bespoke hero, full SEO with structured data</td>
                                     </tr>
-                                    <tr className="hover:bg-neutral-900/30 transition-colors bg-[rgb(255,73,37)]/5">
-                                        <td className="p-5 font-bold text-white border-l-2 border-[rgb(255,73,37)]">Growth<br/><span className="text-xs font-normal text-[rgb(255,73,37)]/80">Most Popular</span></td>
-                                        <td className="p-5 font-mono text-white font-bold">Rs 130,000</td>
-                                        <td className="p-5 text-neutral-300">15 pages</td>
-                                        <td className="p-5 text-neutral-300">5–7 days</td>
-                                        <td className="p-5 text-neutral-300 text-sm">Lead Dashboard, CRM pipeline, email capture + newsletter, email marketing campaigns</td>
+                                    <tr className="hover:bg-white transition-colors bg-ember/5">
+                                        <td className="p-5 font-bold text-ink border-l-2 border-ember">Growth<br/><span className="text-xs font-normal text-ember-deep">Most Popular</span></td>
+                                        <td className="p-5 font-mono text-ink font-bold">Rs 130,000</td>
+                                        <td className="p-5 text-ink-soft">15 pages</td>
+                                        <td className="p-5 text-ink-soft">5–7 days</td>
+                                        <td className="p-5 text-ink-soft text-sm">Lead Dashboard, CRM pipeline, email capture + newsletter, email marketing campaigns</td>
                                     </tr>
-                                    <tr className="hover:bg-neutral-900/30 transition-colors">
-                                        <td className="p-5 font-bold text-white">Scale</td>
-                                        <td className="p-5 font-mono text-green-400 font-bold">Rs 160,000</td>
-                                        <td className="p-5 text-neutral-300">23 pages</td>
-                                        <td className="p-5 text-neutral-300">5–7 days</td>
-                                        <td className="p-5 text-neutral-400 text-sm">Everything in Growth + AI agent for 24/7 customer inquiry handling</td>
+                                    <tr className="hover:bg-white transition-colors">
+                                        <td className="p-5 font-bold text-ink">Scale</td>
+                                        <td className="p-5 font-mono text-green-700 font-bold">Rs 160,000</td>
+                                        <td className="p-5 text-ink-soft">23 pages</td>
+                                        <td className="p-5 text-ink-soft">5–7 days</td>
+                                        <td className="p-5 text-ink-soft text-sm">Everything in Growth + AI agent for 24/7 customer inquiry handling</td>
                                     </tr>
-                                    <tr className="hover:bg-neutral-900/30 transition-colors">
-                                        <td className="p-5 font-bold text-white">E-Commerce (Shopify)</td>
-                                        <td className="p-5 font-mono text-green-400 font-bold">Rs 75,000</td>
-                                        <td className="p-5 text-neutral-300">Unlimited</td>
-                                        <td className="p-5 text-neutral-300">5–7 days</td>
-                                        <td className="p-5 text-neutral-400 text-sm">Shopify theme build, product management, secure checkout (+$25/mo Shopify fee)</td>
+                                    <tr className="hover:bg-white transition-colors">
+                                        <td className="p-5 font-bold text-ink">E-Commerce (Shopify)</td>
+                                        <td className="p-5 font-mono text-green-700 font-bold">Rs 75,000</td>
+                                        <td className="p-5 text-ink-soft">Unlimited</td>
+                                        <td className="p-5 text-ink-soft">5–7 days</td>
+                                        <td className="p-5 text-ink-soft text-sm">Shopify theme build, product management, secure checkout (+$25/mo Shopify fee)</td>
                                     </tr>
-                                    <tr className="hover:bg-neutral-900/30 transition-colors">
-                                        <td className="p-5 font-bold text-white">E-Commerce (Next.js)</td>
-                                        <td className="p-5 font-mono text-green-400 font-bold">From Rs 120,000</td>
-                                        <td className="p-5 text-neutral-300">Unlimited</td>
-                                        <td className="p-5 text-neutral-300">2–4 weeks</td>
-                                        <td className="p-5 text-neutral-400 text-sm">100% custom-coded, bespoke animations, unrestricted SEO, unlimited flexibility</td>
+                                    <tr className="hover:bg-white transition-colors">
+                                        <td className="p-5 font-bold text-ink">E-Commerce (Next.js)</td>
+                                        <td className="p-5 font-mono text-green-700 font-bold">From Rs 120,000</td>
+                                        <td className="p-5 text-ink-soft">Unlimited</td>
+                                        <td className="p-5 text-ink-soft">2–4 weeks</td>
+                                        <td className="p-5 text-ink-soft text-sm">100% custom-coded, bespoke animations, unrestricted SEO, unlimited flexibility</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div className="bg-neutral-950 border border-neutral-800 p-5 rounded-xl">
-                                <div className="text-sm font-bold text-white mb-2">Additional Pages</div>
-                                <div className="text-2xl font-black text-[rgb(255,73,37)]">Rs 4,000 - 6,000<span className="text-sm text-neutral-400 font-normal"> /page</span></div>
+                            <div className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-5 ">
+                                <div className="text-sm font-bold text-ink mb-2">Additional Pages</div>
+                                <div className="text-2xl font-black text-ember-deep">Rs 4,000 - 6,000<span className="text-sm text-ink-soft font-normal"> /page</span></div>
                             </div>
-                            <div className="bg-neutral-950 border border-neutral-800 p-5 rounded-xl">
-                                <div className="text-sm font-bold text-white mb-2">Payment Gateway Integration</div>
-                                <div className="text-2xl font-black text-[rgb(255,73,37)]">Rs 25,000<span className="text-sm text-neutral-400 font-normal"> one-time</span></div>
+                            <div className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-5 ">
+                                <div className="text-sm font-bold text-ink mb-2">Payment Gateway Integration</div>
+                                <div className="text-2xl font-black text-ember-deep">Rs 25,000<span className="text-sm text-ink-soft font-normal"> one-time</span></div>
                             </div>
-                            <div className="bg-neutral-950 border border-neutral-800 p-5 rounded-xl">
-                                <div className="text-sm font-bold text-white mb-2">Website Maintenance</div>
-                                <div className="text-2xl font-black text-[rgb(255,73,37)]">Rs 40,000<span className="text-sm text-neutral-400 font-normal"> /3 months</span></div>
+                            <div className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-5 ">
+                                <div className="text-sm font-bold text-ink mb-2">Website Maintenance</div>
+                                <div className="text-2xl font-black text-ember-deep">Rs 40,000<span className="text-sm text-ink-soft font-normal"> /3 months</span></div>
                             </div>
                         </div>
                     </AnimatedSection>
 
                     {/* ── Section: FAQ ──────────────────────── */}
                     <AnimatedSection id="faq" className="scroll-mt-32 mb-20">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center gap-3 border-t border-neutral-800 pt-16">
-                            <HelpCircle className="w-8 h-8 text-[rgb(255,73,37)]" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mb-8 flex items-center gap-3 border-t border-ink/10 pt-16 tracking-[-0.035em]">
+                            <HelpCircle className="w-8 h-8 text-ember-ink" />
                             10. Frequently Asked Questions
                         </h2>
-                        <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-6 md:p-8">
+                        <div className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-6 md:p-8">
                             {faqs.map((faq, idx) => (
                                 <FAQItem key={idx} question={faq.q} answer={faq.a} />
                             ))}
@@ -659,18 +659,17 @@ export default function WebDesignContent() {
                     </AnimatedSection>
 
                     {/* ── Conclusion / CTA ──────────────────────── */}
-                    <AnimatedSection className="mt-20 pt-16 pb-16 border-t border-neutral-800">
-                        <div className="bg-gradient-to-br from-[rgb(255,73,37)]/20 via-neutral-950 to-black border border-[rgb(255,73,37)]/30 rounded-2xl p-8 md:p-12 text-center relative overflow-hidden shadow-2xl">
-                            <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay" />
-                            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 relative z-10">
+                    <AnimatedSection className="mt-20 pt-16 pb-16 border-t border-ink/10">
+                        <div className="cut-card [--cut:18px] bg-gradient-to-br from-ember/20 via-paper to-paper [--cut-line:rgba(255,73,37,0.3)] p-8 md:p-12 text-center relative overflow-hidden shadow-2xl">
+                            <h2 className="text-3xl md:text-4xl font-medium text-ink mb-6 relative z-10 tracking-[-0.035em]">
                                 Stop Building Websites. <br className="hidden md:block" /> Start Building Web Assets.
                             </h2>
-                            <p className="text-lg text-neutral-300 mb-8 max-w-2xl mx-auto relative z-10 font-light">
+                            <p className="text-lg text-ink-soft mb-8 max-w-2xl mx-auto relative z-10 font-light">
                                 If you are ready to abandon slow, vulnerable templates and invest in high-performance, headless architecture that mathematically dominates search engine rankings, let's engineer your digital superiority.
                             </p>
                             <Link
                                 href="/contact"
-                                className="inline-flex items-center gap-2 px-8 py-4 bg-[rgb(255,73,37)] text-white font-bold rounded-full hover:bg-[rgb(220,50,20)] transition-all relative z-10 shadow-[0_0_40px_rgba(255,73,37,0.4)] hover:shadow-[0_0_60px_rgba(255,73,37,0.6)] hover:-translate-y-1"
+                                className="cut-btn [--cut:12px] [--cut-focus:#1B1A17] inline-flex items-center gap-2 px-8 py-4 bg-ember text-ink font-bold hover:bg-[#FF5C3A] transition-all relative z-10 hover:-translate-y-1"
                             >
                                 Schedule a Technical Audit
                                 <ArrowRight className="w-5 h-5" />

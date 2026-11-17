@@ -213,7 +213,7 @@ export default function BlogList() {
     ];
 
     return (
-        <div className="min-h-screen bg-black text-white">
+        <div className="home-cream min-h-screen bg-transparent text-ink">
             <Navbar />
             <Breadcrumbs items={[
                 { label: "Home", href: "/" },
@@ -222,7 +222,7 @@ export default function BlogList() {
 
             {/* Hero Section */}
             <section className="relative flex items-center justify-center px-4 md:px-8 pt-8 md:pt-16 pb-20 min-h-[50vh]">
-                <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black" />
+                <div className="absolute inset-0 bg-gradient-to-b from-paper via-paper/95 to-paper" />
                 <div
                     className="absolute inset-0 opacity-20"
                     style={{
@@ -239,12 +239,12 @@ export default function BlogList() {
                         transition={{ duration: 0.6 }}
                         className="flex items-center gap-4 mb-8 justify-center"
                     >
-                        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-accent to-orange-600 flex items-center justify-center p-2">
+                        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-ember to-ember flex items-center justify-center p-2">
                             <Image src="/favicon.png" alt="ARC AI" width={64} height={64} className="w-full h-full object-contain" loading="lazy" />
                         </div>
                         <div>
                             <h3 className="text-xl font-bold">ARC AI</h3>
-                            <p className="text-neutral-400">Digital Marketing & AI Experts</p>
+                            <p className="text-ink-soft">Digital Marketing & AI Experts</p>
                         </div>
                     </motion.div>
 
@@ -254,14 +254,14 @@ export default function BlogList() {
                         variants={letterContainer}
                         className="text-center"
                     >
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-6">
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-[-0.035em] mb-6">
                             {"INSIGHTS & EXPERTISE".split("").map((char, i) => (
                                 <motion.span
                                     key={i}
                                     variants={letterVariant}
                                     className="inline-block"
                                     style={{
-                                        background: "linear-gradient(to bottom, white, #d4d4d8, #71717a)",
+                                        background: "linear-gradient(to bottom, #1B1A17, #1B1A17)",
                                         WebkitBackgroundClip: "text",
                                         WebkitTextFillColor: "transparent",
                                         backgroundClip: "text",
@@ -275,7 +275,7 @@ export default function BlogList() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.8, duration: 0.6 }}
-                            className="text-xl md:text-2xl text-neutral-400 max-w-3xl mx-auto"
+                            className="text-xl md:text-2xl text-ink-soft max-w-3xl mx-auto"
                         >
                             Explore cutting-edge strategies in AI automation and digital marketing to transform your business
                         </motion.p>
@@ -284,7 +284,7 @@ export default function BlogList() {
             </section>
 
             {/* Pillar Guides — Featured Resources */}
-            <section className="py-12 px-4 md:px-8 bg-black">
+            <section className="py-12 px-4 md:px-8 bg-transparent">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial="hidden"
@@ -292,26 +292,26 @@ export default function BlogList() {
                         viewport={{ once: true }}
                         variants={fadeInUp}
                     >
-                        <h2 className="text-sm font-bold text-neutral-400 uppercase tracking-widest mb-6 flex items-center gap-2">
+                        <h2 className="text-sm font-medium text-ink-soft tracking-[-0.035em] mb-6 flex items-center gap-2">
                             📚 Definitive Industry Guides
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <Link href="/web-design-sri-lanka">
-                                <div className="group relative rounded-2xl overflow-hidden border border-[rgb(255,73,37)]/30 bg-gradient-to-br from-[rgb(255,73,37)]/10 via-neutral-950 to-black p-8 hover:border-[rgb(255,73,37)]/60 transition-all duration-300 cursor-pointer">
-                                    <div className="absolute top-0 right-0 bg-[rgb(255,73,37)] text-white text-[10px] font-black uppercase px-3 py-1 rounded-bl-lg tracking-widest">Pillar Guide</div>
-                                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[rgb(255,73,37)] transition-colors">Web Design Companies in Sri Lanka — 2026 Guide</h3>
-                                    <p className="text-neutral-400 text-sm leading-relaxed mb-4">12 agencies evaluated with exact pricing benchmarks (LKR & USD), WordPress vs Next.js comparisons, and an actionable selection framework.</p>
-                                    <span className="inline-flex items-center gap-2 text-[rgb(255,73,37)] text-sm font-semibold">
+                                <div className="cut-card [--cut:18px] group relative overflow-hidden [--cut-line:rgba(255,73,37,0.3)] bg-gradient-to-br from-ember/10 via-paper to-paper p-8 hover:[--cut-line:rgba(255,73,37,0.6)] transition-all duration-300 cursor-pointer">
+                                    <div className="absolute top-0 right-0 bg-ember text-ink text-[10px] font-black uppercase px-3 py-1 rounded-bl-lg tracking-widest">Pillar Guide</div>
+                                    <h3 className="text-2xl font-bold text-ink mb-3 group-hover:text-ember-ink transition-colors">Web Design Companies in Sri Lanka — 2026 Guide</h3>
+                                    <p className="text-ink-soft text-sm leading-relaxed mb-4">12 agencies evaluated with exact pricing benchmarks (LKR & USD), WordPress vs Next.js comparisons, and an actionable selection framework.</p>
+                                    <span className="inline-flex items-center gap-2 text-ember-deep text-sm font-semibold">
                                         Read the Full Guide <ArrowUpRight className="w-4 h-4" />
                                     </span>
                                 </div>
                             </Link>
                             <Link href="/software-companies-sri-lanka">
-                                <div className="group relative rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-950 p-8 hover:border-neutral-700 transition-all duration-300 cursor-pointer">
-                                    <div className="absolute top-0 right-0 bg-neutral-700 text-white text-[10px] font-black uppercase px-3 py-1 rounded-bl-lg tracking-widest">Pillar Guide</div>
-                                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[rgb(255,73,37)] transition-colors">Top Software Companies in Sri Lanka — 2026</h3>
-                                    <p className="text-neutral-400 text-sm leading-relaxed mb-4">A comprehensive ranking of the leading software development companies, covering IT outsourcing, pricing, and technical capabilities.</p>
-                                    <span className="inline-flex items-center gap-2 text-[rgb(255,73,37)] text-sm font-semibold">
+                                <div className="cut-card [--cut:18px] group relative overflow-hidden [--cut-line:rgba(27,26,23,0.1)] bg-transparent p-8 hover:[--cut-line:rgba(27,26,23,0.3)] transition-all duration-300 cursor-pointer">
+                                    <div className="absolute top-0 right-0 bg-ink/10 text-ink text-[10px] font-black uppercase px-3 py-1 rounded-bl-lg tracking-widest">Pillar Guide</div>
+                                    <h3 className="text-2xl font-bold text-ink mb-3 group-hover:text-ember-ink transition-colors">Top Software Companies in Sri Lanka — 2026</h3>
+                                    <p className="text-ink-soft text-sm leading-relaxed mb-4">A comprehensive ranking of the leading software development companies, covering IT outsourcing, pricing, and technical capabilities.</p>
+                                    <span className="inline-flex items-center gap-2 text-ember-deep text-sm font-semibold">
                                         Read the Full Guide <ArrowUpRight className="w-4 h-4" />
                                     </span>
                                 </div>
@@ -322,7 +322,7 @@ export default function BlogList() {
             </section>
 
             {/* Blog Grid */}
-            <section className="py-20 px-4 md:px-8 bg-black">
+            <section className="py-20 px-4 md:px-8 bg-transparent">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {blogPosts.map((post, index) => (
@@ -335,7 +335,7 @@ export default function BlogList() {
                                 transition={{ delay: index * 0.1 }}
                             >
                                 <Link href={`/blog/${post.id}`}>
-                                    <div className="group relative h-[500px] rounded-2xl overflow-hidden cursor-pointer">
+                                    <div className="cut-card [--cut:18px] group relative h-[500px] overflow-hidden cursor-pointer">
                                         {/* Background Image */}
                                         <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-110">
                                             <Image src={post.image}
@@ -347,17 +347,17 @@ export default function BlogList() {
                                         </div>
 
                                         {/* Overlay */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-paper via-paper/60 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
 
                                         {/* Content */}
                                         <div className="absolute inset-0 flex flex-col justify-between p-8">
                                             {/* Top - Date and Arrow */}
                                             <div className="flex items-center justify-between">
-                                                <div className="flex items-center gap-2 text-neutral-300">
+                                                <div className="flex items-center gap-2 text-ink-soft">
                                                     <Calendar className="w-4 h-4" />
                                                     <span className="text-sm font-medium">{post.date}</span>
                                                 </div>
-                                                <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center group-hover:bg-accent transition-colors duration-300">
+                                                <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center group-hover:bg-[#FF5C3A] transition-colors duration-300">
                                                     <ArrowUpRight className="w-5 h-5" />
                                                 </div>
                                             </div>
@@ -365,14 +365,14 @@ export default function BlogList() {
                                             {/* Bottom - Title and Category */}
                                             <div>
                                                 <div className="mb-3">
-                                                    <span className="inline-block px-3 py-1 bg-accent/20 backdrop-blur-sm text-accent text-sm font-semibold rounded-full border border-accent/30">
+                                                    <span className="inline-block px-3 py-1 bg-ember/20 text-ember-deep text-sm font-semibold rounded-full border border-ember/30">
                                                         {post.category}
                                                     </span>
                                                 </div>
-                                                <h3 className="text-2xl md:text-3xl font-bold mb-3 group-hover:text-accent transition-colors duration-300">
+                                                <h3 className="text-2xl md:text-3xl font-bold mb-3 group-hover:text-ember-ink transition-colors duration-300">
                                                     {post.title}
                                                 </h3>
-                                                <p className="text-neutral-300 text-sm line-clamp-2">
+                                                <p className="text-ink-soft text-sm line-clamp-2">
                                                     {post.excerpt}
                                                 </p>
                                             </div>
@@ -386,7 +386,7 @@ export default function BlogList() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-black to-neutral-950">
+            <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-paper to-paper">
                 <div className="max-w-4xl mx-auto text-center">
                     <motion.div
                         initial="hidden"
@@ -394,15 +394,15 @@ export default function BlogList() {
                         viewport={{ once: true, amount: 0.3 }}
                         variants={fadeInUp}
                     >
-                        <h2 className="text-4xl md:text-6xl font-bold mb-6">
+                        <h2 className="text-4xl md:text-6xl font-medium mb-6 tracking-[-0.035em]">
                             Want to Transform Your Business?
                         </h2>
-                        <p className="text-xl text-neutral-400 mb-8">
+                        <p className="text-xl text-ink-soft mb-8">
                             Let's discuss how AI automation and digital marketing can drive your growth
                         </p>
                         <Link
                             href="/contact"
-                            className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white font-semibold rounded-lg hover:scale-105 transition-transform"
+                            className="cut-btn [--cut:12px] [--cut-focus:#1B1A17] inline-flex items-center gap-2 px-8 py-4 bg-ember text-ink font-semibold hover:scale-105 transition-transform"
                         >
                             Get in Touch
                             <ArrowUpRight className="w-5 h-5" />

@@ -1,35 +1,50 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
+import { Flag, PencilRuler, Search, TrendingUp } from "lucide-react";
+import ProcessVisual, { type ProcessVisualKind } from "./home/ProcessVisual";
+import { BookCallLink } from "./home/BookCallLink";
+import { useOffscreenPause } from "./home/useOffscreenPause";
 
 const Process = () => {
-  const steps = [
+  // The small loops in the cards stop while the section is off screen.
+  const sectionRef = useOffscreenPause<HTMLElement>();
+
+  const steps: { number: number; icon: typeof Search; visual: ProcessVisualKind; title: string; description: string }[] = [
     {
       number: 1,
+      icon: Search,
+      visual: "discovery",
       title: "Discovery Phase",
       description: "Understanding your, goals, pain points, audience, and what sets you apart."
     },
     {
       number: 2,
+      icon: Flag,
+      visual: "kickoff",
       title: "Project Kickoff",
       description: "Setting up projects, aligning on scope and milestones, and diving into the work."
     },
     {
       number: 3,
+      icon: PencilRuler,
+      visual: "refine",
       title: "Receive & Refine",
       description: "Sharing initial designs, gathering feedback, and fine-tuning together."
     },
     {
       number: 4,
+      icon: TrendingUp,
+      visual: "grow",
       title: "Continue & Grow",
       description: "Launching with confidence and supporting your next extraordinary moves."
     }
   ];
 
   const cardVariants: Variants = {
-    hidden: { 
-      opacity: 0, 
-      y: 60 
+    hidden: {
+      opacity: 0,
+      y: 60
     },
     visible: {
       opacity: 1,
@@ -42,55 +57,74 @@ const Process = () => {
   };
 
   return (
-    <section className="bg-[rgb(10,10,10)] py-20 lg:py-16 px-6 lg:px-12">
-      <div className="max-w-[1600px] mx-auto">
-        <div className="flex flex-col lg:flex-row gap-12 items-start">
-          {/* Left Side - Title */}
-          <div className="lg:w-1/4 flex-shrink-0">
-            <p className="text-[rgb(119,119,119)] text-xs font-medium tracking-wider mb-6">
-              (PROCESS)
-            </p>
-            <h2 className="text-[80px] lg:text-[100px] xl:text-[120px] font-bold text-white leading-[0.9] tracking-tight">
-              HOW WE<br />WORK
-            </h2>
-          </div>
+    <section ref={sectionRef} className="render-when-near relative px-4 py-16 md:px-8 lg:px-20 lg:py-24">
+      <div className="mx-auto max-w-[1400px]">
+        <h2 className="text-5xl font-medium leading-[0.98] tracking-[-0.04em] text-ink sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+          How we <span className="text-ember-ink">work</span>
+        </h2>
 
-          {/* Right Side - Steps */}
-          <motion.div
-            className="flex-1 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
-            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
-          >
-            {steps.map((step) => (
+        {/* Four cards, one per step, each with a small animation of its stage.
+            The last one is the orange one: it is where the work goes live. */}
+        <motion.div
+          className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-14 xl:grid-cols-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
+        >
+          {steps.map((step) => {
+            const accent = step.number === steps.length;
+            const Icon = step.icon;
+            return (
               <motion.div
                 key={step.number}
-                className="border border-[rgb(51,51,51)] bg-[rgb(10,10,10)] p-6 lg:p-8 min-h-[280px] sm:min-h-[400px] flex flex-col"
+                className={`cut-card [--cut:22px] flex min-h-[240px] flex-col overflow-hidden p-6 sm:min-h-[340px] lg:p-7 ${
+                  accent
+                    ? "relative bg-ember text-ink"
+                    : "cream-card"
+                }`}
                 variants={cardVariants}
               >
-                {/* Step Number */}
-                <div className="mb-4 sm:mb-auto">
-                  <div className="flex items-start gap-0.5 mb-4 sm:mb-8">
-                    <p className="text-lg font-bold text-[rgb(119,119,119)] tracking-wide">
-                      STEP {step.number}
-                    </p>
-                    <span className="text-lg font-bold text-[rgb(255,73,37)]">.</span>
-                  </div>
+                <div className="flex items-start justify-between">
+                  <p
+                    className={`inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-semibold tracking-wide ${
+                      accent ? "border-ink/20 bg-ink/10 text-ink" : "border-ink/10 bg-white/70 text-ink-soft"
+                    }`}
+                  >
+                    STEP {step.number}
+                  </p>
+                  <span
+                    className={`grid h-12 w-12 place-items-center rounded-full border ${
+                      accent ? "border-ink/25 bg-ink text-ember" : "border-ink/10 bg-white text-ember-ink"
+                    }`}
+                    aria-hidden="true"
+                  >
+                    <Icon className="h-5 w-5" strokeWidth={2} />
+                  </span>
                 </div>
 
-                {/* Step Content */}
-                <div className="sm:mt-auto">
-                  <h3 className="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
+                {/* A small looping picture of the stage, in the space between
+                    the step label and its title. */}
+                <div className="flex flex-1 items-center py-7 lg:py-8">
+                  <ProcessVisual kind={step.visual} />
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-medium leading-tight tracking-[-0.03em] text-ink lg:text-3xl">
                     {step.title}
                   </h3>
-                  <p className="text-[rgb(119,119,119)] text-base leading-relaxed">
+                  <p className={`mt-3 text-base leading-relaxed ${accent ? "text-ink/80" : "text-ink-soft"}`}>
                     {step.description}
                   </p>
                 </div>
               </motion.div>
-            ))}
-          </motion.div>
+            );
+          })}
+        </motion.div>
+
+        {/* Step one is a discovery call; this books it (the hero's booking window). */}
+        <div className="mt-8 lg:mt-10">
+          <BookCallLink>Book a discovery call</BookCallLink>
         </div>
       </div>
     </section>
@@ -98,4 +132,3 @@ const Process = () => {
 };
 
 export default Process;
-

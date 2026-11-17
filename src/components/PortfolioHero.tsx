@@ -62,16 +62,16 @@ export default function PortfolioHero() {
   }, []);
 
     return (
-    <section className="relative w-full flex items-center justify-center px-6 pt-8 md:pt-16 pb-20 bg-black min-h-[40vh]">
+    <section className="relative w-full flex items-center justify-center px-6 pt-8 md:pt-16 pb-20 bg-transparent min-h-[40vh]">
       <div className="max-w-7xl mx-auto text-center">
         
         {/* SEO Hidden H1 */}
-        <h1 className="sr-only">
+        <h1 className="sr-only tracking-[-0.035em] font-medium">
           ARC AI Portfolio: Websites, Systems and AI Agents
         </h1>
 
         <div className="flex justify-center items-center mb-6 min-h-[120px] md:min-h-[160px]">
-          <h2 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-white uppercase leading-none tracking-tight relative w-full">
+          <h2 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-medium text-ink leading-none tracking-[-0.035em] relative w-full">
             <span className="inline-block min-w-[280px] sm:min-w-[350px] md:min-w-[600px] lg:min-w-[800px] xl:min-w-[1000px] text-center">
               {mounted ? (
                 <>
@@ -85,7 +85,7 @@ export default function PortfolioHero() {
           </h2>
         </div>
 
-        <p className="text-base text-[rgb(119,119,119)] max-w-2xl mx-auto leading-relaxed">
+        <p className="text-base text-ink-mute max-w-2xl mx-auto leading-relaxed">
           Explore our collection of successful projects across web design, branding, AI automation, and digital marketing.
         </p>
       </div>

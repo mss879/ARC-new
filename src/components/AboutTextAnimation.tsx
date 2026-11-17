@@ -96,10 +96,10 @@ const AboutTextAnimation = () => {
   }, [hasStarted, words.length]);
 
   return (
-    <section ref={sectionRef} className="relative pt-8 md:pt-20 pb-20 px-6 bg-black">
+    <section ref={sectionRef} className="relative pt-8 md:pt-20 pb-20 px-6 bg-transparent">
       <div className="max-w-6xl mx-auto">
         <div 
-          className="bg-white/5 backdrop-blur-sm rounded-[40px] p-8 md:p-12 lg:p-16 border border-white/10"
+          className="cut-card [--cut:22px] relative bg-white/70 p-8 md:p-12 lg:p-16 [--cut-line:rgba(27,26,23,0.1)]"
           style={{
             willChange: 'transform',
             opacity: 1,
@@ -108,9 +108,8 @@ const AboutTextAnimation = () => {
         >
           <div className="relative w-full">
             <p 
-              className="text-xl md:text-2xl lg:text-[26px] font-medium leading-relaxed text-center text-white"
+              className="text-xl md:text-2xl lg:text-[26px] font-medium leading-relaxed text-center text-ink"
               style={{
-                fontFamily: "'Inter Display', 'Inter', sans-serif",
                 letterSpacing: '-0.9px',
                 lineHeight: '1.55em',
                 backgroundColor: 'rgba(0, 0, 0, 0)',
@@ -128,7 +127,7 @@ const AboutTextAnimation = () => {
                     <span 
                       className="inline-block mr-1"
                       style={{
-                        color: 'rgb(255, 255, 255)',
+                        color: 'rgb(27, 26, 23)',
                         filter: index < visibleWords ? 'none' : 'blur(8px)',
                         transition: 'filter 0.3s',
                         opacity: index < visibleWords ? 1 : 0.3,
@@ -142,7 +141,7 @@ const AboutTextAnimation = () => {
                     <span 
                       className="inline-block align-middle mx-1"
                       style={{
-                        color: 'rgb(255, 255, 255)',
+                        color: 'rgb(27, 26, 23)',
                         filter: index < visibleWords ? 'none' : 'blur(8px)',
                         transition: 'filter 0.3s',
                         opacity: index < visibleWords ? 1 : 0.3,

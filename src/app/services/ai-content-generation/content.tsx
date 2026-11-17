@@ -33,11 +33,11 @@ const fadeInUp: Variants = {
 
 export default function AIContentGenerationContent() {
     return (
-        <div className="min-h-screen bg-black text-white">
+        <div className="home-cream min-h-screen bg-transparent text-ink">
             <Navbar />
             {/* Hero Section */}
             <section className="relative min-h-[90vh] flex items-center justify-center px-4 md:px-8 pt-32 pb-20" aria-label="AI content generation overview">
-                <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black" aria-hidden="true" />
+                <div className="absolute inset-0 bg-gradient-to-b from-paper via-paper/95 to-paper" aria-hidden="true" />
                 <div
                     className="absolute inset-0 opacity-20"
                     aria-hidden="true"
@@ -54,7 +54,7 @@ export default function AIContentGenerationContent() {
                         variants={letterContainer}
                         className="mb-8"
                     >
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight">
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-[-0.035em]">
                             {["AI CONTENT", "GENERATION"].map((word, i) => (
                                 <span key={i} className="block mb-2">
                                     {word.split("").map((char, j) => (
@@ -75,7 +75,7 @@ export default function AIContentGenerationContent() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 0.7 }}
-                        className="text-xl md:text-2xl text-neutral-400 max-w-3xl mx-auto mb-12"
+                        className="text-xl md:text-2xl text-ink-soft max-w-3xl mx-auto mb-12"
                     >
                         Seamless content creation that generates captivating, high-quality content
                         in line with your brand's voice. Scale your content without compromising quality.
@@ -89,7 +89,7 @@ export default function AIContentGenerationContent() {
                     >
                         <Link
                             href="/contact"
-                            className="group relative px-8 py-4 bg-accent text-white font-semibold rounded-lg overflow-hidden transition-all hover:scale-105"
+                            className="cut-btn [--cut:12px] [--cut-focus:#1B1A17] group relative px-8 py-4 bg-ember text-ink font-semibold overflow-hidden transition-all hover:scale-105"
                         >
                             <span className="relative z-10 flex items-center gap-2">
                                 Get Started
@@ -98,7 +98,7 @@ export default function AIContentGenerationContent() {
                         </Link>
                         <Link
                             href="#demo"
-                            className="px-8 py-4 border border-neutral-700 text-white font-semibold rounded-lg hover:border-neutral-500 transition-colors"
+                            className="cut-btn [--cut:12px] px-8 py-4 [--cut-line:rgba(27,26,23,0.1)] text-ink font-semibold hover:[--cut-line:rgba(27,26,23,0.3)] transition-colors"
                         >
                             See Demo
                         </Link>
@@ -107,7 +107,7 @@ export default function AIContentGenerationContent() {
             </section>
 
             {/* Content Types */}
-            <section className="py-20 px-4 md:px-8 bg-black">
+            <section className="py-20 px-4 md:px-8 bg-transparent">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial="hidden"
@@ -116,12 +116,12 @@ export default function AIContentGenerationContent() {
                         variants={fadeInUp}
                         className="mb-16"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                            <span className="bg-gradient-to-b from-white via-zinc-200 to-zinc-600 bg-clip-text text-transparent">
+                        <h2 className="text-4xl md:text-5xl font-medium mb-4 tracking-[-0.035em]">
+                            <span className="text-ink">
                                 Content We Generate
                             </span>
                         </h2>
-                        <p className="text-neutral-400 text-lg">AI-powered content for every need</p>
+                        <p className="text-ink-soft text-lg">AI-powered content for every need</p>
                     </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -174,15 +174,15 @@ export default function AIContentGenerationContent() {
                                 viewport={{ once: true, amount: 0.3 }}
                                 variants={fadeInUp}
                                 transition={{ delay: index * 0.05 }}
-                                className="group p-6 bg-neutral-900/50 border border-neutral-800 rounded-xl hover:border-accent/50 transition-all hover:bg-neutral-900"
+                                className="cut-card [--cut:14px] relative group p-6 bg-white/70 [--cut-line:rgba(27,26,23,0.1)] hover:[--cut-line:rgba(255,73,37,0.5)] transition-all hover:bg-white"
                             >
-                                <div className="w-14 h-14 mb-4 rounded-lg bg-accent/10 flex items-center justify-center text-accent group-hover:scale-110 transition-transform">
+                                <div className="w-14 h-14 mb-4 rounded-lg bg-ember/10 flex items-center justify-center text-ember-deep group-hover:scale-110 transition-transform">
                                     {type.icon}
                                 </div>
                                 <h3 className="text-lg font-bold mb-3">{type.title}</h3>
                                 <ul className="space-y-1">
                                     {type.items.map((item, i) => (
-                                        <li key={i} className="text-sm text-neutral-400">• {item}</li>
+                                        <li key={i} className="text-sm text-ink-soft">• {item}</li>
                                     ))}
                                 </ul>
                             </motion.div>
@@ -192,7 +192,7 @@ export default function AIContentGenerationContent() {
             </section>
 
             {/* AI Capabilities */}
-            <section className="py-20 px-4 md:px-8 bg-neutral-950">
+            <section className="py-20 px-4 md:px-8 bg-transparent">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial="hidden"
@@ -201,12 +201,12 @@ export default function AIContentGenerationContent() {
                         variants={fadeInUp}
                         className="mb-16 text-center"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                            <span className="bg-gradient-to-b from-white via-zinc-200 to-zinc-600 bg-clip-text text-transparent">
+                        <h2 className="text-4xl md:text-5xl font-medium mb-4 tracking-[-0.035em]">
+                            <span className="text-ink">
                                 AI-Powered Features
                             </span>
                         </h2>
-                        <p className="text-neutral-400 text-lg">Advanced capabilities for superior content</p>
+                        <p className="text-ink-soft text-lg">Advanced capabilities for superior content</p>
                     </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -243,11 +243,11 @@ export default function AIContentGenerationContent() {
                                 viewport={{ once: true, amount: 0.3 }}
                                 variants={fadeInUp}
                                 transition={{ delay: index * 0.1 }}
-                                className="p-8 bg-black border border-neutral-800 rounded-xl hover:border-accent/50 transition-all"
+                                className="cut-card [--cut:14px] relative p-8 bg-white/70 [--cut-line:rgba(27,26,23,0.1)] hover:[--cut-line:rgba(255,73,37,0.5)] transition-all"
                             >
-                                <Sparkles className="w-10 h-10 text-accent mb-4" />
+                                <Sparkles className="w-10 h-10 text-ember-deep mb-4" />
                                 <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                                <p className="text-neutral-400">{feature.description}</p>
+                                <p className="text-ink-soft">{feature.description}</p>
                             </motion.div>
                         ))}
                     </div>
@@ -255,7 +255,7 @@ export default function AIContentGenerationContent() {
             </section>
 
             {/* Quality Assurance */}
-            <section className="py-20 px-4 md:px-8 bg-black">
+            <section className="py-20 px-4 md:px-8 bg-transparent">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial="hidden"
@@ -264,17 +264,17 @@ export default function AIContentGenerationContent() {
                         variants={fadeInUp}
                         className="mb-16"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                            <span className="bg-gradient-to-b from-white via-zinc-200 to-zinc-600 bg-clip-text text-transparent">
+                        <h2 className="text-4xl md:text-5xl font-medium mb-4 tracking-[-0.035em]">
+                            <span className="text-ink">
                                 Quality Assurance
                             </span>
                         </h2>
-                        <p className="text-neutral-400 text-lg">Rigorous checks ensure content excellence</p>
+                        <p className="text-ink-soft text-lg">Rigorous checks ensure content excellence</p>
                     </motion.div>
 
                     <div className="relative">
                         {/* Connection Line */}
-                        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent via-accent/50 to-transparent hidden md:block" />
+                        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-ember via-ember/50 to-transparent hidden md:block" />
 
                         {[
                             {
@@ -313,16 +313,16 @@ export default function AIContentGenerationContent() {
                                 className="relative mb-12 last:mb-0 md:pl-24"
                             >
                                 {/* Step Number Circle */}
-                                <div className="absolute left-0 w-16 h-16 bg-accent rounded-full items-center justify-center font-bold text-xl hidden md:flex">
+                                <div className="absolute left-0 w-16 h-16 bg-ember rounded-full items-center justify-center font-bold text-xl hidden md:flex">
                                     {item.step}
                                 </div>
 
-                                <div className="p-8 bg-neutral-900/50 border border-neutral-800 rounded-xl hover:border-accent/50 transition-all">
+                                <div className="cut-card [--cut:14px] relative p-8 bg-white/70 [--cut-line:rgba(27,26,23,0.1)] hover:[--cut-line:rgba(255,73,37,0.5)] transition-all">
                                     <div className="flex items-center gap-4 mb-3 md:hidden">
-                                        <span className="text-3xl font-bold text-accent">{item.step}</span>
+                                        <span className="text-3xl font-bold text-ember-ink">{item.step}</span>
                                     </div>
                                     <h3 className="text-2xl font-bold mb-3">{item.title}</h3>
-                                    <p className="text-neutral-400 text-lg">{item.description}</p>
+                                    <p className="text-ink-soft text-lg">{item.description}</p>
                                 </div>
                             </motion.div>
                         ))}
@@ -331,7 +331,7 @@ export default function AIContentGenerationContent() {
             </section>
 
             {/* Integration Options */}
-            <section className="py-20 px-4 md:px-8 bg-neutral-950">
+            <section className="py-20 px-4 md:px-8 bg-transparent">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial="hidden"
@@ -340,12 +340,12 @@ export default function AIContentGenerationContent() {
                         variants={fadeInUp}
                         className="mb-16 text-center"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                            <span className="bg-gradient-to-b from-white via-zinc-200 to-zinc-600 bg-clip-text text-transparent">
+                        <h2 className="text-4xl md:text-5xl font-medium mb-4 tracking-[-0.035em]">
+                            <span className="text-ink">
                                 Integration Options
                             </span>
                         </h2>
-                        <p className="text-neutral-400 text-lg">Seamlessly integrate with your workflow</p>
+                        <p className="text-ink-soft text-lg">Seamlessly integrate with your workflow</p>
                     </motion.div>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -361,7 +361,7 @@ export default function AIContentGenerationContent() {
                                 viewport={{ once: true, amount: 0.3 }}
                                 variants={fadeInUp}
                                 transition={{ delay: index * 0.05 }}
-                                className="p-6 bg-black border border-neutral-800 rounded-lg text-center hover:border-accent/50 transition-all hover:scale-105"
+                                className="cut-card [--cut:12px] relative p-6 bg-transparent [--cut-line:rgba(27,26,23,0.1)] text-center hover:[--cut-line:rgba(255,73,37,0.5)] transition-all hover:scale-105"
                             >
                                 <p className="font-semibold">{integration}</p>
                             </motion.div>
@@ -371,7 +371,7 @@ export default function AIContentGenerationContent() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-black to-neutral-950" aria-label="Get started with content generation">
+            <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-paper to-paper" aria-label="Get started with content generation">
                 <div className="max-w-4xl mx-auto text-center">
                     <motion.div
                         initial="hidden"
@@ -379,15 +379,15 @@ export default function AIContentGenerationContent() {
                         viewport={{ once: true, amount: 0.3 }}
                         variants={fadeInUp}
                     >
-                        <h2 className="text-4xl md:text-6xl font-bold mb-6">
+                        <h2 className="text-4xl md:text-6xl font-medium mb-6 tracking-[-0.035em]">
                             Scale Your Content Creation
                         </h2>
-                        <p className="text-xl text-neutral-400 mb-8">
+                        <p className="text-xl text-ink-soft mb-8">
                             Generate high-quality content at scale without compromising your brand voice. Start today.
                         </p>
                         <Link
                             href="/contact"
-                            className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white font-semibold rounded-lg hover:scale-105 transition-transform"
+                            className="cut-btn [--cut:12px] [--cut-focus:#1B1A17] inline-flex items-center gap-2 px-8 py-4 bg-ember text-ink font-semibold hover:scale-105 transition-transform"
                         >
                             Start Generating Content
                             <ArrowUpRight className="w-5 h-5" />

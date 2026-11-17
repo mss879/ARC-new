@@ -33,14 +33,14 @@ const fadeInUp: Variants = {
 
 export default function ConsultingAuditsContent() {
     return (
-        <div className="min-h-screen bg-[#050505] text-white selection:bg-amber-500/30">
+        <div className="home-cream min-h-screen bg-transparent text-ink selection:bg-ember/30">
             <Navbar />
             
             {/* Hero Section */}
             <section className="relative min-h-[90vh] flex items-center justify-center px-4 md:px-8 pt-32 pb-20 overflow-hidden" aria-label="Strategy Consulting overview">
-                <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-[rgba(69,26,3,0.3)] to-[#020202] z-0" aria-hidden="true" />
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-600/10 rounded-full blur-[150px] mix-blend-screen pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-orange-600/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-b from-paper via-[rgba(69,26,3,0.3)] to-paper z-0" aria-hidden="true" />
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-ember/10 rounded-full blur-[150px] mix-blend-screen pointer-events-none hidden" />
+                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-ember/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none hidden" />
 
                 <div className="relative z-10 max-w-7xl mx-auto text-center">
                     <motion.div
@@ -49,7 +49,7 @@ export default function ConsultingAuditsContent() {
                         variants={letterContainer}
                         className="mb-8"
                     >
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter">
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-[-0.035em]">
                             {["STRATEGIC", "AI CONSULTING"].map((word, i) => (
                                 <span key={i} className="block mb-2">
                                     {word.split("").map((char, j) => (
@@ -70,7 +70,7 @@ export default function ConsultingAuditsContent() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 0.7 }}
-                        className="text-xl md:text-2xl text-amber-100/60 max-w-3xl mx-auto mb-12 font-medium leading-relaxed"
+                        className="text-xl md:text-2xl text-ink-soft max-w-3xl mx-auto mb-12 font-medium leading-relaxed"
                     >
                         Stop buying disconnected software. Map your exact business processes to find the hidden bottlenecks where AI will drive massive, immediate ROI.
                     </motion.p>
@@ -83,14 +83,14 @@ export default function ConsultingAuditsContent() {
                     >
                         <Link
                             href="/contact"
-                            className="w-full sm:w-auto px-8 py-4 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl transition-all hover:scale-105 shadow-[0_0_20px_rgba(217,119,6,0.3)] flex items-center justify-center gap-2"
+                            className="cut-btn [--cut:12px] [--cut-focus:#1B1A17] w-full sm:w-auto px-8 py-4 bg-ember hover:bg-ember text-ink font-bold transition-all hover:scale-105 flex items-center justify-center gap-2"
                         >
                             <FileSearch className="w-5 h-5" />
                             Book Free Discovery
                         </Link>
                         <a
                             href="#methodology"
-                            className="w-full sm:w-auto px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold rounded-xl transition-colors flex items-center justify-center"
+                            className="cut-btn [--cut:12px] w-full sm:w-auto px-8 py-4 bg-white/70 hover:bg-white [--cut-line:rgba(27,26,23,0.1)] text-ink font-semibold transition-colors flex items-center justify-center"
                         >
                             Our Methodology
                         </a>
@@ -99,7 +99,7 @@ export default function ConsultingAuditsContent() {
             </section>
 
             {/* Core Features Grid */}
-            <section id="methodology" className="py-24 px-4 md:px-8 bg-black relative border-t border-white/5">
+            <section id="methodology" className="py-24 px-4 md:px-8 bg-transparent relative border-t border-ink/10">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial="hidden"
@@ -108,11 +108,11 @@ export default function ConsultingAuditsContent() {
                         variants={fadeInUp}
                         className="mb-16 md:text-center max-w-4xl mx-auto"
                     >
-                        <span className="text-amber-500 font-bold tracking-widest text-sm uppercase mb-4 block">The Process Audit</span>
-                        <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                        <span className="text-ember-deep font-bold tracking-widest text-sm uppercase mb-4 block">The Process Audit</span>
+                        <h2 className="text-3xl md:text-5xl font-medium mb-6 tracking-[-0.035em]">
                             Diagnosis before Prescription.
                         </h2>
-                        <p className="text-neutral-400 text-lg leading-relaxed">
+                        <p className="text-ink-soft text-lg leading-relaxed">
                             Implementing tools without a deep understanding of your operational flow creates 'Frankenstein' systems. We shadow your teams, document your data flows, and architect a customized blueprint. We show you exactly how much time you are losing, and what it costs to fix it.
                         </p>
                     </motion.div>
@@ -157,13 +157,13 @@ export default function ConsultingAuditsContent() {
                                 viewport={{ once: true, margin: "100px" }}
                                 variants={fadeInUp}
                                 transition={{ delay: idx * 0.1 }}
-                                className="bg-white/[0.02] border border-white/5 p-8 rounded-[24px] hover:bg-amber-950/20 hover:border-amber-600/20 transition-all duration-300 group"
+                                className="cut-card [--cut:22px] relative bg-white/70 [--cut-line:rgba(27,26,23,0.1)] p-8 hover:bg-ember/[0.06] hover:[--cut-line:rgba(255,73,37,0.2)] transition-all duration-300 group"
                             >
-                                <div className="w-14 h-14 bg-gradient-to-br from-amber-600/20 to-amber-500/5 border border-amber-500/20 rounded-xl flex items-center justify-center text-amber-500 mb-6 group-hover:scale-110 group-hover:bg-amber-500/20 transition-all">
+                                <div className="w-14 h-14 bg-gradient-to-br from-ember/20 to-ember/5 border border-ember/20 rounded-xl flex items-center justify-center text-ember-deep mb-6 group-hover:scale-110 group-hover:bg-ember/20 transition-all">
                                     {feature.icon}
                                 </div>
                                 <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                                <p className="text-neutral-400 leading-relaxed text-sm">{feature.desc}</p>
+                                <p className="text-ink-soft leading-relaxed text-sm">{feature.desc}</p>
                             </motion.div>
                         ))}
                     </div>
@@ -171,7 +171,7 @@ export default function ConsultingAuditsContent() {
             </section>
 
             {/* Comparison Section  */}
-            <section className="py-24 px-4 md:px-8 bg-[#020202] border-t border-white/5">
+            <section className="py-24 px-4 md:px-8 bg-transparent border-t border-ink/10">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
                     <motion.div 
                         initial="hidden"
@@ -180,16 +180,16 @@ export default function ConsultingAuditsContent() {
                         variants={fadeInUp}
                         className="flex-1 w-full"
                     >
-                        <div className="bg-gradient-to-br from-neutral-900 to-black p-8 md:p-12 rounded-3xl border border-white/10 relative overflow-hidden flex flex-col justify-center gap-8">
-                            <h3 className="text-3xl font-black text-white">The Deliverables.</h3>
-                            <div className="space-y-4 text-neutral-400">
-                                <p><strong className="text-amber-500">1. Current State Map:</strong> A visual diagram of exactly how data currently moves through your business, exposing the leaks.</p>
-                                <div className="h-px bg-white/10" />
-                                <p><strong className="text-amber-500">2. Future State Architecture:</strong> How your business operates once fully integrated with ARC AI pipelines.</p>
-                                <div className="h-px bg-white/10" />
-                                <p><strong className="text-amber-500">3. Phased Roadmap:</strong> A step-by-step rollout plan (Phase 1: Flow, Phase 2: Engage, etc) ensuring team adoption without operational disruption.</p>
-                                <div className="h-px bg-white/10" />
-                                <p><strong className="text-amber-500">4. ROI Projection:</strong> A strict mathematical model showing where hours are saved, and how much those hours cost on payroll.</p>
+                        <div className="cut-card [--cut:22px] bg-gradient-to-br from-paper to-paper p-8 md:p-12 [--cut-line:rgba(27,26,23,0.1)] relative overflow-hidden flex flex-col justify-center gap-8">
+                            <h3 className="text-3xl font-semibold text-ink">The Deliverables.</h3>
+                            <div className="space-y-4 text-ink-soft">
+                                <p><strong className="text-ember-deep">1. Current State Map:</strong> A visual diagram of exactly how data currently moves through your business, exposing the leaks.</p>
+                                <div className="h-px bg-white" />
+                                <p><strong className="text-ember-deep">2. Future State Architecture:</strong> How your business operates once fully integrated with ARC AI pipelines.</p>
+                                <div className="h-px bg-white" />
+                                <p><strong className="text-ember-deep">3. Phased Roadmap:</strong> A step-by-step rollout plan (Phase 1: Flow, Phase 2: Engage, etc) ensuring team adoption without operational disruption.</p>
+                                <div className="h-px bg-white" />
+                                <p><strong className="text-ember-deep">4. ROI Projection:</strong> A strict mathematical model showing where hours are saved, and how much those hours cost on payroll.</p>
                             </div>
                         </div>
                     </motion.div>
@@ -201,8 +201,8 @@ export default function ConsultingAuditsContent() {
                         variants={fadeInUp}
                         className="flex-1 space-y-8"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold leading-tight">
-                            Build with intention. <br/> <span className="text-amber-500">Scale without friction.</span>
+                        <h2 className="text-4xl md:text-5xl font-medium leading-tight tracking-[-0.035em]">
+                            Build with intention. <br/> <span className="text-ember-ink">Scale without friction.</span>
                         </h2>
                         <ul className="space-y-4">
                             {[
@@ -213,10 +213,10 @@ export default function ConsultingAuditsContent() {
                                 "Transform 'busywork' into high-leverage execution"
                             ].map((item, i) => (
                                 <li key={i} className="flex items-center gap-3">
-                                    <div className="w-6 h-6 rounded-full bg-amber-500/20 flex items-center justify-center shrink-0">
-                                        <div className="w-2 h-2 rounded-full bg-amber-500" />
+                                    <div className="w-6 h-6 rounded-full bg-ember/20 flex items-center justify-center shrink-0">
+                                        <div className="w-2 h-2 rounded-full bg-ember" />
                                     </div>
-                                    <span className="text-neutral-300 font-medium">{item}</span>
+                                    <span className="text-ink-soft font-medium">{item}</span>
                                 </li>
                             ))}
                         </ul>
@@ -225,8 +225,8 @@ export default function ConsultingAuditsContent() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-32 px-4 md:px-8 bg-black relative border-t border-white/5 text-center">
-                <div className="absolute inset-0 bg-gradient-to-t from-amber-900/10 to-transparent pointer-events-none" />
+            <section className="py-32 px-4 md:px-8 bg-transparent relative border-t border-ink/10 text-center">
+                <div className="absolute inset-0 bg-gradient-to-t from-ember/10 to-transparent pointer-events-none hidden" />
                 <div className="max-w-3xl mx-auto relative z-10">
                     <motion.div
                         initial="hidden"
@@ -234,15 +234,15 @@ export default function ConsultingAuditsContent() {
                         viewport={{ once: true }}
                         variants={fadeInUp}
                     >
-                        <h2 className="text-4xl md:text-6xl font-black mb-6">
+                        <h2 className="text-4xl md:text-6xl font-medium mb-6 tracking-[-0.035em]">
                             Ready to map your future?
                         </h2>
-                        <p className="text-xl text-neutral-400 mb-10">
+                        <p className="text-xl text-ink-soft mb-10">
                             Book a 30-minute discovery session with our Lead Consultants to discuss your current operational bottlenecks.
                         </p>
                         <Link
                             href="/contact"
-                            className="inline-flex items-center gap-2 px-10 py-5 bg-amber-600 text-white font-bold rounded-full hover:bg-amber-500 transition-all hover:scale-105 shadow-[0_0_30px_rgba(217,119,6,0.2)] uppercase tracking-wide text-sm"
+                            className="cut-btn [--cut:12px] [--cut-focus:#1B1A17] inline-flex items-center gap-2 px-10 py-5 bg-ember text-ink font-bold hover:bg-ember transition-all hover:scale-105 uppercase tracking-wide text-sm"
                         >
                             SCHEDULE DISCOVERY
                             <ArrowUpRight className="w-5 h-5" />

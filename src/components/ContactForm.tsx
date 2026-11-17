@@ -1,6 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { ChevronDown } from "lucide-react";
+import { ArrowDot } from "./home/ui";
+import { hasConsent } from "@/lib/consent";
 import { supabase } from '@/lib/supabase';
 import {
   getAnalyticsIdentity,
@@ -8,7 +11,6 @@ import {
   trackEvent,
   trackFormSubmitted,
 } from "@/lib/analytics/tracker";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -149,6 +151,9 @@ function readAttribution(): Attribution {
     ref: (params.get("ref") || "").slice(0, 60),
   };
 
+  // Kept for the rest of the visit only with analytics consent; without it
+  // the values from this page are still sent with this enquiry.
+  if (!hasConsent("analytics")) return fresh;
   try {
     sessionStorage.setItem(ATTRIBUTION_KEY, JSON.stringify(fresh));
   } catch {
@@ -359,20 +364,20 @@ export default function ContactForm() {
   const FieldError = ({ error }: { error?: string | null }) => {
     if (!error) return null;
     return (
-      <p className="text-[#FF4925] text-xs mt-1.5 pl-1 animate-[fadeIn_0.2s_ease-out]">
+      <p className="text-ember-deep text-sm mt-1.5 pl-1 animate-[fadeIn_0.2s_ease-out]">
         {error}
       </p>
     );
   };
 
-  const errorRingClass = "ring-1 ring-[#FF4925]/60";
+  const errorRingClass = "ring-2 ring-[#FF4925]/70";
 
   return (
     <form
       onSubmit={handleSubmit}
       id="contact-form"
       data-form="contact_form"
-      className="space-y-6 bg-[rgb(20,20,20)] border border-[rgb(40,40,40)] rounded-3xl p-8 lg:p-10"
+      className="cream-card space-y-5 p-5 sm:p-8 lg:p-10"
       noValidate
     >
       {/* Name & Phone Row */}
@@ -388,7 +393,7 @@ export default function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`bg-[rgb(30,30,30)] border-none text-white placeholder:text-[rgb(90,90,90)] focus-visible:ring-1 focus-visible:ring-[#FF4925]/50 focus-visible:ring-offset-0 rounded-xl h-14 px-6 ${touched.name && fieldErrors.name ? errorRingClass : ""}`}
+            className={`bg-white border border-ink/10 text-ink text-base md:text-base placeholder:text-ink-mute focus-visible:ring-2 focus-visible:ring-[#FF4925]/60 focus-visible:ring-offset-0 rounded-xl h-14 px-5 ${touched.name && fieldErrors.name ? errorRingClass : ""}`}
           />
           {touched.name && <FieldError error={fieldErrors.name} />}
         </div>
@@ -404,7 +409,7 @@ export default function ContactForm() {
             onChange={handlePhoneChange}
             onBlur={handleBlur}
             maxLength={PHONE_MAX_LENGTH}
-            className={`bg-[rgb(30,30,30)] border-none text-white placeholder:text-[rgb(90,90,90)] focus-visible:ring-1 focus-visible:ring-[#FF4925]/50 focus-visible:ring-offset-0 rounded-xl h-14 px-6 ${touched.phone && fieldErrors.phone ? errorRingClass : ""}`}
+            className={`bg-white border border-ink/10 text-ink text-base md:text-base placeholder:text-ink-mute focus-visible:ring-2 focus-visible:ring-[#FF4925]/60 focus-visible:ring-offset-0 rounded-xl h-14 px-5 ${touched.phone && fieldErrors.phone ? errorRingClass : ""}`}
           />
           {touched.phone && <FieldError error={fieldErrors.phone} />}
         </div>
@@ -425,7 +430,7 @@ export default function ContactForm() {
             onChange={handleChange}
             onBlur={handleBlur}
             maxLength={EMAIL_MAX_LENGTH}
-            className={`bg-[rgb(30,30,30)] border-none text-white placeholder:text-[rgb(90,90,90)] focus-visible:ring-1 focus-visible:ring-[#FF4925]/50 focus-visible:ring-offset-0 rounded-xl h-14 px-6 ${touched.email && fieldErrors.email ? errorRingClass : ""}`}
+            className={`bg-white border border-ink/10 text-ink text-base md:text-base placeholder:text-ink-mute focus-visible:ring-2 focus-visible:ring-[#FF4925]/60 focus-visible:ring-offset-0 rounded-xl h-14 px-5 ${touched.email && fieldErrors.email ? errorRingClass : ""}`}
           />
           {touched.email && <FieldError error={fieldErrors.email} />}
         </div>
@@ -437,11 +442,11 @@ export default function ContactForm() {
             aria-label="Company name"
             value={formData.company}
             onChange={handleChange}
-            className="bg-[rgb(30,30,30)] border-none text-white placeholder:text-[rgb(90,90,90)] focus-visible:ring-1 focus-visible:ring-[#FF4925]/50 focus-visible:ring-offset-0 rounded-xl h-14 px-6"
+            className="bg-white border border-ink/10 text-ink text-base md:text-base placeholder:text-ink-mute focus-visible:ring-2 focus-visible:ring-[#FF4925]/60 focus-visible:ring-offset-0 rounded-xl h-14 px-5"
           />
         </div>
       </div>
-      <p className="text-xs text-[rgb(119,119,119)] pl-1 -mt-3">
+      <p className="text-sm text-ink-mute pl-1 -mt-1">
         A phone number or an email is enough. Leave whichever you prefer.
       </p>
 
@@ -459,24 +464,27 @@ export default function ContactForm() {
               const val = e.target.value;
               setFormData((prev) => ({ ...prev, website: val, companyWebsite: val }));
             }}
-            className="bg-[rgb(30,30,30)] border-none text-white placeholder:text-[rgb(90,90,90)] focus-visible:ring-1 focus-visible:ring-[#FF4925]/50 focus-visible:ring-offset-0 rounded-xl h-14 px-6"
+            className="bg-white border border-ink/10 text-ink text-base md:text-base placeholder:text-ink-mute focus-visible:ring-2 focus-visible:ring-[#FF4925]/60 focus-visible:ring-offset-0 rounded-xl h-14 px-5"
           />
         </div>
         <div>
+          <div className="relative">
           <select
             name="subject"
             aria-label="What do you need?"
             value={formData.subject}
             onChange={handleChange}
-            className={`w-full appearance-none bg-[rgb(30,30,30)] border-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#FF4925]/50 rounded-xl h-14 px-6 text-sm ${formData.subject ? "text-white" : "text-[rgb(90,90,90)]"}`}
+            className={`w-full appearance-none bg-white border border-ink/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4925]/60 rounded-xl h-14 pl-5 pr-12 text-base ${formData.subject ? "text-ink" : "text-ink-mute"}`}
           >
             <option value="">What do you need?</option>
             {NEEDS.map((need) => (
-              <option key={need} value={need} className="text-white">
+              <option key={need} value={need} className="text-ink">
                 {need}
               </option>
             ))}
           </select>
+          <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-ink-mute" aria-hidden="true" />
+          </div>
         </div>
       </div>
 
@@ -491,7 +499,7 @@ export default function ContactForm() {
           value={formData.message}
           onChange={handleChange}
           onBlur={handleBlur}
-          className={`bg-[rgb(30,30,30)] border-none text-white placeholder:text-[rgb(90,90,90)] focus-visible:ring-1 focus-visible:ring-[#FF4925]/50 focus-visible:ring-offset-0 rounded-xl min-h-[160px] resize-none px-6 py-4 ${touched.message && fieldErrors.message ? errorRingClass : ""}`}
+          className={`bg-white border border-ink/10 text-ink text-base md:text-base placeholder:text-ink-mute focus-visible:ring-2 focus-visible:ring-[#FF4925]/60 focus-visible:ring-offset-0 rounded-xl min-h-[160px] resize-none px-5 py-4 ${touched.message && fieldErrors.message ? errorRingClass : ""}`}
         />
         {touched.message && <FieldError error={fieldErrors.message} />}
       </div>
@@ -499,10 +507,10 @@ export default function ContactForm() {
       {/* Status Message */}
       {submitStatus.type && (
         <div
-          className={`p-4 rounded-xl ${
+          className={`cut-card [--cut:14px] relative p-4 ${
             submitStatus.type === "success"
-              ? "bg-green-500/10 border border-green-500/20 text-green-500"
-              : "bg-red-500/10 border border-red-500/20 text-red-500"
+              ? "bg-green-600/10 [--cut-line:rgba(22,163,74,0.25)] text-green-800"
+              : "bg-red-600/10 [--cut-line:rgba(220,38,38,0.25)] text-red-800"
           }`}
         >
           {submitStatus.message}
@@ -512,20 +520,18 @@ export default function ContactForm() {
       {/* Submit Section */}
       <div className="space-y-6 pt-2">
         <div className="flex flex-col md:flex-row items-start md:justify-between gap-6">
-          <p className="text-sm text-[rgb(119,119,119)] leading-relaxed order-2 md:order-1">
-            By submitting you agree to<br />our <a href="/terms-of-service" className="underline hover:text-white transition-colors">Terms of Service</a> and <a href="/privacy-policy" className="underline hover:text-white transition-colors">Privacy Policy</a>
+          <p className="text-sm text-ink-mute leading-relaxed order-2 md:order-1">
+            By submitting you agree to<br />our <a href="/terms-of-service" className="underline hover:text-ink transition-colors">Terms of Service</a> and <a href="/privacy-policy" className="underline hover:text-ink transition-colors">Privacy Policy</a>
           </p>
 
-          <Button
+          <button
             type="submit"
             disabled={isSubmitting}
-            className="h-14 px-10 bg-transparent hover:bg-[rgb(255,73,37)] text-[rgb(255,73,37)] hover:text-[rgb(10,10,10)] font-bold uppercase tracking-wider rounded-full border-2 border-[rgb(255,73,37)] transition-all duration-300 flex items-center gap-2 whitespace-nowrap w-full md:w-auto order-1 md:order-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="pill-btn pill-btn--ember pill-btn--lg order-1 w-full disabled:cursor-not-allowed disabled:opacity-50 md:order-2 md:w-auto"
           >
-            {isSubmitting ? "SENDING..." : "SUBMIT"}
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="rotate-[-45deg]">
-              <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </Button>
+            {isSubmitting ? "Sending..." : "Submit"}
+            <ArrowDot />
+          </button>
         </div>
       </div>
     </form>

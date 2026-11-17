@@ -26,17 +26,17 @@ export default function MockFrame({
     <div
       role="img"
       aria-label={description}
-      className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-[rgb(12,12,12)] shadow-[0_30px_90px_-30px_rgba(255,73,37,0.35)] [container-name:screen] [container-type:inline-size]"
+      className="cut-card [--cut:18px] [--cut-line:rgba(27,26,23,0.08)] relative w-full overflow-hidden bg-paper-white text-ink [container-name:screen] [container-type:inline-size]"
     >
-      <div className="flex items-center gap-1.5 border-b border-white/10 bg-white/[0.02] px-4 py-3" aria-hidden="true">
+      <div className="flex items-center gap-1.5 border-b border-ink/[0.08] bg-ink/[0.025] px-4 py-3" aria-hidden="true">
         {/* The window dots are dropped on a narrow frame to leave the title room. */}
-        <span className="hidden h-2.5 w-2.5 shrink-0 rounded-full bg-white/15 screen-wide:block" />
-        <span className="hidden h-2.5 w-2.5 shrink-0 rounded-full bg-white/15 screen-wide:block" />
-        <span className="hidden h-2.5 w-2.5 shrink-0 rounded-full bg-white/15 screen-wide:block" />
-        <span className="min-w-0 truncate text-[11px] font-medium uppercase tracking-wider text-zinc-400 screen-wide:ml-3">
+        <span className="hidden h-2.5 w-2.5 shrink-0 rounded-full bg-ember screen-wide:block" />
+        <span className="hidden h-2.5 w-2.5 shrink-0 rounded-full bg-ink/15 screen-wide:block" />
+        <span className="hidden h-2.5 w-2.5 shrink-0 rounded-full bg-ink/15 screen-wide:block" />
+        <span className="min-w-0 truncate text-[11px] font-semibold uppercase tracking-wider text-ink-soft screen-wide:ml-3">
           {title}
         </span>
-        <span className="ml-auto shrink-0 whitespace-nowrap pl-3 text-[10px] uppercase tracking-wider text-zinc-600">
+        <span className="ml-auto shrink-0 whitespace-nowrap pl-3 text-[10px] uppercase tracking-wider text-ink-mute">
           Illustrative screen
         </span>
       </div>

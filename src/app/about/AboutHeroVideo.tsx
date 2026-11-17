@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import { useOffscreenPause } from "@/components/home/useOffscreenPause";
 
 /**
  * Client-side video component for the About hero section.
@@ -9,7 +10,20 @@ import { useRef, useEffect } from "react";
  * custom data attributes) after the initial server render.
  */
 export default function AboutHeroVideo() {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  // The video stops decoding once the hero has scrolled out of view and picks
+  // up again when it comes back.
+  const pausedOffscreen = useRef(false);
+  const videoRef = useOffscreenPause<HTMLVideoElement>((visible) => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (!visible && !video.paused) {
+      pausedOffscreen.current = true;
+      video.pause();
+    } else if (visible && pausedOffscreen.current) {
+      pausedOffscreen.current = false;
+      video.play().catch(() => { });
+    }
+  });
 
   useEffect(() => {
     const video = videoRef.current;

@@ -15,6 +15,11 @@ const FloatingActions = () => {
   // Check if on admin pages
   const isAdmin = pathname?.startsWith("/admin");
 
+  // The home page has a light, grey-cream background. The see-through button
+  // fills below are made for black pages and wash out to pale pink and pale
+  // green on cream, so there the two buttons are given their full colour.
+  const onLightPage = !isAdmin;
+
   useEffect(() => {
     const handleScroll = () => {
       // Show buttons after scrolling past hero section (typically around 100vh)
@@ -28,7 +33,7 @@ const FloatingActions = () => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -99,7 +104,9 @@ const FloatingActions = () => {
               data-analytics-ignore
               className="group relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 hover:scale-110 overflow-hidden"
               style={{
-                background: 'linear-gradient(135deg, rgba(255, 73, 37, 0.8), rgba(255, 73, 37, 0.4))',
+                background: onLightPage
+                  ? 'linear-gradient(135deg, #FF5C3A, #F03E1A)'
+                  : 'linear-gradient(135deg, rgba(255, 73, 37, 0.8), rgba(255, 73, 37, 0.4))',
                 backdropFilter: 'blur(16px)',
                 WebkitBackdropFilter: 'blur(16px)',
                 boxShadow: '0 8px 32px 0 rgba(255, 73, 37, 0.3), inset 0 2px 4px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 4px 0 rgba(0, 0, 0, 0.2)',
@@ -141,7 +148,9 @@ const FloatingActions = () => {
               data-analytics-ignore
               className="group relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 hover:scale-110 overflow-hidden"
               style={{
-                background: 'linear-gradient(135deg, rgba(37, 211, 102, 0.8), rgba(37, 211, 102, 0.4))',
+                background: onLightPage
+                  ? 'linear-gradient(135deg, #2BD96C, #17A851)'
+                  : 'linear-gradient(135deg, rgba(37, 211, 102, 0.8), rgba(37, 211, 102, 0.4))',
                 backdropFilter: 'blur(16px)',
                 WebkitBackdropFilter: 'blur(16px)',
                 boxShadow: '0 8px 32px 0 rgba(37, 211, 102, 0.3), inset 0 2px 4px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 4px 0 rgba(0, 0, 0, 0.2)',
@@ -192,7 +201,7 @@ const FloatingActions = () => {
             aria-label="Book a meeting with ARC AI"
           >
             <motion.div
-              className="bg-white rounded-2xl w-full max-w-4xl h-[90vh] overflow-hidden relative"
+              className="cut-card [--cut:18px] bg-white w-full max-w-4xl h-[90vh] overflow-hidden relative"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}

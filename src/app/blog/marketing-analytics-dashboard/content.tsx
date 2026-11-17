@@ -17,7 +17,7 @@ const fadeInUp: Variants = {
 
 export default function BlogPost() {
     return (
-        <div className="min-h-screen bg-black text-white">
+        <div className="home-cream min-h-screen bg-transparent text-ink">
             <Navbar />
 
             <section className="relative min-h-[60vh] flex items-end px-4 md:px-8 pt-32 pb-12">
@@ -28,23 +28,23 @@ export default function BlogPost() {
                         height={900}
                         className="w-full h-full object-cover"
                         loading="lazy" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/40" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-paper via-paper/80 to-paper/40" />
                 </div>
 
                 <div className="relative z-10 max-w-4xl mx-auto w-full">
-                    <Link href="/blog" className="inline-flex items-center gap-2 text-neutral-300 hover:text-accent transition-colors mb-6">
+                    <Link href="/blog" className="inline-flex items-center gap-2 text-ink-soft hover:text-ember-deep transition-colors mb-6">
                         <ArrowLeft className="w-4 h-4" />
                         Back to Blog
                     </Link>
 
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-                        <span className="inline-block px-4 py-1.5 bg-accent/20 backdrop-blur-sm text-accent text-sm font-semibold rounded-full border border-accent/30 mb-4">
+                        <span className="inline-block px-4 py-1.5 bg-ember/20 text-ember-deep text-sm font-semibold rounded-full border border-ember/30 mb-4">
                             Analytics
                         </span>
-                        <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                        <h1 className="text-4xl md:text-6xl font-medium mb-6 tracking-[-0.035em]">
                             Building the Ultimate Marketing Analytics Dashboard
                         </h1>
-                        <div className="flex items-center gap-6 text-neutral-400">
+                        <div className="flex items-center gap-6 text-ink-soft">
                             <div className="flex items-center gap-2">
                                 <Calendar className="w-4 h-4" />
                                 <span>Aug 12, 2025</span>
@@ -61,22 +61,22 @@ export default function BlogPost() {
             <article className="py-12 px-4 md:px-8">
                 <div className="max-w-4xl mx-auto">
                     <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="prose prose-invert prose-lg max-w-none">
-                        <div className="space-y-6 text-neutral-300 leading-relaxed">
-                            <p className="text-xl text-neutral-200">
+                        <div className="space-y-6 text-ink-soft leading-relaxed">
+                            <p className="text-xl text-ink">
                                 Data-driven marketing requires comprehensive dashboards that surface actionable insights at a glance. Learn how to build analytics dashboards that track the metrics that matter, enable faster decision-making, and drive measurable business growth.
                             </p>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Why Marketing Dashboards Matter</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Why Marketing Dashboards Matter</h2>
                             <p>
                                 Marketing teams drowning in data from Google Analytics, social platforms, email tools, CRM, and advertising platforms need centralized dashboards that consolidate metrics, identify trends, and enable rapid optimization. The right dashboard transforms raw data into strategic insights.
                             </p>
 
-                            <div className="bg-gradient-to-r from-accent/20 to-orange-600/20 border border-accent/30 rounded-xl p-6 my-8">
-                                <h4 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                            <div className="cut-card [--cut:14px] relative bg-gradient-to-r from-ember/20 to-ember/20 [--cut-line:rgba(255,73,37,0.3)] p-6 my-8">
+                                <h4 className="text-xl font-bold text-ink mb-3 flex items-center gap-2">
                                     <TrendingUp className="w-5 h-5" />
                                     Marketing Dashboard Benefits
                                 </h4>
-                                <ul className="space-y-2 text-neutral-200">
+                                <ul className="space-y-2 text-ink">
                                     <li>• 5-10 hours saved weekly on manual reporting</li>
                                     <li>• 32% faster decision-making with real-time data</li>
                                     <li>• 24% increase in campaign ROI from data-driven optimization</li>
@@ -85,9 +85,9 @@ export default function BlogPost() {
                                 </ul>
                             </div>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Essential Metrics by Dashboard Type</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Essential Metrics by Dashboard Type</h2>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Executive Marketing Dashboard</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Executive Marketing Dashboard</h3>
                             <p><strong>Audience:</strong> C-suite, leadership team</p>
                             <p><strong>Focus:</strong> High-level business impact, ROI, strategic KPIs</p>
                             <p><strong>Key metrics:</strong></p>
@@ -102,7 +102,7 @@ export default function BlogPost() {
                                 <li><strong>Pipeline Value:</strong> Total value of opportunities in sales pipeline</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Website Performance Dashboard</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Website Performance Dashboard</h3>
                             <p><strong>Audience:</strong> Marketing managers, content teams</p>
                             <p><strong>Focus:</strong> Traffic, engagement, conversion optimization</p>
                             <p><strong>Key metrics:</strong></p>
@@ -119,7 +119,7 @@ export default function BlogPost() {
                                 <li><strong>Page Load Speed:</strong> Core Web Vitals</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Paid Advertising Dashboard</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Paid Advertising Dashboard</h3>
                             <p><strong>Audience:</strong> PPC managers, performance marketers</p>
                             <p><strong>Focus:</strong> Ad performance, budget efficiency, ROI</p>
                             <p><strong>Key metrics:</strong></p>
@@ -136,7 +136,7 @@ export default function BlogPost() {
                                 <li><strong>Budget Pacing:</strong> Spend rate vs. budget</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Social Media Dashboard</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Social Media Dashboard</h3>
                             <p><strong>Audience:</strong> Social media managers, content creators</p>
                             <p><strong>Focus:</strong> Engagement, growth, content performance</p>
                             <p><strong>Key metrics:</strong></p>
@@ -152,7 +152,7 @@ export default function BlogPost() {
                                 <li><strong>Sentiment Analysis:</strong> Positive/negative mentions</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Email Marketing Dashboard</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Email Marketing Dashboard</h3>
                             <p><strong>Audience:</strong> Email marketers, automation specialists</p>
                             <p><strong>Focus:</strong> Deliverability, engagement, conversion</p>
                             <p><strong>Key metrics:</strong></p>
@@ -168,7 +168,7 @@ export default function BlogPost() {
                                 <li><strong>Revenue Per Email:</strong> Total revenue / Emails sent</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">SEO Performance Dashboard</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">SEO Performance Dashboard</h3>
                             <p><strong>Audience:</strong> SEO managers, content strategists</p>
                             <p><strong>Focus:</strong> Rankings, organic traffic, technical health</p>
                             <p><strong>Key metrics:</strong></p>
@@ -184,9 +184,9 @@ export default function BlogPost() {
                                 <li><strong>Organic Conversion Rate:</strong> Goals from organic traffic</li>
                             </ul>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Dashboard Design Best Practices</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Dashboard Design Best Practices</h2>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Visual Hierarchy</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Visual Hierarchy</h3>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li><strong>Top section:</strong> Most important KPIs (hero metrics)</li>
                                 <li><strong>Middle section:</strong> Supporting metrics and trends</li>
@@ -194,7 +194,7 @@ export default function BlogPost() {
                                 <li><strong>Size = Importance:</strong> Larger visualizations for critical metrics</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Data Visualization Guidelines</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Data Visualization Guidelines</h3>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li><strong>Line charts:</strong> Trends over time (traffic, revenue)</li>
                                 <li><strong>Bar charts:</strong> Comparisons (channel performance, top pages)</li>
@@ -204,12 +204,12 @@ export default function BlogPost() {
                                 <li><strong>Tables:</strong> Detailed data, rankings, lists</li>
                             </ul>
 
-                            <div className="bg-gradient-to-r from-indigo-600/20 to-purple-600/20 border border-indigo-400/30 rounded-xl p-6 my-8">
-                                <h4 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                            <div className="cut-card [--cut:14px] relative bg-gradient-to-r from-ember/20 to-ember/20 [--cut-line:rgba(255,73,37,0.3)] p-6 my-8">
+                                <h4 className="text-xl font-bold text-ink mb-3 flex items-center gap-2">
                                     <Target className="w-5 h-5" />
                                     Dashboard Design Principles
                                 </h4>
-                                <ul className="space-y-2 text-neutral-200">
+                                <ul className="space-y-2 text-ink">
                                     <li>• <strong>Simplicity:</strong> Focus on actionable metrics only</li>
                                     <li>• <strong>Context:</strong> Include comparisons (vs. last month, vs. goal)</li>
                                     <li>• <strong>Color coding:</strong> Red = bad, Green = good, Yellow = caution</li>
@@ -219,9 +219,9 @@ export default function BlogPost() {
                                 </ul>
                             </div>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Top Dashboard Tools</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Top Dashboard Tools</h2>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Google Data Studio (Looker Studio)</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Google Data Studio (Looker Studio)</h3>
                             <p><strong>Best for:</strong> Google ecosystem integration, beginners</p>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li><strong>Pros:</strong> Free, easy to use, native Google integrations</li>
@@ -229,7 +229,7 @@ export default function BlogPost() {
                                 <li><strong>Pricing:</strong> Free</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Tableau</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Tableau</h3>
                             <p><strong>Best for:</strong> Enterprise, advanced visualizations</p>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li><strong>Pros:</strong> Powerful, beautiful visualizations, handles big data</li>
@@ -237,7 +237,7 @@ export default function BlogPost() {
                                 <li><strong>Pricing:</strong> From $70/user/month</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Power BI (Microsoft)</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Power BI (Microsoft)</h3>
                             <p><strong>Best for:</strong> Microsoft ecosystem, mid-market companies</p>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li><strong>Pros:</strong> Affordable, integrates with Microsoft tools, AI insights</li>
@@ -245,7 +245,7 @@ export default function BlogPost() {
                                 <li><strong>Pricing:</strong> From $10/user/month</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Klipfolio</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Klipfolio</h3>
                             <p><strong>Best for:</strong> Marketing-specific dashboards, real-time data</p>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li><strong>Pros:</strong> Marketing-focused, 500+ pre-built integrations</li>
@@ -253,7 +253,7 @@ export default function BlogPost() {
                                 <li><strong>Pricing:</strong> From $49/month</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Databox</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Databox</h3>
                             <p><strong>Best for:</strong> Small-to-mid businesses, quick setup</p>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li><strong>Pros:</strong> Easy setup, mobile app, goal tracking</li>
@@ -261,7 +261,7 @@ export default function BlogPost() {
                                 <li><strong>Pricing:</strong> Free tier; Pro from $72/month</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Domo</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Domo</h3>
                             <p><strong>Best for:</strong> Enterprise, all-in-one business intelligence</p>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li><strong>Pros:</strong> Comprehensive, AI-powered insights, collaboration</li>
@@ -269,9 +269,9 @@ export default function BlogPost() {
                                 <li><strong>Pricing:</strong> Custom enterprise pricing</li>
                             </ul>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Building Your First Dashboard</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Building Your First Dashboard</h2>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Step 1: Define Objectives</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Step 1: Define Objectives</h3>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li>Who will use this dashboard? (Role, seniority)</li>
                                 <li>What decisions need to be made from this data?</li>
@@ -279,7 +279,7 @@ export default function BlogPost() {
                                 <li>How frequently should data update? (Real-time, daily, weekly)</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Step 2: Connect Data Sources</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Step 2: Connect Data Sources</h3>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li>Google Analytics (website traffic)</li>
                                 <li>Google Ads, Facebook Ads (paid advertising)</li>
@@ -289,7 +289,7 @@ export default function BlogPost() {
                                 <li>Google Search Console (SEO data)</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Step 3: Select Key Metrics</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Step 3: Select Key Metrics</h3>
                             <p>Follow the 5-3-1 rule:</p>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li><strong>1 North Star Metric:</strong> Primary business goal (revenue, MQLs)</li>
@@ -297,7 +297,7 @@ export default function BlogPost() {
                                 <li><strong>5 Operational Metrics:</strong> Day-to-day indicators (CTR, bounce rate, email open rate)</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Step 4: Design Layout</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Step 4: Design Layout</h3>
                             <ol className="list-decimal pl-6 space-y-2">
                                 <li>Place north star metric prominently at top</li>
                                 <li>Add supporting metrics in second row</li>
@@ -306,7 +306,7 @@ export default function BlogPost() {
                                 <li>Include detailed tables/breakdowns at bottom</li>
                             </ol>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Step 5: Set Up Automation</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Step 5: Set Up Automation</h3>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li>Automate data refreshes (hourly, daily, weekly)</li>
                                 <li>Schedule email reports to stakeholders</li>
@@ -314,7 +314,7 @@ export default function BlogPost() {
                                 <li>Enable mobile access for on-the-go monitoring</li>
                             </ul>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Common Dashboard Mistakes to Avoid</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Common Dashboard Mistakes to Avoid</h2>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li><strong>Vanity metrics:</strong> Tracking likes/followers without business impact</li>
                                 <li><strong>Information overload:</strong> Too many metrics causing analysis paralysis</li>
@@ -325,20 +325,20 @@ export default function BlogPost() {
                                 <li><strong>One-size-fits-all:</strong> Same dashboard for all stakeholders</li>
                             </ul>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Conclusion</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Conclusion</h2>
                             <p>
                                 Effective marketing dashboards transform scattered data into strategic insights, enabling faster decision-making and better campaign performance. Start with a simple executive dashboard tracking your north star metrics, then expand to specialized dashboards for channels and tactics. Remember: the best dashboard is the one that gets used daily to drive action and results.
                             </p>
 
-                            <div className="bg-gradient-to-r from-accent/20 to-orange-600/20 border border-accent/30 rounded-xl p-8 mt-12">
-                                <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                            <div className="cut-card [--cut:14px] relative bg-gradient-to-r from-ember/20 to-ember/20 [--cut-line:rgba(255,73,37,0.3)] p-8 mt-12">
+                                <h3 className="text-2xl font-bold text-ink mb-4 flex items-center gap-2">
                                     <BarChart3 className="w-6 h-6" />
                                     Build Your Custom Marketing Dashboard
                                 </h3>
-                                <p className="text-neutral-200 mb-6">
+                                <p className="text-ink mb-6">
                                     Our analytics experts will design and implement custom marketing dashboards tailored to your business, connecting all data sources, tracking the metrics that matter, and enabling data-driven growth.
                                 </p>
-                                <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-accent/90 transition-colors">
+                                <Link href="/contact" className="cut-btn [--cut:10px] [--cut-focus:#1B1A17] inline-flex items-center gap-2 px-6 py-3 bg-ember text-ink font-semibold hover:bg-[#FF5C3A] transition-colors">
                                     Get Dashboard Consultation
                                     <ArrowRight className="w-4 h-4" />
                                 </Link>
@@ -347,26 +347,26 @@ export default function BlogPost() {
                     </motion.div>
 
                     {/* Tags */}
-                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mt-12 pt-8 border-t border-neutral-800">
-                        <h4 className="text-sm font-semibold text-neutral-400 uppercase tracking-wider mb-4">Tags</h4>
+                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mt-12 pt-8 border-t border-ink/10">
+                        <h4 className="text-sm font-semibold text-ink-soft uppercase tracking-wider mb-4">Tags</h4>
                         <div className="flex flex-wrap gap-2">
                             {["Marketing Analytics", "Data Visualization", "KPIs", "Business Intelligence", "Marketing Dashboard", "Google Analytics", "Data-Driven Marketing", "Reporting"].map((tag) => (
-                                <span key={tag} className="px-4 py-2 bg-neutral-900 text-neutral-300 text-sm rounded-full border border-neutral-800 hover:border-accent transition-colors cursor-pointer">
+                                <span key={tag} className="px-4 py-2 bg-white/70 text-ink-soft text-sm rounded-full border border-ink/10 hover:border-ember transition-colors cursor-pointer">
                                     {tag}
                                 </span>
                             ))}
                         </div>
                     </motion.div>
 
-                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mt-12 pt-8 border-t border-neutral-800 flex items-center justify-between">
-                        <Link href="/blog/video-marketing-2025" className="group flex items-center gap-2 text-neutral-400 hover:text-accent transition-colors">
+                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mt-12 pt-8 border-t border-ink/10 flex items-center justify-between">
+                        <Link href="/blog/video-marketing-2025" className="group flex items-center gap-2 text-ink-soft hover:text-ember-deep transition-colors">
                             <ArrowLeft className="w-5 h-5" />
                             <div>
                                 <div className="text-xs uppercase tracking-wider mb-1">Previous</div>
                                 <div className="font-semibold">Video Marketing 2025</div>
                             </div>
                         </Link>
-                        <Link href="/blog/ai-analytics-business-intelligence" className="group flex items-center gap-2 text-neutral-400 hover:text-accent transition-colors text-right">
+                        <Link href="/blog/ai-analytics-business-intelligence" className="group flex items-center gap-2 text-ink-soft hover:text-ember-deep transition-colors text-right">
                             <div>
                                 <div className="text-xs uppercase tracking-wider mb-1">Next</div>
                                 <div className="font-semibold">AI Analytics & BI</div>
@@ -375,10 +375,10 @@ export default function BlogPost() {
                         </Link>
                     </motion.div>
 
-                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mt-8 pt-8 border-t border-neutral-800">
+                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mt-8 pt-8 border-t border-ink/10">
                         <div className="flex items-center gap-4">
-                            <span className="text-neutral-400 text-sm font-semibold">Share this article:</span>
-                            <button className="p-2 bg-neutral-900 rounded-lg hover:bg-accent transition-colors">
+                            <span className="text-ink-soft text-sm font-semibold">Share this article:</span>
+                            <button className="p-2 bg-white/70 rounded-lg hover:bg-[#FF5C3A] transition-colors">
                                 <Share2 className="w-5 h-5" />
                             </button>
                         </div>

@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Refund Policy | ARC AI — Cancellations & Refunds",
@@ -45,21 +48,29 @@ export const metadata: Metadata = {
 
 export default function RefundPolicyPage() {
   return (
-    <main className="bg-black text-white min-h-screen">
-      <div className="max-w-[800px] mx-auto px-6 py-32 lg:py-40">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Refund Policy</h1>
-        <p className="text-white/50 mb-12">Last updated: September 24, 2026</p>
+    <div className="home-cream min-h-screen text-ink">
+      <Navbar />
+      <Breadcrumbs
+        tone="cream"
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Refund Policy" },
+        ]}
+      />
+      <div className="max-w-[800px] mx-auto px-6 pt-10 pb-32 md:pt-12 lg:pb-40">
+        <h1 className="text-4xl md:text-5xl font-medium mb-4 tracking-[-0.035em]">Refund Policy</h1>
+        <p className="text-ink-mute mb-12">Last updated: September 24, 2026</p>
 
-        <div className="space-y-10 text-white/80 leading-relaxed">
+        <div className="space-y-10 text-ink leading-relaxed">
           {/* 1 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">1. Overview</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">1. Overview</h2>
             <p>
               Thank you for choosing ARC AI. This Refund Policy explains when and how you can cancel
               a service and receive a refund for payments made to ARC AI (&quot;we&quot;, &quot;us&quot;,
               &quot;our&quot;), including payments made online through our website, payment links and
               invoices. It applies together with our{" "}
-              <a href="/terms-of-service" className="text-[#FF4925] hover:underline">
+              <a href="/terms-of-service" className="text-ember-deep hover:underline">
                 Terms of Service
               </a>{" "}
               and the proposal or agreement for your project.
@@ -73,11 +84,11 @@ export default function RefundPolicyPage() {
 
           {/* 2 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">
               2. Refunds Go Back to the Original Payment Method
             </h2>
-            <div className="border border-[#FF4925]/40 bg-[#FF4925]/5 rounded-lg p-5">
-              <p className="text-white">
+            <div className="cut-card [--cut:12px] relative [--cut-line:rgba(255,73,37,0.4)] bg-ember/5 p-5">
+              <p className="text-ink">
                 All approved refunds are made to the same payment method that was used to make the
                 original payment. If you paid by credit or debit card, the refund is credited back to
                 that same card. If you paid by bank transfer, mobile wallet or another online payment
@@ -92,26 +103,26 @@ export default function RefundPolicyPage() {
 
           {/* 3 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">3. Cancellations and Eligible Refunds</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">3. Cancellations and Eligible Refunds</h2>
             <p>You are eligible for a refund in the following cases:</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li>
-                <strong className="text-white">Cancellation before work starts:</strong> if you cancel
+                <strong className="text-ink">Cancellation before work starts:</strong> if you cancel
                 within 7 days of payment and before we have started work on your project, you will
                 receive a full refund.
               </li>
               <li>
-                <strong className="text-white">Cancellation after work has started:</strong> you will
+                <strong className="text-ink">Cancellation after work has started:</strong> you will
                 receive a refund of the amount paid minus the value of the work already completed,
                 measured against the milestones in your proposal or agreement.
               </li>
               <li>
-                <strong className="text-white">Duplicate or incorrect payments:</strong> if you were
+                <strong className="text-ink">Duplicate or incorrect payments:</strong> if you were
                 charged twice, or charged more than the amount on your invoice, the extra amount will
                 be refunded in full.
               </li>
               <li>
-                <strong className="text-white">Service we cannot deliver:</strong> if we are unable to
+                <strong className="text-ink">Service we cannot deliver:</strong> if we are unable to
                 deliver a service you have paid for, you will receive a full refund for the part that
                 was not delivered.
               </li>
@@ -120,7 +131,7 @@ export default function RefundPolicyPage() {
 
           {/* 4 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">4. Monthly Plans and Subscriptions</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">4. Monthly Plans and Subscriptions</h2>
             <p>
               Monthly services — such as hosting and maintenance, AI agent plans, CRM plans and
               marketing retainers — can be cancelled at any time by contacting us before your next
@@ -132,7 +143,7 @@ export default function RefundPolicyPage() {
 
           {/* 5 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">5. Changes to Your Package</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">5. Changes to Your Package</h2>
             <p>
               Instead of a refund, you may ask to move to a different package or change the scope of
               your project. Any payment already made will be credited towards the new package, and
@@ -143,7 +154,7 @@ export default function RefundPolicyPage() {
 
           {/* 6 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">6. Non-Refundable Items</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">6. Non-Refundable Items</h2>
             <p>The following are not refundable:</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li>Work that has been completed and delivered, or milestones you have approved</li>
@@ -159,10 +170,10 @@ export default function RefundPolicyPage() {
 
           {/* 7 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">7. How to Request a Refund</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">7. How to Request a Refund</h2>
             <p>
               To request a cancellation or refund, email{" "}
-              <a href="mailto:support@arcai.agency" className="text-[#FF4925] hover:underline">
+              <a href="mailto:support@arcai.agency" className="text-ember-deep hover:underline">
                 support@arcai.agency
               </a>{" "}
               with:
@@ -181,7 +192,7 @@ export default function RefundPolicyPage() {
 
           {/* 8 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">8. Refund Processing Time</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">8. Refund Processing Time</h2>
             <p>
               Approved refunds are processed within 7 business days of approval and sent to the
               original payment method. Depending on your bank or card issuer, it may take a further
@@ -191,7 +202,7 @@ export default function RefundPolicyPage() {
 
           {/* 9 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">9. Changes to This Policy</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">9. Changes to This Policy</h2>
             <p>
               We may update this Refund Policy from time to time. Changes will be posted on this page
               with an updated revision date. The policy in effect on the date of your payment applies
@@ -201,21 +212,22 @@ export default function RefundPolicyPage() {
 
           {/* 10 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">10. Contact Us</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">10. Contact Us</h2>
             <p>If you have any questions about this Refund Policy, please contact us:</p>
             <p className="mt-2">
-              <strong className="text-white">Email:</strong>{" "}
-              <a href="mailto:support@arcai.agency" className="text-[#FF4925] hover:underline">
+              <strong className="text-ink">Email:</strong>{" "}
+              <a href="mailto:support@arcai.agency" className="text-ember-deep hover:underline">
                 support@arcai.agency
               </a>
               <br />
-              <strong className="text-white">Phone (UK):</strong> +44 7466 368427
+              <strong className="text-ink">Phone (UK):</strong> +44 7466 368427
               <br />
-              <strong className="text-white">Phone (Sri Lanka):</strong> +94 771852522
+              <strong className="text-ink">Phone (Sri Lanka):</strong> +94 771852522
             </p>
           </section>
         </div>
       </div>
-    </main>
+      <Footer />
+    </div>
   );
 }

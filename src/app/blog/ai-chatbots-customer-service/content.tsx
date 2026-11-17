@@ -17,7 +17,7 @@ const fadeInUp: Variants = {
 
 export default function BlogPost() {
     return (
-        <div className="min-h-screen bg-black text-white">
+        <div className="home-cream min-h-screen bg-transparent text-ink">
             <Navbar />
 
             {/* Hero Section */}
@@ -29,13 +29,13 @@ export default function BlogPost() {
                         height={900}
                         className="w-full h-full object-cover"
                         loading="lazy" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/40" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-paper via-paper/80 to-paper/40" />
                 </div>
 
                 <div className="relative z-10 max-w-4xl mx-auto w-full">
                     <Link
                         href="/blog"
-                        className="inline-flex items-center gap-2 text-neutral-300 hover:text-accent transition-colors mb-6"
+                        className="inline-flex items-center gap-2 text-ink-soft hover:text-ember-deep transition-colors mb-6"
                     >
                         <ArrowLeft className="w-4 h-4" />
                         Back to Blog
@@ -46,13 +46,13 @@ export default function BlogPost() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <span className="inline-block px-4 py-1.5 bg-accent/20 backdrop-blur-sm text-accent text-sm font-semibold rounded-full border border-accent/30 mb-4">
+                        <span className="inline-block px-4 py-1.5 bg-ember/20 text-ember-deep text-sm font-semibold rounded-full border border-ember/30 mb-4">
                             AI Automation
                         </span>
-                        <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                        <h1 className="text-4xl md:text-6xl font-medium mb-6 tracking-[-0.035em]">
                             The Ultimate Guide to AI Chatbots for Customer Service
                         </h1>
-                        <div className="flex items-center gap-6 text-neutral-400">
+                        <div className="flex items-center gap-6 text-ink-soft">
                             <div className="flex items-center gap-2">
                                 <Calendar className="w-4 h-4" />
                                 <span>Sep 28, 2024</span>
@@ -76,12 +76,12 @@ export default function BlogPost() {
                         variants={fadeInUp}
                         className="prose prose-invert prose-lg max-w-none"
                     >
-                        <div className="space-y-6 text-neutral-300 leading-relaxed">
-                            <p className="text-xl text-neutral-200">
+                        <div className="space-y-6 text-ink-soft leading-relaxed">
+                            <p className="text-xl text-ink">
                                 AI chatbots have revolutionized customer service, enabling businesses to provide instant, 24/7 support while dramatically reducing costs. In this comprehensive guide, we'll explore everything you need to know about implementing AI-powered chatbots for exceptional customer experiences.
                             </p>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">What Are AI Chatbots?</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">What Are AI Chatbots?</h2>
                             <p>
                                 AI chatbots are intelligent conversational agents powered by artificial intelligence, natural language processing (NLP), and machine learning. Unlike traditional rule-based chatbots that follow scripted responses, AI chatbots understand context, learn from interactions, and provide human-like conversations.
                             </p>
@@ -96,14 +96,14 @@ export default function BlogPost() {
                                 <li><strong>Multi-language Support:</strong> Communicates in multiple languages automatically</li>
                             </ul>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Benefits of AI Chatbots for Customer Service</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Benefits of AI Chatbots for Customer Service</h2>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">1. 24/7 Availability</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">1. 24/7 Availability</h3>
                             <p>
                                 AI chatbots never sleep. They provide instant responses to customer inquiries at any time of day or night, across all time zones. This round-the-clock availability significantly improves customer satisfaction and reduces wait times from hours to seconds.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">2. Massive Cost Savings</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">2. Massive Cost Savings</h3>
                             <p>
                                 Implementing AI chatbots can reduce customer service costs by 30-50%. Chatbots handle routine inquiries (80% of customer questions), allowing human agents to focus on complex issues requiring empathy and creative problem-solving.
                             </p>
@@ -116,78 +116,78 @@ export default function BlogPost() {
                                 <li>Reduced need for large customer service teams</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">3. Instant Response Times</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">3. Instant Response Times</h3>
                             <p>
                                 67% of customers expect immediate responses. AI chatbots deliver instant answers, eliminating frustrating wait times. Faster response times directly correlate with higher customer satisfaction scores and increased conversions.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">4. Scalability</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">4. Scalability</h3>
                             <p>
                                 AI chatbots handle unlimited simultaneous conversations without degradation in quality. During peak periods, product launches, or viral moments, chatbots scale effortlessly while human teams would struggle under increased volume.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">5. Consistent Service Quality</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">5. Consistent Service Quality</h3>
                             <p>
                                 Chatbots deliver consistent, accurate responses every time. They never have bad days, forget training, or provide inconsistent information. This consistency builds trust and reinforces brand reliability.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">6. Multilingual Support</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">6. Multilingual Support</h3>
                             <p>
                                 Advanced AI chatbots automatically detect and respond in 100+ languages, making global customer service accessible without hiring multilingual support teams.
                             </p>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Key Features of Modern AI Chatbots</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Key Features of Modern AI Chatbots</h2>
 
-                            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 my-8">
+                            <div className="cut-card [--cut:14px] relative bg-white/70 [--cut-line:rgba(27,26,23,0.1)] p-6 my-8">
                                 <div className="space-y-4">
                                     <div className="flex items-start gap-3">
-                                        <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                                        <CheckCircle className="w-6 h-6 text-ember-deep flex-shrink-0 mt-1" />
                                         <div>
-                                            <h4 className="text-lg font-bold text-white mb-1">Natural Language Understanding</h4>
-                                            <p className="text-neutral-400">Comprehends customer intent even with typos, slang, or complex phrasing</p>
+                                            <h4 className="text-lg font-bold text-ink mb-1">Natural Language Understanding</h4>
+                                            <p className="text-ink-soft">Comprehends customer intent even with typos, slang, or complex phrasing</p>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-3">
-                                        <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                                        <CheckCircle className="w-6 h-6 text-ember-deep flex-shrink-0 mt-1" />
                                         <div>
-                                            <h4 className="text-lg font-bold text-white mb-1">Context Retention</h4>
-                                            <p className="text-neutral-400">Remembers previous messages and customer history for personalized conversations</p>
+                                            <h4 className="text-lg font-bold text-ink mb-1">Context Retention</h4>
+                                            <p className="text-ink-soft">Remembers previous messages and customer history for personalized conversations</p>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-3">
-                                        <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                                        <CheckCircle className="w-6 h-6 text-ember-deep flex-shrink-0 mt-1" />
                                         <div>
-                                            <h4 className="text-lg font-bold text-white mb-1">Seamless Handoff</h4>
-                                            <p className="text-neutral-400">Smoothly transfers complex queries to human agents with full context</p>
+                                            <h4 className="text-lg font-bold text-ink mb-1">Seamless Handoff</h4>
+                                            <p className="text-ink-soft">Smoothly transfers complex queries to human agents with full context</p>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-3">
-                                        <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                                        <CheckCircle className="w-6 h-6 text-ember-deep flex-shrink-0 mt-1" />
                                         <div>
-                                            <h4 className="text-lg font-bold text-white mb-1">Omnichannel Integration</h4>
-                                            <p className="text-neutral-400">Works across website, mobile app, Facebook Messenger, WhatsApp, SMS</p>
+                                            <h4 className="text-lg font-bold text-ink mb-1">Omnichannel Integration</h4>
+                                            <p className="text-ink-soft">Works across website, mobile app, Facebook Messenger, WhatsApp, SMS</p>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-3">
-                                        <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                                        <CheckCircle className="w-6 h-6 text-ember-deep flex-shrink-0 mt-1" />
                                         <div>
-                                            <h4 className="text-lg font-bold text-white mb-1">CRM Integration</h4>
-                                            <p className="text-neutral-400">Connects with Salesforce, HubSpot, Zendesk for unified customer data</p>
+                                            <h4 className="text-lg font-bold text-ink mb-1">CRM Integration</h4>
+                                            <p className="text-ink-soft">Connects with Salesforce, HubSpot, Zendesk for unified customer data</p>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-3">
-                                        <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                                        <CheckCircle className="w-6 h-6 text-ember-deep flex-shrink-0 mt-1" />
                                         <div>
-                                            <h4 className="text-lg font-bold text-white mb-1">Analytics & Insights</h4>
-                                            <p className="text-neutral-400">Tracks conversation metrics, customer satisfaction, and identifies trends</p>
+                                            <h4 className="text-lg font-bold text-ink mb-1">Analytics & Insights</h4>
+                                            <p className="text-ink-soft">Tracks conversation metrics, customer satisfaction, and identifies trends</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Real-World Use Cases</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Real-World Use Cases</h2>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">E-commerce Customer Support</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">E-commerce Customer Support</h3>
                             <p>
                                 AI chatbots handle order tracking, product recommendations, returns processing, and sizing questions. They reduce cart abandonment by answering pre-purchase questions instantly and increase average order value through intelligent upselling.
                             </p>
@@ -195,7 +195,7 @@ export default function BlogPost() {
                                 <strong>Results:</strong> 35% reduction in support tickets, 28% increase in conversion rates, 40% faster resolution times.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Banking & Financial Services</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Banking & Financial Services</h3>
                             <p>
                                 Financial chatbots provide account balances, transaction history, fraud alerts, loan applications, and financial advice. They ensure secure, compliant conversations while handling thousands of simultaneous customers.
                             </p>
@@ -203,7 +203,7 @@ export default function BlogPost() {
                                 <strong>Results:</strong> 60% cost reduction, 90% of routine inquiries automated, improved customer trust scores.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Healthcare & Telemedicine</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Healthcare & Telemedicine</h3>
                             <p>
                                 Medical chatbots schedule appointments, answer basic health questions, provide medication reminders, triage symptoms, and collect patient information before appointments, improving healthcare accessibility.
                             </p>
@@ -211,7 +211,7 @@ export default function BlogPost() {
                                 <strong>Results:</strong> 45% reduction in no-shows, 50% faster appointment scheduling, improved patient engagement.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Real Estate</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Real Estate</h3>
                             <p>
                                 Property chatbots qualify leads, schedule viewings, answer property questions, provide neighborhood information, and nurture prospects through the buying journey automatically.
                             </p>
@@ -219,7 +219,7 @@ export default function BlogPost() {
                                 <strong>Results:</strong> 3x more qualified leads, 65% faster lead response, 40% increase in viewing bookings.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Travel & Hospitality</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Travel & Hospitality</h3>
                             <p>
                                 Travel chatbots handle booking modifications, provide flight status updates, recommend destinations, answer hotel amenity questions, and resolve booking issues instantly.
                             </p>
@@ -227,14 +227,14 @@ export default function BlogPost() {
                                 <strong>Results:</strong> 70% of inquiries resolved automatically, 50% reduction in call center volume, improved booking completion rates.
                             </p>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">How to Implement AI Chatbots Successfully</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">How to Implement AI Chatbots Successfully</h2>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Step 1: Define Clear Objectives</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Step 1: Define Clear Objectives</h3>
                             <p>
                                 Identify specific goals: reduce response times, lower support costs, increase conversions, improve satisfaction scores, or handle after-hours inquiries. Clear objectives guide chatbot design and measure success.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Step 2: Choose the Right Platform</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Step 2: Choose the Right Platform</h3>
                             <p>
                                 <strong>Popular AI chatbot platforms:</strong>
                             </p>
@@ -246,27 +246,27 @@ export default function BlogPost() {
                                 <li><strong>Custom Solutions:</strong> Built with ChatGPT API, DialogFlow, or Rasa for unique needs</li>
                             </ul>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Step 3: Design Conversation Flows</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Step 3: Design Conversation Flows</h3>
                             <p>
                                 Map common customer journeys and questions. Create decision trees for different scenarios. Design fallback responses for unrecognized queries. Ensure easy escalation to human agents when needed.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Step 4: Train Your Chatbot</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Step 4: Train Your Chatbot</h3>
                             <p>
                                 Feed your chatbot historical customer conversations, FAQs, product documentation, and support tickets. The more quality training data, the better the chatbot's understanding and responses.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Step 5: Test Extensively</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Step 5: Test Extensively</h3>
                             <p>
                                 Run beta tests with internal teams and select customers. Test edge cases, unusual phrasings, and multi-turn conversations. Identify gaps in knowledge and refine responses before full launch.
                             </p>
 
-                            <h3 className="text-2xl font-bold text-white mt-8 mb-4">Step 6: Monitor and Optimize</h3>
+                            <h3 className="text-2xl font-bold text-ink mt-8 mb-4">Step 6: Monitor and Optimize</h3>
                             <p>
                                 Continuously analyze chatbot performance metrics: resolution rate, customer satisfaction (CSAT), conversation completion rate, and escalation frequency. Use insights to improve conversation flows and train on new scenarios.
                             </p>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Best Practices for AI Chatbot Success</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Best Practices for AI Chatbot Success</h2>
 
                             <ol className="list-decimal pl-6 space-y-3">
                                 <li>
@@ -295,7 +295,7 @@ export default function BlogPost() {
                                 </li>
                             </ol>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Measuring Chatbot Success</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Measuring Chatbot Success</h2>
 
                             <p>
                                 <strong>Key Performance Indicators (KPIs):</strong>
@@ -310,7 +310,7 @@ export default function BlogPost() {
                                 <li><strong>ROI:</strong> Cost savings vs. implementation and maintenance costs</li>
                             </ul>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">The Future of AI Chatbots</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">The Future of AI Chatbots</h2>
                             <p>
                                 AI chatbot technology continues evolving rapidly. Emerging trends include:
                             </p>
@@ -323,7 +323,7 @@ export default function BlogPost() {
                                 <li><strong>Blockchain Integration:</strong> Secure, decentralized chatbot interactions</li>
                             </ul>
 
-                            <h2 className="text-3xl font-bold text-white mt-12 mb-6">Conclusion</h2>
+                            <h2 className="text-3xl font-medium text-ink mt-12 mb-6 tracking-[-0.035em]">Conclusion</h2>
                             <p>
                                 AI chatbots are no longer optional—they're essential for competitive customer service. Businesses implementing intelligent chatbots see dramatic improvements in customer satisfaction, operational efficiency, and bottom-line results.
                             </p>
@@ -334,14 +334,14 @@ export default function BlogPost() {
                                 With AI chatbot technology becoming more affordable and accessible, there's never been a better time to transform your customer service experience.
                             </p>
 
-                            <div className="bg-gradient-to-r from-accent/20 to-orange-600/20 border border-accent/30 rounded-xl p-8 mt-12">
-                                <h3 className="text-2xl font-bold text-white mb-4">Ready to Implement AI Chatbots?</h3>
-                                <p className="text-neutral-200 mb-6">
+                            <div className="cut-card [--cut:14px] relative bg-gradient-to-r from-ember/20 to-ember/20 [--cut-line:rgba(255,73,37,0.3)] p-8 mt-12">
+                                <h3 className="text-2xl font-bold text-ink mb-4">Ready to Implement AI Chatbots?</h3>
+                                <p className="text-ink mb-6">
                                     Our team specializes in building custom AI chatbot solutions that integrate seamlessly with your existing systems. We'll help you design, implement, and optimize conversational AI that delights customers and drives business results.
                                 </p>
                                 <Link
                                     href="/contact"
-                                    className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-accent/90 transition-colors"
+                                    className="cut-btn [--cut:10px] [--cut-focus:#1B1A17] inline-flex items-center gap-2 px-6 py-3 bg-ember text-ink font-semibold hover:bg-[#FF5C3A] transition-colors"
                                 >
                                     Schedule a Chatbot Consultation
                                     <ArrowRight className="w-4 h-4" />
@@ -356,14 +356,14 @@ export default function BlogPost() {
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={fadeInUp}
-                        className="mt-12 pt-8 border-t border-neutral-800"
+                        className="mt-12 pt-8 border-t border-ink/10"
                     >
-                        <h4 className="text-sm font-semibold text-neutral-400 uppercase tracking-wider mb-4">Tags</h4>
+                        <h4 className="text-sm font-semibold text-ink-soft uppercase tracking-wider mb-4">Tags</h4>
                         <div className="flex flex-wrap gap-2">
                             {["AI Chatbots", "Customer Service", "Conversational AI", "Automation", "NLP", "Machine Learning", "Customer Experience", "Live Chat"].map((tag) => (
                                 <span
                                     key={tag}
-                                    className="px-4 py-2 bg-neutral-900 text-neutral-300 text-sm rounded-full border border-neutral-800 hover:border-accent transition-colors cursor-pointer"
+                                    className="px-4 py-2 bg-white/70 text-ink-soft text-sm rounded-full border border-ink/10 hover:border-ember transition-colors cursor-pointer"
                                 >
                                     {tag}
                                 </span>
@@ -377,11 +377,11 @@ export default function BlogPost() {
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={fadeInUp}
-                        className="mt-12 pt-8 border-t border-neutral-800 flex items-center justify-between"
+                        className="mt-12 pt-8 border-t border-ink/10 flex items-center justify-between"
                     >
                         <Link
                             href="/blog/digital-marketing-strategies-2024"
-                            className="group flex items-center gap-2 text-neutral-400 hover:text-accent transition-colors"
+                            className="group flex items-center gap-2 text-ink-soft hover:text-ember-deep transition-colors"
                         >
                             <ArrowLeft className="w-5 h-5" />
                             <div>
@@ -391,7 +391,7 @@ export default function BlogPost() {
                         </Link>
                         <Link
                             href="/blog/seo-optimization-best-practices"
-                            className="group flex items-center gap-2 text-neutral-400 hover:text-accent transition-colors text-right"
+                            className="group flex items-center gap-2 text-ink-soft hover:text-ember-deep transition-colors text-right"
                         >
                             <div>
                                 <div className="text-xs uppercase tracking-wider mb-1">Next</div>
@@ -407,11 +407,11 @@ export default function BlogPost() {
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={fadeInUp}
-                        className="mt-8 pt-8 border-t border-neutral-800"
+                        className="mt-8 pt-8 border-t border-ink/10"
                     >
                         <div className="flex items-center gap-4">
-                            <span className="text-neutral-400 text-sm font-semibold">Share this article:</span>
-                            <button className="p-2 bg-neutral-900 rounded-lg hover:bg-accent transition-colors">
+                            <span className="text-ink-soft text-sm font-semibold">Share this article:</span>
+                            <button className="p-2 bg-white/70 rounded-lg hover:bg-[#FF5C3A] transition-colors">
                                 <Share2 className="w-5 h-5" />
                             </button>
                         </div>

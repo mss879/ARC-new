@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Terms of Service | ARC AI — Usage Terms & Conditions",
@@ -45,15 +48,23 @@ export const metadata: Metadata = {
 
 export default function TermsOfServicePage() {
   return (
-    <main className="bg-black text-white min-h-screen">
-      <div className="max-w-[800px] mx-auto px-6 py-32 lg:py-40">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Terms of Service</h1>
-        <p className="text-white/50 mb-12">Last updated: March 12, 2026</p>
+    <div className="home-cream min-h-screen text-ink">
+      <Navbar />
+      <Breadcrumbs
+        tone="cream"
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Terms of Service" },
+        ]}
+      />
+      <div className="max-w-[800px] mx-auto px-6 pt-10 pb-32 md:pt-12 lg:pb-40">
+        <h1 className="text-4xl md:text-5xl font-medium mb-4 tracking-[-0.035em]">Terms of Service</h1>
+        <p className="text-ink-mute mb-12">Last updated: March 12, 2026</p>
 
-        <div className="space-y-10 text-white/80 leading-relaxed">
+        <div className="space-y-10 text-ink leading-relaxed">
           {/* 1 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">1. Introduction</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">1. Introduction</h2>
             <p>
               These Terms of Service (&quot;Terms&quot;) govern your use of the ARC AI website
               (arcai.agency) and any services provided by ARC AI (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;).
@@ -63,14 +74,14 @@ export default function TermsOfServicePage() {
 
           {/* 2 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">2. Company Information</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">2. Company Information</h2>
             <p>
               ARC AI is a digital agency registered in Sri Lanka (Registration Number: PV00352581)
               with operations in the United Kingdom and Sri Lanka.
             </p>
             <p className="mt-2">
-              <strong className="text-white">Email:</strong>{" "}
-              <a href="mailto:support@arcai.agency" className="text-[#FF4925] hover:underline">
+              <strong className="text-ink">Email:</strong>{" "}
+              <a href="mailto:support@arcai.agency" className="text-ember-deep hover:underline">
                 support@arcai.agency
               </a>
             </p>
@@ -78,7 +89,7 @@ export default function TermsOfServicePage() {
 
           {/* 3 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">3. Services</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">3. Services</h2>
             <p>
               ARC AI provides web design and development, AI automation, branding, digital marketing,
               and related digital services. The specific scope, deliverables, timelines, and pricing
@@ -88,7 +99,7 @@ export default function TermsOfServicePage() {
 
           {/* 4 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">4. Use of Our Website</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">4. Use of Our Website</h2>
             <p>You agree to use our website only for lawful purposes. You must not:</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li>Use the site in any way that violates applicable laws or regulations</li>
@@ -101,7 +112,7 @@ export default function TermsOfServicePage() {
 
           {/* 5 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">5. Intellectual Property</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">5. Intellectual Property</h2>
             <p>
               All content on this website — including but not limited to text, images, designs, logos,
               code, and videos — is the intellectual property of ARC AI or its licensors and is protected
@@ -115,7 +126,7 @@ export default function TermsOfServicePage() {
 
           {/* 6 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">6. Payment Terms</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">6. Payment Terms</h2>
             <p>
               Payment terms are specified in individual project proposals or contracts. Unless otherwise
               agreed:
@@ -128,7 +139,7 @@ export default function TermsOfServicePage() {
             </ul>
             <p className="mt-2">
               Cancellations and refunds are covered by our{" "}
-              <a href="/refund-policy" className="text-[#FF4925] hover:underline">
+              <a href="/refund-policy" className="text-ember-deep hover:underline">
                 Refund Policy
               </a>
               . Approved refunds are always made to the original payment method.
@@ -137,7 +148,7 @@ export default function TermsOfServicePage() {
 
           {/* 7 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">7. Limitation of Liability</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">7. Limitation of Liability</h2>
             <p>
               To the fullest extent permitted by law, ARC AI shall not be liable for any indirect,
               incidental, special, consequential, or punitive damages, including but not limited to
@@ -152,7 +163,7 @@ export default function TermsOfServicePage() {
 
           {/* 8 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">8. Warranties and Disclaimers</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">8. Warranties and Disclaimers</h2>
             <p>
               Our website and services are provided &quot;as is&quot; without warranties of any kind,
               either express or implied. We do not warrant that our website will be available
@@ -167,7 +178,7 @@ export default function TermsOfServicePage() {
 
           {/* 9 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">9. Termination</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">9. Termination</h2>
             <p>
               Either party may terminate a service engagement in accordance with the terms specified
               in the project agreement. We reserve the right to suspend or terminate access to our
@@ -177,7 +188,7 @@ export default function TermsOfServicePage() {
 
           {/* 10 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">10. Governing Law</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">10. Governing Law</h2>
             <p>
               These Terms shall be governed by and construed in accordance with the laws of Sri Lanka.
               For clients based in the United Kingdom, disputes may also be subject to UK jurisdiction
@@ -187,7 +198,7 @@ export default function TermsOfServicePage() {
 
           {/* 11 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">11. Changes to These Terms</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">11. Changes to These Terms</h2>
             <p>
               We reserve the right to update these Terms at any time. Changes will be posted on this
               page with an updated revision date. Continued use of our website following changes
@@ -197,23 +208,24 @@ export default function TermsOfServicePage() {
 
           {/* 12 */}
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">12. Contact Us</h2>
+            <h2 className="text-xl font-medium text-ink mb-3 tracking-[-0.035em]">12. Contact Us</h2>
             <p>
               If you have any questions about these Terms, please contact us:
             </p>
             <p className="mt-2">
-              <strong className="text-white">Email:</strong>{" "}
-              <a href="mailto:support@arcai.agency" className="text-[#FF4925] hover:underline">
+              <strong className="text-ink">Email:</strong>{" "}
+              <a href="mailto:support@arcai.agency" className="text-ember-deep hover:underline">
                 support@arcai.agency
               </a>
               <br />
-              <strong className="text-white">Phone (UK):</strong> +44 7466 368427
+              <strong className="text-ink">Phone (UK):</strong> +44 7466 368427
               <br />
-              <strong className="text-white">Phone (Sri Lanka):</strong> +94 771852522
+              <strong className="text-ink">Phone (Sri Lanka):</strong> +94 771852522
             </p>
           </section>
         </div>
       </div>
-    </main>
+      <Footer />
+    </div>
   );
 }

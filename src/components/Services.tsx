@@ -233,7 +233,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, isOpen, onMouseEnter
             }}
           >
             <motion.div
-              className="relative aspect-[4/5] w-full overflow-hidden rounded-xl max-w-[200px] md:max-w-none"
+              className="cut-card [--cut:14px] relative aspect-[4/5] w-full overflow-hidden max-w-[200px] md:max-w-none"
               data-framer-name="Image"
               initial={false}
               animate={{

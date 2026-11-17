@@ -5,13 +5,18 @@ import Footer from "@/components/Footer";
 import SchemaOrg from "@/components/SchemaOrg";
 import ScrollToTop from "@/components/ScrollToTop";
 import ClientsSection from "@/components/ClientsSection";
-import AboutTextAnimation from "@/components/AboutTextAnimation";
-import ValuesSection from "@/components/ValuesSection";
-import JourneySection from "@/components/JourneySection";
-import IndustriesSection from "@/components/IndustriesSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import AboutHeroVideo from "./AboutHeroVideo";
-import { Rocket, Users } from "lucide-react";
+import Image from "next/image";
+import AboutStatement from "@/components/about/AboutStatement";
+import AboutJourney from "@/components/about/AboutJourney";
+import PauseOffscreen from "@/components/home/PauseOffscreen";
+import { PillLink } from "@/components/home/ui";
+import { company, stats } from "@/content/site-facts";
+import { aboutLead, founderNote, industries, industriesIntro, mission, techStack, vision, type IndustryIcon } from "@/content/about";
+import {
+  Briefcase, Building2, CalendarClock, Cpu, Eye, FolderCheck, GraduationCap, Heart, Home, Rocket, ShoppingCart,
+  Star, Stethoscope, Target, type LucideIcon,
+} from "lucide-react";
 
 // SEO Metadata for About Page
 export const metadata: Metadata = {
@@ -48,9 +53,46 @@ export const metadata: Metadata = {
   }
 };
 
+const INDUSTRY_ICONS: Record<IndustryIcon, LucideIcon> = {
+  retail: ShoppingCart,
+  health: Heart,
+  property: Building2,
+  education: GraduationCap,
+  fitness: Stethoscope,
+  tech: Cpu,
+  services: Briefcase,
+  hospitality: Home,
+};
+
+// The four figures under the hero. The first two and the rating are fixed
+// facts; projects and years come from site-facts.ts, like everywhere else.
+const FACTS: { icon: LucideIcon; label: string; value: string; suffix?: string; note?: string }[] = [
+  { icon: Rocket, label: "Founded in", value: String(company.foundedYear) },
+  { icon: FolderCheck, label: "Successful projects completed", value: String(stats.projectsCompleted), suffix: "+" },
+  { icon: CalendarClock, label: "Years of experience", value: String(stats.yearsOfExperience), suffix: "+" },
+  { icon: Star, label: "Customer rating", value: "4.9", suffix: "/5", note: "Google Reviews" },
+];
+
+// A round orange icon on white, used on every card on this page.
+function IconDot({ icon: Icon, dark = false }: { icon: LucideIcon; dark?: boolean }) {
+  return (
+    <span
+      className={`grid h-11 w-11 shrink-0 place-items-center rounded-full border ${
+        dark ? "border-white/15 text-ember" : "border-ink/10 bg-white text-ember-ink"
+      }`}
+      aria-hidden="true"
+    >
+      <Icon className="h-5 w-5" strokeWidth={2} />
+    </span>
+  );
+}
+
 export default function About() {
   return (
-    <div className="min-h-screen bg-black">
+    // .home-cream is the grey-cream theme (see src/index.css). The page is laid
+    // out like the home page: large two-tone headings, frosted cards, orange
+    // on icons, and one dark card per group for contrast.
+    <div className="home-cream min-h-screen">
       <ScrollToTop />
       <SchemaOrg
         type="about"
@@ -65,325 +107,174 @@ export default function About() {
       ]} />
 
       <main>
-        {/* Company Hero Section */}
-        <section 
-          className="relative min-h-[80vh] w-full flex items-center justify-center px-6 pt-8 md:pt-16 pb-20 overflow-hidden"
-          aria-label="About Hero"
-        >
-          {/* Background Video */}
-          <div className="absolute inset-0 z-0" aria-hidden="true">
-            <AboutHeroVideo />
-            {/* Subtle overlay for text contrast */}
-            <div
-              className="absolute inset-0"
-              aria-hidden="true"
-              style={{
-                background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.3) 100%)'
-              }}
-            />
-          </div>
+        {/* Hero: the heading on the left, who we are on the right */}
+        <section className="px-4 pb-10 pt-8 md:px-8 md:pt-12 lg:px-20 lg:pb-14 lg:pt-14" aria-label="About ARC AI">
+          <div className="mx-auto grid max-w-[1400px] gap-8 lg:grid-cols-2 lg:items-end lg:gap-16">
+            <h1 className="text-6xl font-medium leading-[0.95] tracking-[-0.04em] text-ink sm:text-7xl lg:text-8xl xl:text-[7rem]">
+              About
+              <br />
+              <span className="text-ember-ink">ARC AI</span>
+            </h1>
 
-          {/* First Map SVG Background */}
-          <div
-            className="absolute inset-0 z-0"
-            aria-hidden="true"
-            style={{
-              fill: 'rgba(0, 0, 0, 0)',
-              color: 'rgba(0, 0, 0, 0)',
-              imageRendering: 'pixelated',
-              flexShrink: 0
-            }}
-          >
-            <svg
-              viewBox="0 0 695 400"
-              preserveAspectRatio="none"
-              width="100%"
-              height="100%"
-              style={{ width: '100%', height: '100%' }}
-            >
-              <defs>
-                <pattern id="dotPattern1" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                  <circle cx="2" cy="2" r="1" fill="rgba(213, 192, 43, 0.15)" />
-                </pattern>
-                <linearGradient id="mapGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="rgba(213, 192, 43, 0.2)" />
-                  <stop offset="100%" stopColor="rgba(99, 99, 59, 0.1)" />
-                </linearGradient>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#dotPattern1)" opacity="0.3" />
-              <path
-                d="M 100 150 Q 200 100 300 150 T 500 150 M 150 250 Q 250 200 350 250 T 550 250"
-                stroke="url(#mapGradient1)"
-                strokeWidth="1"
-                fill="none"
-                opacity="0.4"
-              />
-            </svg>
-          </div>
-
-          {/* Second Map SVG Background - Duplicate with different blend - LEFT SIDE */}
-          <div
-            className="absolute left-0 top-0 w-1/2 h-full z-0"
-            aria-hidden="true"
-            style={{
-              fill: 'rgba(0, 0, 0, 0)',
-              color: 'rgba(0, 0, 0, 0)',
-              imageRendering: 'pixelated',
-              flexShrink: 0
-            }}
-          >
-            <div style={{ width: '100%', height: '100%', aspectRatio: 'inherit' }}>
-              <svg
-                viewBox="0 0 695 400"
-                preserveAspectRatio="none"
-                width="100%"
-                height="100%"
-                style={{ width: '100%', height: '100%' }}
-              >
-                <defs>
-                  <pattern id="dotPattern2" x="0" y="0" width="15" height="15" patternUnits="userSpaceOnUse">
-                    <circle cx="2" cy="2" r="0.8" fill="rgba(99, 99, 59, 0.2)" />
-                  </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#dotPattern2)" opacity="0.2" />
-              </svg>
-            </div>
-          </div>
-
-          {/* Main Content Container */}
-          <div className="relative z-10 w-full max-w-6xl mx-auto">
-
-            {/* Centered Content */}
-            <div className="flex flex-col items-center text-center space-y-12">
-
-              {/* Main Heading */}
-              <h1
-                className="text-4xl md:text-5xl font-bold max-w-4xl leading-tight tracking-tight"
-                style={{
-                  color: 'rgb(255, 255, 255)',
-                  fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif"
-                }}
-              >
-                About ARC AI
-              </h1>
-
-              {/* Subheading */}
-              <p
-                className="text-lg md:text-xl text-white/70 max-w-2xl leading-relaxed"
-                style={{
-                  fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif"
-                }}
-              >
-                We combine cutting-edge AI technology with strategic digital marketing to transform businesses. Recognised as one of the <a href="/ai-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">top AI companies in Sri Lanka</a> and among the <a href="/software-companies-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">top software companies in Sri Lanka</a>, we deliver intelligent automation and data-driven campaigns that help you scale faster and smarter.
+            <div>
+              <p className="max-w-xl text-lg leading-relaxed text-ink-soft lg:text-xl">{aboutLead}</p>
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-mute">
+                Comparing providers? See our guides to{" "}
+                <a href="/ai-companies-sri-lanka" className="font-medium text-ember-deep underline underline-offset-4 hover:text-ink">
+                  AI companies in Sri Lanka
+                </a>{" "}
+                and{" "}
+                <a href="/software-companies-sri-lanka" className="font-medium text-ember-deep underline underline-offset-4 hover:text-ink">
+                  software companies in Sri Lanka
+                </a>
+                .
               </p>
-
-              {/* Stats Cards - Horizontal layout as in screenshot */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 w-full max-w-3xl" role="region" aria-label="Company statistics">
-
-                {/* Launched In Card */}
-                <div
-                  className="flex flex-col items-center gap-3 p-6 rounded-xl"
-                  style={{
-                    backgroundColor: 'rgba(20, 20, 20, 0.5)',
-                    backdropFilter: 'blur(10px)',
-                    border: '1px solid rgba(255, 255, 255, 0.05)'
-                  }}
-                >
-                  <div className="flex items-center gap-2 text-white/70">
-                    <Rocket className="w-4 h-4" />
-                    <span className="text-xs font-medium">Founded In</span>
-                  </div>
-                  <div className="text-3xl md:text-4xl font-bold text-white">
-                    2022
-                  </div>
-                </div>
-
-                {/* Customers Card */}
-                <div
-                  className="flex flex-col items-center gap-3 p-6 rounded-xl"
-                  style={{
-                    backgroundColor: 'rgba(20, 20, 20, 0.5)',
-                    backdropFilter: 'blur(10px)',
-                    border: '1px solid rgba(255, 255, 255, 0.05)'
-                  }}
-                >
-                  <div className="flex items-center gap-2 text-white/70">
-                    <Users className="w-4 h-4" />
-                    <span className="text-xs font-medium">Customers</span>
-                  </div>
-                  <div className="text-3xl md:text-4xl font-bold text-white">
-                    100+
-                  </div>
-                  <span className="text-[10px] text-white/50">Verified clients</span>
-                </div>
-
-                {/* Rating Card */}
-                <div
-                  className="flex flex-col items-center gap-3 p-6 rounded-xl"
-                  style={{
-                    backgroundColor: 'rgba(20, 20, 20, 0.5)',
-                    backdropFilter: 'blur(10px)',
-                    border: '1px solid rgba(255, 255, 255, 0.05)'
-                  }}
-                >
-                  <div className="flex items-center gap-2 text-white/70">
-                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                    <span className="text-xs font-medium">Customer Rating</span>
-                  </div>
-                  <div className="text-3xl md:text-4xl font-bold text-white">
-                    4.9/5
-                  </div>
-                  <span className="text-[10px] text-white/50">Google Reviews</span>
-                </div>
-
-              </div>
-
-              {/* Tech Stack Infinite Scroll */}
-              <div className="w-full mt-16" role="region" aria-label="Technology stack">
-                <p className="text-center text-white/40 text-sm uppercase tracking-wider mb-8">
-                  Powered By Industry-Leading Technology
-                </p>
-                <div
-                  className="relative w-full overflow-hidden"
-                  style={{
-                    maskImage: 'linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 12.5%, rgb(0, 0, 0) 87.5%, rgba(0, 0, 0, 0) 100%)',
-                    WebkitMaskImage: 'linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 12.5%, rgb(0, 0, 0) 87.5%, rgba(0, 0, 0, 0) 100%)'
-                  }}
-                >
-                  <div
-                    className="flex gap-12 py-6 animate-scroll"
-                    style={{
-                      animation: 'scroll 40s linear infinite'
-                    }}
-                  >
-                    {/* Duplicate the tech stack 3 times for seamless loop */}
-                    {[...Array(3)].map((_, groupIndex) => (
-                      <div key={groupIndex} className="flex gap-12 shrink-0">
-                        {/* OpenAI */}
-                        <div className="w-32 h-16 bg-white/5 rounded-lg flex items-center justify-center shrink-0 hover:bg-white/10 transition-all">
-                          <span className="text-white font-bold text-lg">OpenAI</span>
-                        </div>
-
-                        {/* Python */}
-                        <div className="w-32 h-16 bg-white/5 rounded-lg flex items-center justify-center shrink-0 hover:bg-white/10 transition-all">
-                          <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none">
-                            <defs>
-                              <linearGradient id="pythonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stopColor="#3776AB" />
-                                <stop offset="100%" stopColor="#FFD43B" />
-                              </linearGradient>
-                            </defs>
-                            <path d="M14.31.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.83l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.23l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.24l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05 1.07.13zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01.21.03zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z" fill="url(#pythonGradient)" />
-                          </svg>
-                        </div>
-
-                        {/* TensorFlow */}
-                        <div className="w-32 h-16 bg-white/5 rounded-lg flex items-center justify-center shrink-0 hover:bg-white/10 transition-all">
-                          <span className="text-[#FF6F00] font-bold text-lg">TensorFlow</span>
-                        </div>
-
-                        {/* React */}
-                        <div className="w-32 h-16 bg-white/5 rounded-lg flex items-center justify-center shrink-0 hover:bg-white/10 transition-all">
-                          <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none">
-                            <g fill="#61DAFB">
-                              <circle cx="12" cy="12" r="2" />
-                              <path d="M12 8c-4.418 0-8 1.791-8 4s3.582 4 8 4 8-1.791 8-4-3.582-4-8-4z" opacity="0.3" />
-                              <ellipse cx="12" cy="12" rx="8" ry="3" fill="none" stroke="#61DAFB" strokeWidth="1" />
-                              <ellipse cx="12" cy="12" rx="8" ry="3" fill="none" stroke="#61DAFB" strokeWidth="1" transform="rotate(60 12 12)" />
-                              <ellipse cx="12" cy="12" rx="8" ry="3" fill="none" stroke="#61DAFB" strokeWidth="1" transform="rotate(-60 12 12)" />
-                            </g>
-                          </svg>
-                        </div>
-
-                        {/* Node.js */}
-                        <div className="w-32 h-16 bg-white/5 rounded-lg flex items-center justify-center shrink-0 hover:bg-white/10 transition-all">
-                          <span className="text-[#339933] font-bold text-lg">Node.js</span>
-                        </div>
-
-                        {/* MongoDB */}
-                        <div className="w-32 h-16 bg-white/5 rounded-lg flex items-center justify-center shrink-0 hover:bg-white/10 transition-all">
-                          <span className="text-[#47A248] font-bold text-lg">MongoDB</span>
-                        </div>
-
-                        {/* AWS */}
-                        <div className="w-32 h-16 bg-white/5 rounded-lg flex items-center justify-center shrink-0 hover:bg-white/10 transition-all">
-                          <span className="text-[#FF9900] font-bold text-lg">AWS</span>
-                        </div>
-
-                        {/* Docker */}
-                        <div className="w-32 h-16 bg-white/5 rounded-lg flex items-center justify-center shrink-0 hover:bg-white/10 transition-all">
-                          <span className="text-[#2496ED] font-bold text-lg">Docker</span>
-                        </div>
-
-                        {/* Google Cloud */}
-                        <div className="w-32 h-16 bg-white/5 rounded-lg flex items-center justify-center shrink-0 hover:bg-white/10 transition-all">
-                          <span className="text-[#4285F4] font-bold text-sm">Google Cloud</span>
-                        </div>
-
-                        {/* Zapier */}
-                        <div className="w-32 h-16 bg-white/5 rounded-lg flex items-center justify-center shrink-0 hover:bg-white/10 transition-all">
-                          <span className="text-[#FF4A00] font-bold text-lg">Zapier</span>
-                        </div>
-
-                        {/* Make.com */}
-                        <div className="w-32 h-16 bg-white/5 rounded-lg flex items-center justify-center shrink-0 hover:bg-white/10 transition-all">
-                          <span className="text-[#6B4FE0] font-bold text-lg">Make.com</span>
-                        </div>
-
-                        {/* n8n */}
-                        <div className="w-32 h-16 bg-white/5 rounded-lg flex items-center justify-center shrink-0 hover:bg-white/10 transition-all">
-                          <span className="text-[#EA4B71] font-bold text-lg">n8n</span>
-                        </div>
-
-                        {/* Next.js */}
-                        <div className="w-32 h-16 bg-white/5 rounded-lg flex items-center justify-center shrink-0 hover:bg-white/10 transition-all">
-                          <span className="text-white font-bold text-lg">Next.js</span>
-                        </div>
-
-                        {/* TypeScript */}
-                        <div className="w-32 h-16 bg-white/5 rounded-lg flex items-center justify-center shrink-0 hover:bg-white/10 transition-all">
-                          <span className="text-[#3178C6] font-bold text-lg">TypeScript</span>
-                        </div>
-
-                        {/* Tailwind CSS */}
-                        <div className="w-32 h-16 bg-white/5 rounded-lg flex items-center justify-center shrink-0 hover:bg-white/10 transition-all">
-                          <span className="text-[#06B6D4] font-bold text-lg">Tailwind</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <PillLink href="/contact">Let&apos;s talk</PillLink>
+                <PillLink href="/portfolio" variant="ghost">
+                  See our work
+                </PillLink>
               </div>
             </div>
           </div>
 
-          {/* Dark overlay to match screenshot darkness */}
+          {/* Company facts */}
           <div
-            className="absolute inset-0 pointer-events-none"
-            aria-hidden="true"
-            style={{
-              background: 'radial-gradient(ellipse at center, transparent 20%, rgba(0, 0, 0, 0.6) 80%)'
-            }}
-          />
+            className="mx-auto mt-10 grid max-w-[1400px] gap-4 sm:grid-cols-2 lg:mt-14 xl:grid-cols-4"
+            role="region"
+            aria-label="Company statistics"
+          >
+            {FACTS.map((fact, index) => {
+              const dark = index === 0;
+              return (
+                <div
+                  key={fact.label}
+                  className={`${dark ? "ink-card" : "cream-card"} flex min-h-[190px] flex-col justify-between p-6 lg:min-h-[230px] lg:p-7`}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <p className={`max-w-[14ch] text-sm leading-snug md:text-base ${dark ? "text-paper-white/75" : "text-ink-soft"}`}>
+                      {fact.label}
+                    </p>
+                    <IconDot icon={fact.icon} dark={dark} />
+                  </div>
+                  <div>
+                    <p className={`text-6xl font-medium leading-none tracking-[-0.05em] lg:text-7xl ${dark ? "text-paper-white" : "text-ink"}`}>
+                      {fact.value}
+                      {fact.suffix && <span className={dark ? "text-ember" : "text-ember-ink"}>{fact.suffix}</span>}
+                    </p>
+                    {fact.note && <p className="mt-2 text-sm text-ink-mute">{fact.note}</p>}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </section>
 
-        {/* About Us Description Section */}
-        <AboutTextAnimation />
+        {/* Who we are, in one statement */}
+        <AboutStatement />
 
-        {/* Mission, Vision & Founder's Note Section */}
-        <ValuesSection />
+        {/* Mission, vision and the founder's note */}
+        <section className="px-4 py-12 md:px-8 lg:px-20 lg:py-16" aria-label="Mission, vision and founder's note">
+          <div className="mx-auto grid max-w-[1400px] gap-4 md:grid-cols-2">
+            <article className="cream-card flex min-h-[240px] flex-col justify-between gap-8 p-6 lg:min-h-[300px] lg:p-9">
+              <div className="flex items-start justify-between gap-4">
+                <h2 className="text-3xl font-medium tracking-[-0.035em] text-ink lg:text-4xl">Our mission</h2>
+                <IconDot icon={Target} />
+              </div>
+              <p className="max-w-xl text-lg leading-relaxed text-ink-soft lg:text-xl">{mission}</p>
+            </article>
+
+            <article className="cream-card flex min-h-[240px] flex-col justify-between gap-8 p-6 lg:min-h-[300px] lg:p-9">
+              <div className="flex items-start justify-between gap-4">
+                <h2 className="text-3xl font-medium tracking-[-0.035em] text-ink lg:text-4xl">Our vision</h2>
+                <IconDot icon={Eye} />
+              </div>
+              <p className="max-w-xl text-lg leading-relaxed text-ink-soft lg:text-xl">{vision}</p>
+            </article>
+
+            <figure className="ink-card p-6 md:col-span-2 lg:p-12">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-ember">Founder&apos;s note</h2>
+              <blockquote className="mt-6 max-w-5xl text-xl font-medium leading-snug tracking-[-0.02em] text-paper-white md:text-2xl lg:text-[1.75rem] lg:leading-[1.35]">
+                &ldquo;{founderNote.quote}&rdquo;
+              </blockquote>
+              <figcaption className="mt-8 flex items-center gap-4">
+                <Image
+                  src={founderNote.photo}
+                  alt={`${founderNote.name}, ${founderNote.role}, ARC AI`}
+                  width={56}
+                  height={56}
+                  className="h-14 w-14 rounded-full object-cover"
+                />
+                <span>
+                  <span className="block text-lg font-medium text-paper-white">{founderNote.name}</span>
+                  <span className="block text-sm text-paper-white/70">{founderNote.role}</span>
+                </span>
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        {/* Technology */}
+        <section className="py-12 lg:py-16" role="region" aria-label="Technology stack">
+          <p className="px-4 text-center text-sm font-medium uppercase tracking-wider text-ink-mute">
+            Powered By Industry-Leading Technology
+          </p>
+          {/* Two copies of the row make the loop seamless; the second is hidden
+              from screen readers. The row stops while it is off screen. */}
+          <PauseOffscreen className="mt-8 flex overflow-hidden mask-gradient">
+            {[false, true].map((isCopy) => (
+              <ul
+                key={isCopy ? "copy" : "original"}
+                className="flex min-w-full shrink-0 animate-[marquee_45s_linear_infinite] gap-3 pr-3"
+                aria-hidden={isCopy ? true : undefined}
+              >
+                {techStack.map((name) => (
+                  <li
+                    key={name}
+                    className="whitespace-nowrap rounded-full border border-white bg-white/70 px-5 py-2.5 text-base font-medium text-ink"
+                  >
+                    {name}
+                  </li>
+                ))}
+              </ul>
+            ))}
+          </PauseOffscreen>
+        </section>
 
         {/* Companies We Worked With Section */}
         <ClientsSection />
 
-        {/* Our Journey Timeline Section */}
-        <JourneySection />
+        {/* Our Journey */}
+        <AboutJourney />
 
-        {/* Industries We Serve Section */}
-        <IndustriesSection />
+        {/* Industries */}
+        <section className="px-4 pb-20 pt-12 md:px-8 lg:px-20 lg:pb-28 lg:pt-16" aria-labelledby="industries-heading">
+          <div className="mx-auto max-w-[1400px]">
+            <div className="grid gap-6 lg:grid-cols-2 lg:items-end lg:gap-16">
+              <h2
+                id="industries-heading"
+                className="text-5xl font-medium leading-[0.98] tracking-[-0.04em] text-ink sm:text-6xl lg:text-7xl"
+              >
+                Industries <span className="text-ember-ink">we serve</span>
+              </h2>
+              <p className="max-w-xl text-lg leading-relaxed text-ink-soft lg:pb-2 lg:text-xl">{industriesIntro}</p>
+            </div>
 
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:mt-14 xl:grid-cols-4">
+              {industries.map((industry) => (
+                <article key={industry.name} className="cream-card flex min-h-[220px] flex-col justify-between gap-8 p-6 lg:p-7">
+                  <IconDot icon={INDUSTRY_ICONS[industry.icon]} />
+                  <div>
+                    <h3 className="text-xl font-medium tracking-[-0.025em] text-ink lg:text-2xl">{industry.name}</h3>
+                    <p className="mt-2 text-base leading-relaxed text-ink-soft">{industry.description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <p className="mt-8 text-base font-medium text-ink-mute">And Many More Industries</p>
+          </div>
+        </section>
       </main>
 
       <Footer />

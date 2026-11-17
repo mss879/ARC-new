@@ -39,14 +39,14 @@ export default function ContentOfficeMock() {
       timeline
         .fromTo(
           desk,
-          { borderColor: "rgba(255,255,255,0.1)", backgroundColor: "rgba(255,255,255,0.03)" },
+          { borderColor: "rgba(27,26,23,0.1)", backgroundColor: "rgba(255,255,255,1)" },
           { borderColor: "rgba(255,73,37,0.7)", backgroundColor: "rgba(255,73,37,0.12)", duration: 0.25 },
           at,
         )
         .from(statuses[index], { autoAlpha: 0, y: 4, duration: 0.25 }, at + 0.15)
         .to(
           desk,
-          { borderColor: "rgba(255,255,255,0.1)", backgroundColor: "rgba(255,255,255,0.03)", duration: 0.4 },
+          { borderColor: "rgba(27,26,23,0.1)", backgroundColor: "rgba(255,255,255,1)", duration: 0.4 },
           at + 0.5,
         );
     });
@@ -77,11 +77,11 @@ export default function ContentOfficeMock() {
         description="Illustration: the Content Office. The owner types a one-line brief, six AI agents (director, researcher, writer, designer, checker and publisher) each do their part, a month's calendar fills with twelve planned posts, the owner approves them, and they are scheduled to Instagram and Facebook."
       >
         {/* Brief */}
-        <div className="flex items-center gap-2.5 rounded-xl border border-white/10 bg-black/40 px-3 py-2.5">
-          <span className="shrink-0 whitespace-nowrap text-[10px] uppercase tracking-wider text-zinc-500">
+        <div className="flex items-center gap-2.5 rounded-xl border border-ink/10 bg-paper-soft px-3 py-2.5">
+          <span className="shrink-0 whitespace-nowrap text-[10px] uppercase tracking-wider text-ink-mute">
             Your brief
           </span>
-          <p className="min-h-[1.25rem] min-w-0 flex-1 truncate text-[13px] text-white">
+          <p className="min-h-[1.25rem] min-w-0 flex-1 truncate text-[13px] text-ink">
             <span data-s="brief">{BRIEF}</span>
             <span className="demo-caret ml-0.5 inline-block h-3.5 w-px translate-y-0.5 bg-[rgb(255,73,37)]" />
           </p>
@@ -93,13 +93,13 @@ export default function ContentOfficeMock() {
             <div
               key={desk.role}
               data-s="desk"
-              className="min-w-0 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5"
+              className="min-w-0 rounded-xl border border-ink/10 bg-white px-3 py-2.5"
             >
-              <p className="flex items-center gap-1.5 text-[12px] font-semibold text-white">
+              <p className="flex items-center gap-1.5 text-[12px] font-semibold text-ink">
                 <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[rgb(255,73,37)]" />
                 <span className="truncate">{desk.role}</span>
               </p>
-              <p data-s="status" className="mt-1 truncate text-[11px] text-zinc-400">
+              <p data-s="status" className="mt-1 truncate text-[11px] text-ink-mute">
                 ✓ {desk.status}
               </p>
             </div>
@@ -108,11 +108,11 @@ export default function ContentOfficeMock() {
 
         <div className="mt-3 grid gap-3 screen-wide:grid-cols-[1.2fr_1fr]">
           {/* Calendar */}
-          <div className="min-w-0 rounded-xl border border-white/10 bg-black/40 p-3">
-            <p className="text-[10px] uppercase tracking-wider text-zinc-500">April plan</p>
+          <div className="min-w-0 rounded-xl border border-ink/10 bg-paper-soft p-3">
+            <p className="text-[10px] uppercase tracking-wider text-ink-mute">April plan</p>
             <div className="mt-2.5 grid grid-cols-7 gap-1">
               {Array.from({ length: DAYS }, (_, day) => (
-                <span key={day} className="relative aspect-[3/2] rounded-[3px] bg-white/[0.05]">
+                <span key={day} className="relative aspect-[3/2] rounded-[3px] bg-ink/[0.06]">
                   {PLANNED.has(day) && (
                     <span data-s="post" className="absolute inset-0 rounded-[3px] bg-[rgb(255,73,37)]" />
                   )}
@@ -124,11 +124,11 @@ export default function ContentOfficeMock() {
           {/* Approval */}
           <div
             data-s="approval"
-            className="flex min-w-0 flex-col justify-between rounded-xl border border-white/10 bg-black/40 p-3"
+            className="flex min-w-0 flex-col justify-between rounded-xl border border-ink/10 bg-paper-soft p-3"
           >
             <div>
-              <p className="text-[12.5px] font-semibold text-white">12 posts ready</p>
-              <p className="text-[11px] leading-snug text-zinc-500">Nothing goes out until you approve.</p>
+              <p className="text-[12.5px] font-semibold text-ink">12 posts ready</p>
+              <p className="text-[11px] leading-snug text-ink-mute">Nothing goes out until you approve.</p>
             </div>
             <div>
               <div className="relative mt-3 h-8 text-[11.5px] font-bold">
@@ -140,7 +140,7 @@ export default function ContentOfficeMock() {
                 </span>
                 <span
                   data-s="published"
-                  className="absolute inset-0 flex items-center justify-center whitespace-nowrap rounded-lg border border-green-500/40 bg-green-500/10 text-green-400"
+                  className="absolute inset-0 flex items-center justify-center whitespace-nowrap rounded-lg border border-green-600/30 bg-green-500/10 text-green-700"
                 >
                   ✓ Approved and scheduled
                 </span>
@@ -150,7 +150,7 @@ export default function ContentOfficeMock() {
                   <span
                     key={channel}
                     data-s="channel"
-                    className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] text-zinc-400"
+                    className="rounded-full border border-ink/10 px-2 py-0.5 text-[10px] text-ink-mute"
                   >
                     {channel}
                   </span>

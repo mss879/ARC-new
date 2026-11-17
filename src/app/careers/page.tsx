@@ -70,7 +70,7 @@ const breadcrumbJsonLd = {
 
 export default function CareersPage() {
   return (
-    <div className="min-h-screen bg-black">
+    <div className="home-cream min-h-screen bg-transparent">
       <ScrollToTop />
       {/* JSON-LD Structured Data */}
       <script

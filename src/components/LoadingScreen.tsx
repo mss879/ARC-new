@@ -7,6 +7,17 @@ import { Grid } from "@react-three/drei";
 import * as THREE from "three";
 import gsap from "gsap";
 
+// The home page's colours: cream page, orange blocks, near-black projectile.
+const PAPER = "#E8E6E0";
+const EMBER = "#FF4925";
+const INK = "#1B1A17";
+
+// The sequence is unchanged; these only set how fast it plays. The build ran
+// about 2.6 s and the finale about 2.6 s, with 1.2 s for the doors.
+const BUILD_SPEED = 1.5;
+const FINALE_SPEED = 1.35;
+const DOOR_SECONDS = 0.85;
+
 interface LoadingScreenProps {
   /** True once the homepage assets (hero video, images, fonts) have loaded —
    *  the finale (impact + collapse + doors) is held back until then */
@@ -25,7 +36,7 @@ interface LoadingScreenProps {
 // ==========================================
 const DataStream = () => {
   const meshRef = useRef<THREE.InstancedMesh>(null);
-  const particleCount = 100;
+  const particleCount = 70;
 
   const particles = useMemo(() => {
     return new Array(particleCount).fill(0).map(() => ({
@@ -57,7 +68,7 @@ const DataStream = () => {
   return (
     <instancedMesh ref={meshRef} args={[null as any, null as any, particleCount]}>
       <boxGeometry args={[0.05, 0.05, 1]} />
-      <meshBasicMaterial color="#f97316" transparent opacity={0.3} blending={THREE.AdditiveBlending} depthWrite={false} />
+      <meshBasicMaterial color={EMBER} transparent opacity={0.35} depthWrite={false} toneMapped={false} />
     </instancedMesh>
   );
 };
@@ -74,8 +85,10 @@ const FONT: Record<string, string[]> = {
   'L': ["100", "100", "100", "100", "111"],
   'N': ["1001", "1101", "1011", "1001", "1001"],
   'O': ["010", "101", "101", "101", "010"],
+  'R': ["110", "101", "110", "101", "101"],
   'S': ["011", "100", "010", "001", "110"],
-  'U': ["101", "101", "101", "101", "011"],
+  'T': ["111", "010", "010", "010", "010"],
+  'U':["101", "101", "101", "101", "011"],
   'V': ["101", "101", "101", "101", "010"],
   'Y': ["101", "101", "010", "010", "010"],
   ' ': ["00", "00", "00", "00", "00"]
@@ -157,7 +170,7 @@ const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () =
   const pointLightRef = useRef<THREE.PointLight>(null);
 
   const blocks = useMemo(() => {
-    return generateTextBlocks(["BEYOND", "VISUALS"]);
+    return generateTextBlocks(["BUILT", "TO RUN"]);
   }, []);
 
   const blockData = useMemo(() => {
@@ -195,7 +208,7 @@ const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () =
   // Sync state for camera shake and material emissive glow
   const animState = useMemo(() => ({
     rumble: 0,
-    emissiveIntensity: 0.2
+    emissiveIntensity: 0.12
   }), []);
 
   // Store the latest callback in a ref to decouple it from effect cleanup
@@ -267,7 +280,7 @@ const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () =
           // Hold here until assets are ready: breathing glow on the voxel text
           // (DataStream particles and the grid keep flowing via useFrame)
           idlePulseRef.current = gsap.to(animState, {
-            emissiveIntensity: 0.7,
+            emissiveIntensity: 0.45,
             duration: 0.9,
             yoyo: true,
             repeat: -1,
@@ -276,6 +289,9 @@ const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () =
           setBuildDone(true);
         }
       });
+
+      // The same build, played at BUILD_SPEED.
+      tl.timeScale(BUILD_SPEED);
 
       // 1. Subtle camera rotation
       gsap.set(masterGroupRef.current?.rotation || {}, { x: 0.6, y: -0.6, z: 0 });
@@ -305,13 +321,16 @@ const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () =
         }, 0);
       });
 
-      // 3. Gap closing / Lock-In phase (starts after all blocks have landed at 2.34s, completes at 2.6s)
+      // 3. Gap closing / Lock-In phase: starts just after the last block
+      // lands. The landing time follows the number of blocks, so the pause
+      // before the lock-in stays the same whatever the words are.
+      const lockInAt = 0.9 + (blockData.length - 1) * 0.012 + 0.06;
       blockData.forEach((block) => {
         tl.to(block, {
           scale: 1.16,
           duration: 0.26,
           ease: "power2.out"
-        }, 2.34);
+        }, lockInAt);
       });
     });
 
@@ -337,6 +356,8 @@ const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () =
           onCompleteRef.current();
         }
       });
+
+      tl.timeScale(FINALE_SPEED);
 
       // Settle the holding glow back down while the projectile flies in
       tl.to(animState, {
@@ -407,7 +428,7 @@ const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () =
 
       // Glowing material blast pulse
       tl.to(animState, {
-        emissiveIntensity: 6,
+        emissiveIntensity: 1.6,
         duration: 0.08,
         ease: "power4.out"
       }, 0.5);
@@ -527,46 +548,44 @@ const IsometricCity = ({ ready, onComplete }: { ready: boolean; onComplete: () =
         {/* Projectile Core */}
         <mesh ref={projectileRef}>
           <sphereGeometry args={[0.55, 16, 16]} />
-          <meshBasicMaterial color="#ffffff" transparent toneMapped={false} />
-          <pointLight ref={pointLightRef} color="#f97316" intensity={0} distance={15} decay={1.5} />
+          <meshBasicMaterial color={INK} transparent toneMapped={false} />
+          <pointLight ref={pointLightRef} color={EMBER} intensity={0} distance={15} decay={1.5} />
         </mesh>
 
         {/* Trail Particles */}
         <mesh ref={trail1Ref}>
           <sphereGeometry args={[0.4, 12, 12]} />
-          <meshBasicMaterial color="#f97316" transparent opacity={0.6} toneMapped={false} />
+          <meshBasicMaterial color="#FF4925" transparent opacity={0.6} toneMapped={false} />
         </mesh>
 
         <mesh ref={trail2Ref}>
           <sphereGeometry args={[0.25, 8, 8]} />
-          <meshBasicMaterial color="#f97316" transparent opacity={0.4} toneMapped={false} />
+          <meshBasicMaterial color="#FF4925" transparent opacity={0.4} toneMapped={false} />
         </mesh>
 
         <mesh ref={trail3Ref}>
           <sphereGeometry args={[0.12, 8, 8]} />
-          <meshBasicMaterial color="#f97316" transparent opacity={0.2} toneMapped={false} />
+          <meshBasicMaterial color="#FF4925" transparent opacity={0.2} toneMapped={false} />
         </mesh>
 
         <instancedMesh
           ref={meshRef}
           args={[null as any, null as any, blocks.length]}
-          castShadow
-          receiveShadow
         >
           <boxGeometry args={[0.95, 0.95, 0.95]} />
           <meshStandardMaterial
             ref={materialRef}
-            color="#f97316"
-            roughness={0.2}
-            metalness={0.6}
-            emissive="#f97316"
+            color={EMBER}
+            roughness={0.35}
+            metalness={0.15}
+            emissive={EMBER}
             emissiveIntensity={0.2}
           />
         </instancedMesh>
       </group>
 
       <group ref={gridRef} position={[0, -5, 0]}>
-        <Grid infiniteGrid fadeDistance={40} sectionColor="#f97316" cellColor="#f97316" sectionThickness={1.5} cellThickness={0.5} />
+        <Grid infiniteGrid fadeDistance={40} sectionColor={EMBER} cellColor="#C9C5BB" sectionThickness={1.2} cellThickness={0.5} />
       </group>
     </group>
   );
@@ -617,12 +636,12 @@ const LoadingScreen = memo(({ ready, onMounted, onExitStart, onLoadComplete }: L
       <motion.div
         initial={{ x: "0%" }}
         animate={isExiting ? { x: "-50vw" } : { x: "0%" }}
-        transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
+        transition={{ duration: DOOR_SECONDS, ease: [0.76, 0, 0.24, 1] }}
         onAnimationComplete={() => {
           // Unmount only after the doors have fully opened
           if (isExiting) onLoadComplete();
         }}
-        className="absolute left-0 top-0 w-[50vw] h-full bg-[#020202] z-10 pointer-events-auto shadow-[0_0_20px_rgba(249,115,22,0.05)]"
+        className="absolute left-0 top-0 w-[50vw] h-full bg-[#E8E6E0] z-10 pointer-events-auto will-change-transform"
       >
         {/* Glowing seam border split details - only rendered during exit split transition */}
         {isExiting && (
@@ -630,7 +649,7 @@ const LoadingScreen = memo(({ ready, onMounted, onExitStart, onLoadComplete }: L
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 top-0 w-[1.5px] h-full bg-orange-500 shadow-[0_0_10px_#f97316,0_0_4px_#f97316]"
+            className="absolute right-0 top-0 w-[1.5px] h-full bg-[#FF4925]"
           />
         )}
       </motion.div>
@@ -639,8 +658,8 @@ const LoadingScreen = memo(({ ready, onMounted, onExitStart, onLoadComplete }: L
       <motion.div
         initial={{ x: "0%" }}
         animate={isExiting ? { x: "50vw" } : { x: "0%" }}
-        transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
-        className="absolute right-0 top-0 w-[50vw] h-full bg-[#020202] z-10 pointer-events-auto shadow-[0_0_20px_rgba(249,115,22,0.05)]"
+        transition={{ duration: DOOR_SECONDS, ease: [0.76, 0, 0.24, 1] }}
+        className="absolute right-0 top-0 w-[50vw] h-full bg-[#E8E6E0] z-10 pointer-events-auto will-change-transform"
       >
         {/* Glowing seam border split details - only rendered during exit split transition */}
         {isExiting && (
@@ -648,7 +667,7 @@ const LoadingScreen = memo(({ ready, onMounted, onExitStart, onLoadComplete }: L
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.15 }}
-            className="absolute left-0 top-0 w-[1.5px] h-full bg-orange-500 shadow-[0_0_10px_#f97316,0_0_4px_#f97316]"
+            className="absolute left-0 top-0 w-[1.5px] h-full bg-[#FF4925]"
           />
         )}
       </motion.div>
@@ -661,16 +680,16 @@ const LoadingScreen = memo(({ ready, onMounted, onExitStart, onLoadComplete }: L
         className="absolute inset-0 z-20 w-full h-full pointer-events-auto"
       >
         {/* Subtle blueprint grid overlay */}
-        <div className="absolute inset-0 z-10 pointer-events-none opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px]" />
+        <div className="absolute inset-0 z-10 pointer-events-none opacity-[0.05] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px]" />
 
         {/* stencil: false drops a buffer nothing here draws with; every other
             renderer setting — shadows, DPR, tone mapping — is untouched so the
             picture is the same one. */}
-        <Canvas orthographic camera={{ position: [0, 0, 20], zoom: zoomLevel }} dpr={[1, 1.5]} gl={{ antialias: false, alpha: false, stencil: false, powerPreference: "high-performance" }} shadows className="w-full h-full">
-          <color attach="background" args={["#020202"]} />
-          <ambientLight intensity={0.4} />
-          <directionalLight position={[10, 20, 10]} intensity={1.5} color="#ffffff" castShadow shadow-mapSize={[1024, 1024]} />
-          <directionalLight position={[-10, 10, -10]} intensity={0.5} color="#f97316" />
+        <Canvas orthographic camera={{ position: [0, 0, 20], zoom: zoomLevel }} dpr={[1, 1.5]} gl={{ antialias: true, alpha: false, stencil: false, powerPreference: "high-performance" }} flat className="w-full h-full">
+          <color attach="background" args={[PAPER]} />
+          <ambientLight intensity={1.1} />
+          <directionalLight position={[10, 20, 10]} intensity={1.6} color="#ffffff" />
+          <directionalLight position={[-10, 10, -10]} intensity={0.5} color={EMBER} />
 
           <IsometricCity ready={ready} onComplete={handleComplete} />
         </Canvas>

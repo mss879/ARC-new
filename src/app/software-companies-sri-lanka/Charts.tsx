@@ -1,9 +1,9 @@
 /* Server-rendered inline SVG charts — no client JS, crawlable, zero bundle cost. */
 
 const ACCENT = "rgb(255,73,37)";
-const GRID = "#262626";
-const LABEL = "#a3a3a3";
-const MUTED = "#525252";
+const GRID = "rgba(27, 26, 23, 0.1)";
+const LABEL = "#3F3D38";
+const MUTED = "#6B675F";
 
 /* EDB estimated monthly ICT/BPM export earnings, 2026 (US$ millions), as first published each month.
  * EDB revises earlier months, so these do not add up to its cumulative total. */
@@ -32,7 +32,7 @@ export function ExportEarningsChart() {
 
     return (
         <figure className="my-8 mx-0">
-            <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-4 md:p-6">
+            <div className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-4 md:p-6">
                 <svg
                     viewBox={`0 0 ${width} ${height}`}
                     className="w-full h-auto"
@@ -58,7 +58,7 @@ export function ExportEarningsChart() {
                         return (
                             <g key={d.month}>
                                 <rect x={x} y={y} width={barW} height={barH} rx="4" fill={ACCENT} opacity={0.85} />
-                                <text x={x + barW / 2} y={y - 8} textAnchor="middle" fontSize="12" fontWeight="700" fill="#ffffff">
+                                <text x={x + barW / 2} y={y - 8} textAnchor="middle" fontSize="12" fontWeight="700" fill="#1B1A17">
                                     {d.value.toFixed(0)}
                                 </text>
                                 <text x={x + barW / 2} y={margin.top + plotH + 20} textAnchor="middle" fontSize="12" fill={LABEL}>
@@ -69,9 +69,9 @@ export function ExportEarningsChart() {
                     })}
                 </svg>
             </div>
-            <figcaption className="text-xs text-neutral-500 mt-3 italic">
+            <figcaption className="text-xs text-ink-mute mt-3 italic">
                 Sri Lanka ICT/BPM export earnings by month, 2026 (US$ millions), as first published by the EDB each month. The EDB later revises monthly estimates, so the bars do not add up to its cumulative figure of US$1,240.67M for January–September, up 3.69% year-on-year. Source:{" "}
-                <a href="https://www.srilankabusiness.com/news/sri-lankas-exports-surpass-usd-13-6-bn-in-the-first-nine-months-of-2026-recording-5-percent-growth.html" target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">
+                <a href="https://www.srilankabusiness.com/news/sri-lankas-exports-surpass-usd-13-6-bn-in-the-first-nine-months-of-2026-recording-5-percent-growth.html" target="_blank" rel="noopener noreferrer" className="text-ember-deep hover:underline">
                     Export Development Board of Sri Lanka
                 </a>
                 .
@@ -93,7 +93,7 @@ export function HeadcountChart({ rows }: { rows: { name: string; value: number; 
 
     return (
         <figure className="my-8 mx-0">
-            <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-4 md:p-6 overflow-x-auto">
+            <div className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-4 md:p-6 overflow-x-auto">
                 <svg
                     viewBox={`0 0 ${width} ${height}`}
                     role="img"
@@ -110,7 +110,7 @@ export function HeadcountChart({ rows }: { rows: { name: string; value: number; 
                                     {r.name.length > 27 ? `${r.name.slice(0, 26)}…` : r.name}
                                 </text>
                                 <rect x={margin.left} y={y + 7} width={w} height={rowH - 14} rx="4" fill={ACCENT} opacity={i === 0 ? 0.95 : 0.75} />
-                                <text x={margin.left + w + 8} y={y + rowH / 2 + 4} fontSize="12" fontWeight="700" fill="#ffffff">
+                                <text x={margin.left + w + 8} y={y + rowH / 2 + 4} fontSize="12" fontWeight="700" fill="#1B1A17">
                                     {r.label}
                                 </text>
                             </g>
@@ -118,7 +118,7 @@ export function HeadcountChart({ rows }: { rows: { name: string; value: number; 
                     })}
                 </svg>
             </div>
-            <figcaption className="text-xs text-neutral-500 mt-3 italic">
+            <figcaption className="text-xs text-ink-mute mt-3 italic">
                 People employed in Sri Lanka, as published by each company or reported in the press. Sources are linked in the list above.
             </figcaption>
         </figure>

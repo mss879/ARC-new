@@ -7,7 +7,7 @@ import { TrendingUp, BarChart3, Users, Building2, Landmark, GraduationCap, Circl
 import { ExportEarningsChart } from "../Charts";
 import { GUIDE_YEAR, SOURCES } from "../page-data";
 
-const LINK = "text-[rgb(255,73,37)] hover:underline";
+const LINK = "text-ember-deep hover:underline";
 const EXT = { target: "_blank", rel: "noopener noreferrer" } as const;
 
 function Src({ to, children }: { to: keyof typeof SOURCES; children: React.ReactNode }) {
@@ -21,12 +21,12 @@ function Src({ to, children }: { to: keyof typeof SOURCES; children: React.React
 export function IndustryOverview() {
     return (
         <section id="industry-overview" className="scroll-mt-24">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mt-16 mb-8 flex items-center gap-3">
-                <TrendingUp className="w-8 h-8 text-[rgb(255,73,37)]" />
+            <h2 className="text-3xl md:text-4xl font-medium text-ink mt-16 mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                <TrendingUp className="w-8 h-8 text-ember-ink" />
                 Sri Lanka&apos;s Software Industry in {GUIDE_YEAR}
             </h2>
 
-            <p className="text-xl text-neutral-200 mb-6">
+            <p className="text-xl text-ink mb-6">
                 What was historically viewed as a lower-cost alternative to India has matured into a
                 high-quality, specialist-driven ecosystem — home to some of the top IT outsourcing companies,
                 tech companies, and software firms in Sri Lanka and South Asia — that global enterprises
@@ -41,15 +41,15 @@ export function IndustryOverview() {
                     { value: "175K", label: "Professionals (SLASSCOM)", icon: Users },
                     { value: "680+", label: "IT & BPM companies (SLASSCOM)", icon: Building2 },
                 ].map((stat) => (
-                    <div key={stat.label} className="bg-neutral-950 border border-neutral-800 rounded-xl p-5 text-center">
-                        <stat.icon className="w-5 h-5 text-[rgb(255,73,37)] mx-auto mb-2" />
-                        <div className="text-2xl font-black text-white">{stat.value}</div>
-                        <div className="text-xs text-neutral-500 mt-1">{stat.label}</div>
+                    <div key={stat.label} className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-5 text-center">
+                        <stat.icon className="w-5 h-5 text-ember-deep mx-auto mb-2" />
+                        <div className="text-2xl font-black text-ink">{stat.value}</div>
+                        <div className="text-xs text-ink-mute mt-1">{stat.label}</div>
                     </div>
                 ))}
             </div>
 
-            <p className="text-neutral-300">
+            <p className="text-ink-soft">
                 According to the <Src to="edbNineMonths">Export Development Board (EDB)</Src>, the country&apos;s
                 ICT/BPM sector earned US$1,240.67 million from exports in January–September 2026, up 3.69% on
                 the same period of 2025. The year began with a record: January alone brought in US$177.83
@@ -62,7 +62,7 @@ export function IndustryOverview() {
 
             <ExportEarningsChart />
 
-            <p className="text-neutral-300 mt-4">
+            <p className="text-ink-soft mt-4">
                 The industry employs about 175,000 professionals across more than 680 IT and BPM companies,
                 according to <Src to="slasscomReview">SLASSCOM&apos;s 2025/26 review</Src> (the EDB&apos;s own
                 page cites 146,000 employed and 500+ companies). On the government side, the{" "}
@@ -72,7 +72,7 @@ export function IndustryOverview() {
                 <Src to="dataReportal2026">DataReportal&apos;s Digital 2026 report</Src>.
             </p>
 
-            <p className="text-neutral-300 mt-4">
+            <p className="text-ink-soft mt-4">
                 Structurally, the industry is shifting from basic digitisation (cloud migration, simple
                 CRM/ERP implementation) toward AI-led work: <Link href="/ai-automation-sri-lanka" className={LINK}>AI automation</Link>,
                 multi-agent systems, and domain-specific AI models. This is creating a two-tier market:
@@ -83,7 +83,7 @@ export function IndustryOverview() {
                 <Link href="/web-design-sri-lanka" className={LINK}>web design companies in Sri Lanka</Link>.
             </p>
 
-            <p className="text-neutral-300 mt-4 text-sm italic">
+            <p className="text-ink-soft mt-4 text-sm italic">
                 Sources: <Src to="edbNineMonths">EDB, January–September 2026 export release</Src>,{" "}
                 <Src to="edbFullYear2025">EDB, full-year 2025 release</Src>,{" "}
                 <Src to="slasscomReview">SLASSCOM 2025/26 review (Daily FT)</Src>,{" "}
@@ -163,19 +163,19 @@ export function TechEcosystem() {
 
     return (
         <section id="tech-ecosystem" className="scroll-mt-24">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mt-16 mb-8 flex items-center gap-3">
-                <Landmark className="w-8 h-8 text-[rgb(255,73,37)]" />
+            <h2 className="text-3xl md:text-4xl font-medium text-ink mt-16 mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                <Landmark className="w-8 h-8 text-ember-ink" />
                 Sri Lanka&apos;s Tech Hubs &amp; Ecosystem
             </h2>
 
-            <p className="text-neutral-300 mb-6">
+            <p className="text-ink-soft mb-6">
                 Understanding where these firms operate and the supporting ecosystem provides valuable context
                 for evaluating potential partners:
             </p>
 
             {/* Moved here from the top of the page so the company list comes first. Lazy-loaded. */}
             <figure className="my-8">
-                <div className="relative aspect-video rounded-2xl overflow-hidden border border-neutral-800">
+                <div className="cut-card [--cut:18px] relative aspect-video overflow-hidden [--cut-line:rgba(27,26,23,0.1)]">
                     <Image
                         src="/software-companies-sri-lanka-guide-2026.webp"
                         alt="Illustration of a software developer working at night in an office overlooking Colombo's Lotus Tower"
@@ -184,7 +184,7 @@ export function TechEcosystem() {
                         className="object-cover"
                     />
                 </div>
-                <figcaption className="text-xs text-neutral-600 mt-2">
+                <figcaption className="text-xs text-ink-mute mt-2">
                     Illustration: Colombo, the centre of Sri Lanka&apos;s software industry.
                 </figcaption>
             </figure>
@@ -192,12 +192,12 @@ export function TechEcosystem() {
             <div className="space-y-6 my-8">
                 {hubs.map((hub) => (
                     <div key={hub.name} className="flex gap-4">
-                        <div className="w-10 h-10 bg-[rgb(255,73,37)]/10 rounded-lg flex items-center justify-center shrink-0">
-                            <hub.icon className="w-5 h-5 text-[rgb(255,73,37)]" />
+                        <div className="w-10 h-10 bg-ember/10 rounded-lg flex items-center justify-center shrink-0">
+                            <hub.icon className="w-5 h-5 text-ember-deep" />
                         </div>
                         <div>
-                            <h3 className="text-lg font-bold text-white mb-1">{hub.name}</h3>
-                            <p className="text-neutral-400 m-0 text-sm">{hub.body}</p>
+                            <h3 className="text-lg font-bold text-ink mb-1">{hub.name}</h3>
+                            <p className="text-ink-soft m-0 text-sm">{hub.body}</p>
                         </div>
                     </div>
                 ))}

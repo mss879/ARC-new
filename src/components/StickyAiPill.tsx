@@ -573,6 +573,32 @@ export function StickyAiPill() {
         updateVolume();
     };
 
+    // Other parts of the page open the agents through one window event, e.g.
+    // the home page's "Talk to our agents" section:
+    //   window.dispatchEvent(new CustomEvent("arc:open-agent", { detail: { mode: "chat", prompt } }))
+    // "chat" opens the chat (a prompt, if given, is typed into the box for the
+    // visitor to send); "voice" starts a voice call. The handler is replaced
+    // on every render so it always uses the current state and functions.
+    const openAgentRef = useRef<(event: Event) => void>(() => {});
+    openAgentRef.current = (event: Event) => {
+        const { mode, prompt } =
+            (event as CustomEvent<{ mode?: "chat" | "voice"; prompt?: string }>).detail ?? {};
+        if (mode === "voice") {
+            if (activeMode === "voice" && (isVoiceActive || isVoiceConnecting)) return;
+            setActiveMode("voice");
+            startVoiceSession();
+        } else if (mode === "chat") {
+            if (isVoiceActive || isVoiceConnecting) stopVoiceSession();
+            setActiveMode("chat");
+            if (prompt) setInputValue(prompt);
+        }
+    };
+    useEffect(() => {
+        const handler = (event: Event) => openAgentRef.current(event);
+        window.addEventListener("arc:open-agent", handler);
+        return () => window.removeEventListener("arc:open-agent", handler);
+    }, []);
+
     if (!pillVisible) return null;
 
     return (

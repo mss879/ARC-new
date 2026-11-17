@@ -10,10 +10,12 @@ export default function ServicesLayout({
     children: React.ReactNode;
 }) {
     return (
-        <>
+        // .home-cream is the grey-cream theme; the strip and the footer below the
+        // page need it as much as the page does.
+        <div className="home-cream">
             {children}
             <RelatedServices />
             <Footer />
-        </>
+        </div>
     );
 }

@@ -11,13 +11,13 @@ export function WhatToLookFor() {
                         id="what-to-look-for"
                         className="scroll-mt-24"
                     >
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mt-16 mb-8 flex items-center gap-3">
-                            <Shield className="w-8 h-8 text-[rgb(255,73,37)]" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mt-16 mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                            <Shield className="w-8 h-8 text-ember-ink" />
                             What to Look for in a Software Partner
                         </h2>
 
-                        <p className="text-neutral-300 mb-6">
-                            Finding a vendor is straightforward; finding the <em>right partner</em> requires structured evaluation. Whether you're a startup building an MVP or a Fortune 500 company modernising legacy systems, these six pillars should guide your selection when evaluating <strong>software development companies in Sri Lanka</strong>. For guidance specific to <Link href="/ai-consultants-sri-lanka" className="text-[rgb(255,73,37)] hover:underline">AI consultants</Link>, see our dedicated guide.
+                        <p className="text-ink-soft mb-6">
+                            Finding a vendor is straightforward; finding the <em>right partner</em> requires structured evaluation. Whether you're a startup building an MVP or a Fortune 500 company modernising legacy systems, these six pillars should guide your selection when evaluating <strong>software development companies in Sri Lanka</strong>. For guidance specific to <Link href="/ai-consultants-sri-lanka" className="text-ember-deep hover:underline">AI consultants</Link>, see our dedicated guide.
                         </p>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 my-8">
@@ -55,11 +55,11 @@ export function WhatToLookFor() {
                             ].map((item) => (
                                 <div
                                     key={item.title}
-                                    className="bg-neutral-950 border border-neutral-800 rounded-xl p-6"
+                                    className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-6"
                                 >
-                                    <item.icon className="w-6 h-6 text-[rgb(255,73,37)] mb-3" />
-                                    <h3 className="text-base font-bold text-white mb-2 m-0">{item.title}</h3>
-                                    <p className="text-sm text-neutral-400 m-0">{item.desc}</p>
+                                    <item.icon className="w-6 h-6 text-ember-deep mb-3" />
+                                    <h3 className="text-base font-bold text-ink mb-2 m-0">{item.title}</h3>
+                                    <p className="text-sm text-ink-soft m-0">{item.desc}</p>
                                 </div>
                             ))}
                         </div>
@@ -75,26 +75,26 @@ export function Versus() {
                         id="sri-lanka-vs-india"
                         className="scroll-mt-24"
                     >
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mt-16 mb-8 flex items-center gap-3">
-                            <Scale className="w-8 h-8 text-[rgb(255,73,37)]" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mt-16 mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                            <Scale className="w-8 h-8 text-ember-ink" />
                             Sri Lanka vs India vs Philippines: Which Should You Choose?
                         </h2>
 
-                        <p className="text-neutral-300 mb-6">
+                        <p className="text-ink-soft mb-6">
                             This is one of the most common questions when evaluating offshore software development options. Each market has distinct advantages depending on your project requirements:
                         </p>
 
                         <div className="overflow-x-auto -mx-4 md:mx-0 my-8">
-                            <table className="w-full text-sm border border-neutral-800 min-w-[700px]">
+                            <table className="w-full text-sm border border-ink/10 min-w-[700px]">
                                 <thead>
-                                    <tr className="border-b border-neutral-800 bg-neutral-950">
-                                        <th className="p-4 text-left text-neutral-400 font-semibold">Factor</th>
-                                        <th className="p-4 text-left text-neutral-400 font-semibold">🇱🇰 Sri Lanka</th>
-                                        <th className="p-4 text-left text-neutral-400 font-semibold">🇮🇳 India</th>
-                                        <th className="p-4 text-left text-neutral-400 font-semibold">🇵🇭 Philippines</th>
+                                    <tr className="border-b border-ink/10 bg-transparent">
+                                        <th className="p-4 text-left text-ink-soft font-semibold">Factor</th>
+                                        <th className="p-4 text-left text-ink-soft font-semibold">🇱🇰 Sri Lanka</th>
+                                        <th className="p-4 text-left text-ink-soft font-semibold">🇮🇳 India</th>
+                                        <th className="p-4 text-left text-ink-soft font-semibold">🇵🇭 Philippines</th>
                                     </tr>
                                 </thead>
-                                <tbody className="text-neutral-300">
+                                <tbody className="text-ink-soft">
                                     {[
                                         { factor: "Talent Pool Size", sl: "About 175,000 (SLASSCOM)", india: "About 5.95 million (NASSCOM, FY26)", ph: "About 1.9 million in IT-BPM (IBPAP, 2025)" },
                                         { factor: "English Proficiency", sl: "Strong in the IT workforce; 73rd in EF EPI 2025", india: "Varies by region; 74th in EF EPI 2025", ph: "Very High (US-influenced)" },
@@ -104,8 +104,8 @@ export function Versus() {
                                         { factor: "Key Differentiator", sl: "Elite talent density, design quality", india: "Massive scale, every niche covered", ph: "Cultural alignment with US clients" },
                                         { factor: "Scalability Risk", sl: "Limited for 100+ teams", india: "Low — massive pipeline", ph: "Moderate — engineering talent thinner" },
                                     ].map((row) => (
-                                        <tr key={row.factor} className="border-b border-neutral-800/50">
-                                            <td className="p-4 font-medium text-white whitespace-nowrap">{row.factor}</td>
+                                        <tr key={row.factor} className="border-b border-ink/10">
+                                            <td className="p-4 font-medium text-ink whitespace-nowrap">{row.factor}</td>
                                             <td className="p-4 text-sm">{row.sl}</td>
                                             <td className="p-4 text-sm">{row.india}</td>
                                             <td className="p-4 text-sm">{row.ph}</td>
@@ -115,18 +115,18 @@ export function Versus() {
                             </table>
                         </div>
 
-                        <p className="text-neutral-500 text-xs italic">
-                            Talent pool figures: <a href={SOURCES.slasscomReview.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">SLASSCOM</a>, <a href={SOURCES.nasscomWorkforce.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">NASSCOM</a> and <a href={SOURCES.ibpapWorkforce.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">IBPAP</a>. English ranking: <a href={SOURCES.efEpi2025.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">EF English Proficiency Index 2025</a>. The qualitative rows are our own assessment.
+                        <p className="text-ink-mute text-xs italic">
+                            Talent pool figures: <a href={SOURCES.slasscomReview.url} target="_blank" rel="noopener noreferrer" className="text-ember-deep hover:underline">SLASSCOM</a>, <a href={SOURCES.nasscomWorkforce.url} target="_blank" rel="noopener noreferrer" className="text-ember-deep hover:underline">NASSCOM</a> and <a href={SOURCES.ibpapWorkforce.url} target="_blank" rel="noopener noreferrer" className="text-ember-deep hover:underline">IBPAP</a>. English ranking: <a href={SOURCES.efEpi2025.url} target="_blank" rel="noopener noreferrer" className="text-ember-deep hover:underline">EF English Proficiency Index 2025</a>. The qualitative rows are our own assessment.
                         </p>
 
-                        <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-6 my-8">
-                            <h3 className="text-lg font-bold text-white mb-3 m-0">The Bottom Line</h3>
-                            <p className="text-neutral-400 m-0 text-sm">
-                                <strong className="text-white">Choose Sri Lanka</strong> when you need a high-quality team of 3–30 developers with excellent communication, design sensibility, and willingness to operate as a genuine extension of your team. The selective talent pipeline means higher average skill per developer.
+                        <div className="cut-card [--cut:14px] relative bg-transparent [--cut-line:rgba(27,26,23,0.1)] p-6 my-8">
+                            <h3 className="text-lg font-bold text-ink mb-3 m-0">The Bottom Line</h3>
+                            <p className="text-ink-soft m-0 text-sm">
+                                <strong className="text-ink">Choose Sri Lanka</strong> when you need a high-quality team of 3–30 developers with excellent communication, design sensibility, and willingness to operate as a genuine extension of your team. The selective talent pipeline means higher average skill per developer.
                                 <br /><br />
-                                <strong className="text-white">Choose India</strong> when you need massive scale (50–500+ developers), hyper-specific niche skills, or the lowest possible entry-level rates. India's ecosystem covers virtually every technology and domain.
+                                <strong className="text-ink">Choose India</strong> when you need massive scale (50–500+ developers), hyper-specific niche skills, or the lowest possible entry-level rates. India's ecosystem covers virtually every technology and domain.
                                 <br /><br />
-                                <strong className="text-white">Choose the Philippines</strong> when your primary need is BPO, customer support, or content operations — especially if you need strong cultural alignment with US clientele. For deep software engineering, Sri Lanka and India typically offer stronger options.
+                                <strong className="text-ink">Choose the Philippines</strong> when your primary need is BPO, customer support, or content operations — especially if you need strong cultural alignment with US clientele. For deep software engineering, Sri Lanka and India typically offer stronger options.
                             </p>
                         </div>
                     </section>
@@ -141,12 +141,12 @@ export function WhyOutsource() {
                         id="why-outsource"
                         className="scroll-mt-24"
                     >
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mt-16 mb-8 flex items-center gap-3">
-                            <Globe className="w-8 h-8 text-[rgb(255,73,37)]" />
+                        <h2 className="text-3xl md:text-4xl font-medium text-ink mt-16 mb-8 flex items-center gap-3 tracking-[-0.035em]">
+                            <Globe className="w-8 h-8 text-ember-ink" />
                             Why Outsource Software Development to Sri Lanka?
                         </h2>
 
-                        <p className="text-neutral-300 mb-6">
+                        <p className="text-ink-soft mb-6">
                             Sri Lanka may not have the sheer scale of India or the Philippines, but that's increasingly seen as an advantage. Here is what sets Sri Lankan <strong>software companies</strong> apart in the global outsourcing landscape:
                         </p>
 
@@ -184,18 +184,18 @@ export function WhyOutsource() {
                                 },
                             ].map((item) => (
                                 <div key={item.title} className="flex gap-4">
-                                    <div className="w-10 h-10 bg-[rgb(255,73,37)]/10 rounded-lg flex items-center justify-center shrink-0">
-                                        <item.icon className="w-5 h-5 text-[rgb(255,73,37)]" />
+                                    <div className="w-10 h-10 bg-ember/10 rounded-lg flex items-center justify-center shrink-0">
+                                        <item.icon className="w-5 h-5 text-ember-deep" />
                                     </div>
                                     <div>
-                                        <h3 className="text-lg font-bold text-white mb-1">{item.title}</h3>
-                                        <p className="text-neutral-400 m-0 text-sm">{item.desc}</p>
+                                        <h3 className="text-lg font-bold text-ink mb-1">{item.title}</h3>
+                                        <p className="text-ink-soft m-0 text-sm">{item.desc}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
-                        <p className="text-neutral-500 text-xs italic">
-                            Sources: <a href={SOURCES.efEpi2025.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">EF English Proficiency Index 2025</a>, <a href={SOURCES.slasscomGraduates.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">SLASSCOM graduate figures</a>, <a href={SOURCES.ieeeXtreme.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">IEEEXtreme results</a>, <a href={SOURCES.budgetSpeech2026.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">Budget Speech 2026</a>, <a href={SOURCES.govTech.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">GovTech and ICTA</a>, <a href={SOURCES.wipo.url} target="_blank" rel="noopener noreferrer" className="text-[rgb(255,73,37)] hover:underline">WIPO treaty membership</a>.
+                        <p className="text-ink-mute text-xs italic">
+                            Sources: <a href={SOURCES.efEpi2025.url} target="_blank" rel="noopener noreferrer" className="text-ember-deep hover:underline">EF English Proficiency Index 2025</a>, <a href={SOURCES.slasscomGraduates.url} target="_blank" rel="noopener noreferrer" className="text-ember-deep hover:underline">SLASSCOM graduate figures</a>, <a href={SOURCES.ieeeXtreme.url} target="_blank" rel="noopener noreferrer" className="text-ember-deep hover:underline">IEEEXtreme results</a>, <a href={SOURCES.budgetSpeech2026.url} target="_blank" rel="noopener noreferrer" className="text-ember-deep hover:underline">Budget Speech 2026</a>, <a href={SOURCES.govTech.url} target="_blank" rel="noopener noreferrer" className="text-ember-deep hover:underline">GovTech and ICTA</a>, <a href={SOURCES.wipo.url} target="_blank" rel="noopener noreferrer" className="text-ember-deep hover:underline">WIPO treaty membership</a>.
                         </p>
                     </section>
         </>

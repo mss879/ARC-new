@@ -23,10 +23,10 @@ if (typeof window !== "undefined") void loadLoadingScreen().catch(() => undefine
 
 // How long assets (hero video, images) get before the preloader opens anyway.
 // The finale used to wait up to 20 seconds for a 3.7 MB hero video, which on
-// a slow mobile connection meant twenty seconds of a pulsing logo. Seven is
-// still longer than the build itself; the video starts the moment it can
+// a slow mobile connection meant twenty seconds of a pulsing logo. Four and a
+// half is still longer than the build itself; the video starts the moment it can
 // behind the opened doors (Hero plays on canplaythrough).
-const ASSET_TIMEOUT_MS = 7000;
+const ASSET_TIMEOUT_MS = 4500;
 // Absolute cap — if the 3D chunk or WebGL ever fails, never strand users on black
 const FAILSAFE_MS = 15000;
 
@@ -90,8 +90,17 @@ const PreloaderProvider = ({ children }: { children: React.ReactNode }) => {
     };
   }, [show, finish]);
 
+  // The cookie banner waits for this before it appears on the home page, so
+  // it is not hidden behind the preloader's doors.
+  const isLoading = show && !revealing;
+  useEffect(() => {
+    if (isLoading) return;
+    (window as unknown as { __arcPreloaderDone?: boolean }).__arcPreloaderDone = true;
+    window.dispatchEvent(new Event("arc:preloader-done"));
+  }, [isLoading]);
+
   return (
-    <PreloaderContext.Provider value={{ isLoading: show && !revealing, markVideoReady }}>
+    <PreloaderContext.Provider value={{ isLoading, markVideoReady }}>
       {show && (
         <>
           {/* Server-rendered shell: covers the page from the very first paint,
@@ -102,11 +111,11 @@ const PreloaderProvider = ({ children }: { children: React.ReactNode }) => {
           {!overlayMounted && (
             <div
               id="arc-preloader-shell"
-              className="fixed inset-0 z-[70] bg-[#020202] flex items-center justify-center pointer-events-auto"
+              className="fixed inset-0 z-[70] bg-[#E8E6E0] flex items-center justify-center pointer-events-auto"
             >
               <div className="relative w-16 h-16">
-                <div className="absolute inset-0 rounded-full border-2 border-orange-500/10" />
-                <div className="absolute inset-0 rounded-full border-t-2 border-orange-500 animate-spin shadow-[0_0_15px_rgba(249,115,22,0.2)]" />
+                <div className="absolute inset-0 rounded-full border-2 border-[#1B1A17]/10" />
+                <div className="absolute inset-0 rounded-full border-t-2 border-[#FF4925] animate-spin" />
               </div>
             </div>
           )}

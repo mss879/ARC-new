@@ -35,7 +35,7 @@ const ValuesSection = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative py-20 px-6 bg-black"
+      className="relative py-20 px-6 bg-transparent"
       style={{
         willChange: 'transform',
         opacity: isVisible ? 1 : 0,
@@ -55,26 +55,24 @@ const ValuesSection = () => {
         >
           {/* Our Mission */}
           <div 
-            className="relative rounded-2xl p-8 md:p-12 overflow-hidden"
+            className="cut-card [--cut:18px] relative p-8 md:p-12 overflow-hidden"
             style={{
-              background: 'linear-gradient(to bottom, rgba(20, 20, 20, 0.8) 0%, rgba(30, 30, 30, 0.4) 100%)',
+              background: 'linear-gradient(160deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.5) 100%)',
               backdropFilter: 'blur(10px)',
               border: '1px solid rgba(255, 73, 37, 0.2)'
             }}
           >
             <div className="relative z-10">
               <h2 
-                className="text-3xl md:text-4xl font-bold text-white mb-6"
+                className="text-3xl md:text-4xl font-medium text-ink mb-6 tracking-[-0.035em]"
                 style={{
-                  fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif"
                 }}
               >
                 Our Mission
               </h2>
               <p 
-                className="text-base md:text-lg text-white/80 leading-relaxed"
+                className="text-base md:text-lg text-ink leading-relaxed"
                 style={{
-                  fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif"
                 }}
               >
                 To revolutionize businesses through innovative AI automation and strategic digital marketing, fostering growth and efficiency.
@@ -91,26 +89,24 @@ const ValuesSection = () => {
 
           {/* Our Vision */}
           <div 
-            className="relative rounded-2xl p-8 md:p-12 overflow-hidden"
+            className="cut-card [--cut:18px] relative p-8 md:p-12 overflow-hidden"
             style={{
-              background: 'linear-gradient(to bottom, rgba(20, 20, 20, 0.8) 0%, rgba(30, 30, 30, 0.4) 100%)',
+              background: 'linear-gradient(160deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.5) 100%)',
               backdropFilter: 'blur(10px)',
               border: '1px solid rgba(255, 73, 37, 0.2)'
             }}
           >
             <div className="relative z-10">
               <h2 
-                className="text-3xl md:text-4xl font-bold text-white mb-6"
+                className="text-3xl md:text-4xl font-medium text-ink mb-6 tracking-[-0.035em]"
                 style={{
-                  fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif"
                 }}
               >
                 Our Vision
               </h2>
               <p 
-                className="text-base md:text-lg text-white/80 leading-relaxed"
+                className="text-base md:text-lg text-ink leading-relaxed"
                 style={{
-                  fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif"
                 }}
               >
                 To be a global leader in AI solutions, setting new standards in digital transformation.
@@ -128,9 +124,9 @@ const ValuesSection = () => {
 
         {/* Founder's Note */}
         <div 
-          className="relative rounded-2xl p-8 md:p-12 overflow-hidden"
+          className="cut-card [--cut:18px] relative p-8 md:p-12 overflow-hidden"
           style={{
-            background: 'linear-gradient(to bottom, rgba(20, 20, 20, 0.8) 0%, rgba(30, 30, 30, 0.4) 100%)',
+            background: 'linear-gradient(160deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.5) 100%)',
             backdropFilter: 'blur(10px)',
             border: '1px solid rgba(255, 73, 37, 0.2)',
             opacity: isVisible ? 1 : 0,
@@ -140,17 +136,15 @@ const ValuesSection = () => {
         >
           <div className="relative z-10">
             <h2 
-              className="text-3xl md:text-4xl font-bold text-white mb-6 text-center"
+              className="text-3xl md:text-4xl font-medium text-ink mb-6 text-center tracking-[-0.035em]"
               style={{
-                fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif"
               }}
             >
               Founder's Note
             </h2>
             <p 
-              className="text-base md:text-lg text-white/80 leading-relaxed text-center max-w-4xl mx-auto mb-8"
+              className="text-base md:text-lg text-ink leading-relaxed text-center max-w-4xl mx-auto mb-8"
               style={{
-                fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif"
               }}
             >
               "ARC AI was born from a vision to harness the power of AI to solve real-world business challenges. Our journey has been one of continuous learning, innovation, and growth. We're committed to pushing the boundaries of what's possible with AI, always with the goal of delivering tangible value to our clients. As we look to the future, we're excited about the endless possibilities that lie ahead and the positive impact we can make on businesses worldwide."
@@ -176,9 +170,8 @@ const ValuesSection = () => {
               </div>
               <div className="text-left">
                 <h3 
-                  className="text-xl font-bold text-white"
+                  className="text-xl font-bold text-ink"
                   style={{
-                    fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif"
                   }}
                 >
                   Shahid Shamir
@@ -186,8 +179,7 @@ const ValuesSection = () => {
                 <p 
                   className="text-sm"
                   style={{
-                    fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-                    color: 'rgba(255, 73, 37, 0.8)'
+                    color: '#B62A0B'
                   }}
                 >
                   Founder & CEO

@@ -63,6 +63,7 @@ export default async function Portfolio() {
       title: "Luxury Restaurant",
       description: "Elegant restaurant template with sophisticated design and seamless user experience.",
       image: "/luxary restaurent.webp",
+      imageSize: { width: 1600, height: 799 },
       link: "https://luxaryrestaurant-demo.netlify.app/",
     },
     {
@@ -70,6 +71,7 @@ export default async function Portfolio() {
       title: "Travel Agency",
       description: "Modern travel agency template designed to inspire wanderlust and drive bookings.",
       image: "/travelagency.webp",
+      imageSize: { width: 1600, height: 766 },
       link: "https://beautiful-conkies-2df92d.netlify.app/",
     },
     {
@@ -77,6 +79,7 @@ export default async function Portfolio() {
       title: "Real Estate",
       description: "Professional real estate template with property listings and advanced search features.",
       image: "/real-estate.webp",
+      imageSize: { width: 1600, height: 800 },
       link: "https://silly-bombolone-0213cb.netlify.app/",
     },
     {
@@ -84,6 +87,7 @@ export default async function Portfolio() {
       title: "Corporate Website",
       description: "Professional corporate website template with modern design and clean aesthetics.",
       image: "/Corporate website.webp",
+      imageSize: { width: 3660, height: 1825 },
       link: "https://courageous-fenglisu-1afb0d.netlify.app/",
     },
     {
@@ -91,6 +95,7 @@ export default async function Portfolio() {
       title: "Music/Radio Website",
       description: "Dynamic music and radio website template with engaging multimedia features.",
       image: "/Musicradio website.webp",
+      imageSize: { width: 1600, height: 762 },
       link: "https://music-demo1.netlify.app/",
     },
     {
@@ -98,12 +103,13 @@ export default async function Portfolio() {
       title: "Travel/Tourism",
       description: "Stunning travel and tourism website template designed to showcase destinations.",
       image: "/traveltourism.webp",
+      imageSize: { width: 1600, height: 805 },
       link: "https://delftdemo.netlify.app/",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="home-cream min-h-screen bg-transparent text-ink">
       <ScrollToTop />
       <SchemaOrg
         type="portfolio"
@@ -127,20 +133,32 @@ export default async function Portfolio() {
         {/* Portfolio Grid */}
         <section className="relative px-6 lg:px-12 pb-32" aria-label="Portfolio projects">
           <div className="max-w-[1800px] w-full mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            {/* Each card spans two rows (picture, then text) shared with the
+                card beside it, so the texts in a row line up even when the
+                two screenshots are different shapes: a shorter one keeps its
+                shape with a little space under it. */}
+            <div className="grid grid-cols-1 gap-x-8 lg:grid-cols-2 lg:gap-x-12">
               {portfolioItems.map((item, index) => {
-                const cardClassName = `group transition-all duration-700 opacity-100 translate-y-0${item.link ? " cursor-pointer" : ""}`;
+                const cardClassName = `group grid grid-rows-subgrid row-span-2 transition-all duration-700 opacity-100 translate-y-0${item.link ? " cursor-pointer" : ""}`;
                 const cardStyle = { transitionDelay: `${index * 150}ms` };
+                // With its pixel size known, the tile takes the screenshot's own
+                // shape and the image fills it, cut corners included, with
+                // nothing cropped. Otherwise the image is shown whole in a
+                // 39:20 tile.
+                const imageSize = "imageSize" in item ? item.imageSize : undefined;
 
                 const cardContent = (
                   <>
                     {/* Image Container */}
-                    <div className="relative aspect-[39/20] overflow-hidden rounded-lg mb-6 bg-zinc-950 border border-white/10 transition-colors duration-500 group-hover:border-[rgb(255,73,37)]/40">
+                    <div
+                      className={`cut-card [--cut:12px] relative self-start overflow-hidden mb-6 bg-transparent [--cut-line:rgba(27,26,23,0.1)] transition-colors duration-500 group-hover:[--cut-line:rgba(255,73,37,0.4)]${imageSize ? "" : " aspect-[39/20]"}`}
+                      style={imageSize ? { aspectRatio: `${imageSize.width} / ${imageSize.height}` } : undefined}
+                    >
                       <NextImage
                         src={item.image}
                         alt={`${item.title} - Custom Web Design & Software built by ARC AI`}
                         fill
-                        className="object-contain"
+                        className={imageSize ? "object-cover" : "object-contain"}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         quality={85}
                         priority={index < 4}
@@ -148,11 +166,11 @@ export default async function Portfolio() {
 
                       {/* Hover Overlay - only for projects with a live link */}
                       {item.link && (
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-500 flex items-center justify-center z-20">
+                        <div className="absolute inset-0 bg-paper/0 group-hover:bg-paper/40 transition-all duration-500 flex items-center justify-center z-20">
                           <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            <div className="w-16 h-16 rounded-full border-2 border-white flex items-center justify-center backdrop-blur-sm bg-white/10">
+                            <div className="w-16 h-16 rounded-full border-2 border-white flex items-center justify-center bg-white">
                               <svg
-                                className="w-6 h-6 text-white"
+                                className="w-6 h-6 text-ink"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -172,30 +190,28 @@ export default async function Portfolio() {
                     </div>
 
                     {/* Project Info */}
-                    <div className="space-y-3">
+                    <div className="space-y-3 self-start pb-8 lg:pb-12">
                       {/* Status */}
                       <span
                         className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider border ${item.status === "live"
-                          ? "bg-green-500/10 text-green-400 border-green-500/30"
-                          : "bg-orange-500/10 text-orange-400 border-orange-500/30"
+                          ? "bg-green-500/10 text-green-700 border-green-500/30"
+                          : "bg-ember/10 text-ember-deep border-ember/30"
                           }`}
                       >
                         <span
-                          className={`w-1.5 h-1.5 rounded-full ${item.status === "live" ? "bg-green-400" : "bg-orange-400"}`}
+                          className={`w-1.5 h-1.5 rounded-full ${item.status === "live" ? "bg-green-400" : "bg-ember"}`}
                           aria-hidden="true"
                         />
                         {item.status === "live" ? "Live" : "In Development"}
                       </span>
                       <h3
-                        className="text-3xl md:text-4xl font-bold text-white group-hover:text-[rgb(255,73,37)] transition-colors duration-300 uppercase"
+                        className="text-3xl md:text-4xl font-bold text-ink group-hover:text-ember-ink transition-colors duration-300 uppercase"
                         style={{
-                          fontFamily:
-                            "'Helvetica Neue', Helvetica, Arial, sans-serif",
                         }}
                       >
                         {item.title}
                       </h3>
-                      <p className="text-base md:text-lg text-zinc-300 leading-relaxed">
+                      <p className="text-base md:text-lg text-ink-soft leading-relaxed">
                         {item.description}
                       </p>
                     </div>
@@ -235,18 +251,17 @@ export default async function Portfolio() {
             {/* Section Heading */}
             <div className="mb-16 text-center">
               <h2
-                className="text-5xl md:text-6xl lg:text-7xl font-bold text-white uppercase tracking-tight"
+                className="text-5xl md:text-6xl lg:text-7xl font-medium text-ink tracking-[-0.035em]"
                 style={{
-                  fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
                 }}
               >
                 Demos built for clients
               </h2>
-              <div className="w-24 h-1 bg-[rgb(255,73,37)] mx-auto mt-6"></div>
+              <div className="w-24 h-1 bg-ember mx-auto mt-6"></div>
             </div>
 
             {/* Templates Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+            <div className="grid grid-cols-1 gap-x-8 lg:grid-cols-3 lg:gap-x-12">
               {customTemplates.map((template, index) => (
                 <a
                   key={template.id}
@@ -254,37 +269,39 @@ export default async function Portfolio() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${template.title} demo (opens in new tab)`}
-                  className="group cursor-pointer transition-all duration-700 opacity-100 translate-y-0"
+                  className="group grid grid-rows-subgrid row-span-2 cursor-pointer transition-all duration-700 opacity-100 translate-y-0"
                   style={{
                     transitionDelay: `${index * 150}ms`,
                   }}
                 >
                   {/* Image Container */}
-                  <div className="relative aspect-[39/20] overflow-hidden rounded-lg mb-6 bg-zinc-950 border border-white/10 transition-colors duration-500 group-hover:border-[rgb(255,73,37)]/40">
+                  <div
+                    className="cut-card [--cut:12px] relative self-start overflow-hidden mb-6 bg-transparent [--cut-line:rgba(27,26,23,0.1)] transition-colors duration-500 group-hover:[--cut-line:rgba(255,73,37,0.4)]"
+                    style={{ aspectRatio: `${template.imageSize.width} / ${template.imageSize.height}` }}
+                  >
                     <NextImage
                       src={template.image}
                       alt={`${template.title} - Premium Web Design Template by ARC AI`}
                       fill
-                      className="object-contain"
+                      className="object-cover"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       quality={85}
                     />
 
                     {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-700 z-10" />
+                    <div className="absolute inset-0 bg-paper/0 group-hover:bg-paper/20 transition-all duration-700 z-10" />
                   </div>
 
                   {/* Template Info */}
-                  <div className="space-y-3">
+                  <div className="space-y-3 self-start pb-8 lg:pb-12">
                     <h3
-                      className="text-2xl md:text-3xl font-bold text-white group-hover:text-[rgb(255,73,37)] transition-colors duration-300 uppercase"
+                      className="text-2xl md:text-3xl font-bold text-ink group-hover:text-ember-ink transition-colors duration-300 uppercase"
                       style={{
-                        fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
                       }}
                     >
                       {template.title}
                     </h3>
-                    <p className="text-base text-zinc-300 leading-relaxed">
+                    <p className="text-base text-ink-soft leading-relaxed">
                       {template.description}
                     </p>
                   </div>
@@ -295,11 +312,11 @@ export default async function Portfolio() {
         </section>
 
         {/* CTA Section */}
-        <CTA />
+        <CTA tone="cream" />
 
       </main>
 
-      <Footer />
+      <Footer tone="dark" />
     </div>
   );
 }

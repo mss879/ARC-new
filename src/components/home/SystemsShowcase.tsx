@@ -1,3 +1,5 @@
+import { ArrowDown } from "lucide-react";
+import Image from "next/image";
 import Showcase from "./showcases/Showcase";
 import AgentsMock from "./showcases/AgentsMock";
 import PosMock from "./showcases/PosMock";
@@ -10,9 +12,10 @@ import ContentOfficeMock from "./showcases/ContentOfficeMock";
  *
  * Two sections, so the page can put "Why us" between them:
  *
- *   SystemsIntro     the "(What we build)" heading block
- *   SystemsPreviews  the five systems, each with a short explanation and a
- *                    demo drawn in code
+ *   SystemsIntro     the "What we build" heading block and five tiles that
+ *                    jump to the previews
+ *   SystemsPreviews  the five systems, each a card with a short explanation
+ *                    and a demo drawn in code
  *
  * Together they replaced a run of generic agency blocks ("Why choose us", "AI
  * features", a social-media integrations marquee) that said nothing a visitor
@@ -29,39 +32,58 @@ const SYSTEMS = [
 
 export function SystemsIntro() {
   return (
-    <section className="relative bg-black px-6 pb-16 pt-24 lg:px-12 lg:pb-20 lg:pt-32" aria-labelledby="systems-heading">
-      <div className="mx-auto max-w-[1400px]">
+    <section
+      className="relative overflow-hidden px-4 pb-10 pt-20 md:px-8 lg:px-20 lg:pb-14 lg:pt-28"
+      aria-labelledby="systems-heading"
+    >
+      <div className="relative mx-auto max-w-[1400px]">
         {/* The heading takes the full width so each of its two lines stays on
-            one row; its size follows the window so the longer line always
-            fits. On a phone the second line is allowed to wrap. */}
-        <div>
-          <p className="text-xs font-medium uppercase tracking-wider text-[rgb(119,119,119)]">(WHAT WE BUILD)</p>
+            one row; from 768px its size follows the window so the longer line
+            always fits. On a phone it is capped at 1/8.1 of its box (cqw):
+            "and the AI inside it" is 7.7 times the font size. */}
+        <div className="[container-type:inline-size]">
           <h2
             id="systems-heading"
-            className="mt-4 text-[length:clamp(2.25rem,12.5vw,3rem)] font-black uppercase leading-[0.92] tracking-tight text-white md:text-[length:clamp(3.5rem,8vw,7rem)]"
+            className="scroll-mt-28 text-[length:min(3.25rem,100cqw/8.1)] font-medium leading-[1.02] tracking-[-0.04em] text-ink md:text-[length:clamp(3.5rem,7.8vw,7rem)]"
           >
             <span className="block whitespace-nowrap">The system,</span>
-            <span className="block text-[rgb(255,73,37)] md:whitespace-nowrap">and the AI inside it</span>
+            <span className="block whitespace-nowrap text-ember-ink">and the AI inside it</span>
           </h2>
-          <div className="mt-8 grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:items-end lg:gap-16">
-            <p className="max-w-2xl text-base leading-relaxed text-zinc-400 md:text-lg">
-              ARC AI is an AI automation and software company in Colombo. We build the systems a Sri Lankan business
-              runs on, and the AI agents and workflow automation that work inside them. Further down this page, each
-              one is shown as a short preview of the real thing.
-            </p>
-            <nav aria-label="Systems on this page" className="flex flex-wrap gap-2 lg:justify-end">
-              {SYSTEMS.map((system) => (
-                <a
-                  key={system.id}
-                  href={`#${system.id}`}
-                  className="whitespace-nowrap rounded-full border border-white/15 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-zinc-300 transition-colors hover:border-[rgb(255,73,37)] hover:text-white"
-                >
-                  {system.label}
-                </a>
-              ))}
-            </nav>
-          </div>
         </div>
+
+        <div className="mt-8 grid gap-8 lg:mt-10 lg:grid-cols-2 lg:gap-16">
+          <p className="max-w-2xl text-base leading-relaxed text-ink-soft md:text-lg lg:col-start-2">
+            ARC AI is an AI automation and software company in Colombo. We build the systems a Sri Lankan business
+            runs on, and the AI agents and workflow automation that work inside them.
+          </p>
+        </div>
+
+        {/* The five systems as tiles; each jumps to its preview further down. */}
+        <nav aria-label="Systems on this page" className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-5 lg:mt-14 lg:gap-4">
+          {SYSTEMS.map((system) => (
+            <a
+              key={system.id}
+              href={`#${system.id}`}
+              className="cream-card group flex min-w-0 flex-col gap-3 p-4 last:col-span-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ember motion-safe:transition-transform motion-safe:duration-300 motion-safe:hover:-translate-y-1 md:last:col-span-1 lg:gap-4 lg:p-5"
+            >
+              <Image
+                src={`/home-system-icons/${system.id}.webp`}
+                alt=""
+                width={288}
+                height={288}
+                unoptimized
+                className="mx-auto size-24 max-w-full object-contain drop-shadow-[0_6px_9px_rgba(90,47,24,0.17)] lg:size-32"
+              />
+              <span className="mt-auto flex min-h-9 items-center justify-between gap-2 text-sm font-medium leading-tight text-ink lg:text-base xl:text-lg">
+                {system.label}
+                <ArrowDown
+                  className="size-4 shrink-0 text-ink-mute group-hover:text-ember-deep motion-safe:transition-transform motion-safe:group-hover:translate-y-0.5"
+                  aria-hidden="true"
+                />
+              </span>
+            </a>
+          ))}
+        </nav>
       </div>
     </section>
   );
@@ -69,22 +91,22 @@ export function SystemsIntro() {
 
 export function SystemsPreviews() {
   return (
-    <section className="relative bg-black px-6 pb-8 pt-16 lg:px-12 lg:pt-24" aria-labelledby="previews-heading">
+    <section className="relative px-4 pb-10 pt-16 md:px-8 lg:px-20 lg:pt-24" aria-labelledby="previews-heading">
       <div className="mx-auto max-w-[1400px]">
-        <div className="pb-12 lg:pb-16">
-          <p className="text-xs font-medium uppercase tracking-wider text-[rgb(119,119,119)]">(SEE IT WORKING)</p>
+        <div className="pb-10 lg:pb-14">
           <h2
             id="previews-heading"
-            className="mt-4 text-4xl font-black uppercase leading-[0.95] tracking-tight text-white md:text-6xl"
+            className="text-4xl font-medium leading-[1.02] tracking-[-0.04em] text-ink md:text-6xl lg:text-7xl"
           >
-            Five systems, <span className="text-[rgb(255,73,37)]">in motion</span>
+            Five systems, <span className="text-ember-ink">in motion</span>
           </h2>
         </div>
 
+        <div className="space-y-4 lg:space-y-6">
         <Showcase
           id="ai-agents"
           index="01"
-          label="AI AGENTS"
+          label="AI agents"
           title="Agents that answer, book and sell"
           body="AI chatbots and voice agents for WhatsApp, your website and your phone line. They answer in Sinhala, Tamil and English from your own product and price information, and pass the conversation to your team when it needs a person."
           points={[
@@ -100,7 +122,7 @@ export function SystemsPreviews() {
         <Showcase
           id="point-of-sale"
           index="02"
-          label="POINT OF SALE"
+          label="Point of sale"
           title="A till that keeps selling"
           body="Point of sale built for Sri Lankan shops: checkout, stock, credit customers and shifts on one screen, in English, Sinhala and Tamil. It carries on when the internet drops and syncs when the connection is back."
           points={[
@@ -117,7 +139,7 @@ export function SystemsPreviews() {
         <Showcase
           id="erp"
           index="03"
-          label="ERP AND BACK OFFICE"
+          label="ERP and back office"
           title="The whole business on one screen"
           body="Custom ERP systems that join up sales, stock, purchasing, finance, HR and service jobs, with roles and approvals that follow how your company actually works."
           points={[
@@ -133,7 +155,7 @@ export function SystemsPreviews() {
         <Showcase
           id="online-stores"
           index="04"
-          label="SMART E-COMMERCE"
+          label="Smart e-commerce"
           title="Stores that follow the order through"
           body="Online stores with fast checkout, cash on delivery and card payments, where stock, orders and customer updates stay in step from the first click to the doorstep."
           points={[
@@ -150,7 +172,7 @@ export function SystemsPreviews() {
         <Showcase
           id="content-office"
           index="05"
-          label="CONTENT OFFICE"
+          label="Content Office"
           title="Your own AI content team"
           body="Brief it in one sentence. A team of AI agents researches, writes, designs and checks every post, shows it to you for approval, then publishes to Instagram and Facebook."
           points={[
@@ -162,6 +184,7 @@ export function SystemsPreviews() {
         >
           <ContentOfficeMock />
         </Showcase>
+        </div>
       </div>
     </section>
   );
