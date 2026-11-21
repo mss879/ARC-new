@@ -3,7 +3,8 @@
   command = "npm run build"
 
 [build.environment]
-  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_GOOGLE_MAPS_API_KEY"
+  # Public by design (built into the site's JavaScript), so the secret scan must not stop the build over them.
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,NEXT_PUBLIC_TURNSTILE_SITE_KEY"
   SECRETS_SCAN_SMART_DETECTION_ENABLED = "false"
 
 # Redirect HTTP to HTTPS and non-www to www (canonical)

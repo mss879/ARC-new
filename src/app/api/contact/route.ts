@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { supabaseAdmin } from '@/lib/supabase-admin';
+import { turnstileEnabled, verifyTurnstile } from '@/lib/turnstile';
+
+/** A person cannot fill in the form faster than this. */
+const MIN_FILL_MS = 3000;
+
 // ── In-memory Rate Limiter ──────────────────────────────────────────────────
 // Tracks submissions per IP. Resets after the time window.
 // Simple but effective for single-instance deployments (Netlify Functions).
@@ -60,6 +66,15 @@ export async function POST(req: NextRequest) {
         }
 
         const body = await req.json().catch(() => null);
+
+        // ── Bot check 1: the hidden trap field ──────────────────────────────
+        // People never see it; bots that fill in every field fill it too. The
+        // sender gets the normal "thank you" and nothing is sent anywhere, so
+        // a bot learns nothing from the reply.
+        if (typeof body?.extra_info === 'string' && body.extra_info.trim() !== '') {
+            console.warn('Contact form: dropped a submission that filled the hidden trap field');
+            return NextResponse.json({ success: true });
+        }
 
         // Validate required fields. A visitor leaves one way to reach them:
         // a phone number or an email, whichever they prefer.
@@ -140,12 +155,47 @@ export async function POST(req: NextRequest) {
             );
         }
 
+        // ── Bot check 2: faster than a person can type ──────────────────────
+        // The form reports how long it had been open. Missing means an old
+        // copy of the page, or a request that did not come from the form.
+        const elapsedMs = Number(body.elapsed_ms);
+        if (!Number.isFinite(elapsedMs)) {
+            return NextResponse.json(
+                { error: 'Please refresh the page and send your message again.' },
+                { status: 400 }
+            );
+        }
+        if (elapsedMs < MIN_FILL_MS) {
+            console.warn(`Contact form: refused a submission sent ${Math.round(elapsedMs)} ms after the form opened`);
+            return NextResponse.json(
+                { error: 'That was very quick. Please wait a few seconds and press Submit again.' },
+                { status: 400 }
+            );
+        }
+
+        // ── Bot check 3: Cloudflare Turnstile, when its keys are set ────────
+        if (turnstileEnabled()) {
+            const check = await verifyTurnstile(body.turnstileToken, ip);
+            if (!check.ok) {
+                console.warn('Contact form: Turnstile check failed:', check.reason);
+                return NextResponse.json(
+                    { error: 'We could not confirm you are a person. Please refresh the page and try again, or message us on WhatsApp.' },
+                    { status: 403 }
+                );
+            }
+        }
+
         // ── Dispatch submission to webhooks ─────────────────────────────────
-        // 1. ARC AI CRM hook — always sent (public endpoint, no secret required)
-        // 2. Make.com automation — only if MAKE_WEBHOOK_URL is configured
-        const arcWebhookUrl = process.env.ARC_WEBHOOK_URL
-            || 'https://www.arcai.online/api/public/hooks/4a98dacf2cb64d9cabb8504e662830f3efb957f6da7e42f8b949c311d675fc09';
+        // 1. ARC AI CRM hook (ARC_WEBHOOK_URL). Its address is a secret: it is
+        //    kept only in the hosting settings, never in this code, because
+        //    this repository is public and anyone holding the address can
+        //    create CRM leads directly.
+        // 2. Make.com automation (MAKE_WEBHOOK_URL), if configured.
+        const arcWebhookUrl = process.env.ARC_WEBHOOK_URL;
         const makeWebhookUrl = process.env.MAKE_WEBHOOK_URL;
+        if (!arcWebhookUrl) {
+            console.error('ARC_WEBHOOK_URL is not set: this enquiry was not sent to the CRM');
+        }
 
         const jsonHeaders = { 'Content-Type': 'application/json' };
 
@@ -166,9 +216,9 @@ export async function POST(req: NextRequest) {
             ...(body.test === true ? { test: true } : {}),
         };
 
-        // Build the dispatch list. Index 0 is always the ARC webhook.
-        const dispatches: { target: string; request: Promise<Response> }[] = [
-            {
+        const dispatches: { target: string; request: Promise<Response> }[] = [];
+        if (arcWebhookUrl) {
+            dispatches.push({
                 target: 'ARC webhook',
                 request: fetch(arcWebhookUrl, {
                     method: 'POST',
@@ -197,8 +247,8 @@ export async function POST(req: NextRequest) {
                         ...analyticsIds,
                     }),
                 }),
-            },
-        ];
+            });
+        }
 
         if (makeWebhookUrl) {
             dispatches.push({
@@ -221,7 +271,30 @@ export async function POST(req: NextRequest) {
             });
         }
 
+        // The website's own record of the enquiry (admin → Contacts). It used
+        // to be written from the visitor's browser with the public key, which
+        // let bots write there directly; now only a submission that passed the
+        // checks above is saved. A failure here never blocks the reply.
+        const websiteRecord = (async () => {
+            if (!supabaseAdmin) return;
+            try {
+                const { error } = await supabaseAdmin.rpc('submit_contact_form', {
+                    p_full_name: name,
+                    ...(phone ? { p_phone: phone } : {}),
+                    p_email: email || null,
+                    p_company: company || null,
+                    p_subject: subject || null,
+                    p_message: message,
+                    p_source: 'website contact form',
+                });
+                if (error) console.error('Website contact record failed:', error.message);
+            } catch (error) {
+                console.error('Website contact record failed:', error);
+            }
+        })();
+
         const results = await Promise.allSettled(dispatches.map((d) => d.request));
+        await websiteRecord;
 
         // Log any failures for observability
         results.forEach((result, i) => {

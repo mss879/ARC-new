@@ -28,11 +28,12 @@ export const metadata: Metadata = {
 /*
  * Keep this page in step with the code. Every item listed here is set by
  * something in src/lib/consent.ts, src/components/CookieConsent.tsx,
- * src/lib/analytics/tracker.ts or src/components/ContactForm.tsx. When a
+ * src/lib/analytics/tracker.ts, src/components/ContactForm.tsx or
+ * src/components/TurnstileWidget.tsx. When a
  * tracker is added, list it here, raise CONSENT_VERSION in
  * src/lib/consent.ts (so every visitor is asked again) and update the date.
  */
-const LAST_UPDATED = "16 November 2026";
+const LAST_UPDATED = "21 November 2026";
 
 type Item = { name: string; by: string; purpose: string; kept: string };
 
@@ -42,6 +43,13 @@ const essential: Item[] = [
     by: "ARC AI (local storage)",
     purpose: "Remembers the cookie choices you made, so we do not ask on every page.",
     kept: `${Math.round(CONSENT_MAX_AGE_DAYS / 30)} months, then we ask again`,
+  },
+  {
+    name: "Cloudflare Turnstile",
+    by: "Cloudflare (contact form only)",
+    purpose:
+      "Checks that a contact-form message comes from a person, not a spam bot. It runs once you start filling in the form and looks at signals such as your IP address and browser. Cloudflare uses them only to detect bots and improve that detection, not to identify you or for advertising.",
+    kept: "Not stored by us. Cloudflare's Turnstile privacy notice explains what it keeps.",
   },
 ];
 

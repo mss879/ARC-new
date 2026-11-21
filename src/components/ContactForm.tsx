@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChevronDown } from "lucide-react";
 import { ArrowDot } from "./home/ui";
 import { hasConsent } from "@/lib/consent";
-import { supabase } from '@/lib/supabase';
+import TurnstileWidget, { TURNSTILE_SITE_KEY } from "./TurnstileWidget";
 import {
   getAnalyticsIdentity,
   newLeadId,
@@ -162,8 +162,33 @@ function readAttribution(): Attribution {
   return fresh;
 }
 
+/** Wait up to `timeoutMs` for Turnstile's token (usually it is already there). */
+function waitForToken(ref: { current: string | null }, timeoutMs: number): Promise<string | null> {
+  return new Promise((resolve) => {
+    const started = Date.now();
+    const tick = () => {
+      if (ref.current) return resolve(ref.current);
+      if (Date.now() - started >= timeoutMs) return resolve(null);
+      setTimeout(tick, 150);
+    };
+    tick();
+  });
+}
+
 export default function ContactForm() {
   const [formData, setFormData] = useState(EMPTY_FORM);
+
+  // Bot checks, verified by /api/contact: how long the form has been open,
+  // a hidden trap field, and Cloudflare Turnstile's token (when its key is
+  // set). Turnstile loads only once the visitor starts on the form.
+  const openedAt = useRef(0);
+  useEffect(() => {
+    openedAt.current = Date.now();
+  }, []);
+  const trapRef = useRef<HTMLInputElement>(null);
+  const [botCheckStarted, setBotCheckStarted] = useState(false);
+  const tokenRef = useRef<string | null>(null);
+  const [tokenResetKey, setTokenResetKey] = useState(0);
 
   useEffect(() => {
     readAttribution();
@@ -227,6 +252,21 @@ export default function ContactForm() {
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: "" });
 
+    let turnstileToken: string | null = null;
+    if (TURNSTILE_SITE_KEY) {
+      setBotCheckStarted(true);
+      turnstileToken = await waitForToken(tokenRef, 10000);
+      if (!turnstileToken) {
+        setSubmitStatus({
+          type: "error",
+          message:
+            "We could not confirm you're a person yet. If a box appeared above the Submit button, tick it, then press Submit again.",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+    }
+
     // Minted before the request, so the CRM receives the same id the
     // analytics conversion will carry.
     const leadId = newLeadId();
@@ -245,25 +285,15 @@ export default function ContactForm() {
           analytics_session_id: identity.session_id,
           analytics_visitor_id: identity.visitor_id,
           ...(identity.test ? { test: true } : {}),
+          extra_info: trapRef.current?.value ?? "",
+          elapsed_ms: Date.now() - openedAt.current,
+          ...(turnstileToken ? { turnstileToken } : {}),
         }),
       });
 
       if (response.ok) {
-        // Also save as CRM lead via Supabase RPC
-        try {
-          await supabase.rpc('submit_contact_form', {
-            p_full_name: formData.name,
-            ...(formData.phone.trim() ? { p_phone: formData.phone.trim() } : {}),
-            p_email: formData.email.trim() || null,
-            p_company: formData.company || null,
-            p_subject: formData.subject || null,
-            p_message: formData.message,
-            p_source: 'website contact form',
-          });
-        } catch (crmError) {
-          console.error('CRM lead save error:', crmError);
-          // Don't block the user — webhook already sent
-        }
+        // The website's own record of the enquiry (admin → Contacts) is now
+        // written by /api/contact on the server, after the bot checks.
 
         // Only here: the request was accepted. This is the one moment that
         // is genuinely a conversion, and it is the moment the funnel, the
@@ -302,6 +332,10 @@ export default function ContactForm() {
       console.error("Form submission error:", error);
     } finally {
       setIsSubmitting(false);
+      if (TURNSTILE_SITE_KEY) {
+        tokenRef.current = null;
+        setTokenResetKey((k) => k + 1);
+      }
     }
   };
 
@@ -377,6 +411,7 @@ export default function ContactForm() {
       onSubmit={handleSubmit}
       id="contact-form"
       data-form="contact_form"
+      onFocus={() => setBotCheckStarted(true)}
       className="cream-card space-y-5 p-5 sm:p-8 lg:p-10"
       noValidate
     >
@@ -502,6 +537,25 @@ export default function ContactForm() {
           className={`bg-white border border-ink/10 text-ink text-base md:text-base placeholder:text-ink-mute focus-visible:ring-2 focus-visible:ring-[#FF4925]/60 focus-visible:ring-offset-0 rounded-xl min-h-[160px] resize-none px-5 py-4 ${touched.message && fieldErrors.message ? errorRingClass : ""}`}
         />
         {touched.message && <FieldError error={fieldErrors.message} />}
+
+        {/* A trap for bots: hidden from people and screen readers, but bots
+            that fill in every field fill this one too, and the server then
+            quietly drops the message. */}
+        <div aria-hidden="true" className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden">
+          <label>
+            Extra info (leave this empty)
+            <input ref={trapRef} type="text" name="extra_info" tabIndex={-1} autoComplete="off" defaultValue="" />
+          </label>
+        </div>
+
+        {/* Cloudflare's bot check: invisible unless it needs a tick. */}
+        <TurnstileWidget
+          load={botCheckStarted}
+          onToken={(token) => {
+            tokenRef.current = token;
+          }}
+          resetKey={tokenResetKey}
+        />
       </div>
 
       {/* Status Message */}
